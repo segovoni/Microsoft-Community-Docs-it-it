@@ -5,7 +5,7 @@
     {
       "docset_name": "MSDN_Community",
       "build_source_folder": "MSDN",
-      "build_output_subfolder": "communitydocs",
+      "build_output_subfolder": "MSDN",
       "locale": "en-us",
       "version": 0,
       "open_to_public_contributors": false,
@@ -19,7 +19,7 @@
     {
       "docset_name": "TN_Community",
       "build_source_folder": "TN_Community",
-      "build_output_subfolder": "communitydocs",
+      "build_output_subfolder": "TechNet",
       "locale": "en-us",
       "version": 0,
       "open_to_public_contributors": false,
