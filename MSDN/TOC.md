@@ -1,2 +1,2 @@
-# [Articoli Tecnici](index.md)
-## Sviluppo Cloud (cloud/TOC.md)
+#[Articoli Tecnici](index.md)
+##[Sviluppo Cloud](cloud/TOC.md)
