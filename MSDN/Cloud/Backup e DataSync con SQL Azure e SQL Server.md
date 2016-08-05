@@ -10,7 +10,7 @@ ms.custom: CommunityDocs
 
 # Backup e DataSync con SQL Azure e SQL Server
 
-#### di [Roberto Freato](https://mvp.support.microsoft.com/profile=9F9B3C0A-2016-4034-ACD6-9CEDEE74FAF3)
+#### di [Roberto Freato](https://mvp.microsoft.com/en-us/PublicProfile/4028383?fullName=Roberto%20%20Freato)
 
 ![](./img/Backup e DataSync con SQL Azure e SQL Server/image1.png)
 
@@ -288,7 +288,7 @@ on-premise. Inoltre abbiamo esplorato il tool di Import/Export Data di
 SQL Azure, per la migrazione in ingresso o in uscita dello schema e dei
 dati da/verso database SQL Server.
 
-#### di Roberto Freato ([blog](http://dotnetlombardia.org/blogs/rob/default.aspx)) - Microsoft MVP
+#### di [Roberto Freato](https://mvp.microsoft.com/en-us/PublicProfile/4028383?fullName=Roberto%20%20Freato) - Microsoft MVP
 
 
 
