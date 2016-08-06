@@ -181,6 +181,7 @@ cliccando “Create” dopo aver selezionato il server Data Sync nel menù in
 Figura 5:
 
 Figura 5 - Menù di Data Sync
+
 ![](./img/Backup e DataSync con SQL Azure e SQL Server/image6.png)
 
 
@@ -188,6 +189,7 @@ Vi si aprirà la Figura 6, dove potrete aggiungere i server cloud e
 quelli on-premise.
 
 Figura 6 - GUI del gruppo di sincronizzazione
+
 ![](./img/Backup e DataSync con SQL Azure e SQL Server/image7.png)
 
 Configurazione dei membri SQL Server
@@ -197,11 +199,13 @@ Per i nuovi database è necessario selezionare l’opzione in Figura 7, nel
 wizard di aggiunta database:
 
 Figura 7 - Aggiunta di un database on-premise al ring di sincronizzazione
+
 ![](./img/Backup e DataSync con SQL Azure e SQL Server/image8.png)
 
 Se è la prima volta, occorrerà creare un nuovo agente, come un Figura 8:
 
 Figura 8 - Installazione del nuovo agente sulla macchina on-premise
+
 ![](./img/Backup e DataSync con SQL Azure e SQL Server/image9.png)
 
 
@@ -220,12 +224,14 @@ completare il setup con queste due operazioni:
 La chiave verrà aggiunta come in Figura 9:
 
 Figura 9 - Configurazione della chiave dell'agente
-![](./img/Backup e DataSync con SQL Azure e SQL Server/image10.png){width="6.5in" height="5.10625in"}
+
+![](./img/Backup e DataSync con SQL Azure e SQL Server/image10.png)
 
 Dopodiché occorrerà seguire la procedura di “Register” per ogni database
 desiderato, come in Figura 10:
 
 Figura 10 - Registrazione di un DB nell'agente
+
 ![](./img/Backup e DataSync con SQL Azure e SQL Server/image11.png)
 
 Ora l’agente sarà in esecuzione con un database registrato: possiamo
@@ -233,8 +239,7 @@ quindi tornare al wizard nell’Azure Portal e completare la procedura,
 selezionando il database ora presente nella lista in Figura 11:
 
  
-Figura 11 - Completamento della registrazione di un database lato
-    Data Sync
+Figura 11 - Completamento della registrazione di un database lato Data Sync
 
 ![](./img/Backup e DataSync con SQL Azure e SQL Server/image12.png)
 
@@ -274,6 +279,7 @@ minuti e una politica di gestione dei conflitti “Client Wins” (che
 stabilisce che in caso di conflitto abbia la meglio il DB on-premise).
 
 Figura 14 - Definizione del dataset di sincronizzazione
+
 ![](./img/Backup e DataSync con SQL Azure e SQL Server/image15.png)
 
 Alla fine, cliccheremo su “Deploy” per mettere in esecuzione il server
