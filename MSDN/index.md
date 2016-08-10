@@ -1,9 +1,12 @@
 ---
+title: Articoli Tecnici - Community Docs 
+description: Insieme di Articoli Tecnici forniti dagli MVP e dalla Community di sviluppatori
 author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: landing
+ms.service: MSDN
+ms.custom: CommunityDocs
 ---
-
-
-
 
 # Articoli Tecnici - Community Docs
 
