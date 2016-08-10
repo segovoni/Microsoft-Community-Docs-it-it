@@ -1,4 +1,4 @@
----
+ï»¿---
 title: Articoli Tecnici - Community Docs 
 description: Insieme di Articoli Tecnici forniti dagli MVP e dalla Community di sviluppatori
 author: MSCommunityPubService
@@ -17,11 +17,11 @@ ms.custom: CommunityDocs
 
 
 Benvenuto nella rinnovata sezione Articoli Tecnici - Community Docs di MSDN.
-Questa è una fonte di informazioni utilissime agli sviluppatori che utilizzano strumenti, prodotti e tecnologie Microsoft®.
+Questa Ã¨ una fonte di informazioni utilissime agli sviluppatori che utilizzano strumenti, prodotti e tecnologie MicrosoftÂ®.
 
 Molti degli articoli contenuti in questa sezione sono stati scritti da [**MVPs**](https://mvp.microsoft.com) ed altri esperti italiani, riportando casi, soluzioni ed esempi vissuti in prima persona.
 
-Di seguito troverete in evidenza l’elenco degli articoli più recenti
+Di seguito troverete in evidenza lâ€™elenco degli articoli piÃ¹ recenti
 
 
 
