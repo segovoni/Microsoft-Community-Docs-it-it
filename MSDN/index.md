@@ -1,6 +1,6 @@
 ---
 author: MSCommunityPubService
-title: Articoli Tecnici - Community Docs
+title: Articoli Tecnici
 ---
 
 
