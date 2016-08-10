@@ -12,7 +12,7 @@ ms.custom: CommunityDocs
 
 #### di [Roberto Freato](https://mvp.microsoft.com/en-us/PublicProfile/4028383?fullName=Roberto%20%20Freato)
 
-![](./img/Backup e DataSync con SQL Azure e SQL Server/image1.png)
+![](./img/Backup-e-DataSync-con-SQL-Azure-e-SQL-Server/image1.png)
 
 *Marzo 2012*
 
@@ -110,7 +110,7 @@ dati) all’interno del nostro server, come in Figura 1.
 
 Figura 1 - Importazione di un BACPAC su SQL Azure
 
-![](./img/Backup e DataSync con SQL Azure e SQL Server/image2.png)
+![](./img/Backup-e-DataSync-con-SQL-Azure-e-SQL-Server/image2.png)
 
 Al contrario, con la funzione di Export si è in grado di esportare un
 intero database SQL Azure (in modalità assolutamente asincrona) verso un
@@ -119,7 +119,7 @@ Figura 2.
 
 Figura 2 - Procedura di Export di un database SQL Azure
 
-![](./img/Backup e DataSync con SQL Azure e SQL Server/image3.png)
+![](./img/Backup-e-DataSync-con-SQL-Azure-e-SQL-Server/image3.png)
 
 Questo tool permette quindi di importare ed esportare facilmente un
 database on-premise da/verso il suo corrispondente on-the-cloud, senza
@@ -145,7 +145,7 @@ mantenere più copie allineate di un dato oggetto.
 
 Figura 3 - SQL Azure Data Sync
 
-![](./img/Backup e DataSync con SQL Azure e SQL Server/image4.png)
+![](./img/Backup-e-DataSync-con-SQL-Azure-e-SQL-Server/image4.png)
 Per seguire passo-passo il tutorial a seguire, è necessario avere:
 
 - SQL Server 2005 SP2 o superiori
@@ -174,7 +174,7 @@ settimana è disponibile sul Management Portal di Windows Azure il tab
 “Provision” e creare il server come in Figura 4:
 
 Figura 4 - Provisioning del server di Data Sync
-![](./img/Backup e DataSync con SQL Azure e SQL Server/image5.png)
+![](./img/Backup-e-DataSync-con-SQL-Azure-e-SQL-Server/image5.png)
 
 È ora necessario creare un Sync Group (gruppo di sincronizzazione)
 cliccando “Create” dopo aver selezionato il server Data Sync nel menù in
@@ -182,7 +182,7 @@ Figura 5:
 
 Figura 5 - Menù di Data Sync
 
-![](./img/Backup e DataSync con SQL Azure e SQL Server/image6.png)
+![](./img/Backup-e-DataSync-con-SQL-Azure-e-SQL-Server/image6.png)
 
 
 Vi si aprirà la Figura 6, dove potrete aggiungere i server cloud e
@@ -190,7 +190,7 @@ quelli on-premise.
 
 Figura 6 - GUI del gruppo di sincronizzazione
 
-![](./img/Backup e DataSync con SQL Azure e SQL Server/image7.png)
+![](./img/Backup-e-DataSync-con-SQL-Azure-e-SQL-Server/image7.png)
 
 Configurazione dei membri SQL Server
 ------------------------------------
@@ -200,13 +200,13 @@ wizard di aggiunta database:
 
 Figura 7 - Aggiunta di un database on-premise al ring di sincronizzazione
 
-![](./img/Backup e DataSync con SQL Azure e SQL Server/image8.png)
+![](./img/Backup-e-DataSync-con-SQL-Azure-e-SQL-Server/image8.png)
 
 Se è la prima volta, occorrerà creare un nuovo agente, come un Figura 8:
 
 Figura 8 - Installazione del nuovo agente sulla macchina on-premise
 
-![](./img/Backup e DataSync con SQL Azure e SQL Server/image9.png)
+![](./img/Backup-e-DataSync-con-SQL-Azure-e-SQL-Server/image9.png)
 
 
 Seguendo tre passi: download ed installazione del client, inserimento
@@ -225,14 +225,14 @@ La chiave verrà aggiunta come in Figura 9:
 
 Figura 9 - Configurazione della chiave dell'agente
 
-![](./img/Backup e DataSync con SQL Azure e SQL Server/image10.png)
+![](./img/Backup-e-DataSync-con-SQL-Azure-e-SQL-Server/image10.png)
 
 Dopodiché occorrerà seguire la procedura di “Register” per ogni database
 desiderato, come in Figura 10:
 
 Figura 10 - Registrazione di un DB nell'agente
 
-![](./img/Backup e DataSync con SQL Azure e SQL Server/image11.png)
+![](./img/Backup-e-DataSync-con-SQL-Azure-e-SQL-Server/image11.png)
 
 Ora l’agente sarà in esecuzione con un database registrato: possiamo
 quindi tornare al wizard nell’Azure Portal e completare la procedura,
@@ -241,7 +241,7 @@ selezionando il database ora presente nella lista in Figura 11:
  
 Figura 11 - Completamento della registrazione di un database lato Data Sync
 
-![](./img/Backup e DataSync con SQL Azure e SQL Server/image12.png)
+![](./img/Backup-e-DataSync-con-SQL-Azure-e-SQL-Server/image12.png)
 
 Otteniamo così un gruppo di sincronizzazione con un solo database
 on-premise.
@@ -256,7 +256,7 @@ Azure, seguendo le istruzioni come in Figura 12:
 
 Figura 12 - Aggiunta di un DB SQL Azure al ring
 
-![](./img/Backup e DataSync con SQL Azure e SQL Server/image13.png)
+![](./img/Backup-e-DataSync-con-SQL-Azure-e-SQL-Server/image13.png)
 
 Ora i database del ring di *sincronizzazione* sono configurati e si può
 procedere alle ultime impostazioni.
@@ -269,7 +269,7 @@ simile a quello in Figura 13:
 
 Figura 13 - GUI del ring di sincronizzazione configurato
 
-![](./img/Backup e DataSync con SQL Azure e SQL Server/image14.png)
+![](./img/Backup-e-DataSync-con-SQL-Azure-e-SQL-Server/image14.png)
 
 Rimane da definire che set di dati occorra sincronizzare, cliccando su
 “Edit Dataset”. Nel nostro caso, come in Figura 14, decidiamo di
@@ -280,7 +280,7 @@ stabilisce che in caso di conflitto abbia la meglio il DB on-premise).
 
 Figura 14 - Definizione del dataset di sincronizzazione
 
-![](./img/Backup e DataSync con SQL Azure e SQL Server/image15.png)
+![](./img/Backup-e-DataSync-con-SQL-Azure-e-SQL-Server/image15.png)
 
 Alla fine, cliccheremo su “Deploy” per mettere in esecuzione il server
 di Data Sync ed avremo concluso.

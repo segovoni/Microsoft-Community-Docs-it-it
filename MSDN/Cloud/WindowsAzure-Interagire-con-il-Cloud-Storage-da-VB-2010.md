@@ -12,7 +12,7 @@ ms.custom: CommunityDocs
 
 #### di [Alessandro Del Sole](https://mvp.support.microsoft.com/profile/Alessandro.Del%20Sole) - Microsoft MVP
 
-![](./img/Windows Azure - interagire con il Cloud Storage da VB 2010/image1.png)
+![](./img/WindowsAzure-Interagire-con-il-Cloud-Storage-da-VB-2010/image1.png)
 
 *Maggio, 2012*
 
@@ -849,7 +849,7 @@ cartella predeterminata:
 
 La seguente figura mostra un esempio dell'applicazione in esecuzione:
 
-![](./img/Windows Azure - interagire con il Cloud Storage da VB 2010/image2.png)
+![](./img/WindowsAzure-Interagire-con-il-Cloud-Storage-da-VB-2010/image2.png)
 
 Sfruttando quindi l'interazione client con lo storage di Azure è
 possibile memorizzare e gestire i propri dati in maniera totalmente

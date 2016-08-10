@@ -1,7 +1,7 @@
 #### di [Roberto Freato](https://mvp.support.microsoft.com/profile=9F9B3C0A-2016-4034-ACD6-9CEDEE74FAF3) – Microsoft MVP
 
 
-![](./img/Windows Azure - la storia/image1.png)
+![](./img/WindowsAzure_LaStoria/image1.png)
 
 *Settembre, 2012*
 
@@ -117,7 +117,7 @@ sconnesso da Visual Studio e il publishing si faceva a mano caricando
 CSPKG e CSCFG: incollo qui uno screenshot dell’epoca per il suo
 intrinseco valore “storico”:
 
-![](./img/Windows Azure - la storia/image2.png)
+![](./img/WindowsAzure_LaStoria/image2.png)
 
 Tolte le icone futuristiche, il portale permetteva poco più di un upload
 dei pacchetti, degli eventuali certificati SSL più la gestione di base
