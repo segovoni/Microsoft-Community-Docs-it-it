@@ -1,7 +1,7 @@
 ---
 title: AgileIoT - Agile meets IoT 
 description: AgileIoT - Agile meets IoT
-author: felicepescatore
+author: MSCommunityPubService
 ms.date: 08/01/2016
 ms.topic: how-to-article
 ms.service: SQLServer
@@ -10,17 +10,21 @@ ms.custom: CommunityDocs
 
 # AgileIoT - Agile meets IoT
 
-![](./img/AgileIOT/image1.png)
+
 
 #### di [Felice Pescatore](https://mvp.microsoft.com/it-it/mvp/Felice%20%20Pescatore-5001016) - Microsoft MVP
+
+![](./img/AgileIOT/image1.png)
+
+[**agileiot.org**](http://www.agileiot.org)
+
+**@agileiotdotorg**
 
 
 
 ## Introduzione
 
-[**agileiot.org**](http://www.agileiot.org)
 
-**@agileiotdotorg**
 
 L’**Internet of Things** è la nuova frontiera della Rete: un ecosistema
 fisico/virtuale in grado di comunicare all’unisono per migliorare la

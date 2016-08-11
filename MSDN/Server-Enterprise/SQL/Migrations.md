@@ -1,7 +1,7 @@
 ---
 title: Migrazioni e deployment in SQL Server 
 description: Migrazioni e deployment in SQL Server
-author: suxtellino
+author: MSCommunityPubService
 ms.date: 08/01/2016
 ms.topic: how-to-article
 ms.service: SQLServer
