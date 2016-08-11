@@ -1,4 +1,14 @@
-Come effettuare il debug di un Trigger in SQL Server
+---
+title: Come effettuare il debug di un Trigger in SQL Server
+description: Come effettuare il debug di un Trigger in SQL Server
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: SQLServer
+ms.custom: CommunityDocs
+---
+
+# Come effettuare il debug di un Trigger in SQL Server
 
 Autore: Sergio Govoni (Microsoft Data Platform MVP)
 
