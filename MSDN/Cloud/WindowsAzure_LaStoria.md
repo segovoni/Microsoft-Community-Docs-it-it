@@ -1,3 +1,15 @@
+---
+title: La storia di Windows Azure 
+description: La storia di Windows Azure
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: cloud
+ms.custom: CommunityDocs
+---
+
+# La storia di Windows Azure
+
 #### di [Roberto Freato](https://mvp.support.microsoft.com/profile=9F9B3C0A-2016-4034-ACD6-9CEDEE74FAF3) – Microsoft MVP
 
 
