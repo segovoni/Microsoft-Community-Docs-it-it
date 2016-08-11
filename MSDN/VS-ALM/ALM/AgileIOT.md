@@ -1,9 +1,12 @@
-# AgileIoT, Agile meets IoT
+# AgileIoT - Agile meets IoT
 
 ![](./img/AgileIOT/image1.png)
 
-Introduzione
-----------------------------------------------------------------------------
+#### di [Felice Pescatore](https://mvp.microsoft.com/it-it/mvp/Felice%20%20Pescatore-5001016) - Microsoft MVP
+
+
+
+## Introduzione
 
 [**agileiot.org**](http://www.agileiot.org)
 
@@ -30,8 +33,7 @@ varie implicazioni derivanti dall’adottare un modello di sviluppo
 Agile/Lean/DevOps nella realizzazione di soluzioni dell’Internet of
 Things.
 
-Il Manifesto
-------------
+## Il Manifesto
 
 **AgileIoT** è frutto di un’esigenza affascinate: proporre un approccio
 ragionato e “goal-driven” allo sviluppo di soluzioni Internet of Things,
@@ -143,8 +145,7 @@ Il Manifesto è attualmente declinato in due soluzioni immediatamente
 utilizzabili: l’AgileIoT Framework e l’Agile Kanban::Board, utilizzabili
 separatamente ma anche in modo congiunto.
 
-Il Framework
-------------
+## Il Framework
 
 ![](./img/AgileIOT/image2.png)
 
@@ -321,8 +322,7 @@ per procedere alla validazione finale e allinearsi per consentire una
 coerente governance d’insieme da parte del *Product Owner* e della
 gestione operativa del *Prime Maker*.
 
-La Kanban::Board
-----------------
+## La Kanban::Board
 
 ![](./img/AgileIOT/image7.png)
 Il
@@ -460,8 +460,7 @@ Queste informazioni permettono di gestire al meglio la definizione della
 *BOM* e, soprattutto, la gestione della fase di produzione fisica che,
 come evidenziato nel Framework, è contemplata quale attività esterna.
 
-AgileIoT e Team Foundation Server
----------------------------------
+## AgileIoT e Team Foundation Server
 
 Fin ora il nostro viaggio ci ha portato ad esplorare gli aspetti
 metodologie ed operativi di AgileIoT, volutamente senza fare riferimenti
@@ -504,8 +503,7 @@ Figura 7 - AgileIoT Work Item query da Visual Studio
 Il process template è gratuitamente scaricabile da GitHub all’indirizzo:
 [*https://github.com/AgileIoT/TFS2015PT*](https://github.com/AgileIoT/TFS2015PT).
 
-Conclusioni
------------
+## Conclusioni
 
 *AgileIoT* vuole essere una **Open-Methodology**, che va a modificarsi,
 adattarsi e aggiornarsi in funzione degli esperimenti e delle
@@ -521,5 +519,4 @@ soprattutto quelli derivati da un’applicazione sul campo, consentendo di
 far maturare e crescere il progetto.
 
 Tutti i dettagli, i riferimenti ai canali social e le guide complete
-sono disponibili sul portale ufficiale:
-[*www.agileiot.org*](http://www.agileiot.org)
+sono disponibili sul portale ufficiale:  [*www.agileiot.org*](http://www.agileiot.org)
