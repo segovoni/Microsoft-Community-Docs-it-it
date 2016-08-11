@@ -75,16 +75,9 @@ coinvolte.
 
 L’obiettivo è quello di allontanare la logica della *Big Bang
 Integration* che soffre di diversi problemi critici:
--   l’efficienza di sviluppo è fortemente penalizzata, poiché i diversi
-    > team non comunicano costantemente tra loro e non condividono il
-    > know-how e gli elementi di forza e debolezza;*
--   i problemi vengono alla luce solo in una fase avanzata di
-    > realizzazione della soluzione, con costi di fix elevati,
-    > soprattutto per la componente hardware;*
--   la soluzione finale spesso contiene un compromesso qualitativo a
-    > ribasso, dettato dalla necessità di consegnare la soluzione in
-    > tempo e basato su workaround software laddove i vari componenti
-    > non si integrino perfettamente.*
+-   l’efficienza di sviluppo è fortemente penalizzata, poiché i diversi team non comunicano costantemente tra loro e non condividono il know-how e gli elementi di forza e debolezza;
+-   i problemi vengono alla luce solo in una fase avanzata di realizzazione della soluzione, con costi di fix elevati, soprattutto per la componente hardware;
+-   la soluzione finale spesso contiene un compromesso qualitativo a ribasso, dettato dalla necessità di consegnare la soluzione in tempo e basato su workaround software laddove i vari componenti non si integrino perfettamente.
 
 Proprio da tali considerazioni nasce l’**AgileIoT Manifesto**, la cui
 filosofia è quella della….
@@ -176,56 +169,56 @@ In particolare, la creazione di una specifica soluzione passa attraverso
 tre fasi ben delineate:
 
 -   **Prototyping Phase**: la fase in cui l’azienda prende atto della
-    > volontà di realizzare una nuova soluzione e, partendo dall’idea o
-    > da bisogno iniziale, definisce quella che è la *Solution Vision*.
-    > Si tratta di tracciare gli obiettivi specifici in funzione delle
-    > esigenze del committente, andando a definire i *Solution Goal* e
-    > le *metriche di validazione*.
+     volontà di realizzare una nuova soluzione e, partendo dall’idea o
+     da bisogno iniziale, definisce quella che è la *Solution Vision*.
+     Si tratta di tracciare gli obiettivi specifici in funzione delle
+     esigenze del committente, andando a definire i *Solution Goal* e
+     le *metriche di validazione*.
 -   **Engineering Phase**: la fase in cui la realizzazione della
     soluzione entra nel vivo. In questa fase gran parte dell’enfasi è
     posta sullo sviluppo del prodotto, ma, parallelamente, anche gli
     aspetti a supporto vengono messi progressivamente a fuoco e
     strutturati a livello aziendale.
 -   **Deployment Phase**: l’ultima fase focalizzata sul Delivery in
-    > esercizio, sul Supporto e sul Miglioramento Continuo.
+     esercizio, sul Supporto e sul Miglioramento Continuo.
 
 In particolare nella fase di prototyping trova posto la cerimonia di
 *Fast Prototype*, pensata esplicitamente per valutare la sostenibilità
 della soluzione stessa e focalizzata sui seguenti aspetti:
 
 -   **Energy**: verifica delle ipotesi relative agli aspetti energetici
-    > in funzione delle esigenze di continuità operativa degli smart
-    > device;
+     in funzione delle esigenze di continuità operativa degli smart
+     device;
 -   **Hardware**: validazione delle ipotesi hardware tramite uno o più
-    > *Evaluation Kit* (EVK). La selezione dell’EVK più idoneo passa, in
-    > primis, dalla scelta della CPU/MCU, dopodiché si inizia a
-    > “costruire” il prototipo lavorando sugli altri componenti (es:
-    > RAM, USB, ecc.);
+     *Evaluation Kit* (EVK). La selezione dell’EVK più idoneo passa, in
+     primis, dalla scelta della CPU/MCU, dopodiché si inizia a
+     “costruire” il prototipo lavorando sugli altri componenti (es:
+     RAM, USB, ecc.);
 -   **Code**: prototipazione del firmware dei dispositivi e su quella
-    > dei servizi a supporto per l’acquisizione dei dati/eventi portanti
-    > della soluzione. In questa fase l’utilizzo di framework e di IDE
-    > di codifica veloce è fondamentale per abbattere i tempi relativi;
+     dei servizi a supporto per l’acquisizione dei dati/eventi portanti
+    della soluzione. In questa fase l’utilizzo di framework e di IDE
+     di codifica veloce è fondamentale per abbattere i tempi relativi;
 -   **Data Flow**: approfondimento degli aspetti legati alla raccolta,
-    > alla pulitura ed alla gestione dei *Raw Data* provenienti dai
-    > device, implementando gli aspetti di trasmissione e
-    > serializzazione degli stessi, con la scelta degli opportuni
-    > protocolli e dei formati più adeguati. In particolare, è
-    > fondamentale dedicare particolare attenzione alla stima dei volumi
-    > dei dati ed alle relative metodologie di analisi, in modo da
-    > approcciare alla gestione delle informazioni in chiave *Polyglot
-    > Persistence*, fondamentale per garantire la possibilità di
-    > elaborare velocemente grandi moli di informazioni;
+     alla pulitura ed alla gestione dei *Raw Data* provenienti dai
+     device, implementando gli aspetti di trasmissione e
+     serializzazione degli stessi, con la scelta degli opportuni
+     protocolli e dei formati più adeguati. In particolare, è
+     fondamentale dedicare particolare attenzione alla stima dei volumi
+     dei dati ed alle relative metodologie di analisi, in modo da
+     approcciare alla gestione delle informazioni in chiave *Polyglot
+     Persistence*, fondamentale per garantire la possibilità di
+     elaborare velocemente grandi moli di informazioni;
 -   **Cloud**: verifica degli aspetti cloud della soluzione, intesa come
-    > piattaforma di gestione dei dati, degli eventi e delle action
-    > portanti;
+     piattaforma di gestione dei dati, degli eventi e delle action
+     portanti;
 -   **Security**: verifica delle ipotesi relative agli aspetti centrali
-    > di security che l’intera soluzione e che ne influenzano in modo
-    > diretto lo sviluppo;
+     di security che l’intera soluzione e che ne influenzano in modo
+     diretto lo sviluppo;
 -   **Delivery Prototyping**: analisi dei possibili vincoli normativi e
-    > ambientali del dispiegamento degli Smart Thing. Si tratta, in
-    > pratica, di avere prontezza delle possibili difficoltà annesse al
-    > deployment e verificare che non vadano a minare la sostenibilità
-    > del progetto.
+     ambientali del dispiegamento degli Smart Thing. Si tratta, in
+     pratica, di avere prontezza delle possibili difficoltà annesse al
+     deployment e verificare che non vadano a minare la sostenibilità
+     del progetto.
 
 La cerimonia di Fast Prototyping viene eseguita sfruttando il ciclo
 **make-measure-learn** (**MML**), al fine di renderla sufficientemente
