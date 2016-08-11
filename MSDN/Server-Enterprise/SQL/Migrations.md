@@ -11,6 +11,7 @@ ms.custom: CommunityDocs
 # Migrazioni e deployment in SQL Server
 
 #### di [Alessandro Alpi](https://mvp.microsoft.com/it-it/PublicProfile/4014222?fullName=Alessandro%20Alpi) - Microsoft MVP
+![](img/MVPLogo.png)
 
 In questi giorni sono riuscito a provare la nuova funzionalità per gli
 script di migrazione di [*SQL Source
