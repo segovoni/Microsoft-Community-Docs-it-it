@@ -1,0 +1,15 @@
+
+# [Il Cloud Computing - origini (*)](https://msdn.microsoft.com/it-it/library/jj714726.aspx)
+# [Windows Azure - la storia](WindowsAzure_LaStoria.md)
+# [Pricing: Capire i costi di Windows Azure (*)](https://msdn.microsoft.com/it-it/library/jj714728.aspx)
+# [PaaS vs. IaaS e il caso Azure (*)](https://msdn.microsoft.com/it-it/library/jj573926.aspx)
+# [Strategie di condivisione dati tra istanze nel Cloud (*)](https://msdn.microsoft.com/it-it/library/jj573927.aspx)
+# [Windows Azure - interagire con il Cloud Storage da VB 2010](WindowsAzure-Interagire-con-il-Cloud-Storage-da-VB-2010.md)
+# [Comunicazione intra-ruolo Web-Worker e bilanciamento del carico (*)](https://msdn.microsoft.com/it-it/library/jj127259.aspx)
+# [Integrazione di un login Facebook nelle applicazioni Web con ACSV2](Integrazione_login_Facebook_in_ACSV2.md)
+# [Certificare applicazioni LightSwitch per Windows Azure, con Microsoft Platform Ready (*)](https://msdn.microsoft.com/it-it/library/jj127266.aspx)
+# [Backup e DataSync con SQL Azure e SQL Server](Backup-e-DataSync-con-SQL-Azure-e-SQL-Server.md)
+# [Esempio di storage efficace privato su Azure con CloudSaver (*)](https://msdn.microsoft.com/it-it/library/hh923935.aspx)
+# [Interoperabilità e migrazione verso il cloud – il caso DotNetLombardia (*)](https://msdn.microsoft.com/it-it/library/hh923933.aspx)
+# [Installazione su Windows Azure di Umbraco 4.7.x (*)](https://msdn.microsoft.com/it-it/library/hh923934.aspx)
+

@@ -1,0 +1,12 @@
+# [Distribuzione di Microsoft .NET Framework versione 3.0 (*)](https://msdn.microsoft.com/it-it/library/aa480198.aspx)
+# [Introduzione a .NET Framework 3.0 (*)](https://msdn.microsoft.com/it-it/library/aa479861.aspx)
+# [Tablet PC (*)](https://msdn.microsoft.com/it-it/library/cc952702.aspx)
+# [Windows Communication Foundation (*)](https://msdn.microsoft.com/it-it/library/cc952703.aspx)
+# [Windows Presentation Foundation (*)](https://msdn.microsoft.com/it-it/library/cc952705.aspx)
+# [Windows Workflow Foundation (*)](https://msdn.microsoft.com/it-it/library/cc952708.aspx)
+# [Notifica o Polling? Una possibile soluzione. (*)](https://msdn.microsoft.com/it-it/library/cc185085.aspx)
+# [.NET Application Settings (*)](https://msdn.microsoft.com/it-it/library/cc185092.aspx)
+# [L’interfaccia IRevertibleChangeTracking, una possibile implementazione. (*)](https://msdn.microsoft.com/it-it/library/cc185102.aspx)
+# [Partecipare ad un Transazione gestita, System.Transactions.Transaction (*)](https://msdn.microsoft.com/it-it/library/cc185103.aspx)
+# [ClickOnce (*)](https://msdn.microsoft.com/it-it/library/cc952709.aspx)
+
