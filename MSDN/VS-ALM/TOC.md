@@ -1,5 +1,5 @@
-# [Visual Studio](https://msdn.microsoft.com/it-it/library/cc952723.aspx)
-# [Visual Basic](https://msdn.microsoft.com/it-it/library/cc952721.aspx)
+# [Visual Studio](VS/TOC.md)
+# [Visual Basic](VB/TOC.md)
 # [Ciclo di vita del software (ALM)](ALM/TOC.md)
 
 
