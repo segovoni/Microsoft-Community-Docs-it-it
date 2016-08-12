@@ -4,7 +4,7 @@ description: Come rendere le proprie applicazioni con i nuovi device di fascia b
 author: MSCommunityPubService
 ms.date: 08/01/2016
 ms.topic: how-to-article
-ms.service: WindowsPhonw
+ms.service: WindowsPhone
 ms.custom: CommunityDocs
 ---
 
