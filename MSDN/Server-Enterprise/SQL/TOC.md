@@ -1,4 +1,36 @@
 # [Migrazioni e deployment in SQL Server](Migrations.md)
 # [Come effettuare il debug di un Trigger in SQL Server](Come effettuare il debug di un Trigger in SQL Server.md)
+
+
+# [Unit Testing con SQL Server](https://msdn.microsoft.com/it-it/library/mt169842.aspx)
+# [SQL Server sotto source control](https://msdn.microsoft.com/it-it/library/dn894015.aspx)
+# [Una inaspettata variazione di SPID (SQL Server, Session Process ID)](https://msdn.microsoft.com/it-it/library/dn722307.aspx)
+# [Il primo comando di ogni Trigger](https://msdn.microsoft.com/it-it/library/dn376356.aspx)
+# [CREATE e DROP di colonne temporanee](https://msdn.microsoft.com/it-it/library/dn269828.aspx)
+# [Lo Statement MERGE e i Trigger (T-SQL)](https://msdn.microsoft.com/it-it/library/dn169486.aspx)
+# [Come usare lo Statement MERGE (T-SQL)](https://msdn.microsoft.com/it-it/library/jj973188.aspx)
+# [EXECUTE statement in SQL Server 2012](https://msdn.microsoft.com/it-it/library/jj884336.aspx)
+# [SEQUENCE in SQL Server 2012](https://msdn.microsoft.com/it-it/library/jj714731.aspx)
+# [SQL Server: OUTPUT clause and Triggers](https://msdn.microsoft.com/it-it/library/jj573929.aspx)
+# [SQL Server: Primi e Ultimi Trigger](https://msdn.microsoft.com/it-it/library/jj573930.aspx)
+
 # [FileTable in SQL Server 2012](FileTable_in_SQL_Server_2012.md)
+
+# [SQL Server: Database Resource e gli oggetti di sistema](https://msdn.microsoft.com/it-it/library/jj191713.aspx)
+# [SQL Server: Trasferire le statistiche di una tabella](https://msdn.microsoft.com/it-it/library/jj127260.aspx)
+# [Introduzione alle funzionalità di Full-Text Search con SQL Server 2005](https://msdn.microsoft.com/it-it/library/cc185066.aspx)
+# [Le transazioni](https://msdn.microsoft.com/it-it/library/cc185104.aspx)
+# [Alta disponibilità con SQL Server 2005](https://msdn.microsoft.com/it-it/library/cc185065.aspx)
+# [Introduzione alla replica](https://msdn.microsoft.com/it-it/library/cc185086.aspx)
+# [SQL Server 2005 Developer Guidelines - Parte 2](https://msdn.microsoft.com/it-it/library/cc185095.aspx)
+# [SQL Server 2005 Development Guidelines](https://msdn.microsoft.com/it-it/library/cc185069.aspx)
+# [Scenari Architetturali con SQL Server 2005](https://msdn.microsoft.com/it-it/library/cc185097.aspx)
+# [SQLCLR: estendere le funzionalità con .Net](https://msdn.microsoft.com/it-it/library/cc185096.aspx)
+# [SQL Server 2005](https://msdn.microsoft.com/it-it/library/cc185072.aspx)
+# [Utilizzare i Web Services con SQL Server 2005](https://msdn.microsoft.com/it-it/library/cc185116.aspx)
+# [SQL Server 2005 Integration Services](https://msdn.microsoft.com/it-it/library/cc185024.aspx)
+# [Introduzione a Microsoft SQL Server 2008](https://msdn.microsoft.com/it-it/library/cc185016.aspx)
+# [Crittografia con SQL Server 2005](https://msdn.microsoft.com/it-it/library/ms189586%28v=sql.100%29.aspx)
+# [Implementazione di un data provider asincrono](https://msdn.microsoft.com/it-it/library/cc185062.aspx)
+
 

@@ -1,0 +1,7 @@
+# [Ciclo di vita dello sviluppo della protezione per sistemi informatici attendibili](https://msdn.microsoft.com/it-it/library/ms995349.aspx)
+# [Una piaga chiamata SQL Injection](https://msdn.microsoft.com/it-it/library/cc185099.aspx)
+# [Sicurezza dei dati: diversi aspetti](https://msdn.microsoft.com/it-it/library/cc185093.aspx)
+# [Approccio Programmatico alla Sicurezza Applicativa](https://msdn.microsoft.com/it-it/library/cc185053.aspx)
+# [Le nuove librerie "safe CRT" di Visual C++ 2005](https://msdn.microsoft.com/it-it/library/cc185089.aspx)
+# [La subdola minaccia del Cross Site Scripting](https://msdn.microsoft.com/it-it/library/cc185059.aspx)
+# [Introduzione al “Single Sign On”](https://msdn.microsoft.com/it-it/library/cc185029.aspx)
