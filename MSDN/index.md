@@ -1,4 +1,4 @@
-﻿---
+---
 title: Articoli Tecnici - Community Docs 
 description: Insieme di Articoli Tecnici forniti dagli MVP e dalla Community di sviluppatori
 author: MSCommunityPubService
@@ -8,12 +8,9 @@ ms.service: MSDN
 ms.custom: CommunityDocs
 ---
 
-
 # Articoli Tecnici - Community Docs
 
-
 ![](./img/minitel.png)
-
 
 
 Benvenuto nella rinnovata sezione Articoli Tecnici - Community Docs di MSDN.
@@ -29,5 +26,7 @@ La conversione degli articoli è "work in progress" - quelli identificati con un
 Di seguito trovate in evidenza l’elenco degli articoli più recenti
 - [Agile IoT - Agile meets IoT](VS-ALM/ALM/AgileIOT.md) - di Felice Pescatore
 - [Migrazioni e deployment in SQL Server](Server-Enterprise/SQL/Migrations.md) - di Alessandro Alpi
+
+
 
 
