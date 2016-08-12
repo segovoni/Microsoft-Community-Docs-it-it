@@ -1,9 +1,8 @@
 # [Migrazioni e deployment in SQL Server](Migrations.md)
-# [Come effettuare il debug di un Trigger in SQL Server](Come effettuare il debug di un Trigger in SQL Server.md)
+# [Come effettuare il debug di un Trigger in SQL Server](Debug-SQL-Server-Trigger.md)
+# [Unit Testing con SQL Server](Unit-Testing-con-SQL-Server.md)
+# [SQL Server sotto source control](SQL-DB-sotto-source-control.md)
 
-
-# [Unit Testing con SQL Server (*)](https://msdn.microsoft.com/it-it/library/mt169842.aspx)
-# [SQL Server sotto source control (*)](https://msdn.microsoft.com/it-it/library/dn894015.aspx)
 # [Una inaspettata variazione di SPID (SQL Server, Session Process ID) (*)](https://msdn.microsoft.com/it-it/library/dn722307.aspx)
 # [Il primo comando di ogni Trigger (*)](https://msdn.microsoft.com/it-it/library/dn376356.aspx)
 # [CREATE e DROP di colonne temporanee (*)](https://msdn.microsoft.com/it-it/library/dn269828.aspx)
