@@ -306,5 +306,6 @@ ed una serie di regole da seguire, è sufficiente integrare il pacchetto
 nel nostro strumento di deploy, ed è fatta. Anche il database non sarà
 più un enorme problema di release.
 
-Stay Tuned! ![](./img/Migrations/image11.gif)
+Stay Tuned! 
+
 
