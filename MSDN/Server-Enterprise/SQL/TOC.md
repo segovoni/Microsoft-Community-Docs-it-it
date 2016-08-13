@@ -3,8 +3,8 @@
 # [Unit Testing con SQL Server](Unit-Testing-con-SQL-Server.md)
 # [SQL Server sotto source control](SQL-DB-sotto-source-control.md)
 # [Una inaspettata variazione di SPID (SQL Server, Session Process ID)](Inaspettata-variazione-di-SPID.md)
+# [Il primo comando di ogni Trigger](Il-primo-comando-di-ogni-Trigger.md)
 
-# [Il primo comando di ogni Trigger (*)](https://msdn.microsoft.com/it-it/library/dn376356.aspx)
 # [CREATE e DROP di colonne temporanee (*)](https://msdn.microsoft.com/it-it/library/dn269828.aspx)
 # [Lo Statement MERGE e i Trigger (T-SQL) (*)](https://msdn.microsoft.com/it-it/library/dn169486.aspx)
 # [Come usare lo Statement MERGE (T-SQL) (*)](https://msdn.microsoft.com/it-it/library/jj973188.aspx)
