@@ -153,7 +153,7 @@ descritto di seguito.
 La figura seguente illustra la pagina di query creata automaticamente
 per effettuare il debug della stored procedure.
 
-![](./img/Come effettuare il debug di un Trigger in SQL Server/image1.png)
+![](./img/Debug-SQL-Server-Trigger/image1.png)
 
 Figura 1 – Debug della stored procedure che scatena l’attivazione
     del trigger
@@ -167,7 +167,7 @@ sul comando di INSERT, l’**execution pointer verrà trasferito sulla
 prima istruzione contenuta nel Trigger**, come illustrato nella figura
 seguente.
 
-![](./img/Come effettuare il debug di un Trigger in SQL Server/image2.png)
+![](./img/Debug-SQL-Server-Trigger/image2.png)
 
 Figura 2 – Debug del Trigger TR\_Product\_StockLevel
 
