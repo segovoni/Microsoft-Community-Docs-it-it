@@ -1,10 +1,10 @@
 ---
 title: AgileIoT - Agile meets IoT 
 description: AgileIoT - Agile meets IoT
-author: MSCommunityPubService
+author: felicepescatore
 ms.date: 08/01/2016
 ms.topic: how-to-article
-ms.service: SQLServer
+ms.service: ALM
 ms.custom: CommunityDocs
 ---
 
