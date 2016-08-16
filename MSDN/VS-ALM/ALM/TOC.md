@@ -1,6 +1,6 @@
 # [Agile IoT - Agile meets IoT](AgileIOT.md)
 
-# [Creare un Task personalizzato per la nuova build di TFS2015 / Visual Studio Team Services](https://msdn.microsoft.com/it-it/library/mt706519.aspx)
+# [Creare un Task personalizzato per la nuova build di TFS2015 / Visual Studio Team Services](CreareEstensioniPerBuild.md)
 # [Rilasciare un package ClickOnce su un Blob di Windows Azure con la build vNext](https://msdn.microsoft.com/it-it/library/mt662359.aspx)
 # [DevOps Jump Start - Adottare concretamente DevOps](https://msdn.microsoft.com/it-it/library/mt653946.aspx)
 # [DevOps Jump Start - Release Management](https://msdn.microsoft.com/it-it/library/mt653883.aspx)
