@@ -8,7 +8,6 @@ ms.service: ALM
 ms.custom: CommunityDocs
 ---
 
-
 # Rilasciare un package ClickOnce su un Blob di Windows Azure con la build vNext
 
 #### di [Gian Maria Ricci](https://mvp.microsoft.com/it-it/PublicProfile/4025635?fullName=Gian%20Maria%20%20Ricci) - Microsoft MVP
