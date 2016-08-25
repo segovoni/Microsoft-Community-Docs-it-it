@@ -1,7 +1,7 @@
 
 ---
-title: DevOps Jump Start - Adottare concretamente DevOps
-description: DevOps Jump Start - Adottare concretamente DevOps
+title: DevOps Jump Start 
+description: DevOps Jump Start
 author: felicepescatore
 ms.date: 08/01/2016
 ms.topic: how-to-article
@@ -9,7 +9,7 @@ ms.service: ALM
 ms.custom: CommunityDocs
 ---
 
-# DevOps Jump Start - Adottare concretamente DevOps
+# DevOps Jump Start
 
 #### di [Felice Pescatore](https://mvp.microsoft.com/it-it/mvp/Felice%20%20Pescatore-5001016) - Microsoft MVP
 
