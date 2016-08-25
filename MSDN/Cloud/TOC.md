@@ -1,5 +1,5 @@
 
-# [Il Cloud Computing - origini (*)](https://msdn.microsoft.com/it-it/library/jj714726.aspx)
+# [Il Cloud Computing - origini](Il-Cloud-Computing-origini.md)
 # [Windows Azure - la storia](WindowsAzure_LaStoria.md)
 # [Pricing: Capire i costi di Windows Azure (*)](https://msdn.microsoft.com/it-it/library/jj714728.aspx)
 # [PaaS vs. IaaS e il caso Azure (*)](https://msdn.microsoft.com/it-it/library/jj573926.aspx)
