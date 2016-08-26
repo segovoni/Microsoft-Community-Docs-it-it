@@ -1,20 +1,27 @@
-#### Di [Roberto Freato](https://mvp.support.microsoft.com/profile=9F9B3C0A-2016-4034-ACD6-9CEDEE74FAF3) – Microsoft MVP
+---
+title: Comunicazione intra-ruolo Web-Worker e bilanciamento del carico
+description: Comunicazione intra-ruolo Web-Worker e bilanciamento del carico
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: cloud
+ms.custom: CommunityDocs
+---
 
-1.  ![](./img//media/image1.png){width="0.5938331146106737in"
-    height="0.9376312335958005in"}
+# Comunicazione intra-ruolo Web-Worker e bilanciamento del carico
+
+#### Di [Roberto Freato](https://mvp.microsoft.com/it-it/PublicProfile/4028383) – Microsoft MVP
+
+![](./img/Comunicazione-Web-Worker-Bilanciamento-del-carico/image1.png)
 
 *Aprile 2012*
 
 In questo articolo verranno discussi i seguenti argomenti:
-
 -   Windows Azure Hosted Services
-
 -   Web e Worker Roles
 
 E le seguenti tecnologie:
-
 -   Windows Communication Foundation
-
 -   C\#
 
 Una peculiarità e, se vogliamo, un differenziale del Cloud è
@@ -51,21 +58,15 @@ Questa differenza, declinatasi nell’atto pratico a qualche riga di
 configurazione come sotto, evidenzia la possibilità di fare comunicare
 ruoli via TCP/IP.
 
-1.  ![](./img//media/image2.png){width="6.239583333333333in"
-    height="0.6770833333333334in"}
+![](./img/Comunicazione-Web-Worker-Bilanciamento-del-carico/image2.png)
 
-<!-- -->
+Figura 1 - Esempio di Endpoint esterno su HTTP(s)
 
-1.  Figura 1 - Esempio di Endpoint esterno su HTTP(s)
 
-<!-- -->
 
-1.  ![](./img//media/image3.png){width="5.166666666666667in"
-    height="3.3645833333333335in"}
+![](./img/Comunicazione-Web-Worker-Bilanciamento-del-carico/image3.png)
 
-<!-- -->
-
-1.  Figura 2 - Esempio di Worker Role con InternalEndpoint accessibile
+Figura 2 - Esempio di Worker Role con InternalEndpoint accessibile
     dal ruolo web
 
 Ne emerge che potremmo implementare una qualche logica di comunicazione
@@ -91,15 +92,12 @@ all’interno di un Hosted Service:
 -   Il ruolo ServiceA, di tipo Web e con External Endpoint
     (aka InputEndpoint) di tipo HTTP/HTTPS, riceve dall’utente richieste
     di elaborazioni complesse.
-
 -   A questo proposito ServiceA prende in carico la richiesta e la gira
     ad un worker role che, ricevuto il messaggio, si attiverà
     a soddisfarla.
-
 -   Il WorkerRole, noto anche come ServiceB, dovrà essere in ascolto di
     rete (su una qualsiasi porta e su un qualsiasi
     protocollo supportato) in attesa dei messaggi da ServiceA.
-
 -   ServiceB riceverà i messaggi e li elaborerà secondo la
     logica definita.
 
@@ -118,37 +116,24 @@ lato ServiceA.
 
 Per fare ciò procediamo, nel Worker, con:
 
-1.  ![](./img//media/image4.png){width="6.6930555555555555in"
-    height="1.5591622922134734in"}
+![](./img/Comunicazione-Web-Worker-Bilanciamento-del-carico/image4.png)
+Figura 3 - Attivazione di un WCF self-hosted sul WorkerRole
 
-<!-- -->
-
-1.  Figura 3 - Attivazione di un WCF self-hosted sul WorkerRole
-
-<!-- -->
-
-1.  ![](./img//media/image5.png){width="3.53125in" height="1.21875in"}
-
-<!-- -->
-
-1.  Figura 4 - Contratto del servizio di ricezione notifiche (1)
+![](./img/Comunicazione-Web-Worker-Bilanciamento-del-carico/image5.png)
+Figura 4 - Contratto del servizio di ricezione notifiche (1)
 
 Lato client, una volta implementato il servizio, sarà necessario
 generare il proxy con Visual Studio o come si preferisce, procedendo poi
 alla chiamata al servizio:
 
-1.  ![](./img//media/image6.png){width="6.354166666666667in"
-    height="1.03125in"}
-
-<!-- -->
-
-1.  Figura 5 - Attivazione del proxy WCF su TCP per la chiamata al
+![](./img/Comunicazione-Web-Worker-Bilanciamento-del-carico/image6.png)
+Figura 5 - Attivazione del proxy WCF su TCP per la chiamata al
     Worker
 
 Fino a qui la soluzione è banale, ma che indirizzo IP inseriamo
 all’interno del CreateChannel?
 
-1.  **Nota:** Il contratto del servizio di ricezione notifiche è un
+    *Nota:* Il contratto del servizio di ricezione notifiche è un
     contratto preso da un progetto reale in cui la notifica genera una
     sessione di HTML-crawling long-running.
 
@@ -177,10 +162,8 @@ premessa:
 -   Dobbiamo fare in modo che le varie istanze Web possano inviare un
     messaggio ad un “generico” servizio che a runtime sia poi
     effettivamente gestito da tutte le istanze del ruolo ServiceB
-
 -   Non vogliamo implementare un bilanciatore di rete “professionale”
     e/o comunque con euristiche basate sul carico reale:
-
     -   Procederemo con l’implementazione di un Round-Robin sulle
         istanze worker.
 
@@ -190,12 +173,9 @@ sta nell’oggetto RoleEnvironment che, come sappiamo, gestisce tutta la
 scaffalatura del servizio Azure, compresa la conoscenza della topologia
 di runtime.
 
-1.  ![](./img//media/image7.png){width="4.40625in"
-    height="0.3541666666666667in"}
+![](./img/Comunicazione-Web-Worker-Bilanciamento-del-carico/image7.png)
 
-<!-- -->
-
-1.  Figura 6 - Ottenimento di tutti gli indirizzi degli endpoint delle N
+Figura 6 - Ottenimento di tutti gli indirizzi degli endpoint delle N
     istanze di ServiceB
 
 Ora dovremmo implementare una qualche struttura che ci consenta di
@@ -203,12 +183,9 @@ ciclare su questi endpoint e scegliere ad ogni chiamata l’endpoint
 “successivo”. A questo proposito si propone l’implementazione di una
 coda circolare (CircularIterator):
 
-1.  ![](./img//media/image8.png){width="6.6930555555555555in"
-    height="2.286055336832896in"}
+![](./img/Comunicazione-Web-Worker-Bilanciamento-del-carico/image8.png)
 
-<!-- -->
-
-1.  Figura 7 - L'iteratore circolare continua a enumerare sulla lista di
+Figura 7 - L'iteratore circolare continua a enumerare sulla lista di
     partenza, riprendendo dall'inizio ad ogni terminazione
 
 Ne consegue che a questo punto basterà tenere in memoria una istanza
@@ -216,12 +193,9 @@ condivisa di questo iteratore e wrappare la chiamata al servizio
 specifico di un N-esimo ServiceB, dentro una chiamata generica, in modo
 da rendere l’operazione su ServiceA il più trasparente possibile.
 
-1.  ![](./img//media/image9.png){width="6.666666666666667in"
-    height="1.1979166666666667in"}
+![](./img/Comunicazione-Web-Worker-Bilanciamento-del-carico/image9.png)
 
-<!-- -->
-
-1.  Figura 8 - Codice di inizializzazione dell'iteratore circolare con
+Figura 8 - Codice di inizializzazione dell'iteratore circolare con
     gli endpoints ottenuti precedentemente
 
 Conclusioni
@@ -235,10 +209,5 @@ istanze ed infine, come poter implementare un rudimentale bilanciatore
 round-robin.
 
 #### di Roberto Freato ([blog](http://dotnetlombardia.org/blogs/rob/default.aspx)) - Microsoft MVP
-
-1.  *[Altri articoli di Roberto Freato nella
-    Libr](http://sxp.microsoft.com/feeds/3.0/msdntn/TA_MSDN_ITA?contenttype=Article&author=Roberto%20Freato)ary*
-    ![](./img//media/image10.png){width="0.1771084864391951in"
-    height="0.1771084864391951in"}
 
 

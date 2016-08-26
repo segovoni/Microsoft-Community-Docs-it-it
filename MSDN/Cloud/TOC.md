@@ -5,7 +5,7 @@
 # [PaaS vs. IaaS e il caso Azure](Paas-Iaas-Azure.md)
 # [Strategie di condivisione dati tra istanze nel Cloud](Condivisione-Dati-tra-istanze-nel-cloud.md)
 # [Windows Azure - interagire con il Cloud Storage da VB 2010](WindowsAzure-Interagire-con-il-Cloud-Storage-da-VB-2010.md)
-# [Comunicazione intra-ruolo Web-Worker e bilanciamento del carico (*)](https://msdn.microsoft.com/it-it/library/jj127259.aspx)
+# [Comunicazione intra-ruolo Web-Worker e bilanciamento del carico](Comunicazione-Web-Worker-Bilanciamento-del-carico.md)
 # [Integrazione di un login Facebook nelle applicazioni Web con ACSV2](Integrazione_login_Facebook_in_ACSV2.md)
 # [Certificare applicazioni LightSwitch per Windows Azure, con Microsoft Platform Ready (*)](https://msdn.microsoft.com/it-it/library/jj127266.aspx)
 # [Backup e DataSync con SQL Azure e SQL Server](Backup-e-DataSync-con-SQL-Azure-e-SQL-Server.md)
