@@ -1,44 +1,44 @@
-#### di [Roberto Freato](https://mvp.support.microsoft.com/profile=9F9B3C0A-2016-4034-ACD6-9CEDEE74FAF3) – Microsoft MVP
 
-1.  ![](./img//media/image1.png){width="0.5938331146106737in"
-    height="0.9376312335958005in"}
+---
+title: PaaS vs. IaaS e il caso Azure
+description: PaaS vs. IaaS e il caso Azure
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: cloud
+ms.custom: CommunityDocs
+---
+
+# PaaS vs. IaaS e il caso Azure
+
+#### di [Roberto Freato](https://mvp.microsoft.com/it-it/PublicProfile/4028383) – Microsoft MVP
+
+![](./img/Paas-Iaas-Azure/image1.png)    
 
 *Luglio, 2012*
 
 In questo articolo verranno discussi i seguenti argomenti:
 
-1.  Confronto tra PaaS e IaaS
+- Confronto tra PaaS e IaaS
+- Benefici e svantaggi del PaaS di Azure
+- Benefici e svantaggi dello IaaS di Azure
 
-    Benefici e svantaggi del PaaS di Azure
 
-    Benefici e svantaggi dello IaaS di Azure
+## Sommario
 
-    1.  
-
-Sommario
---------
-
-1.  [Virtualizzazione e IaaS](#_Virtualizzazione_e_IaaS)
-
-    [Il PaaS](#_Il_PaaS)
-
-    [PaaS vs. IaaS](#_PaaS_vs._IaaS)
-
-    [Vantaggi dello Iaas sul PaaS](#_Vantaggi_dello_Iaas)
-
-    [Svantaggi dello Iaas sul PaaS](#_Svantaggi_dello_Iaas)
-
-    [Il caso Azure](#_Il_caso_Azure)
-
-    1.  
+- Virtualizzazione e IaaS
+- Il PaaS
+- PaaS vs. IaaS
+- Vantaggi dello Iaas sul PaaS
+- Svantaggi dello Iaas sul PaaS
+- Il caso Azure
 
 In questo articolo parleremo delle differenze tra PaaS e IaaS, di come
 distinguere le due offerte di servizio Cloud in generale, declinandone
 una interpretazione attraverso gli strumenti messi a disposizione dal
 Windows Azure Platform.
 
-<span id="_Virtualizzazione_e_IaaS" class="anchor"><span id="_Toc329426758" class="anchor"></span></span>Virtualizzazione e IaaS
---------------------------------------------------------------------------------------------------------------------------------
+## Virtualizzazione e IaaS
 
 Molti considerano il Cloud Computing e la virtualizzazione come due temi
 inscindibili (e questa è una delle motivazioni che ci consentono di
@@ -80,8 +80,7 @@ caratteristica imprescindibile: le risorse sono utilizzate su richiesta
 al momento in cui un cliente ne ha bisogno, non vengono assegnate a
 prescindere dal loro utilizzo effettivo.
 
-<span id="_Il_PaaS" class="anchor"><span id="_Toc329426759" class="anchor"></span></span>Il PaaS
-------------------------------------------------------------------------------------------------
+## Il PaaS
 
 Il PaaS è un’offerta di servizio propria dell’era Cloud. Sebbene già
 prima di parlare di Cloud ci fossero vendor che di fatto effettuavano
@@ -105,8 +104,7 @@ suo staff IT. Il PaaS quindi permette il “deploy” delle applicazioni,
 astraendo del tutto il luogo, la configurazione e la topologia fisica
 delle risorse su cui lo si sta facendo.
 
-<span id="_PaaS_vs._IaaS" class="anchor"><span id="_Toc329426760" class="anchor"></span></span>PaaS vs. IaaS
-------------------------------------------------------------------------------------------------------------
+## PaaS vs. IaaS
 
 Inizio con una massima personale che ben riassume il mio punto di vista
 rispetto ai due paradigmi:
@@ -134,40 +132,28 @@ solamente una visione pretestuosa e fuorviante. Per evidenziare meglio
 questa mia non velata opinione, a seguire un confronto il più possibile
 oggettivo.
 
-<span id="_Vantaggi_dello_Iaas" class="anchor"><span id="_Toc329426761" class="anchor"></span></span>Vantaggi dello Iaas sul PaaS
----------------------------------------------------------------------------------------------------------------------------------
+## Vantaggi dello Iaas sul PaaS
 
 1.  Lo IaaS è configurabile
-
 2.  Posso installare, configurare e rimuovere software e qualsivoglia
     applicazione
-
 3.  Posso arrivarci in Remote Desktop con la certezza che quello che
     farò oggi, lo troverò domani (nota: nello IaaS, di solito lo stato
     delle modifiche al sistema operativo è persistente)
-
-4.  
-
 Finiti! I vantaggi dello IaaS sul PaaS si traducono nella possibilità di
 avere il controllo sulla macchina.
 
-<span id="_Svantaggi_dello_Iaas" class="anchor"><span id="_Toc329426762" class="anchor"></span></span>Svantaggi dello Iaas sul PaaS
------------------------------------------------------------------------------------------------------------------------------------
+## Svantaggi dello Iaas sul PaaS
 
 1.  La IaaS è configurabile
-
 2.  Posso permettermi di allentare i permessi su una folder perchè non
     riesco a configurare IIS su una applicazione.
-
 3.  Posso permettermi di installare in remote desktop un tool non
     firmato per la più disparate motivazioni.
-
 4.  Mi posso permettere, proporzionalmente alla mia ignoranza in
     materia, di “spaccare” il server o almeno di non configurarlo al
     meglio per il servizio da offrire (si parla al 90% di servizi web)
-
 5.  Lo IaaS non scala da solo
-
 6.  Se ho bisogno di una nuova macchina, la devo creare e riconfigurare
     da capo (o nei sistemi più evoluti, clonare da una esistente). Poi
     devo implementare uno stack di rete (bilanciatore, schede,
@@ -176,8 +162,6 @@ avere il controllo sulla macchina.
     sarebbero necessarie anche modifiche alle applicazioni e opportuni
     strumenti per fare “parlare” le istanze multiple allocate
     sullo IaaS)
-
-7.  
 
 Parlando con un collega che lavora in Microsoft, è emerso che il cliente
 medio ha “paura” del PaaS proprio per la perdita di controllo percepita
@@ -191,51 +175,31 @@ casa su un PaaS, sono relative alle macro-aree di attenzione di ogni
 datancenter: ridondanza, sicurezza, performance.
 
 ### Ridondanza
-
 1.  Nel nostro datancenter quante linee di corrente ci sono?
-
 2.  Quanti condizionatori ci sono?
-
 3.  C’è un sistema di monitoring della temperatura con allarme?
-
 4.  C’è del personale *dedicato* pronto a scattare sulla sedia se
     l’allarme suona?
-
 5.  Quante linee internet ci sono?
-
 6.  L’hardware è ridondato (firewall, cavi, switch, schede di rete, hard
     disk, etc)?
 
-7.  
-
 ### Sicurezza
-
 1.  Il palazzo è controllato (telecamere, guardiani, controllo degli
     accessi all’edificio e ai datacenter)?
-
 2.  C’è un sistema antiincendio?
-
 3.  I dati e le informazioni che transitano all’interno del datacenter,
     sono crittografate?
-
 4.  Quante persone hanno accesso fisico alle macchine?
-
-5.  
-
+ 
 ### Performance
-
 1.  Posso triplicare o decuplicare le risorse da un momento al
     successivo?
-
 2.  La mie linee internet hanno banda dedicata?
-
 3.  Il mio staff IT ha configurato i sistemi operativi, i framework e i
     tools al meglio?
 
-4.  
-
-<span id="_Il_caso_Azure" class="anchor"><span id="_Toc329426766" class="anchor"></span></span>Il caso Azure
-------------------------------------------------------------------------------------------------------------
+## Il caso Azure
 
 Non posso che approvare la scelta di Microsoft di lanciare una offerta
 di IaaS a completamento dell’offerta principe con cui Azure è nato.
@@ -260,11 +224,7 @@ IaaS è utile per colmare le necessità residue di chi ha soluzioni
 inevitabilmente complesse.
 
 #### di Roberto Freato ([blog](http://dotnetlombardia.org/blogs/rob/default.aspx)) - Microsoft MVP
-
-1.  [*Altri articoli di Roberto Freato nella
-    Libreria*](http://sxp.microsoft.com/feeds/3.0/msdntn/TA_MSDN_ITA?contenttype=Article&author=Roberto%20Freato)
-    ![](./img//media/image2.png){width="0.1771084864391951in"
-    height="0.1771084864391951in"}
+  
 
 [^1]: Barelli, L. (2009, Febbraio 27). Virtualizzazione e cloud, coppia
     perfetta. Retrieved from Lineaedp:

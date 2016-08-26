@@ -2,7 +2,7 @@
 # [Il Cloud Computing - origini](Il-Cloud-Computing-origini.md)
 # [Windows Azure - la storia](WindowsAzure_LaStoria.md)
 # [Pricing: Capire i costi di Windows Azure](Costi-di-Windows-Azure.md)
-# [PaaS vs. IaaS e il caso Azure (*)](https://msdn.microsoft.com/it-it/library/jj573926.aspx)
+# [PaaS vs. IaaS e il caso Azure](Paas-Iaas-Azure.md)
 # [Strategie di condivisione dati tra istanze nel Cloud (*)](https://msdn.microsoft.com/it-it/library/jj573927.aspx)
 # [Windows Azure - interagire con il Cloud Storage da VB 2010](WindowsAzure-Interagire-con-il-Cloud-Storage-da-VB-2010.md)
 # [Comunicazione intra-ruolo Web-Worker e bilanciamento del carico (*)](https://msdn.microsoft.com/it-it/library/jj127259.aspx)
