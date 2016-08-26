@@ -1,10 +1,10 @@
 ﻿# [Agile IoT - Agile meets IoT](AgileIOT.md)
 # [Creare un Task personalizzato per la nuova build di TFS2015 / Visual Studio Team Services](CreareEstensioniPerBuild.md)
 # [Rilasciare un package ClickOnce su un Blob di Windows Azure con la build vNext](DeployClickOnce.md)
-# [DevOps Jump Start - Adottare concretamente DevOps](DevOps-JumpStart.md)
+# [DevOps Jump Start - Adottare concretamente DevOps](DevOps-Adopt.md)
 # [DevOps Jump Start - Release Management](DevOps-Release.md)
+# [DevOps Jump Start - L'approccio DevOps](DevOps-JumpStart.md)
 
-# [DevOps Jump Start - L'approccio DevOps (*)](https://msdn.microsoft.com/it-it/library/mt674936.aspx)
 # [Gestire la Semantic Versioning con GitFlow e GitVersion in una vNext Build (*)](https://msdn.microsoft.com/it-it/library/mt634392.aspx)
 # [Pubblicare un package nuget grazie alla build vNext di TFS / VSTS (*)](https://msdn.microsoft.com/it-it/library/mt634391.aspx)
 # [Branch per feature in Git (*)](https://msdn.microsoft.com/it-it/library/mt169381.aspx)
