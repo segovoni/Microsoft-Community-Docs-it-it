@@ -10,6 +10,6 @@
 # [Certificare applicazioni LightSwitch per Windows Azure, con Microsoft Platform Ready (*)](https://msdn.microsoft.com/it-it/library/jj127266.aspx)
 # [Backup e DataSync con SQL Azure e SQL Server](Backup-e-DataSync-con-SQL-Azure-e-SQL-Server.md)
 # [Esempio di storage efficace privato su Azure con CloudSaver (*)](https://msdn.microsoft.com/it-it/library/hh923935.aspx)
-# [Interoperabilit� e migrazione verso il cloud � il caso DotNetLombardia (*)](https://msdn.microsoft.com/it-it/library/hh923933.aspx)
+# [Interoperabilità e migrazione verso il cloud - il caso DotNetLombardia (*)](https://msdn.microsoft.com/it-it/library/hh923933.aspx)
 # [Installazione su Windows Azure di Umbraco 4.7.x (*)](https://msdn.microsoft.com/it-it/library/hh923934.aspx)
 
