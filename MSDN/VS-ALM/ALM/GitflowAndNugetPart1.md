@@ -1,5 +1,31 @@
-Pubblicare un package nuget grazie alla build vNext di TFS / VSTS
-=================================================================
+
+---
+title: Pubblicare un package nuget grazie alla build vNext di TFS / VSTS
+description: Pubblicare un package nuget grazie alla build vNext di TFS / VSTS
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: ALM
+ms.custom: CommunityDocs
+---
+
+# Pubblicare un package nuget grazie alla build vNext di TFS / VSTS
+
+di Gian Maria Ricci - Microsoft MVP
+Blog inglese - [http://www.codewrecks.com](http://www.codewrecks.com)
+
+Blog Italiano ALM - [http://www.getlatestversion.it/author/alkampfer/]
+(http://www.getlatestversion.it/author/alkampfer/)
+
+Blog Italiano - [http://blogs.ugidotnet.org/rgm](http://blogs.ugidotnet.org/rgm)
+
+![](img/MVPLogo.png)
+
+*Novembre 2015*
+
+
+
+
 
 Grazie alle nuove funzionalità della build vNext di TFS2015 / VSTS, è
 possibile con pochissimo sforzo pubblicare automaticamente un package
@@ -17,8 +43,7 @@ standard per la pubblicazione. Il primo passo consiste nell’andare nel
 tab **Variables** per aggiungere una variabile chiamata NugetVersion,
 come mostrato nella **Figura 1.**
 
-![](./img//media/image1.png){width="6.09375in"
-height="3.5833333333333335in"}
+![](./img/GitflowAndNugetPart1/image1.png)
 
 **Figura 1:** *Introduzione di una nuova variabile che andrà a contenere
 la versione di Nuget*
@@ -65,8 +90,7 @@ si trova il NugetPackager. In questa cartella si possono trovare tutti
 gli script PowerShell che verranno utilizzati dal task per creare il
 file nupkg a partire dal file .nuspec.
 
-![](./img//media/image2.png){width="6.927083333333333in"
-height="4.979166666666667in"}
+![](./img/GitflowAndNugetPart1/image2.png)
 
 **Figura 2:** *Aggiungere il task Nuget Packager per creare il file
 .nupkg a partire dal nuspec durante la build.*
@@ -88,8 +112,8 @@ direttamente nella definizione della build. Il tutto fatto da un browser
 web, non richiedendo più di avere Visual Studio installato per definire
 una build, come per le vecchie build XAML.
 
-![](./img//media/image3.png){width="5.25in"
-height="2.9791666666666665in"}
+![](./img/GitflowAndNugetPart1/image3.png)
+
 
 **Figura 3:** *Navigazione nel source control per scegliere il file
 .nuspec da pubblicare.*
@@ -125,8 +149,8 @@ L’ultimo passo che rimane da fare è aggiungere un task di tipo Nuget
 Publisher, che ha lo scopo di effettuare il push del package .nupkg
 sull’account nuget o myget designato.
 
-![](./img//media/image4.png){width="7.010416666666667in"
-height="4.083333333333333in"}
+![](./img/GitflowAndNugetPart1/image4.png)
+
 
 **Figura 4:** *Lo step finale è usare il NuGet Publisher per effettuare
 il push dei package.*
@@ -152,8 +176,8 @@ NuGet/MyGet è sufficiente premere il bottone **Manage** alla destra
 della ComboBox per essere ridirezionati nella sezione di gestione degli
 Endpoint.
 
-![](./img//media/image5.png){width="5.729166666666667in"
-height="3.8541666666666665in"}
+![](./img/GitflowAndNugetPart1/image5.png)
+
 
 **Figura 5:** *Gestione degli endpoint in Visual Studio Online *
 
@@ -163,8 +187,8 @@ Alcuni tipi di endpoint specifici sono già presenti, ma dato che non
 esiste nessun endpoint specifico per NuGet è necessario andare a creare
 un nuovo endpoint di tipo **Generic. **
 
-![](./img//media/image6.png){width="6.25in"
-height="2.6979166666666665in"}
+![](./img/GitflowAndNugetPart1/image6.png)
+
 
 **Figura 6:** *Aggiunta di un endpoint di tipo generico verso il proprio
 feed NuGet o MyGet.*
@@ -191,8 +215,8 @@ maggiore sicurezza.
 A questo punto la configurazione è finiza, si può quindi verificare che
 tutto funzioni correttamente andando ad accodare una nuova build.
 
-![](./img//media/image7.png){width="5.21875in"
-height="3.4895833333333335in"}
+![](./img/GitflowAndNugetPart1/image7.png)
+
 
 **Figura 7:** *Quando si accoda una nuova build è possibile selezionare
 branch è versione.*
@@ -206,7 +230,7 @@ la branch, che è invece definita del workspace specificato nella build.
 Se la build riesce, si può andare a controllare nel proprio feed NuGet o
 MyGet il risultato della pubblicazione.
 
-![](./img//media/image8.png){width="7.25in" height="2.40625in"}
+![](./img/GitflowAndNugetPart1/image8.png)
 
 **Figura 8:** *Il pacchetto è stato correttamente pubblicato nel feed
 MyGet.*
@@ -224,8 +248,8 @@ pre-release, è possibile schedulare una build sulla branch develop ed
 adottare una numerazione di nuget tipica di un pacchetto pre-release,
 come mostrato in **Figura 9**.
 
-![](./img//media/image9.png){width="5.25in"
-height="3.6770833333333335in"}
+![](./img/GitflowAndNugetPart1/image9.png)
+
 
 **Figura 9:** *Si può pubblicare una branch non stabile, come la
 develop, semplicemente usando un numero di pacchetto NuGet pre-release.*
@@ -235,8 +259,8 @@ pacchetto pre-release.** Una volta terminata la build, da Visual Studio
 si verifica che effettivamente il pacchetto è stato correttamente
 pubblicato con una versione in pre-release.
 
-![](./img//media/image10.png){width="3.8958333333333335in"
-height="2.25in"}
+![](./img/GitflowAndNugetPart1/image10.png)
+
 
 **Figura 10:** *Verifica in Visual Studio della corretta pubblicazione
 della branch develop in pre-release.*

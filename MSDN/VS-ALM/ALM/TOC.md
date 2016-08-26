@@ -4,9 +4,9 @@
 # [DevOps Jump Start - Adottare concretamente DevOps](DevOps-Adopt.md)
 # [DevOps Jump Start - Release Management](DevOps-Release.md)
 # [DevOps Jump Start - L'approccio DevOps](DevOps-JumpStart.md)
+# [Gestire la Semantic Versioning con GitFlow e GitVersion in una vNext Build](GitflowAndNugetPart2.md)
+# [Pubblicare un package nuget grazie alla build vNext di TFS / VSTS](GitflowAndNugetPart1.md)
 
-# [Gestire la Semantic Versioning con GitFlow e GitVersion in una vNext Build (*)](https://msdn.microsoft.com/it-it/library/mt634392.aspx)
-# [Pubblicare un package nuget grazie alla build vNext di TFS / VSTS (*)](https://msdn.microsoft.com/it-it/library/mt634391.aspx)
 # [Branch per feature in Git (*)](https://msdn.microsoft.com/it-it/library/mt169381.aspx)
 # [Lean Startup, Jump Start (parte 3/3) - Growth Engine (*)](https://msdn.microsoft.com/it-it/library/dn940052.aspx)
 # [Lean Startup, Jump Start (parte 2/3) - Build-Measure-Learn (*)](https://msdn.microsoft.com/it-it/library/dn940051.aspx)

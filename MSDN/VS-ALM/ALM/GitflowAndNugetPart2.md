@@ -1,5 +1,28 @@
-Gestire la Semantic Versioning con GitFlow e GitVersion in una vNext Build 
-===========================================================================
+
+---
+title: Gestire la Semantic Versioning con GitFlow e GitVersion in una vNext Build 
+description: Gestire la Semantic Versioning con GitFlow e GitVersion in una vNext Build
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: ALM
+ms.custom: CommunityDocs
+---
+
+# Gestire la Semantic Versioning con GitFlow e GitVersion in una vNext Build 
+
+di Gian Maria Ricci - Microsoft MVP
+Blog inglese - [http://www.codewrecks.com](http://www.codewrecks.com)
+
+Blog Italiano ALM - [http://www.getlatestversion.it/author/alkampfer/]
+(http://www.getlatestversion.it/author/alkampfer/)
+
+Blog Italiano - [http://blogs.ugidotnet.org/rgm](http://blogs.ugidotnet.org/rgm)
+
+![](img/MVPLogo.png)
+
+*Novembre 2015*
+
 
 Nell’articolo precedente si è discussa la pubblicazione dei package
 nuget tramite la build vNext di VSO / TFS, ma non si è parlato di
@@ -228,8 +251,8 @@ generati è possibile risalire alla numerazione ed al commit attualmente
 utilizzato per generare l’assembly. Massima tracciabilità con poche
 righe di PowerShell.
 
-![](./img//media/image1.png){width="3.779166666666667in"
-height="2.1819444444444445in"}
+![](./img/GitflowAndNugetPart2/image1.png)
+
 
 Inviare comandi al motore di Build vNext tramite PowersHell
 -----------------------------------------------------------
@@ -283,8 +306,7 @@ della build, ma il primo aggiorna anche la variabile build.buildnumber
 con il nuovo numero. Ecco quindi come si presenta la lista delle ultime
 build nel sommario.
 
-![](./img//media/image2.png){width="4.558333333333334in"
-height="3.2729166666666667in"}
+![](./img/GitflowAndNugetPart2/image2.png)
 
 Come si può vedere, il nome della build permette immediatamente di
 capire che branch è stata compilata e che versione di package è stato
@@ -305,8 +327,7 @@ caso del numero di versione, che verrà messo automaticamente.
 L’ultimo passo è verificare che effettivamente i package pubblicati
 abbiano la numerazione corretta.
 
-![](./img//media/image3.png){width="7.2340277777777775in"
-height="3.7270833333333333in"}
+![](./img/GitflowAndNugetPart2/image3.png)
 
 Conclusioni
 -----------
