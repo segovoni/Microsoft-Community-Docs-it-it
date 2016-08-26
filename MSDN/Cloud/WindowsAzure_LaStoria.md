@@ -10,7 +10,7 @@ ms.custom: CommunityDocs
 
 # La storia di Windows Azure
 
-#### di [Roberto Freato](https://mvp.support.microsoft.com/profile=9F9B3C0A-2016-4034-ACD6-9CEDEE74FAF3) – Microsoft MVP
+#### di [Roberto Freato](https://mvp.microsoft.com/it-it/PublicProfile/4028383) – Microsoft MVP
 
 
 ![](./img/WindowsAzure_LaStoria/image1.png)

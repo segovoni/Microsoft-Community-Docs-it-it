@@ -1,47 +1,42 @@
-#### di [Roberto Freato](https://mvp.support.microsoft.com/profile=9F9B3C0A-2016-4034-ACD6-9CEDEE74FAF3) – Microsoft MVP
+---
+title: Strategie di condivisione dati tra istanze nel Cloud
+description: Strategie di condivisione dati tra istanze nel Cloud
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: cloud
+ms.custom: CommunityDocs
+---
 
-1.  ![](./img//media/image1.png){width="0.5938331146106737in"
-    height="0.9376312335958005in"}
+# Strategie di condivisione dati tra istanze nel Cloud
+
+#### di [Roberto Freato](https://mvp.microsoft.com/it-it/PublicProfile/4028383) – Microsoft MVP
+
+![](./img/MVPLogo.png)    
 
 *Luglio, 2012*
 
 In questo articolo verranno discussi i seguenti argomenti:
 
-1.  Tecniche di condivisione dati in ambienti distribuiti
-
-    Esternalizzazione dello storage dalle istanze Cloud
-
-    Internalizzazione dello storage nelle istanze Cloud
-
-    1.  
+- Tecniche di condivisione dati in ambienti distribuiti
+- Esternalizzazione dello storage dalle istanze Cloud
+- Internalizzazione dello storage nelle istanze Cloud
 
 E le seguenti tecnologie:
-
-1.  Windows Azure Cloud Services (Nota 1)
-
-    Windows Azure Storage
-
-    SMB File Sharing
-
-    Command Prompt
-
-    1.  
+- Windows Azure Cloud Services (Nota 1)
+- Windows Azure Storage
+- SMB File Sharing
+- Command Prompt
 
 Sommario
 --------
 
-1.  [Scenario 1 – la nuova applicazione](#_Scenario_1_–)
+- Scenario 1 – la nuova applicazione
+- Scenario 2 – la migrazione
+- Soluzione di base
+- Soluzione di alta disponibilità e affidabilità
+- Approfondimenti
 
-    [Scenario 2 – la migrazione](#_Scenario_2_–)
-
-    [Soluzione di base](#_Soluzione_di_base)
-
-    [Soluzione di alta disponibilità e
-    affidabilità](#_Soluzione_di_alta)
-
-    [Approfondimenti](#_Approfondimenti)
-
-    1.  
 
 In questo articolo parleremo delle strategie più diffuse di condividere
 i dati tra i vari attori in gioco nello scenario Cloud-enabled, ove per
@@ -51,24 +46,20 @@ virtuali) che compongono la nostra architettura distribuita.
 Nel Cloud di Azure esistono sostanzialmente (per il momento) tre scenari
 di esecuzione:
 
-1.  **Nota:** Il 7 Giugno 2012 sono state presentate moltissime novità
+    **Nota:** Il 7 Giugno 2012 sono state presentate moltissime novità
     che rivoluzionano l’offerta della piattaforma in termini di
     tipologia di servizi (IaaS, Azure Web Sites, Caching Roles) che non
     trattiamo in questo articolo in quanto trattasi di servizi in CTP
     e/o comunque di interesse principale da parte dei
     super-early adopters.
 
-<!-- -->
-
 1.  Esecuzione nel contesto di una WebRole, ovvero di una istanza di
     macchina virtuale specificatamente concepita per ospitare una serie
     di applicazioni/servizi web-based (a cura di IIS).
-
 2.  Esecuzione nel contesto di un WorkerRole, ovvero di una istanza
     molto “leggera” specificatamente concepita per ospitare processi di
     computazione/esecuzione long-running, servizi di background e
     processi di gestione del ciclo di vita.
-
 3.  Esecuzione nel contesto di una VMRole, particolare tipo di istanza
     sempre meno supportata e sempre più “evitata” (in quanto ormai
     retaggio della prossima offerta di IaaS), dedicata a coloro
@@ -82,7 +73,7 @@ il consiglio arriva più per una applicazione di esperienza sul campo che
 per la effettiva presenza di una best-practice nella letteratura di
 settore.
 
-1.  **Nota 1:** Una doverosa premessa visto che da poco è noto
+    **Nota 1:** Una doverosa premessa visto che da poco è noto
     pubblicamente che è in corso un renaming di alcuni servizi legati
     alla Windows Azure Platform. In particolare una email dell’8 Maggio
     a tutti i clienti di Azure specifica il cambio di nome per i vari
@@ -92,8 +83,7 @@ settore.
     pubblicazione e nell’immediato futuro ad essa, i nomi utilizzati in
     questo articolo potrebbero aver perso in parte validità.
 
-<span id="_Scenario_1_–" class="anchor"><span id="_Toc329284956" class="anchor"></span></span>Scenario 1 – la nuova applicazione
---------------------------------------------------------------------------------------------------------------------------------
+## Scenario 1 – la nuova applicazione
 
 Nelle nuove applicazioni il concetto di adattamento non esiste o meglio,
 non dovrebbe. Una soluzione veramente “nuova” dovrebbe poter stabilire
@@ -130,31 +120,18 @@ l’Azure Storage, una insieme di tre servizi basati su REST, finalizzati
 alla memorizzazione massiva di dati, di cui un esempio di codice è
 presente sotto:
 
-1.  
-
-<!-- -->
-
-1.  public Uri UploadBlob(string path, string fileName, string content)
-
+```C#
+public Uri UploadBlob(string path, string fileName, string content)
     {
-
-    var account =
-    CloudStorageAccount.FromConfigurationSetting("DataConnectionString");
-
+    var account = CloudStorageAccount.FromConfigurationSetting("DataConnectionString");
     var cloudBlobClient = account.CreateCloudBlobClient();
-
-    var cloudBlobContainer =
-    cloudBlobClient.GetContainerReference(path);
-
+    var cloudBlobContainer = cloudBlobClient.GetContainerReference(path);
     cloudBlobContainer.CreateIfNotExist();
-
     var blob = cloudBlobContainer.GetBlobReference(fileName);
-
     blob.UploadText(content);
-
     return blob.Uri;
-
     }
+```
 
 Trattandosi di un meccanismo custom di salvataggio di files, nelle nuove
 soluzioni è consigliato comunque limitare al minimo il numero di punti
@@ -162,7 +139,7 @@ nel codice in cui se ne fa utilizzo, riusando il più possibile lo stesso
 codice per permettere, in caso di “move-out” il facile adattamento ad un
 diverso sistema di storage, riducendo al minimo il lock-in.
 
-1.  **Nota:** Una buona architettura dovrebbe utilizzare in modo
+    **Nota:** Una buona architettura dovrebbe utilizzare in modo
     intelligente le potenzialità di una implementazione, minimizzando al
     contempo il rischio di lock-in proporzionalmente alla possibilità
     reale di dover o voler cambiare tecnologia in un secondo momento.
@@ -171,8 +148,7 @@ Non sempre tuttavia si lavora su nuove soluzioni, per cui molto spesso
 si tratta di migrare una soluzione esistente piuttosto che progettarne
 una ex-novo.
 
-<span id="_Scenario_2_–" class="anchor"><span id="_Toc329284957" class="anchor"></span></span>Scenario 2 – la migrazione
-------------------------------------------------------------------------------------------------------------------------
+## Scenario 2 – la migrazione
 
 Negli ultimi mesi le aziende che stanno migrando o hanno migrato ad
 Azure sono in crescita e le problematiche sono più o meno comuni a molte
@@ -217,39 +193,25 @@ processo, il file in questione viene stanziato su disco in attesa di una
 computazione e raffinato successivamente sempre passando dal file
 system.
 
-<span id="_Soluzione_di_base" class="anchor"><span id="_Toc329284958" class="anchor"></span></span>Soluzione di base
---------------------------------------------------------------------------------------------------------------------
+## Soluzione di base
 
 In una siffatta soluzione è difficile intervenire univocamente dal
 fronte dei BLOB, per cui si adotta uno stratagemma come di seguito:
 
-1.  Worker Role “0”
-
-    1.  Si utilizza uno startup task per installare sul server virtuale
+- Worker Role “0”
+    a.  Si utilizza uno startup task per installare sul server virtuale
         i servizi di File Sharing
-
-    2.  Si crea una share di rete che punti ad un percorso su disco (es.
+    b.  Si crea una share di rete che punti ad un percorso su disco (es.
         LocalStorage)
-
-    3.  Si apre il firewall
-
-    4.  Si utilizza uno script (PS o CMD) sempre in fase di startup, per
+    c.  Si apre il firewall
+    d.  Si utilizza uno script (PS o CMD) sempre in fase di startup, per
         creare una utenza che abbia i permessi di lettura/scrittura
         sulla share di rete creata.
-
-    5.  
-
-    Web Role 0-N
-
+- Web Role 0-N
     a.  Durante lo startup si creerà una unità di rete in connessione al
         server 0
-
-    <!-- -->
-
-    1.  Si imposterà il path montato nelle settings dell’applicazione in
+    b. Si imposterà il path montato nelle settings dell’applicazione in
         modo che i vari punti possano accedervi in lettura/scrittura.
-
-    2.  
 
 Questa soluzione porta ad una prima considerazione: il worker role salva
 su disco, il che significa che al primo riciclo perderemo tutto. Quindi
@@ -270,71 +232,46 @@ parzialmente dipendente dall’API di controllo del ciclo di vita di
 Azure, per l’attivazione di una seconda istanza Worker di condivisione
 files.
 
-1.  **Nota:** Questa soluzione implica un meccanismo distribuito di
+    **Nota:** Questa soluzione implica un meccanismo distribuito di
     elezione del supernodo di condivisione e di discovery da parte
     dei client.
 
-<span id="_Soluzione_di_alta" class="anchor"><span id="_Toc329284959" class="anchor"></span></span>Soluzione di alta disponibilità e affidabilità
--------------------------------------------------------------------------------------------------------------------------------------------------
+## Soluzione di alta disponibilità e affidabilità
 
-1.  Worker Role 0-N
-
-    1.  Si utilizza uno startup task per installare sul server virtuale
+- Worker Role 0-N
+    a.  Si utilizza uno startup task per installare sul server virtuale
         i servizi di File Sharing
-
-    2.  Si “prova” a montare il VHD su BLOB remoto (aka Azure Drive)
-
-    3.  Se ci si riesce si è “eletti” a supernodo
-
-    4.  Se non ci si riesce ci si mette in sleep/wait e si ritenta
+    b.  Si “prova” a montare il VHD su BLOB remoto (aka Azure Drive)
+    c.  Se ci si riesce si è “eletti” a supernodo
+    d.  Se non ci si riesce ci si mette in sleep/wait e si ritenta
         indefinitamente
 
-    <!-- -->
-
-    1.  **Note:** In caso il worker supernodo cada, un secondo worker
+        **Note:** In caso il worker supernodo cada, un secondo worker
         riuscirebbe ad ottenere il lease sul VHD e quindi a montarlo in
         scrittura, diventando così il nuovo supernodo.
 
-    <!-- -->
-
-    1.  Si crea una share di rete che punti al percorso del VHD montato
-
-    2.  Si apre il firewall
-
-    3.  Si utilizza uno script (PS o CMD) sempre in fase di startup, per
+    e.  Si crea una share di rete che punti al percorso del VHD montato
+    f.  Si apre il firewall
+    g.  Si utilizza uno script (PS o CMD) sempre in fase di startup, per
         creare una utenza che abbia i permessi di lettura/scrittura
         sulla share di rete creata.
-
-    4.  
-
-    Web Role 0-N
-
-    1.  Durante lo startup si cicleranno i worker role del servizio
+- Web Role 0-N
+    a.  Durante lo startup si cicleranno i worker role del servizio
         “tentando” una scrittura su una share di rete predeterminata:
-
-    2.  Quando il client riuscirà a completare la scrittura senza
+    b.  Quando il client riuscirà a completare la scrittura senza
         eccezione, avrà trovato il supernodo di condivisione.
-
-    3.  Si imposterà il path montato nelle settings dell’applicazione in
+    c.  Si imposterà il path montato nelle settings dell’applicazione in
         modo che i vari punti possano accedervi in lettura/scrittura.
-
-    4.  
 
 Questa soluzione conclude lo scenario impostando una strategia di
 maggior tutela per utilizzare uno store unico lungo le nostre istanze di
 Azure.
 
-<span id="_Approfondimenti" class="anchor"><span id="_Toc329284960" class="anchor"></span></span>Approfondimenti
-----------------------------------------------------------------------------------------------------------------
+## Approfondimenti
 
 Un approfondimento tecnico con gli esempi di codice per perseguire la
 soluzione sopra sono disponibili all’indirizzo: <http://bit.ly/fAfmey>.
 
 #### di Roberto Freato ([blog](http://dotnetlombardia.org/blogs/rob/default.aspx)) - Microsoft MVP
-
-1.  [*Altri articoli di Roberto Freato nella
-    Libreria*](http://sxp.microsoft.com/feeds/3.0/msdntn/TA_MSDN_ITA?contenttype=Article&author=Roberto%20Freato)
-    ![](./img//media/image2.png){width="0.1771084864391951in"
-    height="0.1771084864391951in"}
 
 

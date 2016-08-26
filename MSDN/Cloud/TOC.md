@@ -3,7 +3,7 @@
 # [Windows Azure - la storia](WindowsAzure_LaStoria.md)
 # [Pricing: Capire i costi di Windows Azure](Costi-di-Windows-Azure.md)
 # [PaaS vs. IaaS e il caso Azure](Paas-Iaas-Azure.md)
-# [Strategie di condivisione dati tra istanze nel Cloud (*)](https://msdn.microsoft.com/it-it/library/jj573927.aspx)
+# [Strategie di condivisione dati tra istanze nel Cloud](Condivisione-Dati-tra-istanze-nel-cloud.md)
 # [Windows Azure - interagire con il Cloud Storage da VB 2010](WindowsAzure-Interagire-con-il-Cloud-Storage-da-VB-2010.md)
 # [Comunicazione intra-ruolo Web-Worker e bilanciamento del carico (*)](https://msdn.microsoft.com/it-it/library/jj127259.aspx)
 # [Integrazione di un login Facebook nelle applicazioni Web con ACSV2](Integrazione_login_Facebook_in_ACSV2.md)
