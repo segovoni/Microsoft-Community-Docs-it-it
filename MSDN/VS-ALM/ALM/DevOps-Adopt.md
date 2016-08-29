@@ -80,15 +80,15 @@ Per raggiungere tale obiettivo è necessario contestualizzare DevOps,
 avvalendosi di framework operativi come **CALMS**, definito, in
 successione e tempi diversi, da *Damon Edwards* e *Jez Humble*:
 
--   ***Culture** - gestire il cambiamento focalizzandosi sulla collaborazione e la comunicazione*
+-   _**Culture** - gestire il cambiamento focalizzandosi sulla collaborazione e la comunicazione_
     - *Hearts & Minds, Embrace Change;*
--   ***Automation** - rimuovere le azioni manuali lungo la catena del valore*
+-   _**Automation** - rimuovere le azioni manuali lungo la catena del valore_
     - *Continuous Integration, Continuous Delivery/Deployment, Infrastructure-as-a-code;*
--   ***Lean** - utilizzare i principi Lean per velocizzare, standardizzare e rendere efficienti le attività*
+-   _**Lean** - utilizzare i principi Lean per velocizzare, standardizzare e rendere efficienti le attività_
     -   *Customer Value focus, Small batch size;*
--   ***Metrics** - misurare qualsiasi cosa, utilizzando i risultati per rifinire costantemente le attività*
+-   _**Metrics** - misurare qualsiasi cosa, utilizzando i risultati per rifinire costantemente le attività_
     -   *Measure Everything, Show the improvement;*
--   ***Sharing**, condividere le esperienze di successo e di fallimento per una crescita diffusa*
+-   _**Sharing**, condividere le esperienze di successo e di fallimento per una crescita diffusa_
     -   *Open Information Sharing, Collaboration.*
 
 Possiamo pensare a CALMS come ai cinque aspetti strategici per
