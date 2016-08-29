@@ -80,25 +80,15 @@ Per raggiungere tale obiettivo è necessario contestualizzare DevOps,
 avvalendosi di framework operativi come **CALMS**, definito, in
 successione e tempi diversi, da *Damon Edwards* e *Jez Humble*:
 
--   ***Culture** - gestire il cambiamento focalizzandosi sulla
-    > collaborazione e la comunicazione*
-    -   *Hearts & Minds, Embrace Change;*
-
--   ***Automation** - rimuovere le azioni manuali lungo la catena del
-    > valore*
-    -   *Continuous Integration, Continuous Delivery/Deployment,
-        Infrastructure-as-a-code;*
-
--   ***Lean** - utilizzare i principi Lean per velocizzare,
-    > standardizzare e rendere efficienti le attività*
+-   ***Culture** - gestire il cambiamento focalizzandosi sulla collaborazione e la comunicazione*
+    - *Hearts & Minds, Embrace Change;*
+-   ***Automation** - rimuovere le azioni manuali lungo la catena del valore*
+    - *Continuous Integration, Continuous Delivery/Deployment, Infrastructure-as-a-code;*
+-   ***Lean** - utilizzare i principi Lean per velocizzare, standardizzare e rendere efficienti le attività*
     -   *Customer Value focus, Small batch size;*
-
--   ***Metrics** - misurare qualsiasi cosa, utilizzando i risultati per
-    > rifinire costantemente le attività*
+-   ***Metrics** - misurare qualsiasi cosa, utilizzando i risultati per rifinire costantemente le attività*
     -   *Measure Everything, Show the improvement;*
-
--   ***Sharing**, condividere le esperienze di successo e di fallimento
-    > per una crescita diffusa*
+-   ***Sharing**, condividere le esperienze di successo e di fallimento per una crescita diffusa*
     -   *Open Information Sharing, Collaboration.*
 
 Possiamo pensare a CALMS come ai cinque aspetti strategici per
@@ -175,11 +165,11 @@ valore, ricordandosi di:
     generali;*
 -   *Adattare l’organizzazione.*
 
-E’ lecitio a questo punto chiedersi quanto DevOps sia oggi presente nel
+E’ lecito a questo punto chiedersi quanto DevOps sia oggi presente nel
 mondo dell’IT.
 
 Ebbene, facendo riferimento ai dversi elementi dell’ADP, la **Continuous
-Integration** è ampiamente adotta, essendo relativamente semplice da
+Integration** è ampiamente adottata, essendo relativamente semplice da
 implementare. Analogo discorso per la **Continuous Delivery** che è
 chiaramente più difficile, ma rappresenta un obiettivo che tutte le
 software house, in modo contestualizzato, si stanno ponendo.
