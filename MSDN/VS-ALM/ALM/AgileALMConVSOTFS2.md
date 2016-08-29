@@ -78,16 +78,12 @@ per le decisioni strategiche.
 I tre diversi Backlog sono di proprietà/responsabilità di altrettante
 board o figure specifiche:
 
-Portfolio Backlog, Portfolio Management;
-
-Program Backlog, Product Management (in cui rientra anche il Product
+- Portfolio Backlog, Portfolio Management;
+- Program Backlog, Product Management (in cui rientra anche il Product
 Owner o il Chief PO);
-
-Product Backlog (Team Backlog), Product Owner (che può essere coadiuvato
+- Product Backlog (Team Backlog), Product Owner (che può essere coadiuvato
 da un Product Manager che cura gli aspetti di “esterni” del progetto,
 come quelli di business).
-
-1.  
 
 L’aspetto interessante è che tale suddivisione consente di avere due
 “viste” di quanto si sta realizzando: una, di alto livello, orientata al
@@ -126,15 +122,10 @@ Figura 10 - Create new project
 
 A questo punto, VSO crea per noi una serie di elementi specifici per il
 nuovo progetto:
-
-Un specifica Home Page;
-
-Uno specifico Team;
-
-Una serie di Iterazioni già attive relative alla prima release del nuovo
-sistema;
-
-e … molto altro di cui parleremo in seguito.
+- Un specifica Home Page;
+- Uno specifico Team;
+- Una serie di Iterazioni già attive relative alla prima release del nuovo sistema;
+- e … molto altro di cui parleremo in seguito.
 
 ![](./img/AgileALMConVSOTFS2/image6.png)
 

@@ -23,11 +23,7 @@ ALM Blog: <http://www.getlatestversion.it/>
 Sprint by Sprint
 ----------------
 
-Nel precedente articolo, abbiamo visto come settare il nostro ambiente,
-popolare il Program ed il Backlog, effettuare lo Sprint Planning e, di
-conseguenza, creare lo Sprint Backlog. Ora non ci resta che tuffarci in
-quello che è il cuore pulsante e operativo delle attività di sviluppo in
-Scrum: lo **Sprint**.
+Nel [precedente articolo](AgileALMConVSOTFS2.md), abbiamo visto come settare il nostro ambiente, popolare il Program ed il Backlog, effettuare lo Sprint Planning e, di conseguenza, creare lo Sprint Backlog. Ora non ci resta che tuffarci in quello che è il cuore pulsante e operativo delle attività di sviluppo in Scrum: lo **Sprint**.
 
 ![](./img/AgileALMConVSOTFS3/image2.png)
 
@@ -40,21 +36,17 @@ Story, o, più in generale, i Work item inseriti nello Sprint Backlog.
 
 Lo Sprint raccoglie in se alcune delle cerimonie fondamentali di Scrum:
 
-1.  **Daily Scrum**: si tratta di uno stand-up meeting mattutino di una
+- **Daily Scrum**: si tratta di uno stand-up meeting mattutino di una
     decina di minuti al massimo in cui tutti i membri del Team, a turno,
     illustrando cosa hanno realizzato (What have I done yesterday?),
     cosa si apprestano a fare (What will I do today?) e le eventuali
     difficoltà incontrante (What keeps me from doing my work?);
-
-    **Sprint Review**: si effettua alla chiusura dello Sprint. Il
+- **Sprint Review**: si effettua alla chiusura dello Sprint. Il
     Product Owner mostra quanto realizzato agli stakeholder, al fine di
     validare in ultima analisi il tutto e raccogliere i feedback;
-
-    **Sprint Retrospective**: si effettua alla chiusura dello Sprint ed
+- **Sprint Retrospective**: si effettua alla chiusura dello Sprint ed
     è dedicata al Team. Ha il compito fondamentale di ragionare sui
     processi adottati e sul loro miglioramento.
-
-    1.  
 
 In relazione allo Sprint, esiste un elemento che è fondamentale
 introdurre prima di proseguire: **Definition of Done** (DoD).
@@ -66,19 +58,12 @@ prodotto e può avere una prima formalizzazione associata ai primi
 una short list di attività da effettuare per ogni elemento del Backlog o
 per un suo insieme:
 
-1.  \[MUST\] Superamento dei Test di Accettazione (Acceptance Criteria);
+- \[MUST\] Superamento dei Test di Accettazione (Acceptance Criteria);
+- \[MUST\] Definizione, esecuzione e superamento dei Test di Unità;
+- Test Code Coverage superiore ad una certa %;
+- Documentazione funzionale;
+- …
 
-    \[MUST\] Definizione, esecuzione e superamento dei Test di Unità;
-
-    Test Code Coverage superiore ad una certa %;
-
-    Documentazione funzionale;
-
-    ….
-
-    …
-
-    1.  
 
 Tipicamente, per i Team che si sono imbarcati in Scrum da poco, è
 possibile limitarsi alle prime due attività, anche se si tratta di
@@ -134,37 +119,18 @@ funzionalità legate alla verifica della **Qualità del Codice** (Code
 Quality), anche se, per inciso, sono strumenti integrati più nell’IDE
 Visual Studio (Premium e Ultimate) che in TFS/VSO. Tra essi troviamo:
 
-1.  **Code Clone Detection**, per la ricerca di codice duplicato;
-
-    **Code Metrics**, per misurare la complessità e la manutenibilità
+- **Code Clone Detection**, per la ricerca di codice duplicato;
+- **Code Metrics**, per misurare la complessità e la manutenibilità
     del codice;
-
-    **Code Profiler**, per analizzare l’utilizzo della memoria da parte
+- **Code Profiler**, per analizzare l’utilizzo della memoria da parte
     del codice ed individuare colli di bottiglia nelle performance;
+- **Static Code Analysis**, per effettuare un check del codice basato
+    su standard di riferimento (es: best practice per lo sviluppo .NET: i nomi dei metodi devono iniziare con la Maiuscola);
+- **Unit Testing / Coded UI Tests /Code Coverage**, supporto allo Uni
+   Test (MSTest, xUnit o altri);
+- **Faks Framework**, per la generazione automatizzata di Mocks e Stubs;
 
-    **Static Code Analysis**, per effettuare un check del codice basato
-    su standard di riferimento (es: best practice per lo sviluppo .NET:
-    i nomi dei metodi devono iniziare con la Maiuscola);
-
-    **Unit Testing / Coded UI Tests /Code Coverage**, supporto allo Unit
-    Test (MSTest, xUnit o altri);
-
-    **Fakes Framework**, per la generazione automatizzata di Mocks e
-    Stubs;
-
-    1.  
-
-Nonostante esistano strumenti ad-hoc per ognuna delle aree evidenziate,
-con funzionalità estreme, il grande vantaggio della soluzione Microsoft
-è la completa integrazione, consentendo così di produrre in modo
-efficiente codice di maggiore qualità rispettando i vincoli decisi con
-la DoD. In particolare, l’utilizzo delle batterie automatizzate per il
-Test e il settaggio dei Build Agent permettono di abbracciare in pieno
-la pratica della *Continuous Integration* (CI) che prevede
-un’integrazione completa e testata di quanto sviluppato sulla main-line
-di sviluppo. Gli strumenti forniti consento di impostare opportune
-policy (per esempio: inibire il check-in se non si superano i test di
-unità presenti nella solution) in modo da automatizzare il tutto.
+Nonostante esistano strumenti ad-hoc per ognuna delle aree evidenziate, con funzionalità estreme, il grande vantaggio della soluzione Microsoft è la completa integrazione, consentendo così di produrre in modo efficiente codice di maggiore qualità rispettando i vincoli decisi con la DoD. In particolare, l’utilizzo delle batterie automatizzate per il Test e il settaggio dei Build Agent permettono di abbracciare in pieno la pratica della *Continuous Integration* (CI) che prevede un’integrazione completa e testata di quanto sviluppato sulla main-line di sviluppo. Gli strumenti forniti consento di impostare opportune policy (per esempio: inibire il check-in se non si superano i test di unità presenti nella solution) in modo da automatizzare il tutto.
 
 Sia le operazioni di Build che le attività di Testing sono gestibili
 tramite la Web App di VSO/TFS o direttamente da Visual Studio.
@@ -225,8 +191,6 @@ Personalmente, suggerisco al Team di applicare due semplici regole:
 2.  L’intera User Story, compresi i Task completati e non, vengono
     traslati nel nuovo Sprint.
 
-3.  
-
 Un approccio alternativo al punto 2 è quello di “splittare” la User
 Story in *UserStoryA* e *UserStoryB*, la prima comprende i Task
 completati e la seconda quelli non completati. In questo modo la
@@ -286,13 +250,9 @@ A valle delle operazioni di “aggiustamento”, lo Sprint Review si
 conclude con una serie di domande molto simili a quelle poste durate il
 Daily Scrum, di preparazione al prossimo Sprint Planning:
 
-1.  What did you like the most ?
-
-    What did you not like?
-
-    What would you like to improve?
-
-    1.  
+- What did you like the most ?
+- What did you not like?
+- What would you like to improve?
 
 Una volta terminato lo Sprint Review, lo Scrum Team (e solo esso) si
 riunisce per circa 2-3 ore per effettuare la **Scrum Retrospective**.
