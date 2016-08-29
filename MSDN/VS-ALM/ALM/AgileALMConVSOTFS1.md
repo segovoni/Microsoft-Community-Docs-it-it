@@ -57,13 +57,7 @@ Volendo riportare una buona definizione di cos’è l’ALM (ne esistono
 diverse, con focus differenziato sui vari aspetti), possiamo affidarci
 alla più classica delle fonti, Wikipedia:
 
-“Application Lifecycle Management (ALM) is a* ***continuous
-process* ***of managing the life of an application through governance,
-development and maintenance. ALM is the* ***marriage*** *of **business
-management* ***to* ***software engineering* ***made possible
-by* ***tools*** *that facilitate and* ***integrate*** *requirements
-management, architecture, coding, testing, tracking, and release
-management.”
+> “Application Lifecycle Management (ALM) is a **continuous pocess** of managing the life of an application through governance, development and maintenance. ALM is the* **marriage** of **business management** to **software engineering** made possible by **tools** that facilitate and **integrate** requirements management, architecture, coding, testing, tracking, and release management.”
 
 Ma qual è il “core” dell’ALM? Soddisfare le esigenze del cliente (Key
 stakeholder), fornendo gli strumenti e le pratiche utili a catturare i
@@ -127,34 +121,31 @@ interazioni più che i processi e gli strumenti*” in 5 Valori “derivati”:
 
 ![](./img/AgileALMConVSOTFS1/image5.png)
     
-
-<!-- -->
-
-1.  Figura 5 - The 5 Scrum Values
+Figura 5 - The 5 Scrum Values
 
 Vediamo gli *Scrum Values* in dettaglio, evidenziandoli per ogni
 componente dello Scrum Team (Scrum Master \[SM\], Product Owner \[PO\] e
 Development Team \[DT\]):
 
-**Focus**. Lo SM è concentrato sulla rimozione degli impedimenti e
+- **Focus**. Lo SM è concentrato sulla rimozione degli impedimenti e
 sull’applicazione di Scrum all’interno del Team e nel contesto
 aziendale. Il PO è concentrato sull’ottenimento del massimo Valore per
 il prodotto in essere, organizzando opportunamente il Product Backlog.
 Il DT è focalizzato sullo sviluppo della soluzione in funzione della
 Definition of Done;
 
-**Coraggio (Courage)**. Lo SM deve avere coraggio per “proteggere” e
+- **Coraggio (Courage)**. Lo SM deve avere coraggio per “proteggere” e
 “guidare” il Team, così come il PO per fidarsi delle attività in essere
 e dialogare con gli stakeholder. Il DT deve impegnarsi nella
 realizzazione dei Work Item, superando i propri limiti in un’ottica
 inspect-and-adapt;
 
-**Apertura (Openness)**. L’intero Team deve essere aperto ai
+- **Apertura (Openness)**. L’intero Team deve essere aperto ai
 cambiamenti, sia che provengano dall’interno che dall’esterno
 (stakeholder). In aggiunta, il DT deve guardare a nuove soluzioni,
 soprattutto tecniche, per ottimizzare la qualità di quanto realizzato;
 
-**Impegno (Commitment)**. Il DT sottoscrive il proprio impegno in ogni
+- **Impegno (Commitment)**. Il DT sottoscrive il proprio impegno in ogni
 Sprint Planning, quando vengono decisi i Work Item da realizzare nella
 prossima iterazione. Lo SM ha un impegno costante nel far penetrare
 culturalmente Scrum nello specifico contesto. Il PO si impegna con gli
@@ -162,7 +153,7 @@ stakeholder per ottenere costantemente (ad ogni Sprint) un incremento
 della soluzione disponibile, in ottica sempre di accrescimento del
 Valore complessivo;
 
-**Respect (Rispetto)**. Questo è il valore più difficile da conquistare,
+- **Respect (Rispetto)**. Questo è il valore più difficile da conquistare,
 perché il rispetto si estende oltre i ruoli, toccando il personale. Il
 DT e lo SM devono rispettare le decisioni del PO, l’unico ad avere la
 parola finale su cosa realizzare. Dualmente il PO deve rispettare
@@ -174,12 +165,11 @@ Infine ogni singolo membro dello Scrum Team deve rispettare i propri
 colleghi nell’ottica della Prima Direttiva delle Retrospettive (Norman
 Kerth):
 
-> **“Regardless of what we discover, we understand and truly believe
-> that everyone did the best job they could, given what they knew at the
-> time, their skills and abilities, the resources available, and the
-> situation at hand.”**
+    > **“Regardless of what we discover, we understand and truly believe
+    > that everyone did the best job they could, given what they knew at the
+    > time, their skills and abilities, the resources available, and the
+    > situation at hand.”**
 
-1.  
 
 Una cosa da sottolineare con fermezza è che i Valori appartengono a
 tutto il Team ed è sua responsabilità farli maturare ed applicare al

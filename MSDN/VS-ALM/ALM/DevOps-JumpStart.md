@@ -120,14 +120,9 @@ Figura 1 - It's DevOps!
 che trovano tutti un loro spazio nella seguente definizione, a cui
 faremo riferimento anche nel seguito:
 
-> **DevOps*** *è un* **approccio Culturale** *in cui l’intera Line of
-> Business si assume la responsabilità della creazione di **Valore** per
-> il cliente.
+> **DevOps** è un* **approccio Culturale** *in cui l’intera Line of Business si assume la responsabilità della creazione di **Valore** per il cliente.
 >
-> In tale scenario, Developers e Operations sperimentano continuamente
-> nuovi modi di lavorare insieme, andando a standardizzare e
-> padroneggiare i processi attraverso la* **ripetitività** *e
-> la* **pratica***.
+> In tale scenario, Developers e Operations sperimentano continuamente nuovi modi di lavorare insieme, andando a standardizzare e padroneggiare i processi attraverso la **_ripetitività_** e  la **_pratica_**.
 
 Questa definizione sposa anche i due punti focali di DevOps evidenziati
 sempre da *Gene Kim*:
@@ -138,8 +133,8 @@ sempre da *Gene Kim*:
     allineati rispetto agli obiettivi di qualità e di valore.
 arrivando a trasformare il termine DevOps in un vero e proprio acronimo:
 
-> ***DevOps**: **D**elivery **E**nhanced **V**alues **O**ver **P**rocesses **S**mells
-> \[F.P.\]*
+> **_DevOps_**: **D**elivery **E**nhanced **V**alues **O**ver **P**rocesses **S**mells 
+> \[F.P.\]
 
 Come ogni trasformazione Lean che si rispetti, il Team che realizza la
 soluzione è il primo destinatario della trasformazione, aspetto che
@@ -213,8 +208,8 @@ I quattro Pilastri di DevOps
 ----------------------------
 
 Cominciamo a concretizzare il nostro viaggio nel mondo DevOps,
-descrivendo quelli che sono i 4 pilastri portanti: ***Comunicazione***,
-***Integrazione***, ***Collaborazione*** e ***Automazione***.
+descrivendo quelli che sono i 4 pilastri portanti: **_Comunicazione_**,
+**_Integrazione_**, **_Collaborazione_** e **_Automazione_**.
 
 Ognuno di questi elementi condensa dei fattori che vanno analizzati e
 contestualizzati per ottenere il giusto bilanciamento degli interventi
@@ -229,7 +224,7 @@ proposto.
 
 Figura 3 - Insights-Options-Experiment \[rif. Lean Change Management\]
 
-Così, tra i fattori su cui intervenire nella ***Comunicazione***
+Così, tra i fattori su cui intervenire nella **_Comunicazione_**
 troviamo:
 -   *Abbattere le barriere tra le aree funzionali aziendali;*
 -   *Condividere le responsabilità individuando nuovi ruoli;*
@@ -237,21 +232,21 @@ troviamo:
 -   *Focalizzarsi sui servizi a supporto del business, non sulla tecnologia;*
 -   *Creare un senso di fiducia reciproco.*
 
-per l’***Integrazione***:
+per l’**_Integrazione_**:
 -   *Abbattimento delle barriere tra Sviluppo e Operation;*
 -   *Migliorare e automatizzare la collaborazione tra le varie Aree funzionali;*
 -   *Rimuovere gli Ostacoli e i Colli di Bottiglia;*
 -   *Favorire il flusso informativo dall’Idea alla Consegna al Cliente;*
 -   *Creare Loop di Feedback ad ogni fase.*
 
-per la ***Collaborazione***:
+per la **_Collaborazione_**:
 -   *Relazioni Face-to-face, real time;*
 -   *Ridurre al minimo, idealmente abolire, le comunicazioni formali;*
 -   *Team di piccole dimensioni focalizzati sul Business;*
 -   *Condividere i problemi con i pari e gli altri colleghi;*
 -   *Utilizzare strumenti di Visual Management / Information Radiator.*
 
-per l’***Automazione***:
+per l’**_Automazione_**:
 -   *Automatizzare l’Esecuzione dei Task, soprattutto quelli ripetitivi;*
 -   *Automatizzare i Processi, connettendo task e decisioni;*
 -   *Automatizzare Delivery e Deployment, in funzione del Business;*
@@ -281,8 +276,7 @@ Tale bilanciamento è supportato da un set di *Valori*, *Principi* e
 
 I **Valori** sono praticamente gli stessi del *Manifesto Agile*, anche
 se con una estensione nel caso del secondo (“Software funzionate più che
-documentazione esaustiva”) che si trasforma in ***Overall Service più
-che documentazione esaustiva***, ponendo l’accento sulla necessità di
+documentazione esaustiva”) che si trasforma in **_Overall Service più che documentazione esaustiva_**, ponendo l’accento sulla necessità di
 creare un servizio complessivo al cliente e non limitarsi a creare
 software che funziona.
 

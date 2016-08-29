@@ -64,7 +64,7 @@ operare un’azione di **Insight** senza la quale non è possibile
 affacciarsi in modo corretto (forse in alcun modo!) ad una
 trasformazione sostenibile del proprio Business.
 
-![](./img/DevOps-JumpStart/image19.png)
+![](./img/DevOps-Adopt/image19.png)
 
 
 Figura 13 - Aspetti aziendali di riferimento
@@ -80,25 +80,15 @@ Per raggiungere tale obiettivo è necessario contestualizzare DevOps,
 avvalendosi di framework operativi come **CALMS**, definito, in
 successione e tempi diversi, da *Damon Edwards* e *Jez Humble*:
 
--   ***Culture** - gestire il cambiamento focalizzandosi sulla
-    > collaborazione e la comunicazione*
-    -   *Hearts & Minds, Embrace Change;*
-
--   ***Automation** - rimuovere le azioni manuali lungo la catena del
-    > valore*
-    -   *Continuous Integration, Continuous Delivery/Deployment,
-        Infrastructure-as-a-code;*
-
--   ***Lean** - utilizzare i principi Lean per velocizzare,
-    > standardizzare e rendere efficienti le attività*
+-   _**Culture** - gestire il cambiamento focalizzandosi sulla collaborazione e la comunicazione_
+    - *Hearts & Minds, Embrace Change;*
+-   _**Automation** - rimuovere le azioni manuali lungo la catena del valore_
+    - *Continuous Integration, Continuous Delivery/Deployment, Infrastructure-as-a-code;*
+-   _**Lean** - utilizzare i principi Lean per velocizzare, standardizzare e rendere efficienti le attività_
     -   *Customer Value focus, Small batch size;*
-
--   ***Metrics** - misurare qualsiasi cosa, utilizzando i risultati per
-    > rifinire costantemente le attività*
+-   _**Metrics** - misurare qualsiasi cosa, utilizzando i risultati per rifinire costantemente le attività_
     -   *Measure Everything, Show the improvement;*
-
--   ***Sharing**, condividere le esperienze di successo e di fallimento
-    > per una crescita diffusa*
+-   _**Sharing**, condividere le esperienze di successo e di fallimento per una crescita diffusa_
     -   *Open Information Sharing, Collaboration.*
 
 Possiamo pensare a CALMS come ai cinque aspetti strategici per
@@ -113,7 +103,7 @@ medio termine.
 Si ipotizzi, a T0, di avere lo scenario di trasformazione CALMS-related
 rappresentato nella figura seguente:
 
-![](./img/DevOps-JumpStart/image20.png)
+![](./img/DevOps-Adopt/image20.png)
 
 
 Figura 14 - T0 Scenario
@@ -144,7 +134,7 @@ attività in ottica di rendere il tutto maggiormente efficiente.
 Detto questo, è possibile settare gli obiettivi, come, per esempio,
 riportato nella figura seguente (T1 Scenario):
 
-![](./img/DevOps-JumpStart/image21.png)
+![](./img/DevOps-Adopt/image21.png)
 
 
 Figura 15 - T1 Scenario
@@ -175,11 +165,11 @@ valore, ricordandosi di:
     generali;*
 -   *Adattare l’organizzazione.*
 
-E’ lecitio a questo punto chiedersi quanto DevOps sia oggi presente nel
+E’ lecito a questo punto chiedersi quanto DevOps sia oggi presente nel
 mondo dell’IT.
 
 Ebbene, facendo riferimento ai dversi elementi dell’ADP, la **Continuous
-Integration** è ampiamente adotta, essendo relativamente semplice da
+Integration** è ampiamente adottata, essendo relativamente semplice da
 implementare. Analogo discorso per la **Continuous Delivery** che è
 chiaramente più difficile, ma rappresenta un obiettivo che tutte le
 software house, in modo contestualizzato, si stanno ponendo.

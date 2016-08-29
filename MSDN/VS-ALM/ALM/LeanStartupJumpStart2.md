@@ -233,7 +233,7 @@ verificare la reazione alle modifiche dividendo il campione in due
 macro-gruppi e consegnando loro due versioni leggermente differenti
 della soluzione.
 
-![](./img/LeanStartupJumpStart1/image10.gif)
+![](./img/LeanStartupJumpStart1/image10.png)
 
 Figura 9 - Split Testing
 
