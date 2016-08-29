@@ -12,7 +12,7 @@ ms.custom: CommunityDocs
 
 #### di [Roberto Freato](https://mvp.microsoft.com/en-us/PublicProfile/4028383?fullName=Roberto%20%20Freato)
 
-![](./img/Backup-e-DataSync-con-SQL-Azure-e-SQL-Server/image1.png)
+![](./img/MVPLogo.png)
 
 *Marzo 2012*
 

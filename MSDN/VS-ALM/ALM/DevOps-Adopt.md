@@ -64,7 +64,7 @@ operare un’azione di **Insight** senza la quale non è possibile
 affacciarsi in modo corretto (forse in alcun modo!) ad una
 trasformazione sostenibile del proprio Business.
 
-![](./img/DevOps-JumpStart/image19.png)
+![](./img/DevOps-Adopt/image19.png)
 
 
 Figura 13 - Aspetti aziendali di riferimento
@@ -113,7 +113,7 @@ medio termine.
 Si ipotizzi, a T0, di avere lo scenario di trasformazione CALMS-related
 rappresentato nella figura seguente:
 
-![](./img/DevOps-JumpStart/image20.png)
+![](./img/DevOps-Adopt/image20.png)
 
 
 Figura 14 - T0 Scenario
@@ -144,7 +144,7 @@ attività in ottica di rendere il tutto maggiormente efficiente.
 Detto questo, è possibile settare gli obiettivi, come, per esempio,
 riportato nella figura seguente (T1 Scenario):
 
-![](./img/DevOps-JumpStart/image21.png)
+![](./DevOps-Adopt/image21.png)
 
 
 Figura 15 - T1 Scenario

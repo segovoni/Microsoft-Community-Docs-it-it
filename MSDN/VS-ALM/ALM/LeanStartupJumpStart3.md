@@ -50,7 +50,7 @@ business, andando a trasformare rapidamente, anche se gradualmente, il
 nostro “esperimento” in un’azienda in grado di generare e sostenere
 profitto.
 
-![](./img/LeanStartupJumpStart1/image15.gif)
+![](./img/LeanStartupJumpStart1/image15.png)
 
 Figura 12 - Strategy: 2 values
 
@@ -99,7 +99,7 @@ gestione (anche qui, Innovation Accounting docet), come:
 
 Blank propone di approcciare al GKG secondo lo schema seguente:
 
-![](./img/LeanStartupJumpStart1/image16.jpeg)
+![](./img/LeanStartupJumpStart1/image16.jpg)
 
 Figura 13 - The Startup Owner’s Manual”: Get-Keep-Grow
 
