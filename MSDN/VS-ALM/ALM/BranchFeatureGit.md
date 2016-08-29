@@ -1,12 +1,27 @@
+
+---
+title: Branch per feature in Git
+description: Branch per feature in Git
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: ALM
+ms.custom: CommunityDocs
+---
+
+# Branch per feature in Git
+
+
 #### di Gian Maria Ricci – Microsoft MVP
 
-Blog inglese: http://www.codewrecks.com
+Blog inglese: <http://www.codewrecks.com>
 
-Blog Italiano ALM: http://www.getlatestversion.it/author/alkampfer/
+Blog Italiano ALM: <http://www.getlatestversion.it/author/alkampfer/>
 
-Blog Italiano: http://blogs.ugidotnet.org/rgm
+Blog Italiano: <http://blogs.ugidotnet.org/rgm>
 
-1.  ![](./img//media/image1.png){width="0.59375in" height="0.9375in"}
+![](./img/BranchFeatureGit/image1.png)
+
 
 *Maggio, 2015*
 
@@ -47,8 +62,6 @@ configurata con il comando *git checkout*
 
 Si possono usare branch locali, non visibili al resto del team.
 
-1.  
-
 Questa differenza permette di creare branch con più tranquillità, dato
 che l’impatto sul resto del team è minimo.
 
@@ -57,10 +70,10 @@ che l’impatto sul resto del team è minimo.
 Se si lavora con un controllo di codice sorgente centralizzato, ogni
 branch ha un percorso differente nello spazio logico dei file, es:
 
-1.  \$/MyProject/**Trunk**/src/MyProject.sln\
-    \$/MyProject/**Branches/Release1**/src/MyProject.sln\
-    \$/MyProject/**Branches/Release2**/src/MyProject.sln\
-    \$/MyProject/**Dev**/src/MyProject.sln
+    $/MyProject/**Trunk**/src/MyProject.sln
+    $/MyProject/**Branches/Release1**/src/MyProject.sln
+    $/MyProject/**Branches/Release2**/src/MyProject.sln
+    $/MyProject/**Dev**/src/MyProject.sln
 
 In questo caso ho evidenziato in neretto la parte del percorso che
 identifica la branch logica, ma a livello di File System, tutte le
@@ -77,8 +90,8 @@ la build. Nella figura sottostante è ad esempio rappresentata una build
 che viene eseguita per la branch **master** e per tutte le branch che
 iniziano per **feat.**
 
-1.  ![](./img//media/image2.png){width="5.082697944006999in"
-    height="2.8850557742782152in"}
+![](./img/BranchFeatureGit/image2.png)
+    
 
 Se si hanno più build con forti personalizzazioni, il poter avere una
 singola definizione da utilizzare per branch multiple è una funzionalità
@@ -93,14 +106,10 @@ tradizionali difficoltà che si incontrano nell’adottare la strategia:
 software viene sviluppata in una branch isolata, portando i seguenti
 vantaggi:
 
-Ogni funzionalità è sviluppata in completo isolamento dalle altre
+- Ogni funzionalità è sviluppata in completo isolamento dalle altre
+- Si può decidere per ogni singola funzionalità quando reintegrarla con la branch originale
+- È molto adatta all’uso con SCRUM e con metodologie agili
 
-Si può decidere per ogni singola funzionalità quando reintegrarla con la
-branch originale
-
-È molto adatta all’uso con SCRUM e con metodologie agili
-
-1.  
 
 Ad esempio, se a fine Sprint il Product Owner decide che solamente 4 dei
 5 PBI sono completi, si può procedere con il reintegro delle branch
@@ -122,15 +131,11 @@ definizione di una build accurata di controllo, si può conoscere in ogni
 momento lo stato di ogni feature branch. Questo significa che per ogni
 funzionalità si può sapere se:
 
-Compila
+- Compila
+- Tutti i test sono OK
+- Deploy automatico su server di test OK (verifica procedure di rilascio)
+- Etc.
 
-Tutti i test sono OK
-
-Deploy automatico su server di test OK (verifica procedure di rilascio)
-
-Etc.
-
-1.  
 
 Questo vi permette di capire se una funzionalità è pronta o meno per
 essere reintegrata.
@@ -159,8 +164,8 @@ riga di comando. Il risultato è una build che è in grado di dirvi in
 maniera automatica se la forward integration tra la master e la feature
 branch, genera conflitti o no.
 
-1.  ![](./img//media/image3.png){width="6.6930555555555555in"
-    height="4.930738188976378in"}
+![](./img/BranchFeatureGit/image3.png)
+    
 
 In questo modo, ad ogni push di codice sulla feature branch, verrà
 effettuato un controllo ed il team può essere immediatamente avvertito
@@ -176,8 +181,8 @@ della merge automatica non compili nemmeno. Un caso tipico è la presenza
 di refactoring di tipo rename nella branch master su classi che sono
 utilizzate anche dal nuovo codice della branch.
 
-1.  ![](./img//media/image4.png){width="6.6930555555555555in"
-    height="4.459946412948382in"}
+![](./img/BranchFeatureGit/image4.png)
+    
 
 Se il codice compila verranno poi comunque eseguiti gli Unit Test e
 tutte le altre procedure di controllo impostate nella build. Una volta
@@ -212,33 +217,32 @@ Questa estensione si integra in maniera semplice con i vari menu del
 Team Explorer, fondendosi naturalmente con tutti gli altri comandi
 supportati
 
-1.  ![](./img//media/image5.png){width="3.405824584426947in"
-    height="1.926842738407699in"}
+![](./img/BranchFeatureGit/image5.png)
+    
 
 Dopo la prima installazione, se tentate di utilizzare GitFlow vi verrà
 proposto di installare gli script necessari in maniera automatica. Una
 volta installato, per ogni repository Git potete inizializzare GitFlow
 specificando la vostra nomenclatura
 
-1.  ![](./img//media/image6.png){width="3.582884951881015in"
-    height="2.92671697287839in"}
+![](./img/BranchFeatureGit/image6.png)
+    
 
 Dopo l’inizializzazione appare il menù con le azioni disponibili per
 GitFlow.
 
-1.  ![](./img//media/image7.png){width="3.572470472440945in"
-    height="1.5935509623797026in"}
+![](./img/BranchFeatureGit/image7.png)
 
 Ad esempio si può iniziare una Feature
 
-1.  ![](./img//media/image8.png){width="3.5933005249343832in"
-    height="1.5102274715660542in"}
+![](./img/BranchFeatureGit/image8.png)
+    
 
 Una volta iniziata una feature, potete visualizzarla direttamente nella
 lista delle feature correnti
 
-1.  ![](./img//media/image9.png){width="3.5516393263342083in"
-    height="1.770612423447069in"}
+![](./img/BranchFeatureGit/image9.png)
+    
 
 Dietro le quinte vengono utilizzate le normali branch di Git, ma grazie
 a GitFlow è possibile mantenere una nomenclatura consistente e guidare
@@ -250,8 +254,8 @@ Se si vuole essere sicuri, si può verificare nel menu standard delle
 Branch che le operazioni di GitFlow non fanno altro che creare normali
 branch di Git.
 
-1.  ![](./img//media/image10.png){width="3.5933005249343832in"
-    height="2.8538101487314087in"}
+![](./img/BranchFeatureGit/image10.png)
+    
 
 Altro aspetto interessante è che il plugin di Visual Studio non
 re-implementa GitFlow, ma bensì installa e configura le estensioni
@@ -260,8 +264,8 @@ se preferite lavorare a riga di comando, potete tranquillamente
 utilizzare GitFlow nella vostra bash. Per conoscere i comandi basta
 scrivere *git flow help.*
 
-1.  ![](./img//media/image11.png){width="6.5929254155730534in"
-    height="2.3017957130358706in"}
+![](./img/BranchFeatureGit/image11.png)
+    
 
 Conclusioni
 -----------
