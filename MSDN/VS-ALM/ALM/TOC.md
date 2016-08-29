@@ -8,8 +8,8 @@
 # [Pubblicare un package nuget grazie alla build vNext di TFS / VSTS](GitflowAndNugetPart1.md)
 # [Branch per feature in Git](BranchFeatureGit.md)
 # [Lean Startup, Jump Start (parte 3/3) - Growth Engine (*)](LeanStartupJumpStart3.md)
-# [Lean Startup, Jump Start (parte 2/3) - Build-Measure-Learn (*)](LeanStartupJumpStart2.md)
-# [Lean Startup Jump Start (parte 1/3) (*)](LeanStartupJumpStart1.md)
+# [Lean Startup, Jump Start (parte 2/3) - Build-Measure-Learn](LeanStartupJumpStart2.md)
+# [Lean Startup Jump Start (parte 1/3)](LeanStartupJumpStart1.md)
 
 # [Agile Application Lifecycle Management con VSO/TFS (parte 1/3) (*)](https://msdn.microsoft.com/it-it/library/dn858853.aspx)
 # [Agile Application Lifecycle Management con VSO/TFS (parte 2/3) (*)](https://msdn.microsoft.com/it-it/library/dn858854.aspx)
