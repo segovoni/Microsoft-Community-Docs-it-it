@@ -1,11 +1,22 @@
+---
+title: Agile Application Lifecycle Management con VSO/TFS (parte 3/3)
+description: Agile Application Lifecycle Management con VSO/TFS (parte 3/3)
+author: felicepescatore
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: ALM
+ms.custom: CommunityDocs
+---
+
+# Agile Application Lifecycle Management con VSO/TFS (parte 3/3)
+
 #### di [Felice Pescatore (MVP)](http://mvp.microsoft.com/en-us/mvp/Felice%20Pescatore-5001016)
 
-Blog/Sito Personale:
-[www.felicepescatore.it](http://www.felicepescatore.it)
+Blog/Sito Personale: [www.felicepescatore.it](http://www.felicepescatore.it)
 
 ALM Blog: <http://www.getlatestversion.it/>
 
-1.  ![](./img//media/image1.png){width="0.59375in" height="0.9375in"}
+![](./img/MVPLogo.png)
 
 *Dicembre 2014*
 
@@ -18,12 +29,9 @@ conseguenza, creare lo Sprint Backlog. Ora non ci resta che tuffarci in
 quello che è il cuore pulsante e operativo delle attività di sviluppo in
 Scrum: lo **Sprint**.
 
-1.  ![](./img//media/image2.png){width="5.330570866141732in"
-    height="3.134375546806649in"}
+![](./img/AgileALMConVSOTFS3/image2.png)
 
-<!-- -->
-
-1.  Figura 32 – A Sprint Activity: Daily Scrum
+Figura 32 – A Sprint Activity: Daily Scrum
 
 Si tratta di un intervallo time-boxed, tipicamente di 1-4 settimane
 (mediamente 2 settimane), all’interno del quale il Team concretizza lo
@@ -94,12 +102,9 @@ svolgere le attività intrinseche ad uno Sprint, a partire dalla *Sprint
 Board*, di cui abbiamo già parlato e che consente di gestire agevolmente
 tutte le attività di organizzazione dei Work Item e dei Task.
 
-1.  ![](./img//media/image3.png){width="4.2375in"
-    height="1.8229166666666667in"}
+![](./img/AgileALMConVSOTFS3/image3.png)
 
-<!-- -->
-
-1.  Figura 33 - Sprint Board
+Figura 33 - Sprint Board
 
 Il monitoraggio avviene attraverso una serie di strumenti visuali: lo
 *Sprint* *Burndown Chart*, il *Release Burndown Chart*, il *Cumulative*
@@ -111,23 +116,15 @@ relativo. Per gli amanti dell’Agile si tratta di un vero e proprio
 *Information* *Radiator Digitale* in linea con la regola del 3+3: avere
 chiaro il quadro generale guardando la Board in 3secondi da 3metri.
 
-1.  ![](./img//media/image4.png){width="1.9264020122484689in"
-    height="1.3333333333333333in"}
-    ![](./img//media/image5.png){width="2.6354166666666665in"
-    height="1.3616316710411198in"}
+![](./img/AgileALMConVSOTFS3/image4.png)
 
-<!-- -->
+![](./img/AgileALMConVSOTFS3/image5.png)
 
-1.  Figura 34 - Sprint Burndown e Cumulative Flow
+Figura 34 - Sprint Burndown e Cumulative Flow
 
-<!-- -->
+![](./img/AgileALMConVSOTFS3/image6.jpg)
 
-1.  ![](./img//media/image6.jpg){width="4.083333333333333in"
-    height="2.760333552055993in"}
-
-<!-- -->
-
-1.  Figura 35 - TFS Web Access / VSOnline Web App
+Figura 35 - TFS Web Access / VSOnline Web App
 
 Tali strumenti visuali sono fondamentali per comunicare rapidamente con
 persone (es: manager o stakeholder) poco interessati agli aspetti di
@@ -172,20 +169,16 @@ unità presenti nella solution) in modo da automatizzare il tutto.
 Sia le operazioni di Build che le attività di Testing sono gestibili
 tramite la Web App di VSO/TFS o direttamente da Visual Studio.
 
-1.  ![](./img//media/image7.png){width="2.71875in"
-    height="3.2019236657917762in"}
+![](./img/AgileALMConVSOTFS3/image7.png)
 
 A proposito di main-line: dalla versione 2013, VSO/TFS supporta
 pienamente sia il source control centralizzato proprietario (TFVC) che
 il distribuito GIT, consentendo di applicare le politiche di gestione
 del codice sorgente che più si adattano al proprio contesto.
 
-1.  ![](./img//media/image8.png){width="2.7851148293963255in"
-    height="2.8541666666666665in"}
+![](./img/AgileALMConVSOTFS3/image8.png)
 
-<!-- -->
-
-1.  Figura 36 - TFVC & GIT
+Figura 36 - TFVC & GIT
 
 Se si lavora in ottica Scrum e Continuous Integration (se non praticate
 quest’ultima vi consiglio vivamente di “incamminarvi” su questa strada)
@@ -194,23 +187,17 @@ può adottare una strategia di branch “**Sprint-to-Branch**” in cui si
 crea un nuovo branch ad ogni nuovo Sprint, legandoli direttamente tra
 loro.
 
-1.  ![](./img//media/image9.png){width="4.125in"
-    height="2.728885608048994in"}
+![](./img/AgileALMConVSOTFS3/image9.png)
 
-<!-- -->
-
-1.  Figura 37 - Branch Strategy: Sprint-to-Branch
+Figura 37 - Branch Strategy: Sprint-to-Branch
 
 Tornando allo Sprint, lo stesso si conclude con due appuntamenti
 (cerimonie) fondamentali: lo **Sprint Review** e lo **Sprint
 Retrospective**.
 
-1.  ![](./img//media/image10.png){width="4.564732064741907in"
-    height="2.5562489063867018in"}
+![](./img/AgileALMConVSOTFS3/image10.png)
 
-<!-- -->
-
-1.  Figura 38 - Sprint Review and Sprint Retrospective meeting
+Figura 38 - Sprint Review and Sprint Retrospective meeting
 
 Lo *Sprint Review* è dedicato alla presentazione del lavoro svolto, o
 meglio, dell’attuale stato del prodotto, comprendente tutto quanto
@@ -256,12 +243,9 @@ nell’attività di riallocare una User Story con tutti i relativi task in
 modo semplice e veloce: basta selezionare la User Story specifica e
 cambiare la sua “assegnazione”.
 
-1.  ![](./img//media/image11.png){width="5.941435914260717in"
-    height="3.0104166666666665in"}
+![](./img/AgileALMConVSOTFS3/image11.png)
 
-<!-- -->
-
-1.  Figura 39 - User Story Iteration Assignment
+Figura 39 - User Story Iteration Assignment
 
 Se si desidera spostare solo i task non competi, la procedura è un po’
 più complessa: VSO/TFS, in modo automatizzato, permette lo “share” di
@@ -269,44 +253,30 @@ una User Story tra più Sprint (Iterazioni), quindi non è necessario
 effettuare la ri-stima per due User Story differenti. Vediamo come fare:
 prima di tutto bisogna creare una query che selezioni i task “un-done”.
 
-1.  ![](./img//media/image12.png){width="4.3805555555555555in"
-    height="2.2604166666666665in"}
-
-<!-- -->
-
-1.  Figura 40 - Done / un-Done Task query
+![](./img/AgileALMConVSOTFS3/image12.png)
+    
+Figura 40 - Done / un-Done Task query
 
 Dopodiché selezionate il risultato ottenuto (sia la User Story che i
 Task), cliccate con il tasto destro sulla selezione e scegliete “Move to
 Iteration”.
 
-1.  ![](./img//media/image13.png){width="5.354166666666667in"
-    height="3.7314730971128607in"}
+![](./img/AgileALMConVSOTFS3/image13.png)
 
-<!-- -->
-
-1.  Figura 41 - Move to Iteration
+Figura 41 - Move to Iteration
 
 Una volta confermato il tutto avrete la User Story presente sia
 nell’iterazione corrente, con i relativi Task in Done state, e
 nell’iterazione successiva (o quella che avete indicato) con i Task in
 un-Done state.
 
-1.  ![](./img//media/image14.png){width="4.895833333333333in"
-    height="1.4172419072615923in"}
+![](./img/AgileALMConVSOTFS3/image14.png)
 
-<!-- -->
+Figura 42 – Shared User Story: Sprint attuale
 
-1.  Figura 42 – Shared User Story: Sprint attuale
+![](./img/AgileALMConVSOTFS3/image15.png)
 
-<!-- -->
-
-1.  ![](./img//media/image15.png){width="4.583333333333333in"
-    height="1.6877209098862642in"}
-
-<!-- -->
-
-1.  Figura 43 – Shared User Story split: Sprint successivo
+Figura 43 – Shared User Story split: Sprint successivo
 
 Essendo la User Story in “share”, risulterà ancora aperta alla fine
 dello Sprint corrente e, automaticamente, non correrà al calcolo della
@@ -333,12 +303,9 @@ Spesso, come Activity, si utilizzano dei Retrospective Game come lo
 *Starfish* che consentono di raccogliere in modo chiaro e coinvolgente i
 vari aspetti che caratterizzano il Team.
 
-1.  ![](./img//media/image16.jpg){width="4.092202537182852in"
-    height="2.936130796150481in"}
+![](./img/AgileALMConVSOTFS3/image16.jpg)
 
-<!-- -->
-
-1.  Figura 44 - Starfish game
+Figura 44 - Starfish game
 
 Da questo punto di vista, VSO/TFS non offre un grande supporto avendo,
 come detto, nella versione 2013 eliminato lo “Sprint Work Item”.
@@ -346,12 +313,9 @@ L’opzione potrebbe essere quella di creare, a questo punto, un Work Item
 generico nella cui descrizione si inseriscono gli obiettivi (agenda)
 della retrospettiva e si allegano le foto dei vari artefatti realizzati.
 
-1.  ![](./img//media/image17.png){width="5.770833333333333in"
-    height="2.8620647419072616in"}
+![](./img/AgileALMConVSOTFS3/image17.png)
 
-<!-- -->
-
-1.  Figura 45 - Retrospective Work Item
+Figura 45 - Retrospective Work Item
 
 Si tratta di un Work Item utile per aver traccia di quanto discusso
 nella retrospettiva, legandolo in modo diretto allo Sprint.
@@ -371,7 +335,6 @@ le proprie attività.
 
 #### di [Felice Pescatore (MVP)](http://mvp.microsoft.com/en-us/mvp/Felice%20Pescatore-5001016)
 
-Blog/Sito Personale:
-[www.felicepescatore.it](http://www.felicepescatore.it)
+Blog/Sito Personale: [www.felicepescatore.it](http://www.felicepescatore.it)
 
 ALM Blog: <http://www.getlatestversion.it/>

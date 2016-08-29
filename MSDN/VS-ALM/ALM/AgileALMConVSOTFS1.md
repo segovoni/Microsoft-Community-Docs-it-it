@@ -1,11 +1,22 @@
+---
+title: Agile Application Lifecycle Management con VSO/TFS (parte 1/3)
+description: Agile Application Lifecycle Management con VSO/TFS (parte 1/3)
+author: felicepescatore
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: ALM
+ms.custom: CommunityDocs
+---
+
+# Agile Application Lifecycle Management con VSO/TFS (parte 1/3)
+
 #### di [Felice Pescatore (MVP)](http://mvp.microsoft.com/en-us/mvp/Felice%20Pescatore-5001016)
 
-Blog/Sito Personale:
-[www.felicepescatore.it](http://www.felicepescatore.it)
+Blog/Sito Personale: [www.felicepescatore.it](http://www.felicepescatore.it)
 
 ALM Blog: <http://www.getlatestversion.it/>
 
-1.  ![](./img//media/image1.png){width="0.59375in" height="0.9375in"}
+![](./img/AgileALMConVSOTFS1/image1.png)
 
 *Dicembre 2014*
 
@@ -31,12 +42,10 @@ un approccio lineare (matematicamente secondo equazioni lineari) perché
 il funzionamento olistico è più della somma del funzionamento delle
 singole parti, dipendendo anche dalla sua evoluzione e dalla sua storia.
 
-1.  ![](./img//media/image2.png){width="4.7194083552056in"
-    height="3.7505238407699037in"}
+![](./img/AgileALMConVSOTFS1/image2.png)
+    
 
-<!-- -->
-
-1.  Figura 2 - Cynefin framework
+Figura 2 - Cynefin framework
 
 Questo ragionamento si applica all’intero ciclo di vita del prodotto,
 richiedendo la definizione di una strategia complessiva e di tattiche
@@ -61,24 +70,18 @@ stakeholder), fornendo gli strumenti e le pratiche utili a catturare i
 feedback e a riorganizzare le attività in funzione della loro priorità.
 E qui il connubio con l’Agile è assolutamente evidente e “naturale”.
 
-1.  ![](./img//media/image3.png){width="5.173458005249344in"
-    height="3.8958333333333335in"}
+![](./img/AgileALMConVSOTFS1/image3.png)
 
-<!-- -->
-
-1.  Figura 3 - Application Lifecycle Management
+Figura 3 - Application Lifecycle Management
 
 In particolare, tra le diverse metodologie e i diversi framework Agile
 disponibili, **Scrum** si è imposto nell’ultimo decennio come
 riferimento per un approccio moderno alla gestione dello sviluppo del
 software.
 
-1.  ![](./img//media/image4.png){width="5.604569116360455in"
-    height="2.9928390201224846in"}
+![](./img/AgileALMConVSOTFS1/image4.png)
 
-<!-- -->
-
-1.  Figura 4 – Scrum big picture
+Figura 4 – Scrum big picture
 
 Il successo di Scrum è dovuto ad un fattore principale: funziona ed è in
 grado di adattarsi a contesti fortemente eterogenei. Questo grazie al
@@ -122,8 +125,8 @@ il Valore esplicitamente dedicato alle persone: “*Gli individui e le
 interazioni più che i processi e gli strumenti*” in 5 Valori “derivati”:
 *Openness, Courage, Respect, focus e Commitment*.
 
-1.  ![](./img//media/image5.png){width="6.657179571303587in"
-    height="2.614948600174978in"}
+![](./img/AgileALMConVSOTFS1/image5.png)
+    
 
 <!-- -->
 
@@ -196,12 +199,9 @@ di supporto all’ALM è sicuramente di estremo aiuto, soprattutto se
 flessibile ed integrato con le tecnologie di sviluppo stesse,
 esattamente come nel caso di **VSO**/**TFS.**
 
-1.  ![](./img//media/image6.png){width="4.5795559930008745in"
-    height="2.894278215223097in"}
+![](./img/AgileALMConVSOTFS1/image6.png)
 
-<!-- -->
-
-1.  Figura 6 - Team Foundation Server ecosystems
+Figura 6 - Team Foundation Server ecosystems
 
 Evitando di entrare negli aspetti di gestione del codice, della relativa
 integrazione con le piattaforme di sviluppo Microsoft (.Net in primis) e

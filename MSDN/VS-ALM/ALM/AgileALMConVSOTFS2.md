@@ -1,3 +1,15 @@
+---
+title: Agile Application Lifecycle Management con VSO/TFS (parte 2/3)
+description: Agile Application Lifecycle Management con VSO/TFS (parte 2/3)
+author: felicepescatore
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: ALM
+ms.custom: CommunityDocs
+---
+
+# Agile Application Lifecycle Management con VSO/TFS (parte 2/3)
+
 #### di [Felice Pescatore (MVP)](http://mvp.microsoft.com/en-us/mvp/Felice%20Pescatore-5001016)
 
 Blog/Sito Personale:
@@ -5,7 +17,7 @@ Blog/Sito Personale:
 
 ALM Blog: <http://www.getlatestversion.it/>
 
-1.  ![](./img//media/image1.png){width="0.59375in" height="0.9375in"}
+![](./img/AgileALMConVSOTFS2/image1.png)
 
 *Dicembre 2014*
 
@@ -19,12 +31,9 @@ il *Product Backlog*. La governance di quest’ultimo spetta al *Product
 Owner* che si occupa, costantemente, di effettuarne il \[*Product
 Backlog\] Grooming*: *scrittura, stima, rifinimento e priorizzazione*.
 
-1.  ![](./img//media/image2.png){width="3.422952755905512in"
-    height="2.982859798775153in"}
-
-<!-- -->
-
-1.  Figura 7 - Product Backlog Grooming
+![](./img/AgileALMConVSOTFS2/image2.png)
+    
+Figura 7 - Product Backlog Grooming
 
 Come ben noto a coloro che usano Scrum, tale framework non contempla
 direttamente il *Product Backlog Grooming,* occupandosi esclusivamente
@@ -39,12 +48,9 @@ sotto la supervisione dallo stesso *Ken Schwaber,* e pensato proprio per
 rafforzare la competitività dell’azienda al fine di massimizzare il
 proprio *ROI* (Return On Investment).
 
-1.  ![](./img//media/image3.png){width="5.016472003499563in"
-    height="2.9522134733158354in"}
+![](./img/AgileALMConVSOTFS2/image3.png)
 
-<!-- -->
-
-1.  Figura 8 - CIF Framework
+Figura 8 - CIF Framework
 
 Senza voler approfondire CIF e i relativi processi caratterizzanti,
 *product development* e *continuous improvement*, è importante
@@ -58,12 +64,9 @@ Come ci aiuta VSO/TFS in tutto ciò? Ebbene, diamo un’occhiata alla
 segmentazione proposta da Microsoft per l’*Agile Portfolio*,
 relativamente allo *Scrum Process Template*:
 
-1.  ![](./img//media/image4.png){width="5.1948053368328955in"
-    height="1.4831550743657043in"}
+![](./img/AgileALMConVSOTFS2/image4.png)
 
-<!-- -->
-
-1.  Figura 9 - TFS 213, Scrum Process Template Work Item
+Figura 9 - TFS 213, Scrum Process Template Work Item
 
 VSO/TFS, di base, considera le attività di sviluppo affidate a un solo
 Team, identificando due diversi Backlog: il *Program Backlog (feature
@@ -118,12 +121,9 @@ Visual Studio), e creare un nuovo Product Backlog.
 Cliccate su “new” nell’area “Recent pojects & teams”, selezionando il
 corretto Process Template ed inserendo le informazioni richieste.
 
-1.  ![](./img//media/image5.png){width="3.401995844269466in"
-    height="2.8831167979002625in"}
+![](./img/AgileALMConVSOTFS2/image5.png)
 
-<!-- -->
-
-1.  Figura 10 - Create new project
+Figura 10 - Create new project
 
 A questo punto, VSO crea per noi una serie di elementi specifici per il
 nuovo progetto:
@@ -137,34 +137,17 @@ sistema;
 
 e … molto altro di cui parleremo in seguito.
 
-1.  
+![](./img/AgileALMConVSOTFS2/image6.png)
 
-<!-- -->
+Figura 11 - New Home Page
 
-1.  ![](./img//media/image6.png){width="3.8857141294838144in"
-    height="2.164597550306212in"}
+![](./img/AgileALMConVSOTFS2/image7.png)
 
-<!-- -->
+Figura 12 - New Team
 
-1.  Figura 11 - New Home Page
+![](./img/AgileALMConVSOTFS2/image8.png)
 
-<!-- -->
-
-1.  ![](./img//media/image7.png){width="4.341071741032371in"
-    height="1.3530610236220473in"}
-
-<!-- -->
-
-1.  Figura 12 - New Team
-
-<!-- -->
-
-1.  ![](./img//media/image8.png){width="3.153497375328084in"
-    height="3.1268853893263344in"}
-
-<!-- -->
-
-1.  Figura 13 – Iterations
+Figura 13 – Iterations
 
 Il passo successivo è quello di impostare il *timing* relativo alla
 Release e agli Sprint. Anche qui bisogna dire che, sebbene Scrum non
@@ -180,66 +163,46 @@ soluzione Microsoft tiene comunque conto dell’intervallo scelto per lo
 Sprint precedente (es: 2 settimane) e suggerisce le date per i
 successivi.
 
-1.  ![](./img//media/image9.png){width="2.4166666666666665in"
-    height="1.8096369203849518in"}
-    ![](./img//media/image10.png){width="2.2291666666666665in"
-    height="1.8144378827646543in"}
+![](./img/AgileALMConVSOTFS2/image9.png)
 
-<!-- -->
+![](./img/AgileALMConVSOTFS2/image10.png)
 
-1.  Figura 14 - Sprint and Release timing
+Figura 14 - Sprint and Release timing
 
 Al termine delle operazioni relative, avremo un *Backlogs Tree* simile
 al seguente:
 
-1.  ![](./img//media/image11.png){width="1.3749660979877516in"
-    height="1.9375in"}
+![](./img/AgileALMConVSOTFS2/image11.png)
 
-<!-- -->
-
-1.  Figura 15 - Backlogs Tree
+Figura 15 - Backlogs Tree
 
 Settato il contesto, passiamo ad aggiungere le *Feature* (Program
 Backlog) e le *User Story* (Product Backlog), adottando un approccio
 top-down e avendo cura di settare la corretta relazione padre-figlio tra
 essi.
 
-1.  ![](./img//media/image12.png){width="5.089337270341208in"
-    height="2.752719816272966in"}
+![](./img/AgileALMConVSOTFS2/image12.png)
 
-<!-- -->
+Figura 16 - Aggiunta Feature
 
-1.  Figura 16 - Aggiunta Feature
+![](./img/AgileALMConVSOTFS2/image13.png)
 
-<!-- -->
-
-1.  ![](./img//media/image13.png){width="5.147069116360455in"
-    height="2.527251749781277in"}
-
-<!-- -->
-
-1.  Figura 17 - Aggiunta User Story
+Figura 17 - Aggiunta User Story
 
 Una volta completato il tutto, avremo un risultato simile al seguente:
 
-1.  ![](./img//media/image14.png){width="5.807731846019248in"
-    height="2.089167760279965in"}
+![](./img/AgileALMConVSOTFS2/image14.png)
 
-<!-- -->
-
-1.  Figura 18 - Product Backlog Work Item
+Figura 18 - Product Backlog Work Item
 
 Ora, per poter popolare il primo Sprint/Iteration Backlog con la scelta
 delle User Story, settando il campo “Iteration” per ogni singola User
 Story e la definizione dei Task relativi, manca un tassello fondamentale
 e irrinunciabile per fare ciò: il Team nella sua interezza!
 
-1.  ![](./img//media/image15.png){width="5.785472440944882in"
-    height="1.2527198162729658in"}
+![](./img/AgileALMConVSOTFS2/image15.png)
 
-<!-- -->
-
-1.  Figura 19 - User Story Iteration Setting
+Figura 19 - User Story Iteration Setting
 
 La scelta dei Work Item per la prossima iterazione avviene durante lo
 *Sprint Planning*, ovvero la cerimonia Scrum a cui è demandata lo
@@ -255,22 +218,16 @@ mancanza è facilmente ovviabile associando lo Sprint Goal al nome
 dell’Iterazione, grazie al fatto che esso è tipicamente caratterizzato
 da una descrizione sintetica.
 
-1.  ![](./img//media/image16.png){width="5.335886920384952in"
-    height="2.252719816272966in"}
+![](./img/AgileALMConVSOTFS2/image16.png)
 
-<!-- -->
-
-1.  Figura 19 - Sprint Goal
+Figura 19 - Sprint Goal
 
 In alternativa è possibile, solo per TFS, creare un apposito Work Item o
 importare quello specifico esistente nella versione 2010.
 
-1.  ![](./img//media/image17.jpg){width="4.930470253718285in"
-    height="3.457158792650919in"}
+![](./img/AgileALMConVSOTFS2/image17.jpg)
 
-<!-- -->
-
-1.  Figura 20 - Sprint Work Item TFS 2010
+Figura 20 - Sprint Work Item TFS 2010
 
 Il numero di User Story da “inserire” nello Sprint hanno una relazione
 diretta con la *Velocity* (pari alla somma dell’effort delle User Story
@@ -287,12 +244,9 @@ basato sulla sequenza di Fibonacci “corretta” che, inoltre, contribuisce
 alla discussione sulla singola User Story al fine di condividerne il
 significato ed il dominio.
 
-1.  ![](./img//media/image18.jpg){width="3.7402777777777776in"
-    height="2.252719816272966in"}
+![](./img/AgileALMConVSOTFS2/image18.jpg)
 
-<!-- -->
-
-1.  Figura 20 - Le carte per il Planning Poker
+Figura 21 - Le carte per il Planning Poker
 
 L’attività di stima si svolge nel seguente modo:
 
@@ -325,12 +279,9 @@ finché non si raggiunge il doppio degli Story Point completabili in una
 iterazione), quelle che rientrano nel prossimo Sprint/Iterazione, vanno
 correttamente assegnate ad esso.
 
-1.  ![](./img//media/image19.png){width="5.253620953630796in"
-    height="2.661913823272091in"}
+![](./img/AgileALMConVSOTFS2/image19.png)
 
-<!-- -->
-
-1.  Figura 23 - Assegnazione Iterazione
+Figura 23 - Assegnazione Iterazione
 
 Congiuntamente bisogna aggiungere il “Valore” (Business Value, definito
 dal Product Owner durante il Grooming) e l’Effort (Story Point),
@@ -338,12 +289,9 @@ valorizzando la sezione “Details” con quanto emerso durante il Planning
 Poker. Ciò servirà per utilizzare efficacemente gli strumenti di
 analisi.
 
-1.  ![](./img//media/image20.png){width="4.177083333333333in"
-    height="3.269342738407699in"}
+![](./img/AgileALMConVSOTFS2/image20.png)
 
-<!-- -->
-
-1.  Figura 24 - Effort e Priorità
+Figura 24 - Effort e Priorità
 
 Non ci resta ora che assegnare la *Priorità*, in accordo con lo Sprint
 Backlog ed il Product Backlog: questa azione è “implicita” nel senso che
@@ -351,12 +299,9 @@ si ottiene spostando con il mouse i Work Item nell’ordine (alias
 priorità) desiderato. Completati tutti i settaggi, selezionando lo
 specifico Sprint, TFS vi presenterà un summary simile a quello seguente:
 
-1.  ![](./img//media/image21.png){width="5.552083333333333in"
-    height="2.3618525809273843in"}
+![](./img/AgileALMConVSOTFS2/image21.png)
 
-<!-- -->
-
-1.  Figura 25 - Sprint summary
+Figura 25 - Sprint summary
 
 Una puntualizzazione: come accennato la stima viene effettuata per un
 numero minimo di User Story, mentre quella relativa ai rimanenti PBI è
@@ -379,24 +324,18 @@ la “Forecast”. In tal modo raccogliete la richiesta esplicita del
 Program Level, cercando di avere una buona accuratezza ma evitando,
 comunque, di sprecare tempo nella ricerca della precisione.
 
-1.  ![](./img//media/image22.png){width="6.0625in"
-    height="2.5833869203849518in"}
+![](./img/AgileALMConVSOTFS2/image22.png)
 
-<!-- -->
-
-1.  Figura 26 - TFS Forecast
+Figura 26 - TFS Forecast
 
 L’ultimo parametro da settare è la *Capacity* (capacità) del Team sullo
 Sprint, selezionando chi lavorerà sul progetto, in quale sub-area e per
 quante ore al giorno. In tal modo si indicano le ore totali che il Team
 dedicherà allo Sprint, suddivise, se ha senso, per area.
 
-1.  ![](./img//media/image23.png){width="4.489603018372703in"
-    height="1.959717847769029in"}
+![](./img/AgileALMConVSOTFS2/image23.png)
 
-<!-- -->
-
-1.  Figura 27 - Sprint "Capacity"
+Figura 27 - Sprint "Capacity"
 
 Questo dato risulta utile per avere costantemente una stima di
 capacità/carico di lavoro, che però diventa evidente solo con
@@ -405,32 +344,23 @@ l’*inserimento dei Task* relativi alle User Story incluse nello Sprint.
 Per fare ciò, selezioniamo “Board” e passiamo alla relativa
 visualizzazione:
 
-1.  ![](./img//media/image24.png){width="4.062033027121609in"
-    height="2.056725721784777in"}
+![](./img/AgileALMConVSOTFS2/image24.png)
 
-<!-- -->
-
-1.  Figura 28 - Sprint Board View
+Figura 28 - Sprint Board View
 
 Clicchiamo sul segno “+” adiacente la User Story e creiamo, come Team,
 un nuovo Task, compilando i relativi dettagli:
 
-1.  ![](./img//media/image25.png){width="4.801519028871391in"
-    height="2.431149387576553in"}
+![](./img/AgileALMConVSOTFS2/image25.png)
 
-<!-- -->
-
-1.  Figura 29 - Nuovo Task
+Figura 29 - Nuovo Task
 
 Salviamo e, a questo punto, ci troveremo difronte a una Board contenente
 il nuovo Task con riportare le relative ore.
 
-1.  ![](./img//media/image26.png){width="3.837734033245844in"
-    height="1.9431561679790026in"}
+![](./img/AgileALMConVSOTFS2/image26.png)
 
-<!-- -->
-
-1.  Figura 30 - Sprint Board
+Figura 30 - Sprint Board
 
 Ovviamente i Task da creare sono quelli relativi alle User Story
 selezionate nello Sprint Planning.
@@ -439,12 +369,9 @@ La nostra finestra di stima della capacità del Team (alla destra dei
 Work Item nella visualizzazione Backlog dello Sprint) somiglierà alla
 figura seguente:
 
-1.  ![](./img//media/image27.png){width="1.5919116360454943in"
-    height="2.002719816272966in"}
+![](./img/AgileALMConVSOTFS2/image27.png)
 
-<!-- -->
-
-1.  Figura 31 – Work
+Figura 31 – Work
 
 Si conclude così la fase di “pre-settaggio” dello Sprint sulla base di
 quanto emerso durante lo Sprint Planning. Da sottolineare l’uso del
@@ -452,7 +379,7 @@ termine “pre-settaggio” scelto per evidenziare che l’ambiente di lavoro
 relativo ad un Sprint è in continua evoluzione e questa è solo una
 fotografia del suo stato nella fase iniziale.
 
-Nel prossimo articolo della serie ci occuperemo del cuore operativo di
+Nel [prossimo articolo](AgileALMConVSOTFS3.md) della serie ci occuperemo del cuore operativo di
 Scrum: lo **Sprint**.
 
 #### di [Felice Pescatore (MVP)](http://mvp.microsoft.com/en-us/mvp/Felice%20Pescatore-5001016)
