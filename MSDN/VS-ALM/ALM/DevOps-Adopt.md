@@ -144,7 +144,7 @@ attività in ottica di rendere il tutto maggiormente efficiente.
 Detto questo, è possibile settare gli obiettivi, come, per esempio,
 riportato nella figura seguente (T1 Scenario):
 
-![](./DevOps-Adopt/image21.png)
+![](./img/DevOps-Adopt/image21.png)
 
 
 Figura 15 - T1 Scenario
