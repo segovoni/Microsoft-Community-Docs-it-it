@@ -1,112 +1,26 @@
-Lean Startup, Jump Start
-========================
 
-Introduzione
-------------
+---
+title: Lean Startup, Jump Start (parte 2/3) - Build-Measure-Learn 
+description: Lean Startup, Jump Start (parte 2/3) - Build-Measure-Learn
+author: felicepescatore
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: ALM
+ms.custom: CommunityDocs
+---
 
-Le startup sono una forma particolare di organizzazione, pensate per
-**sperimentare** un modello di business sostenibile che consenta di
-perseguire la propria Vision. Ma le startup sono più di quella che è
-l’immagine collettiva dei geni sregolati in un garage: per avere
-successo ci vuole metodo e un approccio scientifico al management.
+# Lean Startup, Jump Start (parte 2/3) - Build-Measure-Learn
 
-**Lean Startup** ci fornisce gli strumenti per trasformare una startup
-in un’azienda sostenibile e di successo, al di là del seguito il
-contesto di riferimento. Detto ciò, di seguito il contesto di
-riferimento sarà relativo al mondo dell’Information Technologies.
 
-Lean Startup: la startup è un continuo esperimento
---------------------------------------------------
+#### di [Felice Pescatore](https://mvp.microsoft.com/it-it/mvp/Felice%20%20Pescatore-5001016) - Microsoft MVP
 
-**Lean Startup** propone un approccio lean-based alla creazione di un
-nuovo business e/o di una nuova startup, assimilando tale atto creativo
-ad un **continuo esperimento**. Così come suggerito da *Eric Ries*, in
-primis, ma anche da *Steve Blank* e altri pionieri di Lean Startup, una
-nuova startup non è un’azienda in miniatura e quindi la cosiddetta
-“*dollhouse theory of startups*” è assolutamente errata.
+Blog/Sito Personale: <www.felicepescatore.it>
 
-![](./img//media/image1.png){width="4.166146106736658in"
-height="2.520518372703412in"}
+ALM Blog: <http://www.getlatestversion.it/>
 
-> *“A startup is a human institution designed to create something new *
->
-> *under conditions of extreme uncertainty”*
 
-L’obiettivo di una startup è quello di trasformare la propria Vision in
-un business sostenibile, creando opportuni prodotti e servizi a supporto
-di esso. In linea generale, non si ha inizialmente bisogno di tutte le
-strutture tipiche di un’azienda rodata come, ad esempio, marketing o
-finance, bensì di una struttura snella con un mix di competenze in
-costante evoluzione. Essendo la Vision l’unico punto fermo, il processo
-di realizzazione del prodotto (sevizio) annesso deve adattarsi a
-condizioni assolutamente incerte, in cui il problema è *parzialmente
-noto* (o addirittura in alcuni casi sconosciuto) e la *soluzione è
-sconosciuta*. In tale contesto, non è possibile ipotizzare l’utilizzo di
-approcci classici, ovvero:
+![](img/MVPLogo.png)
 
--   **Waterfall-like** (*known problem, known solution*), richiede la
-    conoscenza approfondita sia del problema e sia della soluzione che
-    si vuole realizzare;
-
--   **Agile** (*known problem, unknown solution*), in cui il problema da
-    risolvere è noto (in linea generale) ma non è ben chiaro quale
-    soluzione realizzare per risolverlo ed il modo migliore per farlo.
-
-Nel caso di una startup, siamo in una condizione di *(partially) unknown
-problem - unknown solution*, ovvero una combinazione delle condizioni
-precedenti in chiave peggiorativa. Lean Startup suggerisce di
-considerare lo sviluppo del business (e del prodotto/servizio)
-attraverso il ciclo **build-measure-learn** che va velocizzato il più
-possibile al fine di sfruttare al massimo in concetto di *Validation
-Learning*, ovvero validare scientificamente le proprie assunzioni (o
-come li definisce Ries, atti di fede – “Leap of Faith”).
-
-![](./img//media/image2.jpg){width="3.47839457567804in" height="3.22in"}
-
-Figura 1 - Build-Measure-Learn
-
-Ma l’apprendimento va associato a delle metriche affidabili e
-verificabili, altrimenti si tratta di supposizioni che non portano a
-vedere ciò che si vuole (*Vanity Metrics*) e a considerare livelli di
-crescita (growth) falsati da valori non connessi ai miglioramenti
-ottenuti nell’ultima esecuzione del loop Build-Measure-Learn.
-
-Un esempio: *se si utilizzano delle metriche generiche che consentono
-solo di vedere l’incremento dei download del prodotto, com’è possibile
-capire se essi sono dovuti alle nuove features introdotte o ad un
-aumento delle campagne di advertising?*
-
-Questi elementi sono ben esplicitati nella pratica definita *Innovation
-Accounting,* ovvero nella formulazione e nella verifica di una serie di
-metriche affidabili (*Actionable Metrics*) definite sulla base di alcune
-“semplici” domante:
-
--   *Cosa vogliamo imparare nel prossimo loop?*
-
--   *Cosa è necessario misurare per fare ciò?*
-
--   *Cosa dobbiamo realizzare (es: MVP) per raggiungere il nostro
-    obiettivo?*
-
-Tramite l’Innovation Accounting è possibile capire se si stanno facendo
-progressi o se la strategia adottata va modificata (PIVOT) perché non
-produce i risultati attesi, motivo che spinge, chiaramente, ad
-accelerare il più possibile i loop build-measure-learn.
-
-Chiudiamo questo primo appuntamento con l’enfasi sul “fallimento”: se la
-scelta strategia risulta errata, ovvero le assunzioni fatte non sono
-valide, ciò non vuol dire che è necessario arrendersi, bensì che bisogna
-adeguare le proprie scelte e le future azioni ai risultati ottenuti. Il
-pattern di riferimento di Lean Startup non è quindi: **win-or-fail** ma
-**fail-fail-win**, andando ad abbracciare egregiamente il principio
-**Genchi Gembutsu**: «vai e verifica di persona», che invita
-l’imprenditore a non rilassarsi e ad essere sempre presente e vigile
-nelle azioni chiave finalizzare alla creazione del nuovo business.
-
-![](./img//media/image3.png){width="4.166146106736658in"
-height="3.9890846456692914in"}
-
-Figura 2 - win-fail vs fail-fail-win
 
 Lean Startup: Buil-Measure-Learn
 --------------------------------
@@ -126,8 +40,7 @@ La prima fase è quella di **Build**, in cui l’idea viene codificata e
 presentata agli *early adopters* (e successivamente ai clienti) per i
 feedback.
 
-![](./img//media/image4.jpg){width="3.125in"
-height="2.8229166666666665in"}
+![](./img/LeanStartupJumpStart1/image4.jpg)
 
 Figura 3 - Build phase
 
@@ -149,8 +62,7 @@ artefatto che ci permetta di verificare le nostre ipotesi e i nostri
 “atti-di-fede” (*act of faith*): dal prototipo, ad una semplice pagina
 web, fino anche ad un video in cui si descrive il prodotto/servizio.
 
-![](./img//media/image5.jpg){width="5.555555555555555in"
-height="4.305555555555555in"}
+![](./img/LeanStartupJumpStart1/image5.jpg)
 
 Figura 4 - The MVP
 
@@ -169,8 +81,7 @@ strumenti come *PowerPoint* per la creazione di mock nelle primissime
 iterazione e *Visual Studio LightSwitch* per la creazione dei primi
 prototipi.
 
-![](./img//media/image6.png){width="3.3125in"
-height="3.411874453193351in"}
+![](./img/LeanStartupJumpStart1/image6.png)
 
 Figura 5 - PowerPoint Story Board
 
@@ -215,8 +126,7 @@ precedentemente, consentono di capire se si stanno facendo progressi o
 se la strategia adottata va modificata (PIVOT) perché non produce i
 risultati attesi.
 
-![](./img//media/image7.jpg){width="3.163695319335083in"
-height="2.8645833333333335in"}
+![](./img/LeanStartupJumpStart1/image7.jpg)
 
 Figura 6 - Measure phase
 
@@ -273,8 +183,7 @@ all’analisi delle pagine (o aree tematiche) su cui i clienti si
 soffermano maggiormente, piuttosto che conteggiare banalmente il numero
 di visitatori (*Vanity Metrics*).
 
-![](./img//media/image8.png){width="2.8958333333333335in"
-height="2.639344925634296in"}
+![](./img/LeanStartupJumpStart1/image8.png)
 
 Figura 7 - Conversion Funnels
 
@@ -311,8 +220,7 @@ Uno strumento particolarmente efficace per la creazione di Actionable
 Metrics è *Microsoft Power BI,* che consente di visualizzare i dati,
 condividere individuazioni e collaborare in modi nuovi e intuitivi.
 
-![](./img//media/image9.jpg){width="4.166666666666667in"
-height="2.09375in"}
+![](./img/LeanStartupJumpStart1/image9.jpg)
 
 Figura 8 - Net Promoter Score
 
@@ -325,8 +233,7 @@ verificare la reazione alle modifiche dividendo il campione in due
 macro-gruppi e consegnando loro due versioni leggermente differenti
 della soluzione.
 
-![](./img//media/image10.gif){width="4.166666666666667in"
-height="2.3541666666666665in"}
+![](./img/LeanStartupJumpStart1/image10.gif)
 
 Figura 9 - Split Testing
 
@@ -362,8 +269,7 @@ alla valutazione *indiretta* del comportamento degli utenti delle
 strumenti ben noti al mondo del marketing come le
 *Interviste/Questionari* o i *Focus Group*.
 
-![](./img//media/image11.jpg){width="3.125in"
-height="2.8229166666666665in"}
+![](./img/LeanStartupJumpStart1/image11.jpg)
 
 Figura 10 - Learn phase
 
@@ -386,8 +292,7 @@ domanda fondamentale: **I miei dati validano la mia ipotesi iniziale?**
 
 -   *\[si\] Preserve, si continua sulla strada intrapresa.*
 
-![](./img//media/image12.png){width="4.168351924759405in"
-height="2.0112292213473317in"}
+![](./img/LeanStartupJumpStart1/image12.png)
 
 Figura 11 - PIVOT
 
@@ -488,179 +393,14 @@ apprendimento molto ampia, ciò rallenterà l’esecuzione del loop
 build-measure-learn, in contrasto con l’obiettivo stesso di Lean
 Startup.
 
-![](./img//media/image13.png){width="1.5623042432195975in"
-height="0.624922353455818in"} Entrambi questi aspetti sono egregiamente
+![](./img/LeanStartupJumpStart1/image13.png)
+
+Entrambi questi aspetti sono egregiamente
 contemplati dal programma **BizSpark per Startup di Microsoft** (il
 primo tramite Azure ed il secondo tramite Visual Studio e il dotNet
 Framework), che mira a fornire supporto diretto, e in larga parte
 gratuito, alle startup. Per i dettagli si rimanda al [*link
 ufficiale*](http://www.microsoft.com/bizspark/).
 
-<span id="_Toc412544484" class="anchor"><span id="_Toc413063915" class="anchor"></span></span>Lean Startup: Growth Engine
--------------------------------------------------------------------------------------------------------------------------
+[Lean Startup, Jump Start (parte 3/3) - Growth Engine](LeanStartupJumpStart3.md)
 
-![](./img//media/image14.jpg){width="1.0416666666666667in"
-height="0.8229166666666666in"}L’approccio scientifico proposto da *Lean
-Startup* consente di validare le proprie ipotesi, accelerando quanto più
-possibile il loop *build-measure-learn*. Finora abbiamo posto l’enfasi
-sul creare il “giusto” prodotto/servizio in linea con la Vision,
-rispondendo alla seguente domanda:
-
--   ***A value hypothesis**: What product or service will satisfy that
-    demand?*
-
-Ma la strategia scelta deve, inoltre, confutare una ulteriore e
-fondamentale ipotesi:
-
--   ***A growth hypothesis**: How can growth be made sustainable so that
-    it happens without requiring new funding?*
-
-che ci proietta sulle questioni inerenti la crescita del proprio
-business, andando a trasformare rapidamente, anche se gradualmente, il
-nostro “esperimento” in un’azienda in grado di generare e sostenere
-profitto.
-
-![](./img//media/image15.gif){width="3.125in"
-height="1.8958333333333333in"}
-
-Figura 12 - Strategy: 2 values
-
-Si tratta di ricercare un modello di crescita dipendente dal contesto
-che, per forza di cose, può evolvere in qualcosa di decisamente
-complesso. Tale attività rientra nelle “cose noiose” che sono il succo
-dell’*Innovation Accounting*, fondamentali per il successo del nuovo
-business.
-
-La crescita passa, banalmente, dall’acquisizioni di nuovi clienti. Tale
-processo è ben rappresentato da *Steve Blank* (“*The Startup Owners
-Manual*”) che definisce tre step fondamentali per attuarlo, andando a
-coniare l’acronimo: **GKG**: **Get** (Customer) **Keep** (Customer)
-**Grow** (Customer). In sintesi, l’obiettivo primario è quello di
-acquisire (GET) un numero iniziale di clienti sufficienti a sostenere il
-proprio business, creando le condizioni per fidelizzarli (Keep) e quelle
-affinché si riesca ad ottenere una crescita sostenibile (Grow) che porti
-nuove risorse finanziare da investire in nuovi esperimenti.
-
-Durante la fase di crescita bisogna fare particolare attenzione ai nuovi
-fattori, spesso in contrasto:
-
--   *esigenze dei clienti attuali;*
-
--   *ricerca di nuovi clienti;*
-
--   *gestione (aggiustamento) dell’attuale modello di business;*
-
--   *esplorazione di nuovi business model.*
-
-Tali fattori (non esclusivi) vanno bilanciati attraverso pratiche di
-gestione (anche qui, Innovation Accounting docet), come:
-
--   ***gestione oculata delle risorse, finite ma garantite**. Un budget
-    eccessivo può portare a rilassarsi, mentre è fondamentale che quello
-    allocato non venga tagliato al fine di garantire una tranquillità
-    nelle attività;*
-
--   ***concedere autonomia nello sviluppo**. I Team impegnati nella
-    sperimentazione devono essere relativamente liberi di organizzarsi e
-    provare nuove soluzioni;*
-
--   ***stimolare e premiare i dipendenti**. Stock options e bonus sono
-    un buono strumento per spronare i dipendenti a dare il meglio
-    di se.*
-
-Blank propone di approcciare al GKG secondo lo schema seguente:
-
-![](./img//media/image16.jpeg)
-
-Figura 13 - The Startup Owner’s Manual”: Get-Keep-Grow
-
-in cui le varie fasi possono contare su una serie di tool e soluzioni,
-ben riassunte nella figura seguente:
-
-![](./img//media/image17.png){width="4.8848064304461944in"
-height="6.7387412510936135in"}
-
-Figura 14 - GKG tools and solutions
-
-La **crescita**, in particolare, garantisce la trasformazione della
-startup in un’azienda consolidata, grazie alle revenue annesse e alla
-possibilità di investire in nuovi progetti/iniziative/servizi. Non
-sorprende, quindi, la sua trattazione esplicita in Lean Startup, che si
-concentra sui cosiddetti **motori di crescita** (*Growth Engines*) da
-applicare al proprio “esperimento” ed inquadrabili in due modelli
-fondamentali:
-
--   **Jump-start Engine**, basati su azioni una tantum, come, ad
-    esempio, l’acquisto di ADV slot sui più noti motori di ricerca;
-
--   **Sustainable Engine**, basati su azioni che generano un flusso
-    continuativo di crescita.
-
-Soprassedendo sul modello “Jump-start”, di facile comprensione, il
-modello “sostenibile” è suddivisibile in tre specifiche categorie:
-
--   **Sticky**: i clienti che provano il prodotto/soluzione decidono di
-    > utilizzarlo regolarmente (es. acquisti ripetuti o abbonamenti).
-    > Questo modello di crescita spinge la startup a concentrarsi sui
-    > clienti che ha già acquisito: un cliente felice vale più di 100
-    > passaggi pubblicitari!
-
-<!-- -->
-
--   **Viral**: basato sul passaparola (*word of mouth*), diretto
-    o indiretto. Nel primo caso l’utente fa da promotore esplicito del
-    prodotto, nel secondo è l’utilizzo implicito che contagia gli altri
-    (*side effect*: l’esempio più ricorrente è il colore delle cuffie
-    bianche dell’ipod che ne hanno spinto le vendite). La “misura del
-    contagio” può essere fatta attraverso un *viral coefficient (VC)*,
-    ovvero il numero dei nuovi utenti generati dai vecchi:
-
-    -   *VC molto inferiore a 1, il trend di crescita è breve. Si
-        immagini di avere VC=0.1, ciò significa che 100 utenti ne
-        portano 10, quei 10 ne porteranno 1 e poi l’effetto virale
-        termina;*
-
-    -   *VC uguale (o molto vicini) ad 1, il trend di crescita è
-        costante;*
-
-    -   *VS maggiore di 1, crescita esponenziale.*
-
-> L’ideale è che ogni cliente “contagi” almeno 1 nuovo utilizzatore
-> (meglio più di uno, chiaramente) a provare il prodotto/servizio.
->
-> Tale motore è particolarmente difficile da attuare perché richiede che
-> il prodotto superi le attese stesse dei clienti e che il target di
-> riferimento sia perfettamente inquadrato: in caso contrario l’effetto
-> virale termina rapidamente e il numero di clienti tende presto a
-> stagnarsi;
-
--   **Paid Growth**: ottenimento di nuovi clienti tramite
-    > investimento diretto. La forma più comune di questo approccio è,
-    > banalmente, la pubblicità, ma possiamo anche citare l’impiego dei
-    > call center o l’apertura di sedi di rappresentanza in punti
-    > strategici particolarmente trafficati. Il fattore predominante è
-    > il *profitto marginale*, ovvero la differenza tra il *valore
-    > totale del cliente* (*lifetime customer value*, il profitto legato
-    > al cliente) e il *costo marginale* (costo di acquisizione
-    > del cliente).
-
-> Questo motore richiede che si verifichi costantemente la copertura dei
-> costi: finché si ottiene un profitto su ogni cliente, è possibile
-> investire i profitti stessi in ulteriore pubblicità per accelerare la
-> crescita.
-
-Ovviamente, i modelli di growth engine possono essere combinati, ma per
-ottenere delle metriche specifiche che ne convalidino i risultati
-(*Actionable Metrics*) è fondamentale che si riesca a misurare
-puntualmente il loro effetto. Bisogna, inoltre, tener presente che un
-growth engine va legato ad un breve/periodo di riferimento, dopodiché
-può perdere rapidamente efficacia rendendo necessario un rinnovamento di
-strategia o, in extremis, un PIVOT.
-
-Prima di concludere è cruciale evidenziare che quando l’azienda passa da
-uno stato di startup ad uno stato “consolidato”, non è ovviamente più
-possibile fare esperimenti continui sul prodotto o sulla soluzione core,
-dovendo garantire un alto livello di qualità ai propri clienti. In tal
-caso è opportuno approcciare una (mini) divisione o un (mini) Team che
-ha il compito di continuare a sperimentare soluzioni innovative
-parallelamente al core business.
