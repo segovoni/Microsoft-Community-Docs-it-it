@@ -12,12 +12,11 @@ ms.custom: CommunityDocs
 
 #### di [Felice Pescatore (MVP)](http://mvp.microsoft.com/en-us/mvp/Felice%20Pescatore-5001016)
 
-Blog/Sito Personale:
-[www.felicepescatore.it](http://www.felicepescatore.it)
+Blog/Sito Personale: [www.felicepescatore.it](http://www.felicepescatore.it)
 
 ALM Blog: <http://www.getlatestversion.it/>
 
-![](./img/AgileALMConVSOTFS2/image1.png)
+![](./img/MVPLogo.png)
 
 *Dicembre 2014*
 
