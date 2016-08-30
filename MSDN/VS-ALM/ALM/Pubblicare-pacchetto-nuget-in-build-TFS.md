@@ -1,4 +1,3 @@
-
 ---
 title: Pubblicare automaticamente un pacchetto NuGet durante una build TFS
 description: Pubblicare automaticamente un pacchetto NuGet durante una build TFS
@@ -43,10 +42,10 @@ soffre di alcuni punti deboli.
 
 - Personalizzare il workflow di una Build non è un operazione banale,
     soprattutto per chi non ha familiarità con Workflow Foundation
--   *Cambiando la versione di TFS ed i build agents è necessario
+- *Cambiando la versione di TFS ed i build agents è necessario
     ricompilare le azioni per referenziare le nuove versioni degli
     assembly delle build di TFS.*
--   Non è possibile debuggare in locale in maniera semplice il codice
+- Non è possibile debuggare in locale in maniera semplice il codice
     che si è scritto
 
 
@@ -77,7 +76,7 @@ tutte le cartelle dei sorgenti tutti i file assemblyinfo.cs ed
 assemblyinfo.vb per poi modificarli con una regex, è questione di poche
 righe di codice.
 
-```Powershell
+```powershell
 function Update-SourceVersion
 {
     Param
@@ -168,13 +167,13 @@ sorgenti, nella BuildScripts ho invece inserito gli script di build**.
 In questo modo si può semplicemente eseguire lo script in locale al di
 fuori di qualsiasi build, sfruttando i percorsi relativi. La cartella
 src, dove risiedono tutti i file sorgenti si trova infatti in
-***..\\src***. Nella cartella ScriptTest si trova il modulo powershell
+**_..\\src_**. Nella cartella ScriptTest si trova il modulo powershell
 discusso precedentemente, oltre che uno script chiamato
 PreBuildScripts.ps1 che contiene semplicemente il codice necessario ad
 invocare la funzione del modulo descritto precedentemente.
 
 
-```Powershell
+```powershell
 Param
 (
 [string] $assemblyVersion,
