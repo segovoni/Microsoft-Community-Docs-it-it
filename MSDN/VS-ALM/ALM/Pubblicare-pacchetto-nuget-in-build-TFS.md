@@ -1,3 +1,16 @@
+
+---
+title: Pubblicare automaticamente un pacchetto NuGet durante una build TFS
+description: Pubblicare automaticamente un pacchetto NuGet durante una build TFS
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: ALM
+ms.custom: CommunityDocs
+---
+
+# Pubblicare automaticamente un pacchetto NuGet durante una build TFS
+
 #### di [Gian Maria Ricci](http://mvp.microsoft.com/en-us/mvp/Gian%20Maria%20Ricci-4025635) – Microsoft MVP
 
 Blog inglese: <http://www.codewrecks.com>
@@ -6,9 +19,9 @@ Blog Italiano ALM: <http://www.getlatestversion.it/author/alkampfer/>
 
 Blog Italiano: <http://blogs.ugidotnet.org/rgm>
 
-1.  ![](./img//media/image1.png){width="0.59375in" height="0.9375in"}
+![](./img/MVPLogo.png)
 
-*Marzo, 2014 *
+*Marzo, 2014*
 
 Versionare gli assembly
 -----------------------
@@ -28,17 +41,14 @@ pacchetto NuGet durante una build.
 Di base l’approccio al versioning descritto nel precedente articolo
 soffre di alcuni punti deboli.
 
-1.  Personalizzare il workflow di una Build non è un operazione banale,
+- Personalizzare il workflow di una Build non è un operazione banale,
     soprattutto per chi non ha familiarità con Workflow Foundation
-
-    *Cambiando la versione di TFS ed i build agents è necessario
+-   *Cambiando la versione di TFS ed i build agents è necessario
     ricompilare le azioni per referenziare le nuove versioni degli
     assembly delle build di TFS.*
-
-    Non è possibile debuggare in locale in maniera semplice il codice
+-   Non è possibile debuggare in locale in maniera semplice il codice
     che si è scritto
 
-    1.  
 
 **Il punto due è quello sicuramente più fastidioso, perché rende più
 complessi gli scenari di aggiornamento**. Questo problema è mitigato da
@@ -60,131 +70,64 @@ Powershell eseguito prima della build, il cui scopo è semplicemente
 quello di modificare tutti i file assemblyinfo.cs ed assemblyinfo.vb
 mettendo il valore corretto del versioning.
 
-1.  ![](./img//media/image2.png){width="6.6930555555555555in"
-    height="1.7992082239720035in"}
+![](./img/Pubblicare-pacchetto-nuget-in-build-TFS/image2.png)
 
 Grazie alle potenzialità di powershell, creare uno script che cerca in
 tutte le cartelle dei sorgenti tutti i file assemblyinfo.cs ed
 assemblyinfo.vb per poi modificarli con una regex, è questione di poche
 righe di codice.
 
-1.  function Update-SourceVersion
+```Powershell
+function Update-SourceVersion
+{
+    Param
+    (
+        [string]$SrcPath,
+        [string]$assemblyVersion,
+        [string]$fileAssemblyVersion
+    )
+     
+    $buildNumber = $env:TF_BUILD_BUILDNUMBER
+    if ($buildNumber -eq $null)
+    {
+        $buildIncrementalNumber = 0
+    }
+    else
+    {
+        $splitted = $buildNumber.Split('.')
+        $buildIncrementalNumber = $splitted[$splitted.Length - 1]
+    }
 
-    {
+    if ($fileAssemblyVersion -eq "")
+    {
+        $fileAssemblyVersion = $assemblyVersion
+    }
 
-      Param
+    Write-Host "Executing Update-SourceVersion in path $SrcPath, Version is $assemblyVersion and File Version is $fileAssemblyVersion"
 
-      (
+    $AllVersionFiles = Get-ChildItem $SrcPath AssemblyInfo.cs -recurse
 
-        \[string\]\$SrcPath,
+    $jdate = Get-JulianDate
+    $assemblyVersion = $assemblyVersion.Replace("J", $jdate).Replace("B", $buildIncrementalNumber)
+    $fileAssemblyVersion = $fileAssemblyVersion.Replace("J", $jdate).Replace("B", $buildIncrementalNumber)
 
-        \[string\]\$assemblyVersion,
+    Write-Host "Transformed Version is $assemblyVersion and Transformed File Version is $fileAssemblyVersion"
 
-        \[string\]\$fileAssemblyVersion
-
-      )
-
-         
-
-        \$buildNumber = \$env:TF\_BUILD\_BUILDNUMBER
-
-        if (\$buildNumber -eq \$null)
-
-        {
-
-            \$buildIncrementalNumber = 0
-
-        }
-
-        else
-
-        {
-
-            \$splitted = \$buildNumber.Split('.')
-
-            \$buildIncrementalNumber = \$splitted\[\$splitted.Length -
-    1\]
-
-        }
-
-     
-
-        if (\$fileAssemblyVersion -eq "")
-
-        {
-
-            \$fileAssemblyVersion = \$assemblyVersion
-
-        }
-
-         
-
-        Write-Host "Executing Update-SourceVersion in path \$SrcPath,
-    Version is \$assemblyVersion and File Version is
-    \$fileAssemblyVersion"
-
-      
-
-     
-
-        \$AllVersionFiles = Get-ChildItem \$SrcPath AssemblyInfo.cs
-    -recurse
-
-     
-
-         
-
-        \$jdate = Get-JulianDate
-
-        \$assemblyVersion = \$assemblyVersion.Replace("J",
-    \$jdate).Replace("B", \$buildIncrementalNumber)
-
-        \$fileAssemblyVersion = \$fileAssemblyVersion.Replace("J",
-    \$jdate).Replace("B", \$buildIncrementalNumber)
-
-         
-
-        Write-Host "Transformed Version is \$assemblyVersion and
-    Transformed File Version is \$fileAssemblyVersion"
-
-      
-
-     
-
-        foreach (\$file in \$AllVersionFiles)
-
-        {
-
-            Write-Host "Modifying file " + \$file.FullName
-
-            \#save the file for restore
-
-            \$backFile = \$file.FullName + ".\_ORI"
-
-            \$tempFile = \$file.FullName + ".tmp"
-
-            Copy-Item \$file.FullName \$backFile
-
-            \#now load all content of the original file and rewrite
-    modified to the same file
-
-            Get-Content \$file.FullName |
-
-            %{\$\_ -replace
-    'AssemblyVersion("\[0-9\]+(.(\[0-9\]+|\*)){1,3}")',
-    "AssemblyVersion(""\$assemblyVersion"")" } |
-
-            %{\$\_ -replace
-    'AssemblyFileVersion("\[0-9\]+(.(\[0-9\]+|\*)){1,3}")',
-    "AssemblyFileVersion(""\$fileAssemblyVersion"")" }  &gt; \$tempFile
-
-            Move-Item \$tempFile \$file.FullName -force
-
-        }
-
-      
-
-    }
+    foreach ($file in $AllVersionFiles)
+    {
+        Write-Host "Modifying file " + $file.FullName
+        #save the file for restore
+        $backFile = $file.FullName + "._ORI"
+        $tempFile = $file.FullName + ".tmp"
+        Copy-Item $file.FullName $backFile
+        #now load all content of the original file and rewrite modified to the same file
+        Get-Content $file.FullName |
+        %{$_ -replace 'AssemblyVersion("[0-9]+(.([0-9]+|*)){1,3}")', "AssemblyVersion(""$assemblyVersion"")" } |
+        %{$_ -replace 'AssemblyFileVersion("[0-9]+(.([0-9]+|*)){1,3}")', "AssemblyFileVersion(""$fileAssemblyVersion"")" }  > $tempFile
+        Move-Item $tempFile $file.FullName -force
+    }
+}
+```
 
 Non essendo io uno specialista di powershell, questo script
 probabilmente non è ottimale, ma serve comunque allo scopo e a
@@ -209,8 +152,7 @@ process template, di cui esistono due versioni praticamente identiche,
 una per TFVC e l’altra per Git, che permettono out-of-the-box la
 personalizzazione tramite script.
 
-1.  ![](./img//media/image3.png){width="5.738865923009624in"
-    height="2.6142563429571304in"}
+![](./img/Pubblicare-pacchetto-nuget-in-build-TFS/image3.png)
 
 Una volta selezionato questo nuovo tipo di template, potrete vedere che
 **i parametri per la configurazione sono molto differenti da quelli
@@ -231,34 +173,27 @@ discusso precedentemente, oltre che uno script chiamato
 PreBuildScripts.ps1 che contiene semplicemente il codice necessario ad
 invocare la funzione del modulo descritto precedentemente.
 
-1.  Param
 
-    (
+```Powershell
+Param
+(
+[string] $assemblyVersion,
+[string] $fileAssemblyVersion
+)
 
-    \[string\] \$assemblyVersion,
+Write-Host "Running Pre Build Scripts on Powershell host:"
+Write-Host ($PSVersionTable | Format-Table | Out-String)
 
-    \[string\] \$fileAssemblyVersion
+Import-Module $scriptRoot\BuildFunctions
 
-    )
+if ($assemblyVersion -eq "")
+{
+$assemblyVersion = "1.0.0.0"
+$fileAssemblyVersion = "1.0.J.B"
+}
 
-    Write-Host "Running Pre Build Scripts on Powershell host:"
-
-    Write-Host (\$PSVersionTable | Format-Table | Out-String)
-
-    Import-Module \$scriptRoot\\BuildFunctions
-
-    if (\$assemblyVersion -eq "")
-
-    {
-
-    \$assemblyVersion = "1.0.0.0"
-
-    \$fileAssemblyVersion = "1.0.J.B"
-
-    }
-
-    Update-SourceVersion \$scriptRoot\\..\\src \$assemblyVersion
-    \$fileAssemblyVersion
+Update-SourceVersion $scriptRoot\..\src $assemblyVersion $fileAssemblyVersion
+```
 
 Rimane solamente da specificare nei parametri della build lo script e
 tutti i parametri da lui richiesti. Per chi non ha familiarità di
@@ -267,8 +202,7 @@ esplicitamente all’inizio dello script stesso con la direttiva Param; in
 questo modo il parsing della riga di comando verrà fatto direttamente
 dal motore di PowerShell.
 
-1.  ![](./img//media/image4.png){width="6.6930555555555555in"
-    height="2.370833333333333in"}
+![](./img/Pubblicare-pacchetto-nuget-in-build-TFS/image4.png)
 
 L’aspetto interessante è che **prima di lanciare la build si può aprire
 lo script con Powershell ISE, eseguirlo e verificarne la correttezza
@@ -281,8 +215,7 @@ Una volta che lo script viene eseguito correttamente in locale si può
 eseguire la build ed al termine scaricare la drop folder per verificare
 che il versioning sia stato eseguito correttamente.
 
-1.  ![](./img//media/image5.png){width="3.884931102362205in"
-    height="3.6766240157480317in"}
+![](./img/Pubblicare-pacchetto-nuget-in-build-TFS/image5.png)
 
 L’aspetto interessante è capire come si procede se lo script non ha
 funzionato, ad esempio se le dll non hanno il corretto File Version. Se
@@ -290,8 +223,7 @@ nelle funzioni si sono utilizzate semplici chiamate alla cmdlet
 Write-Host per fare output di log, si ritroverà tutto l’output nelle
 diagnostiche delle build.
 
-1.  ![](./img//media/image6.png){width="6.6930555555555555in"
-    height="1.3069444444444445in"}
+![](./img/Pubblicare-pacchetto-nuget-in-build-TFS/image6.png)
 
 Questo permette di visualizzare l’esatta riga di comando che utilizzata
 dall’agent di build per lanciare lo script, seguita da tutti i log fatti
@@ -319,271 +251,140 @@ progetto, lasciando allo script il solo compito di cambiare la versione
 e di pubblicarlo nel repository NuGet. Un possibile esempio di .nuspec
 file potrebbe essere il seguente.
 
-1.  &lt;?xml version="1.0"?&gt;
+```xml
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>LogLibrary</id>
+    <version>1.0.0.0</version>
+    <authors>Ricci Gian Maria</authors>
+    <owners>Ricci Gian Maria</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Simple log library project to verify build+nuget.</description>
+    <releaseNotes>ContinuousIntegration.</releaseNotes>
+    <copyright>Copyright 2014 - Ricci Gian Maria</copyright>
+    <tags>Example</tags>
+  </metadata>
 
-    &lt;package &gt;
-
-      &lt;metadata&gt;
-
-        &lt;id&gt;LogLibrary&lt;/id&gt;
-
-        &lt;version&gt;1.0.0.0&lt;/version&gt;
-
-        &lt;authors&gt;Ricci Gian Maria&lt;/authors&gt;
-
-        &lt;owners&gt;Ricci Gian Maria&lt;/owners&gt;
-
-        &lt;requireLicenseAcceptance&gt;false&lt;/requireLicenseAcceptance&gt;
-
-        &lt;description&gt;Simple log library project to verify
-    build+nuget.&lt;/description&gt;
-
-        &lt;releaseNotes&gt;ContinuousIntegration.&lt;/releaseNotes&gt;
-
-        &lt;copyright&gt;Copyright 2014 - Ricci Gian
-    Maria&lt;/copyright&gt;
-
-        &lt;tags&gt;Example&lt;/tags&gt;
-
-      &lt;/metadata&gt;
-
-     
-
-      &lt;files&gt;
-
-        &lt;file src="LogLibrary.dll" target="libNET40" /&gt;
-
-        &lt;file src="LogLibrary.pdb" target="libNET40" /&gt;
-
-      &lt;/files&gt;
-
-    &lt;/package&gt;
+  <files>
+    <file src="LogLibrary.dll" target="libNET40" />
+    <file src="LogLibrary.pdb" target="libNET40" />
+  </files>
+</package>
+```
 
 Lo script Powershell che invece si occupa di pubblicare su nuget è il
 seguente
 
-1.  function Publish-NugetPackage
-
-    {
-
-      Param
-
-      (
-
-        \[string\]\$SrcPath,
-
-        \[string\]\$NugetPath,
-
-        \[string\]\$PackageVersion,
-
-        \[string\]\$NugetServer,
-
-        \[string\]\$NugetServerPassword
-
-      )
-
-         
-
-        \$buildNumber = \$env:TF\_BUILD\_BUILDNUMBER
-
-        if (\$buildNumber -eq \$null)
-
-        {
-
-            \$buildIncrementalNumber = 0
-
-        }
-
-        else
-
-        {
-
-            \$splitted = \$buildNumber.Split('.')
-
-            \$buildIncrementalNumber = \$splitted\[\$splitted.Length -
-    1\]
-
-        }
-
-         
-
-        Write-Host "Executing Publish-NugetPackage in path \$SrcPath,
-    PackageVersion is \$PackageVersion"
-
-         
-
-        \$jdate = Get-JulianDate
-
-        \$PackageVersion = \$PackageVersion.Replace("J",
-    \$jdate).Replace("B", \$buildIncrementalNumber)
-
-         
-
-        Write-Host "Transformed PackageVersion is \$PackageVersion "
-
-      
-
-        \$AllNuspecFiles = Get-ChildItem \$SrcPath\*.nuspec
-
-       
-
-        \#Remove all previous packed packages in the directory
-
-          
-
-        \$AllNugetPackageFiles = Get-ChildItem \$SrcPath\*.nupkg
-
-       
-
-        foreach (\$file in \$AllNugetPackageFiles)
-
-        {
-
-            Remove-Item \$file
-
-        }
-
-     
-
-        foreach (\$file in \$AllNuspecFiles)
-
-        {
-
-            Write-Host "Modifying file " + \$file.FullName
-
-            \#save the file for restore
-
-            \$backFile = \$file.FullName + ".\_ORI"
-
-            \$tempFile = \$file.FullName + ".tmp"
-
-            Copy-Item \$file.FullName \$backFile -Force
-
-            \#now load all content of the original file and rewrite
-    modified to the same file
-
-            Get-Content \$file.FullName |
-
-            %{\$\_ -replace
-    '&lt;version&gt;\[0-9\]+(.(\[0-9\]+|\*)){1,3}&lt;/version&gt;',
-    "&lt;version&gt;\$PackageVersion&lt;/version&gt;" } &gt; \$tempFile
-
-            Move-Item \$tempFile \$file.FullName -force
-
-     
-
-            \#Create the .nupkg from the nuspec file
-
-            \$ps = new-object System.Diagnostics.Process
-
-            \$ps.StartInfo.Filename = "\$NugetPathnuget.exe"
-
-            \$ps.StartInfo.Arguments = "pack \`"\$file\`""
-
-            \$ps.StartInfo.WorkingDirectory = \$file.Directory.FullName
-
-            \$ps.StartInfo.RedirectStandardOutput = \$True
-
-            \$ps.StartInfo.RedirectStandardError = \$True
-
-            \$ps.StartInfo.UseShellExecute = \$false
-
-            \$ps.start()
-
-            if(!\$ps.WaitForExit(30000))
-
-            {
-
-                \$ps.Kill()
-
-            }
-
-            \[string\] \$Out = \$ps.StandardOutput.ReadToEnd();
-
-            \[string\] \$ErrOut = \$ps.StandardError.ReadToEnd();
-
-            Write-Host "Nuget pack Output of commandline " +
-    \$ps.StartInfo.Filename + " " + \$ps.StartInfo.Arguments
-
-            Write-Host \$Out
-
-            if (\$ErrOut -ne "")
-
-            {
-
-                Write-Error "Nuget pack Errors"
-
-                Write-Error \$ErrOut
-
-            }
-
-            \#Restore original file
-
-            \#Move-Item \$backFile \$file -Force
-
-        }
-
-         
-
-        \$AllNugetPackageFiles = Get-ChildItem \$SrcPath\*.nupkg
-
-       
-
-        foreach (\$file in \$AllNugetPackageFiles)
-
-        {
-
-            \#Create the .nupkg from the nuspec file
-
-            \$ps = new-object System.Diagnostics.Process
-
-            \$ps.StartInfo.Filename = "\$NugetPathnuget.exe"
-
-            \$ps.StartInfo.Arguments = "push \`"\$file\`" -s
-    \$NugetServer \$NugetServerPassword"
-
-            \$ps.StartInfo.WorkingDirectory = \$file.Directory.FullName
-
-            \$ps.StartInfo.RedirectStandardOutput = \$True
-
-            \$ps.StartInfo.RedirectStandardError = \$True
-
-            \$ps.StartInfo.UseShellExecute = \$false
-
-            \$ps.start()
-
-            if(!\$ps.WaitForExit(30000))
-
-            {
-
-                \$ps.Kill()
-
-            }
-
-            \[string\] \$Out = \$ps.StandardOutput.ReadToEnd();
-
-            \[string\] \$ErrOut = \$ps.StandardError.ReadToEnd();
-
-            Write-Host "Nuget push Output of commandline " +
-    \$ps.StartInfo.Filename + " " + \$ps.StartInfo.Arguments
-
-            Write-Host \$Out
-
-            if (\$ErrOut -ne "")
-
-            {
-
-                Write-Error "Nuget push Errors"
-
-                Write-Error \$ErrOut
-
-            }
-
-     
-
-        }
-
-    }
+```powershell
+function Publish-NugetPackage
+{
+  Param
+  (
+    [string]$SrcPath,
+    [string]$NugetPath,
+    [string]$PackageVersion,
+    [string]$NugetServer,
+    [string]$NugetServerPassword
+  )
+    $buildNumber = $env:TF_BUILD_BUILDNUMBER
+    if ($buildNumber -eq $null)
+    {
+        $buildIncrementalNumber = 0
+    }
+    else
+    {
+        $splitted = $buildNumber.Split('.')
+        $buildIncrementalNumber = $splitted[$splitted.Length - 1]
+    }
+
+    Write-Host "Executing Publish-NugetPackage in path $SrcPath,PackageVersion is $PackageVersion"
+
+    $jdate = Get-JulianDate
+    $PackageVersion = $PackageVersion.Replace("J", $jdate).Replace("B", $buildIncrementalNumber)
+
+    Write-Host "Transformed PackageVersion is $PackageVersion "
+
+    $AllNuspecFiles = Get-ChildItem $SrcPath*.nuspec
+
+    #Remove all previous packed packages in the directory
+
+    $AllNugetPackageFiles = Get-ChildItem $SrcPath*.nupkg
+
+    foreach ($file in $AllNugetPackageFiles)
+    {
+        Remove-Item $file
+    }
+
+    foreach ($file in $AllNuspecFiles)
+    {
+        Write-Host "Modifying file " + $file.FullName
+        #save the file for restore
+        $backFile = $file.FullName + "._ORI"
+        $tempFile = $file.FullName + ".tmp"
+        Copy-Item $file.FullName $backFile -Force
+
+        #now load all content of the original file and rewrite modified to the same file
+        Get-Content $file.FullName |
+        %{$_ -replace '<version>[0-9]+(.([0-9]+|*)){1,3}</version>', "<version>$PackageVersion</version>" } > $tempFile
+        Move-Item $tempFile $file.FullName -force
+
+        #Create the .nupkg from the nuspec file
+        $ps = new-object System.Diagnostics.Process
+        $ps.StartInfo.Filename = "$NugetPathnuget.exe"
+        $ps.StartInfo.Arguments = "pack `"$file`""
+        $ps.StartInfo.WorkingDirectory = $file.Directory.FullName
+        $ps.StartInfo.RedirectStandardOutput = $True
+        $ps.StartInfo.RedirectStandardError = $True
+        $ps.StartInfo.UseShellExecute = $false
+        $ps.start()
+        if(!$ps.WaitForExit(30000))
+        {
+            $ps.Kill()
+        }
+        [string] $Out = $ps.StandardOutput.ReadToEnd();
+        [string] $ErrOut = $ps.StandardError.ReadToEnd();
+        Write-Host "Nuget pack Output of commandline " + $ps.StartInfo.Filename + " " + $ps.StartInfo.Arguments
+        Write-Host $Out
+        if ($ErrOut -ne "")
+        {
+            Write-Error "Nuget pack Errors"
+            Write-Error $ErrOut
+        }
+
+        #Restore original file
+
+        #Move-Item $backFile $file -Force
+    }
+
+    $AllNugetPackageFiles = Get-ChildItem $SrcPath*.nupkg
+    foreach ($file in $AllNugetPackageFiles)
+    {
+        #Create the .nupkg from the nuspec file
+        $ps = new-object System.Diagnostics.Process
+        $ps.StartInfo.Filename = "$NugetPathnuget.exe"
+        $ps.StartInfo.Arguments = "push `"$file`" -s $NugetServer $NugetServerPassword"
+        $ps.StartInfo.WorkingDirectory = $file.Directory.FullName
+        $ps.StartInfo.RedirectStandardOutput = $True
+        $ps.StartInfo.RedirectStandardError = $True
+        $ps.StartInfo.UseShellExecute = $false
+        $ps.start()
+        if(!$ps.WaitForExit(30000))
+        {
+            $ps.Kill()
+        }
+        [string] $Out = $ps.StandardOutput.ReadToEnd();
+        [string] $ErrOut = $ps.StandardError.ReadToEnd();
+        Write-Host "Nuget push Output of commandline " + $ps.StartInfo.Filename + " " + $ps.StartInfo.Arguments
+        Write-Host $Out
+        if ($ErrOut -ne "")
+        {
+            Write-Error "Nuget push Errors"
+            Write-Error $ErrOut
+        }
+    }
+}
+```
 
 Come si può vedere il funzionamento è molto semplice, dopo avere
 determinato il numero di versione, in maniera analoga a quanto fatto per
@@ -602,44 +403,31 @@ Anche questa funzione viene inserita nello stesso modulo powershell
 discusso precedentemente, in modo da poter essere richiamata dal reale
 script che verrà invocato dopo la build.
 
-1.  Param
+```powershell
+Param
+(
+[string] $PackageVersion = "1.0.J.B",
+[string] $NugetServer = "http://alkampfernuget.azurewebsites.net/",
+[string] $NugetServerPassword = "ThisIsANiceTest_WithNugetServer"
+)
 
-    (
+Write-Host "Running Pre Build Scripts"
 
-    \[string\] \$PackageVersion = "1.0.J.B",
+$scriptRoot = Split-Path -Parent -Path
+$MyInvocation.MyCommand.Definition
 
-    \[string\] \$NugetServer =
-    "http://alkampfernuget.azurewebsites.net/",
-
-    \[string\] \$NugetServerPassword =
-    "ThisIsANiceTest\_WithNugetServer"
-
-    )
-
-    Write-Host "Running Pre Build Scripts"
-
-    \$scriptRoot = Split-Path -Parent -Path
-    \$MyInvocation.MyCommand.Definition
-
-    \#Remove-Module BuildFunctions
-
-    Import-Module \$scriptRoot\\BuildFunctions
-
-    \$binPath = \$env:TF\_BUILD\_BINARIESDIRECTORY
-
-    if (\$binPath -eq \$null)
-
-    {
-
+#Remove-Module BuildFunctions
+Import-Module $scriptRoot\BuildFunctions
+$binPath = $env:TF_BUILD_BINARIESDIRECTORY
+if ($binPath -eq $null)
+{
     Write-Host "Not running in build, using relative path to identify
     bin location."
+    $binPath = $scriptRoot + "\..\..\bin"
+}
 
-    \$binPath = \$scriptRoot + "\\..\\..\\bin"
-
-    }
-
-    Publish-NugetPackage \$env:TF\_BUILD\_BINARIESDIRECTORY \$scriptRoot
-    \$PackageVersion \$NugetServer \$NugetServerPassword
+Publish-NugetPackage $env:TF_BUILD_BINARIESDIRECTORY $scriptRoot $PackageVersion $NugetServer $NugetServerPassword
+```
 
 **In questo modo si può creare un modulo Powershell che verrà poi
 utilizzato da più build e da più Team Project, semplicemente invocando
@@ -662,15 +450,11 @@ utilizzati per compilare la specifica versione.
 Sfortunatamente il workflow base di TFS permette solamente di eseguire
 uno script
 
-1.  Prima della build
+- Prima della build
+- Dopo la build
+- Prima dei test
+- Dopo i test
 
-    Dopo la build
-
-    Prima dei test
-
-    Dopo i test
-
-    1.  
 
 Per questo è necessario **creare una build personalizzata che permetta
 di eseguire uno script al termine di tutte le azioni del workflow**. In
@@ -686,8 +470,7 @@ workflow non vengono più inseriti automaticamente nella cartella
 BuildProcessTemplates, ma sono memorizzati direttamente nel database di
 TFS.
 
-1.  ![](./img//media/image7.png){width="4.593175853018373in"
-    height="2.4163648293963256in"}
+![](./img/Pubblicare-pacchetto-nuget-in-build-TFS/image7.png)
 
 Una volta scaricato il template TfvcTemplate.12.xaml in locale con un
 nome significativo lo si può modificare e poi reinserire in una cartella
@@ -702,22 +485,19 @@ gestione.** In questo scenario è infatti sufficiente localizzare il
 blocco *Run Optional Script After Test* e con un banale copia ed
 incolla, copiarne una ulteriore versione come ultimo step della build.
 
-1.  ![](./img//media/image8.png){width="5.197267060367454in"
-    height="4.218222878390201in"}
+![](./img/Pubblicare-pacchetto-nuget-in-build-TFS/image8.png)
 
 Ora è necessario andare ad inserire negli argomenti del workflow due
 nuovi argomenti, il path dello script da eseguire ed i parametri da
 passare.
 
-1.  ![](./img//media/image9.png){width="6.6930555555555555in"
-    height="2.7632556867891513in"}
+![](./img/Pubblicare-pacchetto-nuget-in-build-TFS/image9.png)
 
 I due nuovi parametri sono di tipo stringa e sono evidenziati nella
 figura precedente. Una volta definiti possono essere utilizzati come
 argomenti nel blocco appena incollato.
 
-1.  ![](./img//media/image10.png){width="4.507638888888889in"
-    height="2.798611111111111in"}
+![](./img/Pubblicare-pacchetto-nuget-in-build-TFS/image10.png)
 
 Come ultimo passo è necessario localizzare un argomento particolare
 chiamato Metadata, il quale contiene una serie di informazioni sugli
@@ -725,15 +505,13 @@ argomenti del workflow. Quello che si deve fare è aggiungere le
 informazioni sui due argomenti appena inseriti *PostExecutionScriptPath
 e PostExecutionScriptArguments*.
 
-1.  ![](./img//media/image11.png){width="6.6930555555555555in"
-    height="2.7576388888888888in"}
+![](./img/Pubblicare-pacchetto-nuget-in-build-TFS/image11.png)
 
 Ora si può premere il bottone Add e poi inserire le informazioni per
 entrambi gli argomenti definiti in precedenza. Ecco ad esempio la
 definizione di *PostExecutionScriptPath*.
 
-1.  ![](./img//media/image12.png){width="6.6930555555555555in"
-    height="3.8716207349081366in"}
+![](./img/Pubblicare-pacchetto-nuget-in-build-TFS/image12.png)
 
 Come si evince dalla figura, nei metadata si specifica il nome del
 Parametro, un Display Name che rappresenta il nome da visualizzare
@@ -747,28 +525,25 @@ caso in questione, il parametro è una semplice stringa che rappresenta
 il percorso dello script nel Source Control, per cui si può utilizzare
 la classe predefinita
 
-1.  Microsoft.TeamFoundation.Build.Controls.ServerFileBrowserEditor,
+> Microsoft.TeamFoundation.Build.Controls.ServerFileBrowserEditor,
     Microsoft.TeamFoundation.Build.Controls
 
 A questo punto si può salvare il workflow, fare check-in e lo si può
 scegliere come workflow per la build di pubblicazione Nuget.
 
-1.  ![](./img//media/image13.png){width="6.6930555555555555in"
-    height="2.563888888888889in"}
+![](./img/Pubblicare-pacchetto-nuget-in-build-TFS/image13.png)
 
 Grazie ai metadati i due nuovi argomenti appariranno nella sezione
 specificata rendendo semplice per l’utente valorizzarli nelle nuove
 definizioni di build.
 
-1.  ![](./img//media/image14.png){width="6.561679790026247in"
-    height="2.218472222222222in"}
+![](./img/Pubblicare-pacchetto-nuget-in-build-TFS/image14.png)
 
 Grazie all’editor specificato, trovate (evidenziato dalla freccia nella
 figura precedente) un bottone che vi permetterà di selezionare lo script
 direttamente navigando nel codice sorgente.
 
-1.  ![](./img//media/image15.png){width="5.372916666666667in"
-    height="4.26875in"}
+![](./img/Pubblicare-pacchetto-nuget-in-build-TFS/image15.png)
 
 Eseguire la build e verificare la pubblicazione su nuget
 --------------------------------------------------------
@@ -776,23 +551,20 @@ Eseguire la build e verificare la pubblicazione su nuget
 A questo punto non rimane altro che andare ad eseguire la build e poi
 verificare che effettivamente la pubblicazione sia andata a buon fine.
 
-1.  ![](./img//media/image16.png){width="5.968004155730534in"
-    height="4.166146106736658in"}
+![](./img/Pubblicare-pacchetto-nuget-in-build-TFS/image16.png)
 
 Grazie al feed di Nuget dopo ogni build dovreste vedere una nuova
 versione pubblicata. Per verificare che la versione sia corretta è anche
 possibile utilizzare la Package Manager Console, che grazie
 all’intellisense vi lista tutte le versioni disponibili.
 
-1.  ![](./img//media/image17.png){width="4.395284339457568in"
-    height="2.197642169728784in"}
+![](./img/Pubblicare-pacchetto-nuget-in-build-TFS/image17.png)
 
 **Se la build fallisce, è sempre possibile visualizzare i log
 diagnostici per verificare l’output dello script**. Ogni riga che viene
 scritta nello stream di error fa infatti fallire la build.
 
-1.  ![](./img//media/image18.png){width="6.6930555555555555in"
-    height="3.8152777777777778in"}
+![](./img/Pubblicare-pacchetto-nuget-in-build-TFS/image18.png)
 
 Lo svantaggio è che purtroppo ogni linea scritta da PowerShell
 nell’error output genera un distinto errore nella build, ma questo è un
@@ -801,15 +573,13 @@ dell’errore andando nella diagnostica della build e comunque la lista
 degli errori rende comunque possibile capire perché la build non è
 riuscita.
 
-1.  ![](./img//media/image19.png){width="5.238928258967629in"
-    height="1.5206430446194226in"}
+![](./img/Pubblicare-pacchetto-nuget-in-build-TFS/image19.png)
 
 In questo caso si può visualizzare tutto l’output che lo script ha fatto
 con il Write-Host. Questa funzionalità è particolarmente utile se la
 build riesce, ma il risultato non è quello desiderato.
 
-1.  ![](./img//media/image20.png){width="6.6930555555555555in"
-    height="4.05625in"}
+![](./img/Pubblicare-pacchetto-nuget-in-build-TFS/image20.png)
 
 Il consiglio è quindi quello di inserire un buon numero di Write-Host
 nei vostri script in modo da poter diagnosticare il più velocemente
@@ -820,8 +590,7 @@ progetto console di test ed aggiungere un riferimento tramite NuGet, per
 poi verificare che sia possibile entrare in debug nei sorgenti grazie al
 server dei simboli.
 
-1.  ![](./img//media/image21.png){width="6.6930555555555555in"
-    height="2.516692913385827in"}
+![](./img/Pubblicare-pacchetto-nuget-in-build-TFS/image21.png)
 
 In questo caso come si può vedere dall’immagine precedente, s**i è in
 grado di entrare in debug sui sorgenti della libreria, e Visual Studio
@@ -841,13 +610,9 @@ possibile con poche righe di PowerShell razionalizzare il rilascio
 interno/esterno delle proprie librerie ottenendo
 
 1.  Versionamento automatico delle Dll
-
 2.  Punto centrale di distribuzione grazie ad un Nuget Server
-
 3.  Debug automatico dei sorgenti utilizzati per compilare ogni precisa
     versione di dll
-
-4.  
 
 Il tutto in maniera completamente automatica.
 

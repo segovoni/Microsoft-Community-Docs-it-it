@@ -1,3 +1,13 @@
+---
+title: Riscrivere la storia in Git
+description: Riscrivere la storia in Git
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: ALM
+ms.custom: CommunityDocs
+---
+
 # Riscrivere la storia in Git
 
 #### di [Gian Maria Ricci](http://mvp.microsoft.com/en-us/mvp/Gian%20Maria%20Ricci-4025635) – Microsoft MVP
