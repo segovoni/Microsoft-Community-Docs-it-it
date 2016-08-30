@@ -16,7 +16,8 @@
 # [Riscrivere ls storia in Git](Riscrivere-Storia-in-Git.md)
 # [Pubblicare automaticamente un pacchetto NuGet durante una build TFS](Pubblicare-pacchetto-nuget-in-build-TFS.md)
 
-# [Utilizzare Git come 'ponte' per collaborazioni esterne (*)](https://msdn.microsoft.com/it-it/library/dn605823.aspx)
+# [Utilizzare Git come 'ponte' per collaborazioni esterne](Git-come-ponte-per-collaborazioni-esterne.md)
+
 # [Continuous Deployment di Asp.Net web sites con TFS Build (*)](https://msdn.microsoft.com/it-it/library/dn569268.aspx)
 # [Continuous Integration con SQL Server (*)](https://msdn.microsoft.com/it-it/library/dn383992.aspx)
 # [Creare un Symbol Server con le Build di Team Foundation Server (*)](https://msdn.microsoft.com/it-it/library/dn376358.aspx)
