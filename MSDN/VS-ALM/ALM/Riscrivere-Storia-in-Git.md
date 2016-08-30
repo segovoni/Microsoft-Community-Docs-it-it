@@ -1,3 +1,15 @@
+---
+title: Riscrivere la storia in Git
+description: Riscrivere la storia in Git
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: ALM
+ms.custom: CommunityDocs
+---
+
+# Riscrivere la storia in Git
+
 #### di [Gian Maria Ricci](http://mvp.microsoft.com/en-us/mvp/Gian%20Maria%20Ricci-4025635) – Microsoft MVP
 
 Blog inglese: <http://www.codewrecks.com>
@@ -6,9 +18,9 @@ Blog Italiano ALM: <http://www.getlatestversion.it/author/alkampfer/>
 
 Blog Italiano: <http://blogs.ugidotnet.org/rgm>
 
-1.  ![](./img//media/image1.png){width="0.59375in" height="0.9375in"}
+![](./img/MVPLogo.png)
 
-*Giugno, 2014 *
+*Giugno, 2014*
 
 Perché riscrivere
 -----------------
@@ -42,8 +54,7 @@ Marco e Gianni, che lavorano in maniera concorrente su un progetto,
 inizialmente composto di un solo commit. Aprendo GitViz e selezionando i
 due repository, la situazione è quella rappresentata in figura.
 
-1.  ![](./img//media/image2.png){width="4.15573053368329in"
-    height="3.343332239720035in"}
+![](./img/Riscrivere-Storia-in-Git/image2.png)
 
 Ovvero abbiamo un unico commit (85e6ef7 composto di un singolo file
 foo.txt) in entrambi i repository. Il primo concetto di ***fondamentale
@@ -64,8 +75,8 @@ commit e costituisce l’inizio del grafo. Supponiamo ora che Marco
 effettui una modifica al file foo.txt (aggiunta di una riga) e poi
 esegua un commit locale. Ecco come si presenta il suo repository
 
-1.  ![](./img//media/image3.png){width="4.15573053368329in"
-    height="3.343332239720035in"}
+![](./img/Riscrivere-Storia-in-Git/image3.png)
+    
 
 Come si può vedere il secondo commit ha un puntatore al primo. Questo
 significa che il commit c2efbe1 punta a 85e6ef7. Git ha una serie di
@@ -74,8 +85,8 @@ operazioni a basso livello, ad esempio scrivendo ***git cat-file –p
 c2efbe1*** viene richiesta la visualizzazione dell’esatto contenuto del
 commit specificato.
 
-1.  ![](./img//media/image4.png){width="4.551514654418198in"
-    height="1.0831977252843394in"}
+![](./img/Riscrivere-Storia-in-Git/image4.png)
+    
 
 Un commit non è altro quindi che un ***file di testo*** in cui
 all’interno è memorizzato come prima informazione lo SHA1 del blob che
@@ -93,8 +104,8 @@ quello che permette di “raggiungere” il grafo di oggetti. Questo
 puntatore è quindi detto *ref* perché costituisce appunto un riferimento
 ad un Commit.
 
-1.  ![](./img//media/image5.png){width="4.364037620297463in"
-    height="2.2080577427821524in"}
+![](./img/Riscrivere-Storia-in-Git/image5.png)
+
 
 Come potete vedere, nella cartella .git (dove risiede tutto il
 repository git) esiste una cartella chiamata refs, dove vengono
@@ -113,18 +124,15 @@ meglio le sue funzionalità.
 
 Ricapitolando:
 
-1)  Git è uno strumento per creare snapshot o immagini dello stato di
+1.  Git è uno strumento per creare snapshot o immagini dello stato di
     una cartella
-
-2)  Ogni snapshot/immagine è un commit, ovvero una serie di blob binari
+2.  Ogni snapshot/immagine è un commit, ovvero una serie di blob binari
     che contiene i riferimenti ai file modificati rispetto al
     commit precedente. Per questo ogni commit memorizza un puntatore al
     commit precedente.
-
-3)  Il risultato è un grafo di commit dove ogni commit punta al
+3.  Il risultato è un grafo di commit dove ogni commit punta al
     precedente
-
-4)  Per identificare l’ultimo commit di ogni ramo del grafo, git
+4.  Per identificare l’ultimo commit di ogni ramo del grafo, git
     memorizza nella cartella .git/refs/heads un file che contiene l0
     SHA1 dell’ultimo commit di ogni ramo.
 
@@ -143,20 +151,20 @@ In git la modifica dell’ultimo commit viene chiamata *amending* e può
 essere effettuata semplicemente aggiungendo l’opzione --amend al comando
 commit. Supponiamo di partire da questo log.
 
-1.  ![](./img//media/image6.png){width="4.1765616797900265in"
-    height="1.8435192475940507in"}
+![](./img/Riscrivere-Storia-in-Git/image6.png)
+
 
 Ora Marco vuole cambiare il commento dell’ultimo commit, per questo
 esegue il seguente comando
 
-git commit -m "Added a line to Foo.txt because I needed it" --amend
+> git commit -m "Added a line to Foo.txt because I needed it" --amend
 
 A questo punto il log si presenta in questo modo.
 
-1.  ![](./img//media/image7.png){width="4.3536220472440945in"
-    height="1.853934820647419in"}
+![](./img/Riscrivere-Storia-in-Git/image7.png)
 
-***È di fondamentale importanza notare che l’id del commit è cambiato***
+
+**_È di fondamentale importanza notare che l’id del commit è cambiato_**
 ed ora vale dd465ee134… Se avete metabolizzato il primo paragrafo,
 questo fatto è naturale. Cambiando infatti il commento, il contenuto del
 file che rappresenta il commit è cambiato e quindi ha uno SHA1
@@ -164,18 +172,18 @@ differente dal precedente. Questo significa che il vecchio commit
 c2efbe, ora non è più presente ed è stato sostituito con un nuovo
 commit.
 
-***Abbiamo quindi riscritto la storia, ovvero abbiamo cambiato il grafo
-sostituendo ad un nodo un altro con differente contenuto***. ***È DI
+**_Abbiamo quindi riscritto la storia, ovvero abbiamo cambiato il grafo
+sostituendo ad un nodo un altro con differente contenuto_**. **_È DI
 FONDAMENTALE IMPORTANZA CAPIRE CHE LA RISCRITTURA DEL GRAFO LOCALE NON
 DEVE MAI E POI MAI ESSERE EFFETTUATA SU DEI COMMIT DEI QUALI SI È GIA
-EFFETTUATO IL PUSH SU UN REMOTE***.
+EFFETTUATO IL PUSH SU UN REMOTE_**.
 
 Un remote non è altro infatti che un “repository remoto nel quale
 copiare i propri commit per condividere il proprio grafo con altre
 persone”. Questo significa che se si esegue una riscrittura di commit
 già inviati ad un remote, quando si andrà ad effettuare push questo
 verrà rifiutato, perché il grafo non è più compatibile. Avrete comunque
-l’opzione ***--force*** che permette di riscrivere forzatamente la
+l’opzione **_--force_** che permette di riscrivere forzatamente la
 storia anche nel remote, ma questo genererà ogni sorta di problemi alle
 altre persone che già avevano recuperato i vecchi commit, ***per cui è
 un’operazione da non fare mai.***
@@ -187,12 +195,8 @@ includerla nel commit precedente senza creare un altro. Supponiamo di
 avere un nuovo file chiamato bar.txt che si è dimenticato di aggiungere,
 ecco come procedere.
 
-git add bar.txt
-
-git commit --amend -m "Added a line to Foo.txt because I needed it and
-added
-
-bar.txt"
+> git add bar.txt
+> git commit --amend -m "Added a line to Foo.txt because I needed it and added bar.txt"
 
 Come si può vedere è sufficiente procedere normalmente aggiungendo file
 alla staging area con il comando *git add* per poi procedere ad un
@@ -204,8 +208,7 @@ commit.*
 
 Ecco cosa restituisce il log dopo questa ulteriore operazione.
 
-1.  ![](./img//media/image8.png){width="5.520143263342082in"
-    height="1.8122736220472442in"}
+![](./img/Riscrivere-Storia-in-Git/image8.png)
 
 Ancora una volta si è riscritta la storia.
 
@@ -220,34 +223,32 @@ lo memorizza in un nuovo blob in .git/objects. A questo punto modifica
 il contenuto della ref attuale, nella cartella .git/refs/heads e ne
 cambia il contenuto affinché punti a questo nuovo commit.
 
-***Di base quindi il commit precedente non viene cancellato,
+**_Di base quindi il commit precedente non viene cancellato,
 semplicemente ne viene creato un altro che internamente punta allo
 stesso padre, il puntatore attivo (in questo caso master) viene poi
-aggiornato affinché punti a questo nuovo commit*. *In questo modo il
+aggiornato affinché punti a questo nuovo commit. In questo modo il
 vecchio commit non è ora più puntato da nessuna ref e a tutti gli
-effetti è irraggiungibile.***
+effetti è irraggiungibile._**
 
 Se in gitviz si abilita il “visualize deleted” (opzione presente se
 usate gitviz dalla mia fork su github, altrimenti nella versione base è
 sempre abilitato) potrete notare che i vecchi commit riscritti sono in
 effetti ancora presenti.
 
-1.  ![](./img//media/image9.png){width="5.7701115485564305in"
-    height="2.1351498250218723in"}
+![](./img/Riscrivere-Storia-in-Git/image9.png)
 
 In questo caso il dd465ee ed il c2efbe1 sono mostrati in modo
 traslucido, ad indicare appunto che sono *irraggiungibili (unreachable
 commits)*. Per avere la lista di tutti i commit irraggiungibili si può
 usare il comando
 
-git fsck –lost-found
+> git fsck –lost-found
 
 In questo caso avrete la lista che mostrerà solamente lo SHA1 degli
 oggetti non più raggiungibili, assieme al loro tipo. Nel nostro esempio
 infatti abbiamo due commit, quelli appunto che hanno subito amending.
 
-1.  ![](./img//media/image10.png){width="4.843144138232721in"
-    height="0.7290758967629046in"}
+![](./img/Riscrivere-Storia-in-Git/image10.png)
 
 Un altro comando ancora più utile in queste situazione è *git reflog*
 che non fa altro che listare gli ultimi commit a cui la HEAD (ovvero il
@@ -262,8 +263,8 @@ precedenza, abbiamo la lista cronologica dei commit su cui abbiamo
 lavorato. Questa lista naturalmente comprende anche i commit che nel
 frattempo sono diventati irraggiungibili.
 
-1.  ![](./img//media/image11.png){width="6.6930555555555555in"
-    height="0.7645833333333333in"}
+![](./img/Riscrivere-Storia-in-Git/image11.png)
+
 
 Questo concetto è fondamentale, perché ci assicura che in git *non
 esiste modo di perdere il contenuto di un commit con una riscrittura
@@ -280,8 +281,8 @@ Gianni abbia anche lui modificato il file foo.txt ed abbia fatto un
 commit locale. La situazione è quella mostrata in figura, con marco
 sulla sinistra e Gianni sulla destra.
 
-1.  ![](./img//media/image12.png){width="6.6930555555555555in"
-    height="4.4in"}
+![](./img/Riscrivere-Storia-in-Git/image12.png)
+
 
 Entrambi hanno effettuato un commit dopo 85e6ef7, Marco (sulla sinistra)
 ha già effettuato il push verso il remote origin. Come mostrato da
@@ -290,8 +291,8 @@ origin/master punta allo stesso commit della master locale. Gianni
 invece deve ancora sincronizzare, ma ecco cosa accade quando tenta di
 effettuare un push
 
-1.  ![](./img//media/image13.png){width="6.572095363079615in"
-    height="1.4685662729658793in"}
+![](./img/Riscrivere-Storia-in-Git/image13.png)
+
 
 Due sono gli aspetti interessanti della figura precedente. Il primo è il
 messaggio di errore che spiega la ragione per cui non è possibile fare
@@ -324,15 +325,15 @@ fetch seguito da un git merge origin/master, procediamo per passi in
 modo da comprendere a pieno come si procede per la risoluzione di un
 conflitto. Gianni effettua un
 
-git fetch
+> git fetch
 
 per recuperare in locale i commit “nuovi” che sono stati nel frattempo
 inviati ad origin da altri. Gitviz mostra egregiamente cosa è successo
 (come al solito a sinistra troviamo il grafo di Marco e a destra quello
 di Gianni dopo che ha effettuato il fetch).
 
-1.  ![](./img//media/image14.png){width="6.6930555555555555in"
-    height="1.5604166666666666in"}
+![](./img/Riscrivere-Storia-in-Git/image14.png)
+
 
 In questo caso il commit b25a2cb, che era stato creato da Marco e di cui
 era stato effettuato il push in origin, è stato scaricato in locale da
@@ -341,15 +342,15 @@ puntatore chiamato origin/master. Anche in questo caso, affinché il ramo
 del grafo sia raggiungibile si ha la necessità di un puntatore che
 rappresenta la copia del puntatore master di origin.
 
-1.  ![](./img//media/image15.png){width="3.937007874015748in"
-    height="2.5413484251968503in"}
+![](./img/Riscrivere-Storia-in-Git/image15.png)
+
 
 Anche origin/master è un file contenuto nella cartella
 .git/refs/remotes/origin chiamato master ed il cui contenuto è lo SHA1
 del commit puntato. A questo punto è necessario risolvere il conflitto,
 per cui Gianni può semplicemente richiedere un semplice merge
 
-Git merge origin/master
+> Git merge origin/master
 
 Con questo comando si è semplicemente richiesto a git di effettuare il
 merge tra la branch attuale (master) quella del remote (origin/master).
@@ -361,22 +362,19 @@ Se non ci sono conflitti, ovvero file modificati da entrambi il merge è
 automatico, ma in questo caso si è verificato un conflitto, per cui ecco
 cosa git risponde a Gianni.
 
-1.  ![](./img//media/image16.png){width="6.645002187226597in"
-    height="1.187351268591426in"}
+![](./img/Riscrivere-Storia-in-Git/image16.png)
 
 In questo caso si hanno dei file per cui esiste conflitto, quindi git
 richiede all’utente di
 
-1)  Risolvere i conflitti
-
-2)  Effettuare il commit dei file una volta che i conflitti sono risolti
+1.  Risolvere i conflitti
+2.  Effettuare il commit dei file una volta che i conflitti sono risolti
 
 Il merge è una operazione delicata, perché è necessario andare a
 integrare modifiche di due o più persone. Il comando *git* *status*
 permette di visualizzare i file che hanno generato conflitto.
 
-1.  ![](./img//media/image17.png){width="4.707744969378828in"
-    height="2.6455030621172355in"}
+![](./img/Riscrivere-Storia-in-Git/image17.png)
 
 Il file bar.txt è quello da Marco e chiaramente non ha generato alcun
 conflitto. Il file foo.txt invece presenta come stato “both modified” ad
@@ -384,8 +382,7 @@ indicare appunto che è stato modificato da entrambi gli sviluppatori. Se
 si visualizza il contenuto del file si possono vedere le modifiche con
 la sintassi standard usata per avere la diff inline.
 
-1.  ![](./img//media/image18.png){width="3.1558552055993in"
-    height="1.1248589238845144in"}
+![](./img/Riscrivere-Storia-in-Git/image18.png)
 
 Ora si deve editare tutti i file che presentano conflitti, risolverli e
 salvare le modifiche risultanti, includerli nella staging area ed infine
@@ -393,7 +390,7 @@ effettuare il commit di merge. Naturalmente il merge dei file viene
 fatto da strumenti grafici, per cui basta chiedere a git di effettuare
 il merge con uno strumento GUI
 
-Git mergetool
+> Git mergetool
 
 Ora git richiederà quale strumento di risoluzione utilizzare (si può
 usare qualsiasi strumento, anche Visual Studio [come descritto
@@ -401,8 +398,8 @@ qui](http://www.codewrecks.com/blog/index.php/2013/03/19/how-to-configure-diff-a
 In questo esempio non avendo configurato nulla, git tenta di usare
 alcuni tra gli strumenti più comuni come tortoisemerge, emerge o vidiff
 
-1.  ![](./img//media/image19.png){width="6.103403324584427in"
-    height="1.9997495625546806in"}
+![](./img/Riscrivere-Storia-in-Git/image19.png)
+
 
 Nel mio sistema ho tortoisemerge e questa è quindi l’unica opzione che
 mi viene presentata. In questo caso si è modificata una sola linea, per
@@ -413,55 +410,52 @@ vi sono grandi file la possibilità di sbagliare esiste.
 
 Una volta uscito dallo strumento di merge Gianni ha questa situazione
 
-1.  ![](./img//media/image20.png){width="5.426405293088364in"
-    height="1.5102274715660542in"}
+![](./img/Riscrivere-Storia-in-Git/image20.png)
+    
 
 A questo punto si effettua un commit scrivendo
 
-Git commit -m “merge del fix bug 42”
+> Git commit -m “merge del fix bug 42”
 
 È fondamentale capire che ancora si sta lavorando nel repository locale,
 come visibile da GitViz
 
-1.  ![](./img//media/image21.png){width="3.4162390638670166in"
-    height="2.9683792650918637in"}
+![](./img/Riscrivere-Storia-in-Git/image21.png)
+
 
 Quello che si è fatto è creare un nuovo commit 992c109 che contiene il
 risultato del merge tra il ramo master locale e quello di origin che nel
 frattempo era stato cambiato. Se si visualizza il contenuto binario di
 questo commit si ha
 
-Git cat-file -p 992c109
+> Git cat-file -p 992c109
 
-1.  ![](./img//media/image22.png){width="4.7702373140857395in"
-    height="1.2706747594050745in"}
+![](./img/Riscrivere-Storia-in-Git/image22.png)
+
 
 È importante notare che questo commit ha due parent, dato che
 rappresenta un commit di merge. A questo punto Gianni nota con sgomento
 che ha sbagliato ad effettuare il merge, perché non vede le righe da lui
 inserite:
 
-1.  ![](./img//media/image23.png){width="2.99962489063867in"
-    height="0.7915682414698163in"}
+![](./img/Riscrivere-Storia-in-Git/image23.png)
+
 
 In questo caso Gianni può procedere in due modi, il primo è usare
 l’amend come visto precedentemente. I passi sono
 
 1)  Capire cosa ha sbagliato nel merge effettuando il diff dei file
     errati nelle varie branch
-
 2)  Correggere i file errati e verificare che tutto sia ok
-
 3)  Aggiungere tutti i file corretti con git add
-
 4)  Effettuare un commit --amend con lo stesso commento del commit
     precedente
 
 Ecco come si presenterebbe il grafo locale dopo questa serie di
 operazioni.
 
-1.  ![](./img//media/image24.png){width="4.2390529308836395in"
-    height="2.6559175415573053in"}
+![](./img/Riscrivere-Storia-in-Git/image24.png)
+
 
 In questo caso se si effettua un amend del commit di merge, il nuovo
 commit sarà nuovamente un commit di merge.
@@ -472,8 +466,7 @@ essere più semplice annullare completamente tutte le operazioni di merge
 e ricominciare daccapo. In questo caso ricordiamo come si presentava il
 grafo appena prima del merge (sinistra) e dopo il merge (destra)
 
-1.  ![](./img//media/image25.png){width="6.6930555555555555in"
-    height="1.9252373140857393in"}
+![](./img/Riscrivere-Storia-in-Git/image25.png)
 
 In pratica il merge ha semplicemente creato il commit 992c109 che
 contiene appunto le modifiche necessarie ad integrare le due branch. Se
@@ -483,15 +476,14 @@ sufficiente far sì che il puntatore master torni a puntare al commit
 contenuto del ref corrente può essere fatto con il comando reset –hard
 come visibile nella figura seguente.
 
-1.  ![](./img//media/image26.png){width="3.4683169291338585in"
-    height="0.9165518372703412in"}
+![](./img/Riscrivere-Storia-in-Git/image26.png)
+
 
 Il comando reset con l’opzione --hard seguito dallo SHA1 di un commit
 non fa altro che andare a cambiare il contenuto del ref attuale (in
 questo caso master).
 
-1.  ![](./img//media/image27.png){width="6.5512642169728785in"
-    height="2.2497189413823273in"}
+![](./img/Riscrivere-Storia-in-Git/image27.png)
 
 Come si può vedere la situazione è ora identica a quella che si aveva
 prima del merge, con l’unica differenza di avere un commit
@@ -499,12 +491,12 @@ irraggiungibile che rappresenta il primo tentativo di merge (992c109).
 Ora si può nuovamente effettuare un ulteriore tentativo di merge sempre
 con il comando
 
-git merge origin/master
+> git merge origin/master
 
 Una volta terminata la merge ecco come si presenta il grafo
 
-1.  ![](./img//media/image28.png){width="4.426529965004375in"
-    height="2.635087489063867in"}
+![](./img/Riscrivere-Storia-in-Git/image28.png)
+
 
 Supponiamo che Gianni non sia nemmeno questa volta convinto del
 risultato della merge, situazione che può avvenire con merge difficili.
@@ -512,10 +504,10 @@ Non solo, Gianni sospetta che il tentativo precedente fosse addirittura
 migliore del nuovo, in questo caso può usare il comando git reset –hard
 per tornare al merge precedente.
 
-git reset --hard 992c109
+> git reset --hard 992c109
 
-1.  ![](./img//media/image29.png){width="4.31196084864392in"
-    height="2.6142563429571304in"}
+![](./img/Riscrivere-Storia-in-Git/image29.png)
+
 
 Se si comprende il funzionamento interno di git e si metabolizza la
 gestione del grafo, ci si rende conto che le possibilità offerte da git
@@ -540,13 +532,13 @@ tutti gli effetti un branch del grafo. Nella figura seguente vengono
 mostrati i due comandi che esegue Gianni per creare dei ref ai due
 tentativi di merge.
 
-1.  ![](./img//media/image30.png){width="3.1662707786526685in"
-    height="0.8540594925634296in"}
+![](./img/Riscrivere-Storia-in-Git/image30.png)
+
 
 Ecco il risultato
 
-1.  ![](./img//media/image31.png){width="5.697204724409449in"
-    height="3.6662084426946633in"}
+![](./img/Riscrivere-Storia-in-Git/image31.png)
+
 
 Avere due branch (puntatori refs) che puntano ai due tentativi di merge
 permette di andare dall’uno all’altro in modo semplice con git checkout
@@ -568,18 +560,15 @@ Supponiamo ora che Marco suggerisca a Gianni che il tentativo 2 è il più
 corretto, ma che sia necessario effettuare una piccola modifica.
 
 1)  Ci si sposta su quel tentativo con git checkout tentativomerge2
-
 2)  Marco effettua le modifiche che correggono il tentativo di merge di
     Gianni
-
 3)  Si aggiungono i file modificati alla staging area con git add
-
 4)  Si fa un amend del commit di merge con git commit --amend
 
 Ecco come si presenta la situazione
 
-1.  ![](./img//media/image32.png){width="6.467941819772529in"
-    height="3.3329166666666667in"}
+![](./img/Riscrivere-Storia-in-Git/image32.png)
+
 
 A questo punto abbiamo un terzo commit di merge (e70131c) che è il
 risultato del tentativo2 di Gianni a cui Marco ha aggiunto le sue fix.
@@ -587,32 +576,22 @@ Il commit precedentemente puntato da tentativomerge2 (3464333) è ora
 irraggiungibile, mentre la branch tentativomerge1 è ancora disponibile.
 A questo punto si può fare pulizia.
 
-1)  Ci si sposta sulla branch master con git checkout master
+1.  Ci si sposta sulla branch master con git checkout master. Dato che ora tentativomerge2 punta al commit di merge corretto, spostiamo la master su di esso con git reset --hard tentativomerge2 (ecco come si presenta il grafo ora) ![](./img/Riscrivere-Storia-in-Git/image33.png)
 
-    1.  Dato che ora tentativomerge2 punta al commit di merge corretto,
-        spostiamo la master su di esso con git reset --hard
-        tentativomerge2 (ecco come si presenta il grafo
-        ora)![](./img//media/image33.png){width="6.645002187226597in"
-        height="3.38499343832021in"}
-
-2)  A questo punto le due branch tentativo non sono più necessarie e si
+2.  A questo punto le due branch tentativo non sono più necessarie e si
     cancellano con git branch -d tentativomerge2 seguito da un git
     branch -D tentativomerge2.
 
-> Nel punto 3 per cancellare la tentativomerge2 si è usata l’opzione d
-> minuscola, perché il commit puntato da essa è puntato anche da master;
-> per cancellare tentativomerge1 si deve usare invece la D maiuscola,
-> per indicare a git che si è sicuri di cancellare una branch il cui
-> commit (992c109) è puntato solamente da lei e diventerà quindi
-> irraggiungibile.
->
-> Chiaramente siete coscienti che anche usando -D maiuscolo per
-> cancellare una branch di cui non si è effettuata la merge, non si sta
-> perdendo nulla, perché i commit sono sempre tutti nel grafo, solamente
-> diventeranno irraggiungibili.
+Nel punto 3 per cancellare la tentativomerge2 si è usata l’opzione d
+minuscola, perché il commit puntato da essa è puntato anche da master;
+per cancellare tentativomerge1 si deve usare invece la D maiuscola,
+per indicare a git che si è sicuri di cancellare una branch il cui
+commit (992c109) è puntato solamente da lei e diventerà quindi irraggiungibile.
 
-1.  ![](./img//media/image34.png){width="4.624421478565179in"
-    height="2.99962489063867in"}
+Chiaramente siete coscienti che anche usando -D maiuscolo per cancellare una branch di cui non si è effettuata la merge, non si sta
+perdendo nulla, perché i commit sono sempre tutti nel grafo, solamente diventeranno irraggiungibili.
+
+![](./img/Riscrivere-Storia-in-Git/image34.png)
 
 Push di commit con storia riscritta
 -----------------------------------
@@ -620,15 +599,15 @@ Push di commit con storia riscritta
 A questo punto Gianni può tentare il push, che riuscirà se nel frattempo
 nessun altro ha effettuato push di ulteriori modifiche su origin.
 
-1.  ![](./img//media/image35.png){width="5.749281496062992in"
-    height="2.8225634295713036in"}
+![](./img/Riscrivere-Storia-in-Git/image35.png)
+    
 
 Se ora Gianni effettua una nuova riscrittura della storia, supponiamo
 che voglia cambiare semplicemente il commento del commit di merge con un
 amend. A questo punto se tenta un push riceverà un errore
 
-1.  ![](./img//media/image36.png){width="6.645002187226597in"
-    height="2.2080577427821524in"}
+![](./img/Riscrivere-Storia-in-Git/image36.png)
+    
 
 Il perché dovrebbe essere oramai chiaro, avendo fatto un amend
 dell’ultimo commit il suo grafo è ora cambiato, ed il commit che ha
@@ -638,16 +617,14 @@ sostanza ora Gianni ha creato una situazione in cui il suo commit
 risultato dell’amend sta facendo conflitto con il commit prima che fosse
 avvenuto l’amend.
 
-1.  ![](./img//media/image37.png){width="5.863850612423447in"
-    height="2.905886920384952in"}
+![](./img/Riscrivere-Storia-in-Git/image37.png)
 
 In questo caso l’unico modo per Gianni di continuare a lavorare è
 
-1)  Fare un reset hard della master, riportandola ad origin/master,
-    d’altronde ha violato una delle regole d’oro di git: ***mai fare un
-    rewrite di history per commit di cui si è fatto push.***
-
-2)  Alternativamente può effettuare una nuova merge tra il vecchio
+1.  Fare un reset hard della master, riportandola ad origin/master,
+    d’altronde ha violato una delle regole d’oro di git: **_mai fare un
+    rewrite di history per commit di cui si è fatto push._**
+2.  Alternativamente può effettuare una nuova merge tra il vecchio
     commit di merge e quello che ha subito l’amend del solo commento.
 
 L’opzione 2 non fa altro che complicare ulteriormente il repository, per
@@ -659,6 +636,7 @@ complesse, di effettuare un buon numero di test e verifiche per essere
 sicuri che la propria merge sia corretta, prima di effettuare push. Una
 volta effettuato il push infatti, modificare il merge diventa una
 operazione non piu banale.
+
 
 #### di [Gian Maria Ricci](http://mvp.microsoft.com/en-us/mvp/Gian%20Maria%20Ricci-4025635) – Microsoft MVP
 
