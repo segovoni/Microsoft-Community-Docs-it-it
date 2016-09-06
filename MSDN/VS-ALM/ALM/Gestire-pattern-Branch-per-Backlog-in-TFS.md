@@ -1,7 +1,10 @@
+
+
+# Gestire il pattern Branch per Product Backlog Item con TFS
+
 #### di [Gian Maria Ricci](http://mvp.microsoft.com/en-us/mvp/Gian%20Maria%20Ricci-4025635) – Microsoft MVP
 
-1.  ![](./img//media/image1.png){width="0.5938331146106737in"
-    height="0.9376312335958005in"}
+![](./img/MVPLogo.png)
 
 *Maggio, 2013*
 
@@ -58,8 +61,8 @@ Una delle soluzioni consigliate è usare un workspace per ogni Team
 Project e mappare solamente la branch su cui si sta lavorando, come
 potete vedere nella figura sottostante.
 
-1.  ![](./img//media/image2.png){width="6.322916666666667in"
-    height="1.8958333333333333in"}
+![](./img/Gestire-pattern-Branch-per-Backlog-in-TFS/image2.png)
+    
 
 In questo caso l’utente Keller ha mappato la branch Main del progetto
 FabrikamFiber nella cartella c:\\ws\\brian\\ff. Questo mapping gli
@@ -75,8 +78,8 @@ in un percorso specifico: \$/NomeTeamProject/**Pbi/** ad indicare
 appunto che in questa cartella si troveranno tutte le branch delle
 funzionalità attive.
 
-1.  ![](./img//media/image3.png){width="5.135416666666667in"
-    height="2.7291666666666665in"}
+![](./img/Gestire-pattern-Branch-per-Backlog-in-TFS/image3.png)
+    
 
 Come si può notare si sta effettuando una normale branch della Main in
 \$/FabrikamFiber/Pbi/1435 e si è messo un commento che spiega in maniera
@@ -88,16 +91,16 @@ infatti l’unico percorso mappato nel proprio HD dall’utente Keller è
 appena creata dato che non ha una corrispondente destinazione nel disco
 locale.
 
-1.  ![](./img//media/image4.png){width="4.5in"
-    height="1.9270833333333333in"}
+![](./img/Gestire-pattern-Branch-per-Backlog-in-TFS/image4.png)
+    
 
 Se si vuole iniziare a lavorare su questa branch, è sufficiente aprire
 la definizione del workspace dal Source Control Explorer e procedere a
 cambiare il mapping affinche **la stessa cartella locale punti alla
 nuova branch**, come mostrato nella figura sottostante.
 
-1.  ![](./img//media/image5.png){width="5.947916666666667in"
-    height="2.09375in"}
+![](./img/Gestire-pattern-Branch-per-Backlog-in-TFS/image5.png)
+
 
 Quello che è stato fatto è rimappare la cartella locale
 c:\\ws\\brian\\ff sulla nuova branch, in questo modo si utilizza una
@@ -108,8 +111,8 @@ workspace è cambiato, propone all’utente di effettuare subito un Get
 Latest per aggiornare la cartella locale con la nuova cartella remota
 del server.
 
-1.  ![](./img//media/image6.png){width="5.104166666666667in"
-    height="2.2395833333333335in"}
+![](./img/Gestire-pattern-Branch-per-Backlog-in-TFS/image6.png)
+    
 
 Rispondendo yes viene effettuato un Get Latest, il quale però procede
 con una cancellazione preventiva di tutti i vecchi file per poi
@@ -118,8 +121,8 @@ vedere chiaramente dalla finestra di output che inizia con indicare il
 comando di replacing c:\\ws\\brian\\ff …. seguito da una serie di delete
 dei vecchi file ed un successivo get di tutti i file dal nuovo percorso.
 
-1.  ![](./img//media/image7.png){width="5.072916666666667in"
-    height="2.90625in"}
+![](./img/Gestire-pattern-Branch-per-Backlog-in-TFS/image7.png)
+    
 
 Risoluzione dei problemi con tf get /remap
 ------------------------------------------
@@ -132,8 +135,8 @@ nuovo percorso una branch del vecchio, *ci si attenderebbe un
 comportamento più intelligente che non è presente nella UI, ma è
 disponibile solamente da riga di comando tramite un **tf get /remap***
 
-1.  ![](./img//media/image8.png){width="4.53125in"
-    height="1.3229166666666667in"} 
+![](./img/Gestire-pattern-Branch-per-Backlog-in-TFS/image8.png)
+
 
 Questo comando verifica se il cambiamento di mapping è stato fatto tra
 due branch correlate, ed in caso affermativo verifica le differenze ed
@@ -157,8 +160,8 @@ comando e si può pensare di automatizzarle semplicemente in un batch,
 ecco ad esempio i due comandi che permettono di switchare e di tornare a
 sviluppare nella Main Branch.
 
-1.  ![](./img//media/image9.png){width="6.979166666666667in"
-    height="1.6354166666666667in"}
+![](./img/Gestire-pattern-Branch-per-Backlog-in-TFS/image9.png)
+    
 
 Come si può vedere *il comando **tf workfold** effettua una rimappatura
 della cartella locale (indicata dal punto finale) ad un nuovo percorso*
@@ -169,9 +172,8 @@ li cancella e li scarica dalla branch correntemente mappata*, il tutto
 in meno di un secondo. Creando un semplice file batch
 chiamato SwitchToPbi.bat con queste due righe di codice
 
-tf workfold \$/FabrikamFiber/Pbi/%1
-
-tf get /remap
+    tf workfold $/FabrikamFiber/Pbi/%1
+    tf get /remap
 
 si può effettuare la chiamata **SwitchToPbi 1435** per cambiare
 velocemente la branch mappata nella cartella con la branch della feature
@@ -194,10 +196,5 @@ mappata perché è l’unica che non sarà rappresentata in grigio.
 Gian Maria.
 
 #### di [Gian Maria Ricci](http://mvp.microsoft.com/en-us/mvp/Gian%20Maria%20Ricci-4025635) – Microsoft MVP
-
-1.  [*Altri articoli di Gian Maria Ricci nella
-    Libreria*](http://sxp.microsoft.com/feeds/3.0/msdntn/TA_MSDN_ITA?contenttype=Article&author=Gian%20Maria%20Ricci)
-    ![](./img//media/image10.png){width="0.1771084864391951in"
-    height="0.1771084864391951in"}
 
 
