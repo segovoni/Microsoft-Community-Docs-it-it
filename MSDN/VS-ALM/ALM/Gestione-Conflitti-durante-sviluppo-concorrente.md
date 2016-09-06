@@ -1,7 +1,7 @@
 
 ---
-title: Conflitti durante lo sviluppo concorrente
-description: Conflitti durante lo sviluppo concorrente
+title: Gestione dei Conflitti durante lo sviluppo concorrente
+description: Gestione dei Conflitti durante lo sviluppo concorrente
 author: MSCommunityPubService
 ms.date: 08/01/2016
 ms.topic: how-to-article
@@ -9,7 +9,7 @@ ms.service: ALM
 ms.custom: CommunityDocs
 ---
 
-# Conflitti durante lo sviluppo concorrente
+# Gestione dei Conflitti durante lo sviluppo concorrente
 
 #### di [Gian Maria Ricci](http://mvp.microsoft.com/en-us/mvp/Gian%20Maria%20Ricci-4025635) – Microsoft MVP
 
@@ -38,7 +38,7 @@ effettuare un merge automatico delle modifiche, senza richiedere dunque
 l’intervento manuale dell’utente. Questo accade ad esempio se le
 modifiche riguardano parti differenti di un file.
 
-![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image2.jpeg)
+![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image2.jpg)
     
 
 Nel caso non sia possibile procedere ad un merge automatico, lo
@@ -69,7 +69,7 @@ corrispondono il file è stato modificato da entrambi. Anche in questo
 caso è possibile che le modifiche possano essere risolte da un
 automerge, ma in caso non siano compatibili, il check-in viene bloccato.
 
-![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image3.jpeg)
+![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image3.jpg)
     
 
 Questo blocco è fondamentale, perché se non ci fosse Marco avrebbe
@@ -78,7 +78,7 @@ il check-in viene bloccato, si rende necessario procedere ad un
 Get-Latest e risolvere i conflitti localmente prima di tentare
 nuovamente un check-in.
 
-![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image4.jpeg)
+![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image4.jpg)
     
 
 Gestioni conflitti in git
@@ -127,7 +127,7 @@ hash SHA1), come si può vedere con un git logf. (il comando logf non è
 altro che un alias creato con l’istruzione git config --global
 alias.logf "log --graph --oneline --all --decorate")
 
-![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image5.jpeg)
+![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image5.jpg)
     
 
 Il dato interessante è dato dalla colorazione, che identifica in maniera
@@ -144,14 +144,14 @@ commit locali al server e se nel frattempo nessuno ha effettuato
 operazioni di push, questi commit locali vengono semplicemente copiati
 nel server.
 
-![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image6.jpeg)
+![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image6.jpg)
     
 
 Effettuando di nuovo un log da riga di comando si può notare come ora la
 origin/master sia allineata alla master locale, ed i due commit sono
 stati correttamente copiati nel server.
 
-![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image7.jpeg)
+![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image7.jpg)
     
 
 Supponiamo ora che l’altro sviluppatore (AlkampferOutlook) abbia anche
@@ -165,12 +165,12 @@ nel frattempo sono state inviate da Gian Maria Ricci. L’interfaccia
 suggerisce quindi di effettuare un pull (operazione analoga al
 get-latest) ed effettuare la merge in locale.
 
-![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image8.jpeg)
+![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image8.jpg)
     
 
 Tentando il push da command line il messaggio è molto più esplicito
 
-![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image9.jpeg)
+![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image9.jpg)
     
 
 Fetch, pull e risoluzione di conflitti in locale
@@ -185,7 +185,7 @@ Una volta che il suo tentativo di Push è stato rigettato,
 AlkampferOutlook può effettuare un log a riga di comando per capire lo
 stato del suo repository.
 
-![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image10.jpeg)
+![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image10.jpg)
     
 
 La situazione è esattamente omologa a quella vista da Gian Maria Ricci
@@ -201,7 +201,7 @@ modifiche effettuate dall’ultimo aggiornamento. Visual Studio ha il
 vantaggio di mostrare una comoda visualizzazione grafica di quello che è
 cambiato dopo che viene effettuato il fetch
 
-![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image11.jpeg)
+![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image11.jpg)
     
 
 Dall’immagine precedente è immediatamente chiaro che Gian Maria Ricci ha
@@ -210,7 +210,7 @@ dunque procedere ad un merge.
 
 La stessa visualizzazione si può avere in command line:
 
-![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image12.jpeg)
+![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image12.jpg)
     
 
 In questo caso è leggermente più difficile comprendere cosa sia
@@ -227,7 +227,7 @@ varie immagini che si vedono sui tutorial o libri su Git. Il tool si
 chiama SeeGit ed è possibile trovarlo qui
 ([*http://haacked.github.io/SeeGit/*](http://haacked.github.io/SeeGit/))
 
-![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image13.jpeg)
+![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image13.jpg)
     
 
 Se invece si vuole una visualizzazione grafica veramente completa è
@@ -258,12 +258,12 @@ direttamente il pull. Sia che venga fatto a riga di comando o da Visual
 Studio o con qualsiasi altro tool questa è la situazione che si ha dopo
 un fetch+merge (o pull)
 
-![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image14.jpeg)
+![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image14.jpg)
     
 
 La situazione è ancora più chiara utilizzando l’utility di Phil Haack.
 
-![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image15.jpeg)
+![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image15.jpg)
     
 
 Dato che ogni sviluppatore possiede un repository locale, è molto comune
@@ -289,7 +289,7 @@ Naturalmente è possibile che entrambi gli sviluppatori abbiano
 modificato lo stesso file, in questo caso durante il merge git
 notificherà l’utente della presenza di uno o più conflitti.
 
-![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image16.jpeg)
+![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image16.jpg)
     
 
 La comodità di uno strumento grafico come Visual Studio è capire con
@@ -299,19 +299,19 @@ utilizzare la command line anche per le operazioni di merge, dato che
 gli eventuali conflitti vengono comunque risolti con un tool visuale,
 lanciato in automatico dalla command line stessa.
 
-![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image17.jpeg)
+![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image17.jpg)
 
 In questo caso il conflitto è su un singolo file, è possibile premere
 sul link Compare Files per lanciare il compare tools di Visual Studio e
 capire cosa è cambiato.
 
-![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image18.jpeg)
+![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image18.jpg)
     
 
 Di base però si preme il bottone Merge e si gestiscono i conflitti
 direttamente da Visual Studio
 
-![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image19.jpeg)
+![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image19.jpg)
     
 
 Se avete installato precedentemente msysgit o i tool di GitHub è
@@ -386,7 +386,7 @@ sottostante è infatti rappresentata la situazione in cui ho due commit
 da inviare al remote, il primo è il commit che ha generato conflitto, il
 secondo è quello che risolve il conflitto.
 
-![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image20.jpeg)
+![](./img/Gestione-Conflitti-durante-sviluppo-concorrente/image20.jpg)
     
 
 #### di [Gian Maria Ricci](http://mvp.microsoft.com/en-us/mvp/Gian%20Maria%20Ricci-4025635) – Microsoft MVP
