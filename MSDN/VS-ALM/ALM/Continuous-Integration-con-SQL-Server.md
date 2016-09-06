@@ -2,7 +2,7 @@
 ---
 title: Continuous Integration con SQL Server 
 description: Continuous Integration con SQL Server 
-author: suxtellino
+author: suxstellino
 ms.date: 08/01/2016
 ms.topic: how-to-article
 ms.service: ALM
