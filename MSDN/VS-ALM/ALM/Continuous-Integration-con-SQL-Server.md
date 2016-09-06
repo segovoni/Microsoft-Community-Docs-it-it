@@ -1,13 +1,25 @@
+
+---
+title: Continuous Integration con SQL Server 
+description: Continuous Integration con SQL Server 
+author: suxtellino
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: ALM
+ms.custom: CommunityDocs
+---
+
+# Continuous Integration con SQL Server 
+
 #### di [Alessandro Alpi](http://mvp.microsoft.com/it-it/mvp/Alessandro%20Alpi-4014222) – Microsoft MVP
 
 blog italiano: <http://blogs.dotnethell.it/suxstellino>
 
-blog
-inglese: [http://s](http://blogs.dotnethell.it/suxstellino)[uxstellino.wordpress.com](http://suxstellino.wordpress.com)
+blog inglese: <http://suxstellino.wordpress.com>
 
 sito web: <http://www.alessandroalpi.net>
 
-1.  ![](./img//media/image1.png){width="0.59375in" height="0.9375in"}
+![](./img/MVPLogo.png)
 
 Introduzione
 ------------
@@ -45,16 +57,12 @@ Partiamo col parlare delle relative parti in gioco. Quando si parla di
 CI gli attori sono principalmente tre, escluso il development team che
 ne fa ovviamente parte:
 
-Source control server, ovvero il server delegato al versioning e allo
+- Source control server, ovvero il server delegato al versioning e allo
 store del codice.
-
-Build server, ovvero il server che prende il codice committato e ne
+- Build server, ovvero il server che prende il codice committato e ne
 esegue la compilazione
-
-Testing, ovvero la parte (tipicamente del build server) che si occupa di
+- Testing, ovvero la parte (tipicamente del build server) che si occupa di
 eseguire, dopo la compilazione, i test automatici
-
-1.  
 
 Andremo a parlare di due di essi nei paragrafi seguenti, mentre
 salteremo la parte di Build Server, poiché il database non si preoccupa
@@ -71,8 +79,6 @@ seguire comunque, sia lato applicazione, sia lato database. Non è mai da
 sottovalutare l’importanza che una pratica come questa ha nel ciclo di
 vita del nostro database. Vedremo che da un po’ di tempo a questa parte
 non è nemmeno più così difficile raggiungere l’obbiettivo.
-
-#### 
 
 #### Perché source control anche su database
 
@@ -107,7 +113,6 @@ Il source control del database può essere di vario genere e dipende
 fortemente da:
 
 -   Source control manager scelto
-
 -   Tool utilizzato per gestirlo
 
 È possibile scegliere fra vari source control manager, come [Team
@@ -141,20 +146,14 @@ definizione della base dati, posta sotto source control proprio come si
 fa per un progetto standard basato su codice C\# o altro linguaggio.
 Ecco come riassumere quanto SQL Server Data Tools fornisce:
 
-[Connected database
+- [Connected database
 development](http://msdn.microsoft.com/en-us/library/hh272679(v=vs.103).aspx)
-
-[Project Based
+- [Project Based
 development](http://msdn.microsoft.com/en-us/library/hh272702(v=vs.103).aspx)
+- Schema Deployment
 
-Schema Deployment
-
-1.  
-
-<!-- -->
-
-1.  ![](./img//media/image2.PNG){width="6.5in"
-    height="3.0409722222222224in"}
+![](./img/Continuous-Integration-con-SQL-Server/image2.PNG)
+    
 
 Chi è abituato ad utilizzare SQL Server Management Studio (SSMS) ha
 poche difficoltà ad utilizzare un ambiente di sviluppo connesso
@@ -164,14 +163,14 @@ sono presenti, costituiti da editor molto simili alle versioni di SSMS.
 Le nuove funzionalità sono quelle che consentono la comparazione tra lo
 schema salvato nel progetto e quello del database reale.
 
-1.  ![](./img//media/image3.PNG){width="6.5in"
-    height="3.1597222222222223in"}
+![](./img/Continuous-Integration-con-SQL-Server/image3.PNG)
+
 
 Il progetto creato con SSDT, è un vero e proprio template che organizza
 le informazioni in sottocartelle con il modello *Schema/Tipo
 oggetto/file.sql* più altre cartelle come quella della security:
 
-1.  ![](./img//media/image4.png){width="3.03125in" height="2.5in"}
+![](./img/Continuous-Integration-con-SQL-Server/image4.png)
 
 Come è possibile vedere, un grande vantaggio è avere le funzionalità che
 si hanno anche lato sviluppo applicazioni, come la *go to definition*, i
@@ -206,27 +205,20 @@ I tipi di controllo del codice sorgente disponibili sono:
 Il modello shared prevede solo un database centralizzato,
 nell’operatività questo si traduce in:
 
-Ogni sviluppatore si connette al source control server e le modifiche
+- Ogni sviluppatore si connette al source control server e le modifiche
 vengono fatte fisicamente su un solo database centrale.
-
-Chi cambia un oggetto viene segnato come owner della modifica.
-
-Se più persone cambiano lo stesso oggetto, solo l’ultimo sviluppatore
+- Chi cambia un oggetto viene segnato come owner della modifica.
+- Se più persone cambiano lo stesso oggetto, solo l’ultimo sviluppatore
 che ha effettuato la modifica viene segnato, e solo l’ultimo che fa
 checkin archivia le modifiche altrui non ancora “committate”.
-
-Non serve la get latest version, poiché tutti cambiano sulla stessa base
+- Non serve la get latest version, poiché tutti cambiano sulla stessa base
 dati e lo stesso source control. Questo equivale ad avere sempre
 l’ultima versione del database.
-
-Le operazioni di checkin comprendono le modifiche di tutti.
-
-Le operazioni di undo checkout annullano a tutti la modifica (anche
+- Le operazioni di checkin comprendono le modifiche di tutti.
+- Le operazioni di undo checkout annullano a tutti la modifica (anche
 eventuali modifiche fatte da più persone allo stesso oggetto vengono
 annullate, poiché l’undo prevede tutte le modifiche dall’ultimo
 checkin).
-
-1.  
 
 Questo modello è utile se non è possibile creare più versioni dello
 stesso database, ma, come si può ben capire, si perdono un po’ tutti i
@@ -243,24 +235,18 @@ workspace locale su cui la base dati viene creata andando a leggere ogni
 versione dal source control per gli aggiornamenti successivi.
 Nell’operatività abbiamo:
 
-Ogni sviluppatore ha il suo database dedicato che è l’ultima versione
+- Ogni sviluppatore ha il suo database dedicato che è l’ultima versione
 scaricata dal source control.
-
-Ogni modifica è eseguita nel proprio workspace locale (che si traduce in
+- Ogni modifica è eseguita nel proprio workspace locale (che si traduce in
 un vero e proprio database se si utilizza SQL Server Management Studio).
-
-È di fondamentale importanza effettuare le operazioni di Get Latest per
+- È di fondamentale importanza effettuare le operazioni di Get Latest per
 allineare la versione presente nel workspace locale.
-
-Ogni sviluppatore può fare checkin delle proprie modifiche per
+- Ogni sviluppatore può fare checkin delle proprie modifiche per
 archiviarle sul source control e renderle disponibili agli altri
 collaboratori.
-
-Ogni sviluppatore possono annullare il proprio checkout senza disturbare
+- Ogni sviluppatore possono annullare il proprio checkout senza disturbare
 il lavoro altrui, visto che viene toccato solo il proprio workspace
 locale (o database).
-
-1.  
 
 Tale modello, nell’ottica del lavoro di team, è estremamente
 consigliato.
@@ -297,8 +283,8 @@ sfruttando SQL Server Management Studio e il tool aggiuntivo [SQL
 Test](http://www.red-gate.com/products/sql-development/sql-test/),
 disponibile tramite una view integrata e semplice da utilizzare:
 
-1.  ![](./img//media/image5.png){width="3.5833333333333335in"
-    height="2.3645833333333335in"}
+![](./img/Continuous-Integration-con-SQL-Server/image5.png)
+
 
 È possibile collegare un proprio database oppure installare il database
 di esempio, per vedere un po’ come funziona il framework proposto.
@@ -307,16 +293,10 @@ framework per fare test SQL, e si chiama [tSQLt](http://tsqlt.org/).
 Esso viene installato sul database di riferimento con le seguenti
 specifiche:
 
-tSQLt stored procedure, function e oggetti SQL CLR
-
-Abilitazione del CLR
-
-SET TRUSTWORTHY ON sul database (serve per l’esecuzione del CLR)
-
-Aggiunta facoltativa di [SQLCop
-framework](http://sqlcop.lessthandot.com/index.php)
-
-1.  
+- tSQLt stored procedure, function e oggetti SQL CLR
+- Abilitazione del CLR
+- SET TRUSTWORTHY ON sul database (serve per l’esecuzione del CLR)
+- Aggiunta facoltativa di [SQLCop framework](http://sqlcop.lessthandot.com/index.php)
 
 Quello che si ottiene tramite questa funzionalità è, non solo eseguire
 test preimpostati e condividerli col team di sviluppo, bensì crearne di
@@ -333,34 +313,25 @@ built-in (versione di sql test 1.0.14.2, quindi al momento della lettura
 i test potrebbero essere molti di più o cambiati). Innanzitutto abbiamo
 due classi:
 
-Sql Cop
+    Sql Cop
+        È un ulteriore framework (che fornisce anche un’applicazione disponibile direttamente da [qui](http://sqlcop.lessthandot.com/index.php)) che sottolinea alcuni problemi delle nostre istanze SQL Server, soprattutto in termini di naming convention e coding, ma non si ferma a questo. L’elenco completo degli issue controllati è [qui](http://sqlcop.lessthandot.com/detectedissues.php).
 
-È un ulteriore framework (che fornisce anche un’applicazione disponibile
-direttamente da [qui](http://sqlcop.lessthandot.com/index.php)) che
-sottolinea alcuni problemi delle nostre istanze SQL Server, soprattutto
-in termini di naming convention e coding, ma non si ferma a questo.
-L’elenco completo degli issue controllati è
-[qui](http://sqlcop.lessthandot.com/detectedissues.php).
-
-Accelerator Tests
-
-Sono i test built-in di tSQLt
-
-1.  
+    Accelerator Tests
+        Sono i test built-in di tSQLt
 
 è sufficiente a premere semplicemente *Run Test* sul database
 dimostrativo (tab di default posizionato in basso su SSMS):
 
-1.  ![](./img//media/image6.png){width="6.5in"
-    height="2.573611111111111in"}
+![](./img/Continuous-Integration-con-SQL-Server/image6.png)
+
 
 Un *AcceleratorTests* è fallito ed il messaggio è indicato nella output
 window appena sopra. Vediamo cosa fa il test (è sufficiente espandere la
 classe ed effettuare doppio click) direttamente dal codice in esso
 contenuto:
 
-1.  ![](./img//media/image7.png){width="5.364583333333333in"
-    height="3.3541666666666665in"}
+![](./img/Continuous-Integration-con-SQL-Server/image7.png)
+    
 
 A tutti gli effetti, il test è una semplice stored procedure che
 richiama altre procedure e/o funzioni e verifica che il comportamento
@@ -372,21 +343,18 @@ elementi nella tabella *Particle*. Essendo presenti solo due record,
 quindi la *tSQLt.AssertEquals* (che fa solo uguaglianza dei due
 parametri) torna errore, o meglio *tSQLt.Failure*:
 
-1.  ![](./img//media/image8.png){width="4.416666666666667in"
-    height="0.5208333333333334in"}
+![](./img/Continuous-Integration-con-SQL-Server/image8.png)
+
 
 Tutti questi test possono essere eseguiti singolarmente, oppure tutti in
 una volta, sia nel tab su SSMS, sia con stored procedure dedicate:
 
-*tSQLt.RunAll*: per l’esecuzione di tutte le classi di test
+- *tSQLt.RunAll*: per l’esecuzione di tutte le classi di test
+- *tSQLt.Run*: per l’esecuzione di un test (schema da cui dipendono)
+- *tSQLt.RunWithXmlResult*: torna un xml invece che il testo di status
+- *tSQLt.RunWithNullResult*: non torna feedback se non quelli di errore
 
-*tSQLt.Run*: per l’esecuzione di un test (schema da cui dipendono)
-
-*tSQLt.RunWithXmlResult*: torna un xml invece che il testo di status
-
-*tSQLt.RunWithNullResult*: non torna feedback se non quelli di errore
-
-1.  
+ 
 
 Nel **secondo esempio**, si procederà invece a creare un nostro test,
 seguendo le linee guida direttamente sulla [documentazione di
@@ -407,25 +375,25 @@ Creiamo un test che controlli che ogni valore sia effettivamente legato
 alla descrizione che avevamo previsto. Partiamo dalla creazione di una
 classe di test (che corrisponde ad uno schema nuovo):
 
+```SQL
 EXEC tSQLt.NewTestClass
-
 @ClassName = N'DemoTests'
+```
 
-1.  ![](./img//media/image9.png){width="2.53125in"
-    height="0.8002012248468942in"}
+![](./img/Continuous-Integration-con-SQL-Server/image9.png)
 
 La classe è stata aggiunta, e anche lo schema corrispondente:
 
-1.  ![](./img//media/image10.png){width="2.3645833333333335in"
-    height="1.1178029308836395in"}
+![](./img/Continuous-Integration-con-SQL-Server/image10.png)
+
 
 Ora andiamo a creare il test. È sufficiente creare una stored procedure
 nello schema che abbiamo creato come classe, dando un nome parlante (per
 far capire cosa fa quel test). Ad esempio, in base a quello che abbiamo
 descritto nello scenario:
 
-1.  ![](./img//media/image11.png){width="6.020833333333333in"
-    height="4.042191601049868in"}
+![](./img/Continuous-Integration-con-SQL-Server/image11.png)
+
 
 Questa stored procedure controlla se per ogni stato c’è una particolare
 descrizione. Per ogni controllo, se il test fallisce
@@ -436,29 +404,27 @@ il nome della stored procedure con la parola “test”.
 
 Lanciamo il test e tutto andrà per il verso giusto:
 
-1.  ![](./img//media/image12.png){width="3.5217388451443568in"
-    height="0.6908311461067367in"}
+![](./img/Continuous-Integration-con-SQL-Server/image12.png)
+    
 
 Andiamo ora ad aggiornare una qualunque descrizione, ad esempio mettiamo
 la stringa “Confirmed” nello stato 2. Successivamente, rieseguiamo il
 test:
 
-1.  ![](./img//media/image13.png){width="3.3043482064741907in"
-    height="0.6872484689413824in"}
+![](./img/Continuous-Integration-con-SQL-Server/image13.png)
+    
 
 Diamo uno sguardo ai messaggi, e noteremo Il messaggio di errore
 associato all’asserzione che si era inserita nella stored procedure
 *tSQLt.AssertEqualsString*:
 
-\[DemoTests\].\[test if status descriptions are bound to the right id on
-Statuses table\] failed: If the StatusId is 2 the description must be
-"deleted" Expected: &lt;deleted&gt; but was: &lt;Confirmed&gt;
+    [DemoTests].[test if status descriptions are bound to the right id on Statuses table] failed: If the StatusId is 2 the description must be "deleted" Expected: <deleted> but was: <Confirmed>
 
 Eseguendo il test tramite la stored procedure *tSQLt.Run* otterremo il
 nostro *tSQLt.Failure*:
 
-1.  ![](./img//media/image14.png){width="6.5in"
-    height="1.7326388888888888in"}
+![](./img/Continuous-Integration-con-SQL-Server/image14.png)
+    
 
 Ed ora, nel **terzo esempio**, condividiamo il nuovo test al team,
 operazione molto semplice poiché compare nel source control direttamente
@@ -467,8 +433,8 @@ control tab e fare *checkin* della stored procedure aggiunta, così come
 viene fatto per ogni stored procedure sotto controllo del codice
 sorgente:
 
-1.  ![](./img//media/image15.png){width="6.5in"
-    height="1.6506944444444445in"}
+![](./img/Continuous-Integration-con-SQL-Server/image15.png)
+    
 
 La CI quindi è il processo per cui tutto il codice e le risorse ad esso
 legate nell’ambito di un progetto sono integrate e testate tramite un
@@ -492,7 +458,7 @@ che, in aggiunta, crea anche il package pronto per il deploy del
 database. Parleremo di questo nel processo di deploy, in un articolo
 successivo.
 
-1.  Nota: È possibile sfruttare la personalizzazione delle build
+> Nota: È possibile sfruttare la personalizzazione delle build
     definition per creare un livello di test, direttamente eseguibile da
     riga di comando. Quest’ultima possibilità è disponibile se il
     framework di test impiegato consente, appunto, l’esecuzione da
@@ -503,8 +469,7 @@ successivo.
 
 Qui di seguito, uno schema di continuous integration generico:
 
-1.  ![](./img//media/image16.png){width="4.349489282589676in"
-    height="3.452174103237095in"}
+![](./img/Continuous-Integration-con-SQL-Server/image16.png)
 
 In base a quanto descritto sopra, su database, il testing rimarrà
 nell’area DEVELOP e il build server segnerà come “eseguiti” tutti i task
@@ -513,17 +478,13 @@ a mano i test dagli sviluppatori.
 
 Ricapitolando:
 
-Installare un tool per la gestione del source control su database (SSDT,
+- Installare un tool per la gestione del source control su database (SSDT,
 Red-Gate Source Control)
-
-Installare un framework di test sul proprio SQL Server Management Studio
-
-Sviluppare e sfruttare il framework di test per fare testing pre commit
-
-Committare le modifiche testate. Il tutto è allineato sul source
+- Installare un framework di test sul proprio SQL Server Management Studio
+- Sviluppare e sfruttare il framework di test per fare testing pre commit
+- Committare le modifiche testate. Il tutto è allineato sul source
 control.
-
-1.  
+  
 
 Conclusioni
 -----------
@@ -548,7 +509,6 @@ anche sulla base dati.
 
 blog italiano: <http://blogs.dotnethell.it/suxstellino>
 
-blog
-inglese: [http://s](http://blogs.dotnethell.it/suxstellino)[uxstellino.wordpress.com](http://suxstellino.wordpress.com)
+blog inglese: <http://suxstellino.wordpress.com>
 
 sito web: <http://www.alessandroalpi.net>
