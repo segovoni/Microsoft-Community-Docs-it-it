@@ -7,6 +7,7 @@ ms.topic: how-to-article
 ms.service: ALM
 ms.custom: CommunityDocs
 ---
+
 # Creare un Symbol Server con le Build di Team Foundation Server
 
 #### di [Gian Maria Ricci](http://mvp.microsoft.com/en-us/mvp/Gian%20Maria%20Ricci-4025635) – Microsoft MVP
