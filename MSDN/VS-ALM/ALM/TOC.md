@@ -15,10 +15,9 @@
 # [Agile Application Lifecycle Management con VSO/TFS (parte 1/3)](AgileALMConVSOTFS1.md)
 # [Riscrivere ls storia in Git](Riscrivere-Storia-in-Git.md)
 # [Pubblicare automaticamente un pacchetto NuGet durante una build TFS](Pubblicare-pacchetto-nuget-in-build-TFS.md)
-
 # [Utilizzare Git come 'ponte' per collaborazioni esterne](Git-come-ponte-per-collaborazioni-esterne.md)
+# [Continuous Deployment di Asp.Net web sites con TFS Build](Continuous-Deploy-ASP.NET-with-TFS-Build.md)
 
-# [Continuous Deployment di Asp.Net web sites con TFS Build (*)](https://msdn.microsoft.com/it-it/library/dn569268.aspx)
 # [Continuous Integration con SQL Server (*)](https://msdn.microsoft.com/it-it/library/dn383992.aspx)
 # [Creare un Symbol Server con le Build di Team Foundation Server (*)](https://msdn.microsoft.com/it-it/library/dn376358.aspx)
 # [Gestione delle Branch in Git e Visual Studio (*)](https://msdn.microsoft.com/it-it/library/dn269827.aspx)

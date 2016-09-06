@@ -11,7 +11,7 @@ ms.custom: CommunityDocs
 
 #### Di [Roberto Freato](https://mvp.microsoft.com/it-it/PublicProfile/4028383) – Microsoft MVP
 
-![](./img/Costi-di-Windows-Azure/image1.png)
+![](./img/MVPLogo.png)
 
 *Settembre, 2012*
 
