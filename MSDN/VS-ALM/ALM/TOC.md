@@ -18,10 +18,10 @@
 # [Utilizzare Git come 'ponte' per collaborazioni esterne](Git-come-ponte-per-collaborazioni-esterne.md)
 # [Continuous Deployment di Asp.Net web sites con TFS Build](Continuous-Deploy-ASP.NET-with-TFS-Build.md)
 # [Continuous Integration con SQL Server](Continuous-Integration-con-SQL-Server.md)
-
-# [Creare un Symbol Server con le Build di Team Foundation Server (*)](https://msdn.microsoft.com/it-it/library/dn376358.aspx)
+# [Creare un Symbol Server con le Build di Team Foundation Server](Creare-Symbol-Server-con-TFS-Build.md)
 
 # [Gestione delle Branch in Git e Visual Studio (*)](https://msdn.microsoft.com/it-it/library/dn269827.aspx)
+
 # [Conflitti durante lo sviluppo concorrente (*)](https://msdn.microsoft.com/it-it/library/dn236398.aspx)
 # [Gestire il pattern Branch per Product Backlog Item con TFS (*)](https://msdn.microsoft.com/it-it/library/dn175749.aspx)
 # [Differenze tra Source Control centralizzato e distribuito (*)](https://msdn.microsoft.com/it-it/library/dn133093.aspx)
