@@ -1,11 +1,23 @@
+---
+title: Differenze tra Source Control centralizzato e distribuito
+description: Differenze tra Source Control centralizzato e distribuito
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: ALM
+ms.custom: CommunityDocs
+---
+
+# Differenze tra Source Control centralizzato e distribuito
+
 #### di [Gian Maria Ricci](http://mvp.microsoft.com/en-us/mvp/Gian%20Maria%20Ricci-4025635) – Microsoft MVP
 
-1.  ![](./img//media/image1.png){width="0.5938331146106737in"
-    height="0.9376312335958005in"}
+![](./img/Differenze-tra-Source-Control-centralizzato-e-distribuito/image1.png)
+
 
 *Aprile, 2013*
 
-Sistemi di Version Control System centralizzati {#sistemi-di-version-control-system-centralizzati .ppSection}
+Sistemi di Version Control System centralizzati 
 ===============================================
 
 Tradizionalmente un VCS (Version Control System) è un sistema di
@@ -23,15 +35,15 @@ computer / nome utente / percorso locale**, in questo modo un utente può
 avere più *workspace* in una o più macchine ed avere più copie distinte
 del server centrale.
 
-1.  ![](./img//media/image2.png){width="2.5416666666666665in"
-    height="1.7291666666666667in"}
+![](./img/Differenze-tra-Source-Control-centralizzato-e-distribuito/image2.png)
+
 
 Le modalità di lavoro supportate dai vari VCS possono variare, ma si
 racchiudono tutte in un flusso di lavoro che può essere semplicemente
 rappresentato in questo modo.
 
-1.  ![](./img//media/image3.png){width="2.5416666666666665in"
-    height="1.5in"}
+![](./img/Differenze-tra-Source-Control-centralizzato-e-distribuito/image3.png)
+    
 
 · **GetLatest:** Viene contattato il server e viene scaricata in locale
 l’ultima versione dei sorgenti, la copia locale è cosi allineata al
@@ -50,8 +62,6 @@ Se non ci sono conflitti si procede tranquillamente
 
 Se ci sono conflitti, una volta risolti, si effettua nuovamente un
 GetLatest fino a che non vi sono più conflitti
-
-1.  
 
 · **Check-in:** Invio dei file modificati al *repository*
 
@@ -98,23 +108,20 @@ impedire di iniziare a modificare un file (non esiste contatto con il
 server per il check-out), ma è solamente possibile impostare un lock di
 check-in, ovvero impedire che qualcuno invii un file al server.
 
-Sistemi distribuiti {#sistemi-distribuiti .ppSection}
+Sistemi distribuiti
 ===================
 
 Il modello centralizzato non è adatto per tutti gli scenari, in
 particolar modo ha delle mancanze che in alcune situazioni possono
 rendere difficile il lavoro di tutti i giorni.
 
-· Lavoro offline
-
-· Parti di team che lavorano senza avere accesso al server centrale
+- Lavoro offline
+- Parti di team che lavorano senza avere accesso al server centrale
 
 Oltre queste mancanze, alcuni scenari possono essere comunque gestiti da
 un VCS centralizzato, ma in modo limitato o inefficiente
-
-· Team altamente distribuiti
-
-· Codice sorgente altamente modulare
+- Team altamente distribuiti
+- Codice sorgente altamente modulare
 
 Per questa ragione negli ultimi anni è emerso un nuovo modello di VCS
 chiamato “*distribuito*” il cui paradigma di base è molto differente da
@@ -130,11 +137,9 @@ Per evitare di perdersi, soprattutto se si viene da anni di uso di un
 VCS centralizzato, è opportuno approcciare un VCS distribuito con molto
 pragmatismo:
 
-· Studiare bene lo strumento scelto
-
-· Verificare i modelli supportati
-
-· Scegliere un modello ed attenersi a quello
+- Studiare bene lo strumento scelto
+- Verificare i modelli supportati
+- Scegliere un modello ed attenersi a quello
 
 Il rischio maggiore infatti è quello di andare fuori controllo, dato che
 ogni utilizzatore può decidere di sincronizzare il proprio lavoro con il
@@ -145,7 +150,7 @@ quindi attendersi gli stessi comportamenti. La chiave di volta è sempre
 essere coscienti che si sta lavorando con uno strumento differente
 adatto a risolvere scenari differenti.
 
-L’Abc di Git {#labc-di-git .ppSection}
+L’Abc di Git
 ============
 
 Tra i VCS distribuiti (da qui in poi DVCS) negli ultimi anni sicuramente
@@ -169,8 +174,8 @@ Supponiamo di avere creato un repository Git su TF Service, navigando
 sul tab **CODE** dall’interfaccia web è possibile notare un icona a
 destra che permette di recuperare l’indirizzo del repository.
 
-1.  ![](./img//media/image4.png){width="2.5416666666666665in"
-    height="1.2916666666666667in"}
+![](./img/Differenze-tra-Source-Control-centralizzato-e-distribuito/image4.png)
+
 
 È possibile a questo punto fare clone da riga di comando se avete
 installato Msysgit
@@ -182,8 +187,8 @@ il Team Explorer
 a questo punto connettersi al Team Project e nel Team Explorer avrete la
 possibilità di fare clone direttamente dalla UI di VS2012.
 
-1.  ![](./img//media/image5.png){width="2.5416666666666665in"
-    height="1.5833333333333333in"}
+![](./img/Differenze-tra-Source-Control-centralizzato-e-distribuito/image5.png)
+
 
 L’operazione di ***clone*** effettua due macro-operazioni distinte, la
 prima è creare nella cartella locale una copia *del repository presente
@@ -200,14 +205,14 @@ Per usare la command line in modo efficace, una volta installato Msysgit
 basta selezionare una cartella con un repository locale, fare tasto
 destro e scegliere *Git bash here*.
 
-1.  ![](./img//media/image6.png){width="2.5416666666666665in"
-    height="1.8229166666666667in"}
+![](./img/Differenze-tra-Source-Control-centralizzato-e-distribuito/image6.png)
+
 
 A questo punto avete una bash che permette di lavorare in riga di
 comando sul repository, è utile appena avete installato msysgit definire
 alcuni alias, ad esempio
 
-git config --global alias.logf "log --graph --oneline --all --decorate"
+    git config --global alias.logf "log --graph --oneline --all --decorate"
 
 questo alias non fa altro che creare un nuovo comando fittizio chiamato
 *logf* per fare log del repository con alcune opzioni di default, senza
@@ -217,12 +222,12 @@ disponibile per tutti i repository dell’utente.
 
 A questo punto digitando
 
-git logf
+    git logf
 
 viene effettuato il log del contenuto del proprio repository.
 
-1.  ![](./img//media/image7.png){width="2.5416666666666665in"
-    height="1.1979166666666667in"}
+![](./img/Differenze-tra-Source-Control-centralizzato-e-distribuito/image7.png)
+
 
 L’aspetto interessante è che l’operazione di clone ha scaricato tutta la
 storia del repository e nel proprio hard disk locale è presente una
@@ -233,8 +238,8 @@ notare come siano presenti le stesse icone di quando il progetto è
 connesso a TFS, per cui si può semplicemente iniziare ad editare i file
 e lavorare in maniera normale.
 
-1.  ![](./img//media/image8.png){width="2.46875in"
-    height="1.1041666666666667in"}
+![](./img/Differenze-tra-Source-Control-centralizzato-e-distribuito/image8.png)
+
 
 Come potete vedere nella figura sopra, il file UnitTest1 è stato
 modificato e questo viene indicato da un semplice segno di spunta,
@@ -243,8 +248,8 @@ reale differenza si ha quando si vuole inviare le modifiche al
 repository, in questo caso nel menu del Team Explorer trovate un menu
 differente, dato che siete connessi ad un repository Git.
 
-1.  ![](./img//media/image9.png){width="2.5416666666666665in"
-    height="1.3229166666666667in"}
+![](./img/Differenze-tra-Source-Control-centralizzato-e-distribuito/image9.png)
+
 
 In questo menu potete premere Changes per visualizzare i file modificati
 che debbono essere *committati,* in maniera analoga alla finestra
@@ -261,8 +266,8 @@ effettuate.
 Una volta effettuato il commit potete tornare alla home del Team
 Explorer e scegliere il link Commits
 
-1.  ![](./img//media/image10.png){width="2.5416666666666665in"
-    height="2.0729166666666665in"}
+![](./img/Differenze-tra-Source-Control-centralizzato-e-distribuito/image10.png)
+
 
 Come potete vedere viene listato il commit appena effettuato nella
 sezione ***Outgoing Commits*** ad indicare che è un *commit locale* e
@@ -274,8 +279,7 @@ operazione che invia le modifiche al TF Service.
 Prima di effettuare push potete effettuare un *git logf* da riga di
 comando per vedere lo stato del repository locale
 
-1.  ![](./img//media/image11.png){width="2.5416666666666665in"
-    height="0.2604166666666667in"}
+![](./img/Differenze-tra-Source-Control-centralizzato-e-distribuito/image11.png)
 
 Questa immagine è molto interessante, in rosso viene infatti mostrata la
 posizione attuale della branch master (è la branch principale che esiste
@@ -304,8 +308,8 @@ git, durante il commit viene usato l’utente globale impostato. Questo
 significa che dopo avere fatto il primo clone di Visual Studio dovete
 settare username ed email corrette, ad esempio da riga di comando
 
-1.  ![](./img//media/image12.png){width="2.5416666666666665in"
-    height="0.2604166666666667in"}
+![](./img/Differenze-tra-Source-Control-centralizzato-e-distribuito/image12.png)
+
 
 Naturalmente è possibile anche impostare questi valori andando nella
 sezione settings del team explorer, che ha una nuova sezione chiamata
@@ -316,8 +320,8 @@ come potete vedere sotto Visual Studio vi permette di configurare i
 Global Settings, mentre se si lavora con più server, è consigliabile che
 ogni repository abbia la sua corretta configurazione locale.
 
-1.  ![](./img//media/image13.png){width="2.1875in"
-    height="2.5416666666666665in"}
+![](./img/Differenze-tra-Source-Control-centralizzato-e-distribuito/image13.png)
+
 
 Questo problema accade perché i tool di VS sono ancora in beta, e quindi
 sono ancora leggermente acerbi. L’opzione interessante è comunque la
@@ -329,8 +333,8 @@ Ora che avete riconfigurato correttamente il vostro username e password
 localmente, potete modificare nuovamente un file, ed effettuare un
 secondo commit.
 
-1.  ![](./img//media/image14.png){width="2.5416666666666665in"
-    height="1.125in"}
+![](./img/Differenze-tra-Source-Control-centralizzato-e-distribuito/image14.png)
+
 
 Come potete vedere il primo commit ha ora l’immagine (si usa gravatar),
 ed il secondo commit riporta l’autore corretto, alkampfer, invece di
@@ -343,14 +347,9 @@ sorgente dall’interfaccia web, entrambi i commit sono stati inviati al
 server, ma il primo non ha immagine, ed è associato al mio utente di
 github.
 
-1.  ![](./img//media/image15.png){width="2.5416666666666665in"
-    height="0.6979166666666666in"}
+![](./img/Differenze-tra-Source-Control-centralizzato-e-distribuito/image15.png)
+
 
 #### di [Gian Maria Ricci](http://mvp.microsoft.com/en-us/mvp/Gian%20Maria%20Ricci-4025635) – Microsoft MVP
-
-1.  [*Altri articoli di Gian Maria Ricci nella
-    Libreria*](http://sxp.microsoft.com/feeds/3.0/msdntn/TA_MSDN_ITA?contenttype=Article&author=Gian%20Maria%20Ricci)
-    ![](./img//media/image16.png){width="0.1771084864391951in"
-    height="0.1771084864391951in"}
 
 

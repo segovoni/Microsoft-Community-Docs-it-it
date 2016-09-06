@@ -1,3 +1,15 @@
+---
+title: Creare un Symbol Server con le Build di Team Foundation Server
+description: Creare un Symbol Server con le Build di Team Foundation Server
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: ALM
+ms.custom: CommunityDocs
+---
+
+# Creare un Symbol Server con le Build di Team Foundation Server
+
 #### di [Gian Maria Ricci](http://mvp.microsoft.com/en-us/mvp/Gian%20Maria%20Ricci-4025635) – Microsoft MVP
 
 Blog inglese: <http://www.codewrecks.com>
@@ -6,9 +18,9 @@ Blog Italiano ALM: <http://www.getlatestversion.it/author/alkampfer/>
 
 Blog Italiano: <http://blogs.ugidotnet.org/rgm>
 
-1.  ![](./img//media/image1.png){width="0.59375in" height="0.9375in"}
+![](./img/MVPLogo.png)
 
-*Agosto, 2013 *
+*Agosto, 2013*
 
 Scenario standard: realizzazione di librerie interne
 ----------------------------------------------------
@@ -20,13 +32,10 @@ problematiche maggiori che si riscontrano sono due
 1.  **Chi usa le librerie lamenta il problema di non poter effettuare il
     debug del codice sorgente.** In caso di eccezione interna alla
     libreria non si riesce a diagnosticare la causa;
-
 2.  **Si perde traccia delle varie versioni, non si capisce più quale
     progetto stia usando quale versione.** Anche in questo caso, in caso
     di eccezione interna, non si è in grado di collegarla al sorgente
     realmente utilizzato per la sua compilazione
-
-3.  
 
 Mentre il punto due è stato già trattato in un precedente articolo dal
 titolo: [*Gestire la numerazione degli assembly durante le
@@ -91,9 +100,8 @@ relative CAL.
 
 In entrambi i casi nella Virtual Machine dovrete abilitare.
 
-1.  il File Server role, per avere le share di rete
-
-    il Web Server per avere IIS e poter pubblicare un sito
+- il File Server role, per avere le share di rete
+- il Web Server per avere IIS e poter pubblicare un sito
 
 Una volta installato e [configurato il Build
 Server](http://msdn.microsoft.com/it-it/library/ee259683(v=vs.110).aspx)
@@ -101,21 +109,14 @@ si dovrà creare la cartella che conterrà il Symbol Server e condividerla
 in rete, in questo esempio l’indirizzo dello share è:
 [\\\\tfssymbolserver\\symbols](file:///\\tfssymbolserver\symbols)
 
-1.  ![](./img//media/image2.png){width="5.21875in" height="3.375in"}
+![](./img/Creare-Symbol-Server-con-TFS-Build/image2.png)
 
-<!-- -->
+**Figura 1:** *Creare uno share di rete configurato per lettura / scrittura*
 
-1.  **Figura 1:** *Creare uno share di rete configurato per lettura /
-    scrittura*
 
-<!-- -->
+![](./img/Creare-Symbol-Server-con-TFS-Build/image3.png)
 
-1.  ![](./img//media/image3.png){width="6.71875in"
-    height="3.4895833333333335in"}
-
-<!-- -->
-
-1.  **Figura 2:** *Il build controller ed un agente configurati *
+**Figura 2:** *Il build controller ed un agente configurati*
 
 Creare una build collegata al symbol server
 -------------------------------------------
@@ -127,12 +128,9 @@ standard; nel caso di build su TF Service si deve ricordare di
 selezionare il build controller appena installato sulla Virtual Machine
 e non l’elastic build, che non ha accesso alla cartella condivisa.
 
-1.  ![](./img//media/image4.png){width="6.875in" height="4.34375in"}
+![](./img/Creare-Symbol-Server-con-TFS-Build/image4.png)
 
-<!-- -->
-
-1.  **Figura 3:** *configurazione di una build che utilizza il build
-    controller appena installato*
+**Figura 3:** *configurazione di una build che utilizza il build controller appena installato*
 
 Per TFS on-premise invece è possibile selezionare qualsiasi build
 controller i cui agent collegati abbiano accesso allo share di rete del
@@ -149,14 +147,11 @@ build](http://msdn.microsoft.com/it-it/library/jj714729.aspx)
 
 *Come già detto, se nel vostro scenario il server di build è on-premise,
 è possibile scegliere un qualsiasi share di rete che sia accessibile
-dall’utente usato per eseguire il Build Agent. *
+dall’utente usato per eseguire il Build Agent.*
 
-1.  ![](./img//media/image5.png){width="7.75in"
-    height="3.9791666666666665in"}
+![](./img/Creare-Symbol-Server-con-TFS-Build/image5.png)
 
-<!-- -->
-
-1.  **Figura 4:** *Il tab del processo di build con evidenziato il
+**Figura 4:** *Il tab del processo di build con evidenziato il
     template di versioning e le opzioni per la pubblicazione
     dei simboli.*
 
@@ -164,12 +159,9 @@ Una volta che la definizione della build è completa, si procederà alla
 esecuzione della build, al termine della quale si potrà verificare
 l’effettivo popolamento della cartella del Symbol Server.
 
-1.  ![](./img//media/image6.png){width="5.291666666666667in"
-    height="2.84375in"}
+![](./img/Creare-Symbol-Server-con-TFS-Build/image6.png)
 
-<!-- -->
-
-1.  **Figura 5:** *Al termine della build nello share di rete del Symbol
+**Figura 5:** *Al termine della build nello share di rete del Symbol
     Server saranno presenti alcuni file*
 
 Passo 3: pubblicare la libreria dei simboli con IIS
@@ -197,12 +189,9 @@ Basta aprire la console di amministrazione di IIS ed aggiungere un nuovo
 sito che punti alla cartella locale che è stata condivisa abilitando il
 directory browsing.
 
-1.  ![](./img//media/image7.png){width="7.34375in"
-    height="4.010416666666667in"}
+![](./img/Creare-Symbol-Server-con-TFS-Build/image7.png)
 
-<!-- -->
-
-1.  **Figura 6:** *Symbol server is now publishing the symbol directory
+**Figura 6:** *Symbol server is now publishing the symbol directory
     to the web with IIS*
 
 Per questo esempio ho scelto la porta 27000 per la pubblicazione, ed
@@ -211,23 +200,18 @@ visibile dall’esterno è necessario aprire la porta scelta nel firewall
 interno di Windows Server, e creare un endpoints nel pannello di
 controllo Azure relativo alla vostra Virtual Machine**
 
-1.  ![](./img//media/image8.png){width="5.666666666666667in"
-    height="2.2916666666666665in"}
+![](./img/Creare-Symbol-Server-con-TFS-Build/image8.png)
 
-<!-- -->
-
-1.  **Figura 7:** *Creazione dell’endpoint per esporre all’esterno la
+**Figura 7:** *Creazione dell’endpoint per esporre all’esterno la
     porta 27000*
 
 Una volta che l’endpoint è stato creato si dovrebbe essere in grado di
 navigare all’indirizzo scelto e visualizzare i file della cartella dai
 computer della vostra rete.
 
-1.  ![](./img//media/image9.png){width="5.625in" height="3.0in"}
+![](./img/Creare-Symbol-Server-con-TFS-Build/image9.png)
 
-<!-- -->
-
-1.  **Figura 8:** *Il symbol server è ora esposto in HTTP*
+**Figura 8:** *Il symbol server è ora esposto in HTTP*
 
 Configurare il Visual Studio per usare la libreria dei simboli
 --------------------------------------------------------------
@@ -240,50 +224,36 @@ le configurazioni, uno share di rete
 l’esposizione tramite IIS all’indirizzo visto precedentemente
 (http://tfssymbolserver.cloudapp.net:27000)
 
-1.  ![](./img//media/image10.png){width="7.885416666666667in"
-    height="4.6875in"}
+![](./img/Creare-Symbol-Server-con-TFS-Build/image10.png)
 
-<!-- -->
-
-1.  **Figure 9:** *Il symbol server è ora configurato in Visual Studio*
+**Figure 9:** *Il symbol server è ora configurato in Visual Studio*
 
 Non bisogna inoltre dimenticare di abilitare il Source Server Support,
 altrimenti i vari Symbol server verranno ignorati. I settaggi importanti
 sono due: il primo è l’Enable Just My Code che va deselezionato ed il
 Source Server Support che va abilitato.
 
-1.  ![](./img//media/image11.png){width="7.885416666666667in"
-    height="4.59375in"}
+![](./img/Creare-Symbol-Server-con-TFS-Build/image11.png)
 
-<!-- -->
-
-1.  **Figure 10:** *Configurazione generale del debugging per abilitare
+**Figure 10:** *Configurazione generale del debugging per abilitare
     l’uso dei symbol server*
 
 Le operazioni necessarie per la pubblicazione di una versione diventano
 quindi:
 
-1.  lanciare la build
-
-    verificare che l’esecuzione vada a buon fine
-
-    prelevare i file binari dalla drop folder.
-
-    distribuire i file binari con i relativi .pdb
-
-    1.  
+- lanciare la build
+- verificare che l’esecuzione vada a buon fine
+- prelevare i file binari dalla drop folder.
+- distribuire i file binari con i relativi .pdb
 
 Per quanto riguarda la distribuzione si possono usare le tecniche
 preferite, usare un nuget server interno, includere i binari rilasciati
 nel source control, depositarli in un apposito share di rete, oppure
 semplicemente comunicare la url della Drop della build.
 
-1.  ![](./img//media/image12.png){width="6.385416666666667in"
-    height="3.7708333333333335in"}
+![](./img/Creare-Symbol-Server-con-TFS-Build/image12.png)
 
-<!-- -->
-
-1.  **Figure 11:** *La versione compilata della libreria può essere ora
+**Figure 11:** *La versione compilata della libreria può essere ora
     scaricata direttamente dalla drop folder della build*
 
 La Drop può infatti essere scaricata comodamente in formato zip, come
@@ -298,12 +268,9 @@ effettuare il debug del codice sorgente della libreria**. In questo caso
 i sorgenti corretti verranno scaricati automaticamente dal vostro TFS**
 (Dovete chiaramente essere loggati ed avere accesso al tfs).
 
-1.  ![](./img//media/image13.png){width="9.604166666666666in"
-    height="3.4791666666666665in"}
+![](./img/Creare-Symbol-Server-con-TFS-Build/image13.png)
 
-<!-- -->
-
-1.  **Figure 12:** *Premendo F11 si è in grado di entrare in debug nei
+**Figure 12:** *Premendo F11 si è in grado di entrare in debug nei
     file sorgenti usati per la compilazione della dll*
 
 Quello che accade è, una volta premuto F11, Visual Studio legge dal file
@@ -313,12 +280,9 @@ corretta del file. Se si osserva con attenzione il nome del file in
 Figura 12 si può notare come prima del nome del file (myLogLibrary.cs)
 sia presente un numero (1046), che altro non è che il changeset id.
 
-1.  ![](./img//media/image14.png){width="3.7395833333333335in"
-    height="2.40625in"}
+![](./img/Creare-Symbol-Server-con-TFS-Build/image14.png)
 
-<!-- -->
-
-1.  **Figure 13:** *L’ultima modifica fatta al file è appunto la
+**Figure 13:** *L’ultima modifica fatta al file è appunto la
     versione 1046*
 
 L’aspetto interessante dell’avere messo in opera un Symbol Server, non è
@@ -332,30 +296,21 @@ Infine si ricordi che è comunque possibile risalire alla build
 utilizzata semplicemente dalle proprietà del file, grazie alla libreria
 di versioning.
 
-1.  ![](./img//media/image15.png){width="4.375in" height="2.9375in"}
+![](./img/Creare-Symbol-Server-con-TFS-Build/image15.png)
 
-<!-- -->
-
-1.  **Figure 14:** *Il numero di versione identifica esattamente la
+**Figure 14:** *Il numero di versione identifica esattamente la
     build utilizzata per compilare la dll*
 
-<!-- -->
-
-1.  **NOTA BENE**: I simboli pubblicati sono parte della build, per cui
+> **NOTA BENE**: I simboli pubblicati sono parte della build, per cui
     è necessario ricordare di non cancellare mai le build usate per
     pubblicare i simboli, o se le si cancella di non cancellare i
     relativi simboli, altrimenti tutte le dll che avete distribuito
     relative a quella build, non saranno più in grado di riconnettersi
     ai rispettivi sorgenti
 
-<!-- -->
+![](./img/Creare-Symbol-Server-con-TFS-Build/image16.png)
 
-1.  ![](./img//media/image16.png){width="7.791666666666667in"
-    height="4.770833333333333in"}
-
-<!-- -->
-
-1.  **Figura 15:** *Non cancellare mai i simboli di una libreria
+**Figura 15:** *Non cancellare mai i simboli di una libreria
     pubblicata, oppure non si sarà più in grado di effettuare il debug.*
 
 Una buona norma è marcare con Retain Indefinitely tutte le build
@@ -364,12 +319,9 @@ automatica dei simboli per le build. Questa operazione deve essere fatta
 per ogni versione di cui avete distribuito le dll e che sia ancora
 ufficialmente supportata.
 
-1.  ![](./img//media/image17.png){width="7.947916666666667in"
-    height="2.59375in"}
+![](./img/Creare-Symbol-Server-con-TFS-Build/image17.png)
 
-<!-- -->
-
-1.  **Figura 16:** *Anche se si richiede di tenere solamente le ultime
+**Figura 16:** *Anche se si richiede di tenere solamente le ultime
     10 build riuscite, si può scegliere di non cancellare mai i relativi
     simboli pubblicati*
 
@@ -401,8 +353,8 @@ eventi Intellitrace™, si è in grado di visualizzare la versione esatta
 del file attualmente in produzione che è stato utilizzato per generare
 il file di Intellitrace™ che si sta debuggando.
 
-1.  ![](./img//media/image18.png){width="6.492361111111111in"
-    height="1.6340277777777779in"}
+![](./img/Creare-Symbol-Server-con-TFS-Build/image18.png)
+   
 
 Tutto questo avviene in automatico: una volta selezionato un evento di
 Intellitrace relativo al vostro codice, Visual Studio verificherà nel

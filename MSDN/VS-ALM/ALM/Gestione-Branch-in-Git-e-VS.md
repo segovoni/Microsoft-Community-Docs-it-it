@@ -1,7 +1,18 @@
+---
+title: Gestione delle Branch in Git e Visual Studio
+description: Gestione delle Branch in Git e Visual Studio
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: ALM
+ms.custom: CommunityDocs
+---
+
+# Gestione delle Branch in Git e Visual Studio
+
 #### di [Gian Maria Ricci](http://mvp.microsoft.com/en-us/mvp/Gian%20Maria%20Ricci-4025635) – Microsoft MVP
 
-1.  ![](./img//media/image1.png){width="0.5938331146106737in"
-    height="0.9376312335958005in"}
+![](./img/MVPLogo.png)
 
 *Giugno, 2013*
 
@@ -46,8 +57,8 @@ due padri distinti***, (8bfb6a6 e 2a30849) una situazione non
 contemplata in un sistema centralizzato, dove i vari update (Changesets
 in TFS) sono strettamente sequenziali.
 
-1.  ![](./img//media/image2.png){width="4.936883202099738in"
-    height="2.0934886264216974in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image2.png)
+    
 
 Il fatto di avere repository locali implica infatti che due sviluppatori
 distinti hanno creato dei commit locali partendo dallo stesso padre e
@@ -59,8 +70,8 @@ Se ora si volesse riportare lo stato della cartella al primo commit, si
 può utilizzare il **comando *git checkout \#hash ***dove \#hash
 rappresenta l’hash del commit desiderato
 
-1.  ![](./img//media/image3.png){width="6.322125984251969in"
-    height="1.9164271653543308in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image3.png)
+
 
 Riaprendo la solution si può verificare che effettivamente tutti i file
 presenti nel nostro repository siano ora uguali a quelli del primo
@@ -75,15 +86,14 @@ situazione è poco utile ed ha senso solo quando si vuole visualizzare il
 contenuto del repository in un precedente istante di tempo, ma non è
 consigliabile usarla per lavorare e per effettuare altre modifiche.
 
-1.  ![](./img//media/image4.png){width="5.218098206474191in"
-    height="2.051826334208224in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image4.png)
 
 Per tornare alla situazione iniziale si deve usare il comando *git
 checkout master* che non fa altro che riportare il puntatore HEAD alla
 posizione della branch master per continuare a lavorare.
 
-1.  ![](./img//media/image5.png){width="6.051326552930884in"
-    height="1.0311209536307961in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image5.png)
+
 
 In ogni repository git come minimo si hanno due puntatori: il primo
 viene chiamato HEAD e identifica il commit che è attualmente
@@ -117,27 +127,25 @@ creata a partire dalla HEAD. Questa operazione può essere effettuata
 tranquillamente anche all’interno di Visual Studio con la voce di menu
 New Branch.
 
-1.  ![](./img//media/image6.png){width="3.4891469816272966in"
-    height="1.9060115923009624in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image6.png)
 
 A questo punto basta specificare il nome della branch
 
-1.  ![](./img//media/image7.png){width="3.978669072615923in"
-    height="1.6352121609798775in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image7.png)
+
 
 L’opzione Checkout branch effettua un checkout immediato alla nuova
 branch, ovvero sposta il puntatore HEAD sul puntatore della branch
 appena creata.
 
-1.  ![](./img//media/image8.png){width="6.165895669291339in"
-    height="0.7811526684164479in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image8.png)
+
 
 Questo significa che il prossimo commit che verrà effettuato aggiornerà
 il puntatore FixBug342 e non il master, se si modifica un file e si
 effettua un commit si può infatti verificare questo comportamento.
 
-1.  ![](./img//media/image9.png){width="4.5827602799650045in"
-    height="1.0207053805774278in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image9.png)
 
 In questo caso il commit bfbc290 è stato effettuato sulla branch
 FixBug342, è il puntatore della branch master è rimasto ferma al commit
@@ -152,15 +160,15 @@ il successivo snapshot**.
 Naturalmente è possibile avere una visualizzazione grafica delle branch
 presenti direttamente dal plugin di Visual Studio.
 
-1.  ![](./img//media/image10.png){width="4.041161417322835in"
-    height="2.4371948818897637in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image10.png)
+    
 
 In questo caso è evidente che la nuova branch creata è solamente locale,
 non è quindi pubblicata sull’origin (ovvero TF Service). Nel tab dei
 Commits viene data una spiegazione più dettagliata
 
-1.  ![](./img//media/image11.png){width="4.093238188976378in"
-    height="2.583010717410324in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image11.png)
+    
 
 In questo caso il Push è disabilitato, perché non esiste una upstream
 branch configured, ovvero non è presente nessun collegamento tra la
@@ -172,8 +180,8 @@ Se si vuole tornare a sviluppare sulla branch master, e sospendere le
 operazioni di fix del bug basta scegliere la branch da attivare in
 Visual Studio
 
-1.  ![](./img//media/image12.png){width="6.1450656167979005in"
-    height="2.832979002624672in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image12.png)
+    
 
 In questo caso è stata aperta una finestra WPF XAML a destra dove è
 stata aggiunta una textbox e poi le modifiche sono state committate. Se
@@ -181,8 +189,8 @@ dalla combo del team explorer si cambia la branch, tornando ad esempio
 sulla master, Visual Studio si può notare come il designer si aggiorni
 automaticamente.
 
-1.  ![](./img//media/image13.png){width="5.415989720034996in"
-    height="2.9163024934383204in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image13.png)
+    
 
 L’operazione fatta da Visual Studio in riga di comando è: *git checkout
 nomebranch (es git checkout master)* la comodità di effettuarla dal Team
@@ -200,8 +208,8 @@ Avendo ora a disposizione due branch locali e quindi due puntatori ecco
 come si presenta il repository locale dopo due commit sulla branch
 locale ed un commit nella master.
 
-1.  ![](./img//media/image14.png){width="6.5in"
-    height="2.1354166666666665in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image14.png)
+    
 
 In questo caso seegit mostra in maniera eloquente la presenza di due
 rami di commit, attualmente la branch attiva è la master (dove è stato
@@ -212,16 +220,15 @@ Se i due commit sulla branch FixBug342 sono sufficienti a correggere il
 bug, si procede a reintegrare la branch con la master con una operazione
 di merge.
 
-1.  ![](./img//media/image15.png){width="3.30167104111986in"
-    height="2.8850557742782152in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image15.png)
 
 Da Visual Studio l’operazione di merge è banale da impostare: basta
 selezionare la branch sorgente e quella destinazione e premere il
 bottone Merge. Nella figura precedente è infatti mostrato come fare la
 merge della branch in cui è stato corretto il bug sulla master.
 
-1.  ![](./img//media/image16.png){width="6.5in"
-    height="2.234027777777778in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image16.png)
+
 
 Anche in questo caso al verificarsi di conflitti si procede alla
 risoluzione manuale da Visual Studio. Una volta che ogni conflitto è
@@ -229,15 +236,15 @@ stato risolto, è necessario effettuare un nuovo commit con la loro
 risoluzione. Visual Studio mostra anche un comodo riepilogo di tutti i
 conflitti risolti con l’opzione *View the resolved conflicts*.
 
-1.  ![](./img//media/image17.png){width="3.31208552055993in"
-    height="2.333041338582677in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image17.png)
+    
 
 Ecco quindi visualizzato con SeeGit come appare il repository locale
 dopo che si è risolto il conflitto localmente e si è effettuato il
 commit con le risoluzioni.
 
-1.  ![](./img//media/image18.png){width="3.8953466754155732in"
-    height="4.6556681977252845in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image18.png)
+    
 
 Come si può vedere il risultato è analogo a alla risoluzione di
 conflitti causati dai due sviluppatori che hanno modificato lo stesso
@@ -254,14 +261,13 @@ possibile avere ulteriori conflitti sulla master, causati da altri
 sviluppatori che hanno modificato gli stessi file, come mostrato nella
 figura sottostante.
 
-1.  ![](./img//media/image19.png){width="3.041286089238845in"
-    height="3.7599464129483815in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image19.png)
+
 
 La situazione si complica ecco infatti una rappresentazione grafica con
 seeGit.
 
-1.  ![](./img//media/image20.png){width="4.832729658792651in"
-    height="4.6556681977252845in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image20.png)
 
 In locale dal commit 075007be escono tre branch: due locali (di cui è
 stata già effettuata la merge, e la origin/master che è stata scaricata
@@ -269,8 +275,7 @@ con il fetch. È necessario quindi effettuare una nuova merge di
 origin/master con la propria master. Il risultato è rappresentato nella
 figura sottostante.
 
-1.  ![](./img//media/image21.png){width="6.426279527559055in"
-    height="5.332666229221347in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image21.png)
 
 In questo caso abbiamo due branch locali ed una remota, tutte le merge
 sono state effettuate e quindi si può procedere a fare push verso il
@@ -285,8 +290,8 @@ effettuati però rimangono sempre**. Come si può vedere dalla figura
 sottostante i commit sono rimasti, l’unica cosa che è cambiata è che non
 è più presente il puntatore alla branch FixBug342
 
-1.  ![](./img//media/image22.png){width="5.728450349956256in"
-    height="1.656043307086614in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image22.png)
+
 
 ### Effetti delle branch locali per gli altri sviluppatori
 
@@ -295,16 +300,16 @@ vedono una volta che effettuano un pull e recuperano le modifiche dello
 sviluppatore che ha fatto la merge locale. Vediamo quindi cosa accade ad
 un altro sviluppatore del team che effettua un pull.
 
-1.  ![](./img//media/image23.png){width="2.7392410323709537in"
-    height="1.8643503937007875in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image23.png)
+
 
 Dato che tutti i conflitti sono stati risolti dall’altro sviluppatore,
 Visual Studio avverte semplicemente che sono state scaricare modifiche
 ed il repository è stato aggiornato (figura sopra). Ecco quello che vede
 l’altro sviluppatore.
 
-1.  ![](./img//media/image24.png){width="5.874266185476816in"
-    height="1.8331036745406823in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image24.png)
+
 
 Come si può notare, tutti i commit che il precedente sviluppatore aveva
 effettuato nella sua branch FixBug342 e di cui ha fatto merge con la
@@ -335,8 +340,8 @@ precedente, crea una nuova branch FixBug42, effettuando poi due commit
 su tale branch e due commit sulla master locale. La situazione è analoga
 a quella che aveva nella precedente situazione
 
-1.  ![](./img//media/image25.png){width="5.863850612423447in"
-    height="2.312211286089239in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image25.png)
+
 
 Se ora lo sviluppatore procedesse ad effettuare una merge tra la branch
 FixBug42 e la master locale, si creerebbe lo stesso scenario precedente,
@@ -369,8 +374,8 @@ modifiche differenziali a padri differenti. Se non si generano conflitti
 procede a con il commit seguente fino a terminare tutti i commit della
 branch che subisce il rebase**.
 
-1.  ![](./img//media/image26.png){width="5.822188320209974in"
-    height="1.6664588801399824in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image26.png)
+   
 
 Come si può vedere spostandosi con un comando di checkout sulla branch e
 chiedendo un rebase sulla master quello che viene fatto è un rewind
@@ -384,23 +389,23 @@ nuovamente una serie di conflitti da risolvere.
 
 Ecco ora come si presenta il repository locale.
 
-1.  ![](./img//media/image27.png){width="2.812148950131234in"
-    height="3.3537478127734035in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image27.png)
+    
 
 La branch FixBug42 è stata spostata sulla master, a questo punto
 eseguendo il merge tra la FixBug42 e la master viene effettuato un
 semplice fast forward, dato che è sufficiente spostare il puntatore
 master al commit 1aa45ea0.
 
-1.  ![](./img//media/image28.png){width="4.332791994750656in"
-    height="1.072782152230971in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image28.png)
+    
 
 Ecco come si presenta il repository locale al termine delle operazioni
 di merge; essendo ora il repository lineare il merge è stato fatto
 semplicemente aggiornando il puntatore master.
 
-1.  ![](./img//media/image29.png){width="3.6037160979877516in"
-    height="3.4787314085739283in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image29.png)
+
 
 Ora si può cancellare la branch FixBug42 ed effettuare push senza la
 paura di complicare la situazione dei repository locali degli altri
@@ -421,7 +426,7 @@ unico bugfix. Ogni qualvolta si vuole fondere più commit in uno, si può
 utilizzare il rebase interattivo. Ad esempio se si vuole fondere gli
 ultimi 2 commit in uno si usa il comando
 
-git rebase –i HEAD\~2
+    git rebase –i HEAD\~2
 
 L’opzione -i richiede il rebase interattivo e HEAD\~2 indica il padre
 del commit da cui si vuole partire, in questo caso due commit
@@ -431,16 +436,16 @@ in formato testo con le istruzioni per il rebase**. Il nostro compito è
 ora compilare lo script per ottenere il risultato desiderato, partendo
 da uno script precostituito il cui scopo è non modificare nulla.
 
-1.  ![](./img//media/image30.png){width="4.4681911636045495in"
-    height="2.8538101487314087in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image30.png)
+    
 
 Per ogni commit è presente il comando pick, il suo hash ed il commento.
 In questo caso il comando pick lascia il commit inalterato, mentre se si
 vuole “fondere” due commit in uno si può usare il comando squash che
 permette di fondere il commit con il suo precedente.
 
-1.  ![](./img//media/image31.png){width="4.4681911636045495in"
-    height="1.6977045056867892in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image31.png)
+
 
 Nella figura precedente è mostrato lo script per richiedere lo squash
 del commit 1aa45ea sul fac5737; ora questo punto si può salvare il file
@@ -448,8 +453,8 @@ di script e chiudere l’editor. Git procede quindi ad eseguire lo script
 e dopo avere effettuato le operazioni di rebase interattive, presenta
 una finestra con il commento che verrà associato al commit finale.
 
-1.  ![](./img//media/image32.png){width="6.280464785651794in"
-    height="2.9787937445319335in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image32.png)
+    
 
 Questo commento può essere modificato, di base vengono inclusi tutti i
 commenti dei commit che hanno subito squash (come sempre le linee che
@@ -458,15 +463,15 @@ compilare il file) e se si inserisce un messaggio vuoto l’operazione di
 squash viene abortita. Solitamente il commento viene riscritto in modo
 che abbia un significato chiaro.
 
-1.  ![](./img//media/image33.png){width="3.749530839895013in"
-    height="1.968503937007874in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image33.png)
+    
 
 In questo caso il commento inserito non tiene nessuna traccia
 dell’operazione di squash, è una unica linea che indica il fix di un
 determinato bug. Ecco quindi come si presenta il repository locale.
 
-1.  ![](./img//media/image34.png){width="2.989209317585302in"
-    height="3.6766240157480317in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image34.png)
+    
 
 La regola d’oro da ***non infrangere mai*** ***è effettuare rebase su
 commit di cui si è già effettuato il push sul repository origin***.
@@ -480,8 +485,8 @@ linearizzandola e semplificandola, prima di effettuare un push, in modo
 da mantenere la struttura del server origin (repository centrale) più
 pulita. Ecco cosa vedono gli altri sviluppatori dopo un pull.
 
-1.  ![](./img//media/image35.png){width="5.863850612423447in"
-    height="6.259633639545057in"}
+![](./img/Gestione-Branch-in-Git-e-VS/image35.png)
+
 
 La parte in giallo evidenziata è relativa al precedente push e
 rappresenta la situazione di branch locale di cui è stato effettuato
@@ -491,9 +496,5 @@ fix del bug 42 è un unico commit ed il flusso è lineare.
 
 #### di [Gian Maria Ricci](http://mvp.microsoft.com/en-us/mvp/Gian%20Maria%20Ricci-4025635) – Microsoft MVP
 
-1.  [*Altri articoli di Gian Maria Ricci nella
-    Libreria*](http://sxp.microsoft.com/feeds/3.0/msdntn/TA_MSDN_ITA?contenttype=Article&author=Gian%20Maria%20Ricci)
-    ![](./img//media/image36.png){width="0.1771084864391951in"
-    height="0.1771084864391951in"}
 
 

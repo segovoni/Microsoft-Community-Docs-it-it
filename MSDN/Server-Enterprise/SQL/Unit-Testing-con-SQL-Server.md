@@ -1,7 +1,7 @@
 ---
 title: Unit Testing con SQL Server
 description: Unit Testing con SQL Server
-author: MSCommunityPubService
+author: suxstellino
 ms.date: 08/01/2016
 ms.topic: how-to-article
 ms.service: SQLServer

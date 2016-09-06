@@ -1,5 +1,26 @@
-Continuous Deployment di Asp.Net web sites con TFS Build
-========================================================
+---
+title: Continuous Deployment di Asp.Net web sites con TFS Build 
+description: Continuous Deployment di Asp.Net web sites con TFS Build 
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: ALM
+ms.custom: CommunityDocs
+---
+
+# Continuous Deployment di Asp.Net web sites con TFS Build 
+
+#### di [Gian Maria Ricci](http://mvp.microsoft.com/en-us/mvp/Gian%20Maria%20Ricci-4025635) – Microsoft MVP
+
+Blog inglese: <http://www.codewrecks.com>
+
+Blog Italiano ALM: <http://www.getlatestversion.it/author/alkampfer/>
+
+Blog Italiano: <http://blogs.ugidotnet.org/rgm>
+
+![](./img/MVPLogo.png)
+
+*Dicembre, 2013*
 
 Perché Continuous Deployment
 ----------------------------
@@ -22,17 +43,13 @@ più in generale da chiunque sia coinvolto nelle procedure di QA. Lo
 scopo è quello di:
 
 -   Poter effettuare test il prima possibile sulle nuove funzionalità
-
 -   Verificare immediatamente la chiusura di eventuali Bug / Difetti che
     il team di sviluppo segnala come “Risolti”
-
 -   Avere ambienti stabili e simili a quello di produzione dove
     effettuare verifiche in situazioni più simili a quelle reali
-
 -   Effettuare test in pre-produzione, ovvero in ambienti quasi identici
     a quelli di produzione, spesso usando un backup dei dati di
     produzione
-
 -   Verificare le procedure di rilascio con particolare attenzione
     all’aggiornamento di sistemi esistenti
 
@@ -41,13 +58,10 @@ ciclo di vita tipico di un Bug/Difetto che proviene dal team di testing
 è infatti il seguente:
 
 -   Il bug viene segnalato da un tester
-
 -   Il team effettua triage di tutti i bug rimuovendo tutti i bug
     duplicati/non riproducibili/deferred in modo che i bug in stato
     “attivo” abbiano una qualità elevata.
-
 -   Il team risolve il bug e lo segnala “risolto”
-
 -   Il team di testing verifica che il bug sia effettivamente risolto e
     lo chiude
 
@@ -75,7 +89,7 @@ possono risiedere on-premise oppure nel Cloud. Ad esempio si può
 utilizzare un IIS in una macchina on-premise oppure rilasciare su Azure
 Web Sites / Azure Cloud Services, il sorgente dell’applicativo può
 invece essere su un TFS on-premise oppure su Visual Studio Online
-(http://www.visualstudio.com).
+(<https://www.visualstudio.com>).
 
 Gli scenari supportati da TFS Build e Asp.Net sono qualsiasi
 combinazione delle suddette: possiamo infatti avere TFS sia on-premise
@@ -106,15 +120,16 @@ specifica per ogni sito presente in IIS. Il primo passo per abilitare il
 rilascio tramite Web Deploy è configurare il Web Deploy Publishing da
 IIS per il sito che si vuole utilizzare
 
-![](./img//media/image1.png){width="5.573611111111111in"
-height="3.1215277777777777in"}
+![](./img/Continuous-Deploy-ASP.NET-with-TFS-Build/image2.png)
+    
 
 La configurazione è banale ed è solitamente sufficiente specificare
 l’utente che sarà autorizzato ad effettuare il rilascio, lasciando
 inalterate le restanti informazioni. Ecco ad esempio come risultano le
 opzioni di pubblicazione per un sito.
 
-![](./img//media/image2.png){width="5.2in" height="5.104166666666667in"}
+![](./img/Continuous-Deploy-ASP.NET-with-TFS-Build/image3.png)
+    
 
 Come si può vedere l’utente che può effettuare il deploy è
 gianmaria.ricci, non ho impostato alcuna stringa di connessione
@@ -137,8 +152,8 @@ sia tutto ok. Se invece avete già generato un file con estensione
 .publishsettings è possibile importarlo direttamente da Visual Studio e
 troverete tutti i campi già popolati.
 
-![](./img//media/image3.png){width="6.6930555555555555in"
-height="3.6164851268591427in"}
+![](./img/Continuous-Deploy-ASP.NET-with-TFS-Build/image4.png)
+
 
 In questo caso come indirizzo del server ho utilizzato il nome della mia
 macchina virtuale su azure, ma in generale è sufficiente specificare un
@@ -148,8 +163,8 @@ Se volete aggiornare automaticamente anche lo schema del database con un
 database project, è possibile configurare i database Upgrade
 specificando il file .dacpac che verrà utilizzato per l’aggiornamento.
 
-![](./img//media/image4.png){width="6.269444444444445in"
-height="4.009027777777778in"}
+![](./img/Continuous-Deploy-ASP.NET-with-TFS-Build/image5.png)
+    
 
 Una volta che tutte le impostazioni di pubblicazione sono corrette, è
 possibile salvare il file di pubblicazione.
@@ -161,14 +176,14 @@ Il workflow standard della Build di TFS è sufficiente per rilasciare una
 applicazione ASP.NET, basta infatti aggiungere alcuni argomenti da
 passare a MsBuild nelle proprietà di pubblicazione avanzate.
 
-![](./img//media/image5.png){width="6.6930555555555555in"
-height="2.3502537182852143in"}
+![](./img/Continuous-Deploy-ASP.NET-with-TFS-Build/image6.png)
+    
 
 In questo caso la stringa esatta che è stata inserita è la seguente.
 
-/p:DeployOnBuild=true /p:PublishProfile=AzureVM
-/p:AllowUntrustedCertificate=true /p:UserName=gianmaria.ricci
-/p:Password=xxxxxxxxx
+> /p:DeployOnBuild=true /p:PublishProfile=AzureVM
+    /p:AllowUntrustedCertificate=true /p:UserName=gianmaria.ricci
+    /p:Password=xxxxxxxxx
 
 Di base è sufficiente specificare il nome del profilo di pubblicazione
 da utilizzare (quello che si è inserito precedentemente in Visual
@@ -191,8 +206,8 @@ Authority trusted della propria rete. Una volta che il certificato è
 stato generato è sufficiente usarlo per il web Deploy configurando il
 Management Service da IIS.
 
-![](./img//media/image6.png){width="5.574305555555555in"
-height="3.0444444444444443in"}
+![](./img/Continuous-Deploy-ASP.NET-with-TFS-Build/image7.png)
+
 
 **Se non volete memorizzare nella build le credenziali dell’utente**,
 dovete dare i permessi di pubblicazione all’utente utilizzato per i
@@ -200,15 +215,15 @@ build server di Team Foundation Server ed utilizzare l’autenticazione
 integrata. In questo caso però dovete fare attenzione a qualche semplice
 accortezza.
 
-1)  Nel server dove gira IIS, dove aggiungere nel percorso del registro
+1.  Nel server dove gira IIS, dove aggiungere nel percorso del registro
     HKLM\\SOFTWARE\\Microsoft\\WebManagement\\Server la chiave DWORD
     WindowsAuthenticationEnabled con valore pari ad uno e poi riavviare
     il servizio (net stop wmsvc e poi net start wmsvc)
-
-2)  Dovete utilizzare questi parametri nella apposita sezione
+2.  Dovete utilizzare questi parametri nella apposita sezione
     della build. /p:DeployOnBuild=true
     /p:PublishProfile=WebTest1.Cyberpunk.local.pubxml
     /p:AllowUntrustedCertificate=true /p:UserName="" /p:AuthType=NTLM
+  
 
 Come potete vedere i cambiamenti sono due, *il primo è che al posto di
 specificare username e password viene specificato solamente il parametro
@@ -225,15 +240,14 @@ tra i progetti, ma questo percorso non è corretto durante un rilascio
 con una build di TFS. Il primo passo è verificare il mapping dei
 sorgenti utilizzato con la build.
 
-![](./img//media/image7.png){width="6.6930555555555555in"
-height="2.438888888888889in"}
+![](./img/Continuous-Deploy-ASP.NET-with-TFS-Build/image8.png)
+    
 
 In questo caso è stato mappato il percorso principale del progetto,
 bisogna ora calcolare quante directory sono presenti dalla radice del
 progetto fino al progetto web che si sta rilasciando
 
-![](./img//media/image8.png){width="4.686913823272091in"
-height="3.6662084426946633in"}
+![](./img/Continuous-Deploy-ASP.NET-with-TFS-Build/image9.png)
 
 In questo esempio si sta parlando di tre livelli, il primo è Trunk, il
 secondo è TailspinToys ed il testo è la cartella dove si trova il
@@ -246,7 +260,8 @@ livelli (i tre della solution, piu l’ulteriore per andare alla cartella
 padre dei sorgenti) e da qui selezionare la cartella bin, come si vede
 nella figura sottostante.
 
-![](./img//media/image9.png){width="6.313194444444444in" height="2.0in"}
+![](./img/Continuous-Deploy-ASP.NET-with-TFS-Build/image10.png)
+
 
 Questa procedura può risultare complessa, ma in realtà è abbastanza
 semplice una volta compreso il principio.
@@ -290,13 +305,13 @@ opzioni di deploy automatico da differenti sorgenti, ed una di queste è
 appunto Visual Studio Online. Di base è sufficiente impostare la
 distribuzione dal controllo di codice sorgente.
 
-![](./img//media/image10.png){width="2.874640201224847in"
-height="3.249594269466317in"}
+![](./img/Continuous-Deploy-ASP.NET-with-TFS-Build/image11.png)
+    
 
 La prima opzione disponibile è infatti Visual Studio Online.
 
-![](./img//media/image11.png){width="6.6930555555555555in"
-height="4.534722222222222in"}
+![](./img/Continuous-Deploy-ASP.NET-with-TFS-Build/image12.png)
+    
 
 A questo punto basta specificare l’indirizzo del proprio account,
 effettuare l’autenticazione e garantire accesso al proprio sito dal
@@ -309,8 +324,8 @@ Site. Una volta terminato il wizard vi troverete una nuova build con
 suffisso \_CD (Continuous Deployment) basata sul template di
 distribuzione su Azure Web Site e già configurata.
 
-![](./img//media/image12.png){width="6.6930555555555555in"
-height="4.226388888888889in"}
+![](./img/Continuous-Deploy-ASP.NET-with-TFS-Build/image13.png)
+    
 
 Questa build è a tutti gli effetti una normale build di TFS a cui è
 stato aggiunto un segmento di workflow per effettuare un deploy su Azure
@@ -329,8 +344,8 @@ presenterà un tab dedicato alla distribuzione, il quale lista tutti i
 rilasci effettuati senza il bisogno di andare a visualizzare il log
 delle build di Visual Studio Online.
 
-![](./img//media/image13.png){width="6.6658333333333335in"
-height="7.08244750656168in"}
+![](./img/Continuous-Deploy-ASP.NET-with-TFS-Build/image14.png)
+    
 
 È possibile quindi visualizzare la lista delle distribuzioni, sia andate
 a buon fine sia fallite, con una chiara indicazione su quale sia la
@@ -357,13 +372,10 @@ solitamente si devono anche effettuare test di integrazione, ovvero test
 sull’intero sito rilasciato. Lo scopo è quindi quello di avere una build
 che
 
-1)  Compila il sito
-
-2)  Lo rilascia in un server di test
-
-3)  Esegue gli unit test
-
-4)  Esegue gli Integration test sul sito rilasciato
+1.  Compila il sito
+2.  Lo rilascia in un server di test
+3.  Esegue gli unit test
+4.  Esegue gli Integration test sul sito rilasciato
 
 *Visual Studio comprende uno specifico tipo di test chiamato Web
 Performance Test che permette di effettuare una registrazione del
@@ -376,8 +388,9 @@ Per fare questo è sufficiente andare nel dettaglio della build ed
 aggiungere una nuova lista di test da eseguire, come mostrato nella
 figura sottostante.
 
-![](./img//media/image14.png){width="6.544444444444444in"
-height="3.8208333333333333in"}
+![](./img/Continuous-Deploy-ASP.NET-with-TFS-Build/image15.png)
+    
+
 
 In questo caso ho semplicemente creato un nuovo test run chiamato
 Integration Tests, ed ho semplicemente chiesto di utilizzare MsTest
@@ -392,8 +405,8 @@ non fa altro che navigare ogni pagina del mio sito e verificare che
 nessuna pagina generi un errore. Ecco il risultato della build nel caso
 una pagina invece vada in crash.
 
-![](./img//media/image15.png){width="6.6930555555555555in"
-height="2.660107174103237in"}
+![](./img/Continuous-Deploy-ASP.NET-with-TFS-Build/image16.png)
+    
 
 Come si può vedere sono stati eseguiti 2 test run, il primo set di unit
 test mi dice che tutti i test sono passati, ma l’integration test da un
@@ -401,8 +414,8 @@ errore nel web performance test SmokeCallPages. La parte interessante è
 che cliccando sul nome del test, il risultato viene scaricato dalla drop
 folder ed aperto direttamente in Visual Studio.
 
-![](./img//media/image16.png){width="5.5375in"
-height="4.947916666666667in"}
+![](./img/Continuous-Deploy-ASP.NET-with-TFS-Build/image17.png)
+    
 
 In questo modo si può esaminare il dettaglio del test, in questo caso
 abbiamo un errore nella pagina Home/About.
@@ -417,3 +430,11 @@ riscritta per cui non vi è più la possibilità di eseguire i test con il
 vecchio MsTest Runner. In questo caso è sufficiente utilizzare la
 vecchia definizione della build nel caso voi vogliate eseguire dei web
 performance test.
+
+#### di [Gian Maria Ricci](http://mvp.microsoft.com/en-us/mvp/Gian%20Maria%20Ricci-4025635) – Microsoft MVP
+
+Blog inglese: <http://www.codewrecks.com>
+
+Blog Italiano ALM: <http://www.getlatestversion.it/author/alkampfer/>
+
+Blog Italiano: <http://blogs.ugidotnet.org/rgm>

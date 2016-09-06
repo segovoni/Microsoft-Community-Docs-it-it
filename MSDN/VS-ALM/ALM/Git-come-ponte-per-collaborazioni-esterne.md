@@ -1,14 +1,28 @@
+---
+title: Utilizzare Git come 'ponte' per collaborazioni esterne
+description: Utilizzare Git come 'ponte' per collaborazioni esterne
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: ALM
+ms.custom: CommunityDocs
+---
+
+# Utilizzare Git come 'ponte' per collaborazioni esterne
+
 #### di [Gian Maria Ricci](http://mvp.microsoft.com/en-us/mvp/Gian%20Maria%20Ricci-4025635) – Microsoft MVP
 
 Blog inglese: <http://www.codewrecks.com>
 
 Blog Italiano ALM: <http://www.getlatestversion.it/author/alkampfer/>
 
-Blog Italiano: http://blogs.ugidotnet.org/rgm
+Blog Italiano: <http://blogs.ugidotnet.org/rgm>
 
-1.  ![](./img//media/image1.png){width="0.59375in" height="0.9375in"}
+![](./img/MVPLogo.png)
 
-*Febbraio, 2014 *
+#### di [Gian Maria Ricci](http://mvp.microsoft.com/en-us/mvp/Gian%20Maria%20Ricci-4025635) – Microsoft MVP
+
+*Febbraio, 2014*
 
 Lo scenario
 -----------
@@ -53,8 +67,7 @@ Il secondo passo è inviare la lista delle User Story ad *Acme* in modo
 da assegnare a loro il lavoro da svolgere. La soluzione più immediata è
 inviare una mail.
 
-1.  ![](./img//media/image2.png){width="8.34375in"
-    height="3.3854166666666665in"}
+![](./img/Git-come-ponte-per-collaborazioni-esterne/image2.png)
 
 Il problema dell’invio per mail è però questo: se il destinatario, come
 in questo caso, non ha accesso al tfs originale, dovete includere nella
@@ -83,8 +96,8 @@ distribuzioni standard di Git per effettuare un clone completo del
 repository Subversion di *Acme* in un repository Git locale. Il comando
 è molto semplice ed è così composto.
 
-     git svn clone https://acmedev.googlecode.com/svn/trunk c:\\Acme\\ReactiveSite
-  -- -------------------------------------------------------------------------------
+> git svn clone https://acmedev.googlecode.com/svn/trunk c:\Acme\ReactiveSite
+
 
 Una volta terminato *Nablasoft* avrà nella cartella
 c:\\Acme\\ReactiveSite un repository Git con tutti i commit effettuati
@@ -93,8 +106,7 @@ git-tf](http://vimeo.com/57742458) per connettere lo stesso repository
 Git locale ad una cartella del TFS aziendale basato su TFVC. Il comando
 è molto semplice
 
-     git-tf configure https://gianmariaricci.visualstudio.com/DefaultCollection \$/NablasoftCompany/Main/ReactiveSite
-  -- ------------------------------------------------------------------------------------------------------------------
+> git-tf configure https://gianmariaricci.visualstudio.com/DefaultCollection $/NablasoftCompany/Main/ReactiveSite
 
 Questa semplice istruzione lega il repository locale Git alla cartella
 \$/NablasoftCompany/Main/ReactiveSite del TFS aziendale *Nablasoft*. Si
@@ -107,12 +119,12 @@ Ora i comandi che verranno utilizzati saranno essenzialmente due, il
 primo consente di scaricare nel repository Git locale i nuovi commit che
 sono stati fatti sul Subversion di Acme, il comando è:
 
-Git svn rebase
+> Git svn rebase
 
 Dopo avere aggiornato il proprio repository Git locale si possono
 inviare tutti i nuovi commit a TFS con il comando.
 
-git-tf checkin –deep
+> git-tf checkin –deep
 
 A questo punto tutte le modifiche compresa la storia dei commit
 originali di Subversion è stata trasferita nel TFS aziendale di
@@ -132,44 +144,39 @@ Supponiamo che Acme abbia effettuato un paio di commit sul proprio
 repository Subversion, come visibile nella history sottostante. Il primo
 checkin è quello di creazione della struttura iniziale cartelle e non
 contiene in realtà nessun dato interessante.
-
-1.  ![](./img//media/image3.png){width="11.34375in" height="1.65625in"}
+![](./img/Git-come-ponte-per-collaborazioni-esterne/image3.png)
 
 A questo punto dopo avere effettuato il git svn rebase il repository Git
 locale di Nablasoft si presenterà in questo modo:
 
-1.  ![](./img//media/image4.png){width="6.864583333333333in"
-    height="0.8645833333333334in"}
+![](./img/Git-come-ponte-per-collaborazioni-esterne/image4.png)
 
 Come si può notare nel repository git locale sono stati preservati i
 commenti ed ogni commit in subversion ha un corrispondente commit in
 Git. L’aspetto interessante è che Git ha preservato anche le date
 originali dei commit come visibile nella figura sottostante.
 
-1.  ![](./img//media/image5.png){width="6.634587707786527in"
-    height="2.3226268591426074in"}
+![](./img/Git-come-ponte-per-collaborazioni-esterne/image5.png)
 
 Lo sfasamento di un’ora dipende dal fatto che le date in Git sono state
 memorizzate come UTC, infatti come si può vedere abbiamo un +0000 al
 termine della data. Quando osservo la history con Tortoise SVN ho invece
 la data automaticamente convertita al mio Timezone (Rome GTM +1).
 
-1.  ![](./img//media/image6.png){width="5.759697069116361in"
-    height="1.260259186351706in"}
+![](./img/Git-come-ponte-per-collaborazioni-esterne/image6.png)
 
 A questo punto l’istruzione git-tf checkin --deep eseguirà il
 trasferimento dei commit su TFVC, come si può vedere dalla history del
 Team Project
 
-1.  ![](./img//media/image7.png){width="4.604166666666667in"
-    height="3.6354166666666665in"}
+![](./img/Git-come-ponte-per-collaborazioni-esterne/image7.png)
 
 Ora è sufficiente eseguire l’utility che associa i Work Item ai
 changeset id utilizzando la convenzione \#WID nei commenti ed il
 trasferimento è finito.
 
-1.  ![](./img//media/image8.png){width="4.551514654418198in"
-    height="2.8433945756780403in"}
+![](./img/Git-come-ponte-per-collaborazioni-esterne/image8.png)
+
 
 L’aspetto interessante è che nel commento, oltre al commento originale
 Subversion è presente anche una riga in cui Git-Svn include l’id reale
@@ -214,12 +221,12 @@ TFS di *Nablasoft* e voglia sviluppare con un proprio Source Control
 come Subversion, *Nablasoft* è stata comunque in grado di creare questo
 flusso:
 
-1\) Inviare ad *Acme* il backlog delle cose da fare grazie
+1. Inviare ad *Acme* il backlog delle cose da fare grazie
 all’importazione Excel e Word To TFS\
-2) Far si che gli sviluppatori di *Acme* fossero comunque in grado di
+2. Far si che gli sviluppatori di *Acme* fossero comunque in grado di
 collegare un commit di subversion ad un Work Item di TFS grazie alla
 notazione \#WID\
-3) Importare in maniera progressiva gli incrementi di codice di *Acme*
+3. Importare in maniera progressiva gli incrementi di codice di *Acme*
 nel proprio TFS e ricreare la connessione ai Work Item grazie alla
 notazione \#WID
 
