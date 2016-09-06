@@ -326,46 +326,22 @@ integrato. Per risolvere questo problema ed usare Visual Studio è
 possibile editare direttamente il file di configurazione di git locale o
 globale inserendo questa configurazione
 
-1.  
 
-<!-- -->
-
-1.  \[diff\]
-
+    [diff]
     tool = vsdiffmerge
-
-    \[difftool\]
-
+    [difftool]
     prompt = true
-
-    \[difftool "vsdiffmerge"\]
-
-    cmd = \\"C:\\\\Program Files
-    (x86)[*\\\\Microsoft*](file:///\\microsoft\) Visual Studio
-    11.0\\\\Common7\\\\IDE\\\\vsdiffmerge.exe\\" \\"\$LOCAL\\"
-    \\"\$REMOTE\\" //t
-
+    [difftool "vsdiffmerge"]
+    cmd = \"C:\\Program Files (x86)\\Microsoft Visual Studio 11.0\\Common7\\IDE\\vsdiffmerge.exe\" \"$LOCAL\" \"$REMOTE\" //t
     keepbackup = false
-
     trustexistcode = true
-
-    \[merge\]
-
+    [merge]
     tool = vsdiffmerge
-
-    \[mergetool\]
-
+    [mergetool]
     prompt = true
-
-    \[mergetool "vsdiffmerge"\]
-
-    cmd = \\"C:\\\\Program Files
-    (x86)[*\\\\Microsoft*](file:///\\microsoft\) Visual Studio
-    11.0\\\\Common7\\\\IDE\\\\vsdiffmerge.exe\\" \\"\$REMOTE\\"
-    \\"\$LOCAL\\" \\"\$BASE\\" \\"\$MERGED\\" //m
-
+    [mergetool "vsdiffmerge"]
+    cmd = \"C:\\Program Files (x86)\\Microsoft Visual Studio 11.0\\Common7\\IDE\\vsdiffmerge.exe\" \"$REMOTE\" \"$LOCAL\" \"$BASE\" \"$MERGED\" //m
     keepbackup = false
-
     trustexistcode = true
 
 Il file di configurazione locale si chiama *config* ed è nella cartella
