@@ -1,3 +1,12 @@
+---
+title: Gestire il pattern Branch per Product Backlog Item con TFS
+description: Gestire il pattern Branch per Product Backlog Item con TFS
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: ALM
+ms.custom: CommunityDocs
+---
 
 
 # Gestire il pattern Branch per Product Backlog Item con TFS

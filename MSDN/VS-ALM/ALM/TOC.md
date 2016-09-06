@@ -21,10 +21,9 @@
 # [Creare un Symbol Server con le Build di Team Foundation Server](Creare-Symbol-Server-con-TFS-Build.md)
 # [Gestione delle Branch in Git e Visual Studio](Gestione-Branch-in-Git-e-VS.md)
 # [Gestione dei Conflitti durante lo sviluppo concorrente](Gestione-Conflitti-durante-sviluppo-concorrente.md)
-
 # [Gestire il pattern Branch per Product Backlog Item con TFS](Gestire-pattern-Branch-per-Backlog-in-TFS.md)
+# [Differenze tra Source Control centralizzato e distribuito](Differenze-tra-Source-Control-centralizzato-e-distribuito.md)
 
-# [Differenze tra Source Control centralizzato e distribuito (*)](https://msdn.microsoft.com/it-it/library/dn133093.aspx)
 # [Gestire la numerazione degli assembly durante la build (*)](https://msdn.microsoft.com/it-it/library/jj714729.aspx)
 # [Branching Strategy e tracciabilità dai requisiti al deployment con Team Foundation Server 2012 (*)](https://msdn.microsoft.com/it-it/library/jj573928.aspx)
 # [Standard Environment con Visual Studio Team Lab Management 2012 (*)](https://msdn.microsoft.com/it-it/library/jj191715.aspx)
