@@ -1,13 +1,15 @@
 ---
-title: Pricing: capire i costi di Windows Azure
-description: Pricing: capire i costi di Windows Azure
+title: Pricing - capire i costi di Windows Azure
+description: Pricing - capire i costi di Windows Azure
 author: MSCommunityPubService
 ms.date: 08/01/2016
 ms.topic: how-to-article
 ms.service: cloud
 ms.custom: CommunityDocs
 ---
-# Pricing: capire i costi di Windows Azure
+
+
+# Pricing - capire i costi di Windows Azure
 
 #### Di [Roberto Freato](https://mvp.microsoft.com/it-it/PublicProfile/4028383) – Microsoft MVP
 
