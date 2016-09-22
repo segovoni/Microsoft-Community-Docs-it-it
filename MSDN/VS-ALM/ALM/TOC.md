@@ -23,9 +23,10 @@
 # [Gestione dei Conflitti durante lo sviluppo concorrente](Gestione-Conflitti-durante-sviluppo-concorrente.md)
 # [Gestire il pattern Branch per Product Backlog Item con TFS](Gestire-pattern-Branch-per-Backlog-in-TFS.md)
 # [Differenze tra Source Control centralizzato e distribuito](Differenze-tra-Source-Control-centralizzato-e-distribuito.md)
+# [Gestire la numerazione degli assembly durante la build](AssemblyNumberingDuringBuild.md)
 
-# [Gestire la numerazione degli assembly durante la build (*)](https://msdn.microsoft.com/it-it/library/jj714729.aspx)
 # [Branching Strategy e tracciabilità dai requisiti al deployment con Team Foundation Server 2012 (*)](https://msdn.microsoft.com/it-it/library/jj573928.aspx)
+
 # [Standard Environment con Visual Studio Team Lab Management 2012 (*)](https://msdn.microsoft.com/it-it/library/jj191715.aspx)
 # [Migrazioni con la Team Foundation Server Integration Platform (*)](https://msdn.microsoft.com/it-it/library/jj191716.aspx)
 # [Team Foundation Server, il project management veste la bandiera Microsoft (*)](https://msdn.microsoft.com/it-it/library/cc185100.aspx)

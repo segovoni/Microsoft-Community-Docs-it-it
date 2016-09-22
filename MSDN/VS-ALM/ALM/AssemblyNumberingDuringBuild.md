@@ -1,7 +1,18 @@
+---
+title: Gestire la numerazione degli assembly durante la build
+description: Gestire la numerazione degli assembly durante la build
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: ALM
+ms.custom: CommunityDocs
+---
+
+# Gestire la numerazione degli assembly durante la build
+
 #### di [Gian Maria Ricci](http://mvp.microsoft.com/profiles/Ricci) – Microsoft MVP
 
-1.  ![](./img//media/image1.png){width="0.5938331146106737in"
-    height="0.9376312335958005in"}
+![](./img/MVPLogo.png)
 
 *Settembre, 2012*
 
@@ -53,11 +64,11 @@ Per risolvere questi problemi ed avere una tracciabilità delle varie
 versioni degli assembly che sono presenti nella propria organizzazione
 si può utilizzare una semplice convenzione.
 
-—Tutti gli assembly compilati dagli sviluppatori nelle proprie macchine
+- Tutti gli assembly compilati dagli sviluppatori nelle proprie macchine
 hanno AssemblyVersion uguale a AssemblyFileVersion e con il formato
 X.Y.0.0, ovvero utilizzano solamente il Major ed il Minor
 
-—Tutti gli assembly compilati dagli script di build hanno
+- Tutti gli assembly compilati dagli script di build hanno
 AssemblyVersion nel formato X.Y.0.0, mentre l’AssemblyFileVersion deve
 avere un formato X.Y.R.B dove R e B debbono *identificare univocamente
 la build che ha generato quegli assembly*.
@@ -112,8 +123,6 @@ distinte procedure
     Workflow Foundation che include le operazioni di numerazione
     degli assembly.
 
-3.  
-
 Creazione di una build con versioning
 -------------------------------------
 
@@ -124,8 +133,8 @@ trovate nella cartella BuildProcessTemplates) nel source control del
 vostro progetto assieme alle altre di default già presenti (anche qui
 nella cartella **BuildProcessTemplates).**
 
-1.  ![](./img//media/image2.png){width="3.5516393263342083in"
-    height="2.4163648293963256in"}
+![](./img/AssemblyNumberingDuringBuild/image2.png)
+
 
 A questo punto dovete copiare la dll chiamata
 **TfsBuild.Versioning.Activities.dll** (che trovate nella cartella
@@ -139,8 +148,8 @@ infine selezionare il controller desiderato e premere il tasto
 “properties”. A questo punto dovete controllare il contenuto
 dell’opzione “Version control path to custom assemblies”.
 
-1.  ![](./img//media/image3.png){width="6.134650043744532in"
-    height="4.353623140857393in"}
+![](./img/AssemblyNumberingDuringBuild/image3.png)
+
 
 Questa opzione permette di specificare una cartella del source control
 dove le macchine di build andranno a cercare le dll per le build
@@ -160,8 +169,8 @@ da effettuare si trova nel tab “Process” dove per prima cosa dovete
 scegliere di usare il nuovo template appena inserito nel codice sorgente
 premendo il tasto New.
 
-1.  ![](./img//media/image4.png){width="5.593051181102362in"
-    height="5.124360236220473in"}
+![](./img/AssemblyNumberingDuringBuild/image4.png)
+
 
 Nella finestra di selezione “New Build Process Template” potete poi
 scegliere “select an existing XAML File” per usare il nuovo workflow
@@ -177,8 +186,8 @@ Dopo aver scelto il nuovo build template una nuova sezione di parametri
 appare nella definizione della build, come rappresentato nella figura
 seguente.
 
-1.  ![](./img//media/image5.png){width="6.6930555555555555in"
-    height="1.9283136482939633in"}
+![](./img/AssemblyNumberingDuringBuild/image5.png)
+
 
 Questi parametri sono specifici della nuova build e permettono di
 personalizzare la numerazione automatica. Le prime due voci consentono
@@ -216,19 +225,16 @@ sufficiente verificare le proprietà delle dll da Windows che nel tab
 compilazione del progetto di esempio di Tailspin Toys presente nella
 macchina virtuale di test di Brian Keller.
 
-1.  ![](./img//media/image6.png){width="3.7391163604549433in"
-    height="2.8433945756780403in"}
+![](./img/AssemblyNumberingDuringBuild/image6.png)
+
 
 Considerando che la data in formato Julian 5 cifre è YYDDD dove il DDD
 rappresenta il numero di giorni passati dall’inizio dell’anno, questa
 build è stata effettuata nel 2012 il 13 agosto ed è la prima della
 giornata.
 
+
 #### di [Gian Maria Ricci](http://mvp.microsoft.com/profiles/Ricci) – Microsoft MVP
 
-1.  [*Altri articoli di Gian Maria Ricci nella
-    Libreria*](http://sxp.microsoft.com/feeds/3.0/msdntn/TA_MSDN_ITA?contenttype=Article&author=Gian%20Maria%20Ricci)
-    ![](./img//media/image7.png){width="0.1771084864391951in"
-    height="0.1771084864391951in"}
 
 
