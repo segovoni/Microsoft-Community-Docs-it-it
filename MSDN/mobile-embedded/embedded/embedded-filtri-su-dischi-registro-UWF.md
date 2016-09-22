@@ -1,6 +1,6 @@
 ---
-title: Windows Embedded Standard I filtri sui dischi e sul registro: UWF
-description: Windows Embedded Standard I filtri sui dischi e sul registro: UWF – Unified Write Filter
+title: Windows Embedded Standard I filtri sui dischi e sul registro - UWF
+description: Windows Embedded Standard I filtri sui dischi e sul registro - UWF (Unified Write Filter)
 author: MSCommunityPubService
 ms.date: 08/01/2016
 ms.topic: how-to-article
@@ -22,9 +22,9 @@ Blog: <http://gianni.rosagallina.com/it>
 
 *Dicembre 2014*
 
-Negli articoli precedenti ci siamo interessati ai filtri di scrittura in
-generale, dell’Enhanced Write Filter (EWF) e del File Based Write Filter
-(FBWF); in questo ci occuperemo di quello che va sotto il nome di filtro
+Negli articoli precedenti ci siamo interessati ai filtri di [scrittura in
+generale](embedded-filtri-su-dischi-registro-intro.md), dell’[Enhanced Write Filter (EWF)](embedded-filtri-su-dischi-registro-EWF.md) e del [File Based Write Filter
+(FBWF)](embedded-filtri-su-dischi-registro-FBWF.md); in questo ci occuperemo di quello che va sotto il nome di filtro
 di scrittura unificato ***filtro-UWF*** (Unified Write Filter).
 
 Il filtro di scrittura unificato (***filtro-UWF***) prende il nome
@@ -188,6 +188,7 @@ dischi:
 |PagingFiles   |      Determina il nome ed il posizionamento del file di ***paging*** del sistema. Il file di ***paging*** è il luogo dove il sistema si appoggia quando è in carenza di RAM. Nel nostro caso, dove stiamo utilizzando il ***filtro-UWF***, utilizzare un ***paging*** potrebbe portare ad un controsenso: il sistema è in carenza di RAM e tenta di scrivere su un ***paging*** file che è su un volume protetto e che quindi scriverebbe su un overlay che è esso stesso in RAM!!<br/>Come **default** la funzionalità è disabilitata ed il valore di questo parametro è una stringa vuota.|
 
 Altri parametri di configurazione sono specifici del ***filtro-UWF***:
+
 |  |  |
 |-------|--------|
 |  AddAllVolumes      |        Determinare se applicare il ***filtro-UWF*** a tutti i volumi del sistema.<br/> **True**; Applica il filtro a tutti i volumi del sistema.<br/>**False**; Non applica il filtro a tutti i volumi del sistema, ma si riferirà alle sezioni **ProtectedVolumeList** (**default**).|

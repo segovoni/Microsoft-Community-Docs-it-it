@@ -23,8 +23,8 @@ ms.custom: CommunityDocs
 *Giugno 2014*
 
 Negli articoli precedenti
-([Introduzione](http://msdn.microsoft.com/it-it/library/dn722310.aspx)
-ed [EWF](http://msdn.microsoft.com/it-it/library/dn747237.aspx)) ci
+([Introduzione](embedded-filtri-su-dischi-registro-intro.md)
+ed [EWF](embedded-filtri-su-dischi-registro-EWF.md)) ci
 siamo interessati ai filtri di scrittura in generale, e all’Enhanced
 Write Filter (EWF) più in particolare; in questo ci occuperemo di quello
 che va sotto il nome di filtro di scrittura basato su file:
@@ -135,8 +135,8 @@ dischi:
   
 
 Altri parametri di configurazione sono specifici del ***filtro-FBWF***:
-
-  
+| Nome                                 | Descrizione                          |
+|-----|----|  
 |  CacheType|Seleziona come configurare il tipo di allocazione per l’overlay cache del ***filtro-FBWF***. Ecco i valori previsti:<br/>Pre-allocated – il ***filtro-FBWF*** alloca subito il valore specificato nella variabile EnableVirtualSizeDisplay;<br/>Dynamic – il ***filtro-FBWF*** alloca la memoria dell’overlay dinamicamente;<br/>Dynamic Compressed – il ***filtro-FBWF*** alloca la memoria dell’overlay dinamicamente comprimendo i dati. In questo modo si risparmia RAM, ma ci si impiega più tempo.|
 |EnableVirtualSizeDisplay|Seleziona la visualizzazione standard delle dimensioni dei dischi protetti da scrittura.<br/>Se questo valore è **True** verrà visualizzata la dimensione virtuale del volume, cioè lo spazio di memoria disponibile sull’overlay.<br/>Se il valore è **False** verrà visualizzata la dimensione attuale del volume fisico.|
 |MaximumCacheSizeInMB|Seleziona la dimensione massima dell’overlay espressa in MB. Ecco i valori dei limiti e del default per le due architetture:<br/>**Valore** -  **32-bit** -  **64-bit**<br/>Default - 128 -  256<br/> Minimo   - 16 -  16<br/>Massimo -  1024  - 131072|             
