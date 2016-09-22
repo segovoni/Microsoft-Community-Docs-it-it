@@ -1,3 +1,12 @@
+---
+title: Windows Embedded Standard I filtri sui dischi e sul registro - Introduzione
+description: Windows Embedded Standard I filtri sui dischi e sul registro - Introduzione
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: embedded
+ms.custom: CommunityDocs
+---
 
 # Windows Embedded Standard I filtri sui dischi e sul registro - Introduzione
 
