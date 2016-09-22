@@ -1,6 +1,6 @@
 ---
-title: Windows Embedded Standard I filtri sui dischi e sul registro - Introduzione
-description: Windows Embedded Standard I filtri sui dischi e sul registro - Introduzione
+title: Windows Embedded Standard I filtri sui dischi e sul registro: UWF
+description: Windows Embedded Standard I filtri sui dischi e sul registro: UWF – Unified Write Filter
 author: MSCommunityPubService
 ms.date: 08/01/2016
 ms.topic: how-to-article
@@ -8,286 +8,661 @@ ms.service: embedded
 ms.custom: CommunityDocs
 ---
 
-# Windows Embedded Standard I filtri sui dischi e sul registro - Introduzione
+# Windows Embedded Standard I filtri sui dischi e sul registro: UWF – Unified Write Filter
 
-#### di [Beppe Platania](http://mvp.microsoft.com/it-it/mvp/Beppe%20Platania-402928) - **Microsoft eMVP**
+#### di [Beppe Platania](http://mvp.microsoft.com/it-it/mvp/Beppe%20Platania-4029281) - Microsoft eMVP
 
 Blog: <http://beppeplatania.com/it>
 
 ![](./img/MVPLogo.png)
 
-Riveduto e corretto da: [Gianni Rosa Gallina](http://mvp.microsoft.com/it-it/mvp/Gianni%20Rosa%20Gallina-4034912) - **Microsoft eMVP**
+#### Riveduto e corretto da: [Gianni Rosa Gallina](http://mvp.microsoft.com/it-it/mvp/Gianni%20Rosa%20Gallina-4034912) - Microsoft eMVP
 
 Blog: <http://gianni.rosagallina.com/it>
 
-*Aprile 2014*
+*Dicembre 2014*
 
-Questo è l’articolo introduttivo di una serie di articoli focalizzati
-sui filtri sui dischi e sul registro in ambiente Windows Embedded
-Standard.
+Negli articoli precedenti ci siamo interessati ai filtri di scrittura in
+generale, dell’Enhanced Write Filter (EWF) e del File Based Write Filter
+(FBWF); in questo ci occuperemo di quello che va sotto il nome di filtro
+di scrittura unificato ***filtro-UWF*** (Unified Write Filter).
 
-L’esigenza di mettere dei filtri sui dischi, soprattutto su quello di
-sistema, è stata una delle prime scaturite dall’idea di sviluppare un
-dispositivo embedded. L’obiettivo iniziale era quello di poter avere una
-“applicazione” dedicata ad uno scopo preciso e che quindi ogni volta che
-ripartiva aveva le stesse configurazioni senza sapere cosa era successo
-nel suo periodo di lavoro precedente.
+Il filtro di scrittura unificato (***filtro-UWF***) prende il nome
+proprio per la sua caratteristica di offrire sia le funzionalità del
+***filtro-EWF*** (indirizzato ad una protezione sui settori del volume)
+sia quelle del ***filtro-FBWF*** (indirizzato ad una protezione basata
+su file e cartelle di un volume). Il ***filtro-UWF,*** inoltre, integra
+anche le funzionalità del ***filtro sul registro*** e ne offre di nuove.
 
-A metà degli anni ’90 cominciarono i tentativi di “protezione” del disco
-di sistema con vari artifizi e allo stesso tempo iniziò il dilagare di
-virus e di altri inconvenienti dovuti ad hacker o semplicemente a
-problemi di sistema.
+Con l’introduzione del ***filtro-UWF*** avvenuta con Windows Embedded 8
+Standard, gli altri tre filtri menzionati in precedenza sono diventati
+“sconsigliati” (deprecated) anche se nel configuratore ***ICE*** sono
+ancora presenti in una sezione dedicata della parte di “lockdown”
+denominata “Compatibility Write Filters”. Il motivo per cui non sono
+stati eliminati del tutti è legato al fatto di non voler costringere,
+chi avesse sviluppato applicativi che utilizzano le chiamate a questi
+filtri, di doverle aggiornare per allinearsi a quelle nuove del
+***filtro-UWF.***
 
-La soluzione di mettere, in qualche modo, il disco di sistema come un
-dispositivo di sola lettura sembrava una buona soluzione, ma quando
-questo veniva ottenuto in maniera “fisica” (uno switch hardware per
-impedire fisicamente la scrittura) tutti gli applicativi sviluppati per
-ambienti “desktop”, non aspettandosi degli errori di scrittura, non
-erano in grado di gestire questo tipo di errore e tendevano a bloccarsi
-!!
+Il ***filtro-UWF*** lavora a livello di settore del volume, ma prevede
+comunque funzionalità che operano a livello di file e di registro. Come
+per gli altri filtri sui dischi, ***filtro-UWF*** intercetta le
+scritture che andrebbero su un settore del volume protetto e le
+memorizza in un overlay, poi, quando l’applicativo richiede delle
+letture dallo stesso settore il ***filtro-UWF*** le recupera
+direttamente dall’overlay.
 
-Ancora più problematica è la situazione dal punto di vista del sistema
-operativo: scritto per funzionare nativamente su un disco rigido su cui
-scrive con un’alta frequenza un elevato numero di informazioni sia
-necessarie a tener traccia delle evoluzioni del sistema, sia a livello
-storico per poter risalire, a posteriori, ad eventuali problemi
-verificatisi nel corso dell’utilizzo: file di log, file temporanei,
-ecc...
+Per permettere la gestione a livello di file-system il ***filtro-UWF***
+fornisce un servizio che tiene conto di quali sono le cartelle e/o i
+file che vanno scritti direttamente sul volume fisico e non
+sull’overlay.
 
-Per poter funzionare nativamente senza potersi appoggiare su un disco si
-sarebbero dovuti riscrivere, o rivedere, pezzi di sistema operativo! In
-alternativa si sarebbe dovuta trovare una soluzione, esterna al cuore
-del sistema, per ottenere gli stessi risultati senza creare o modificare
-pesantemente il sistema stesso.
+L’overlay del ***filtro-UWF*** può essere di tipo ***RAM Overlay*** e
+***DISK Overlay***. Il primo tipo, che è quello di default, prevede un
+overlay in RAM con un dimensionamento configurabile. Il ***DISK
+Overlay*** prevede un overlay su un file di dimensione configurabile
+posizionato sul volume di sistema. La prima configurazione è consigliata
+in presenza di dischi flash o allo stato solido per limitare il più
+possibile le scritture. La seconda configurazione è consigliata quando
+si ha bisogno di proteggere il sistema da interventi non voluti, ma il
+volume di sistema è un disco rotante senza problemi di limiti di
+scrittura. Bisogna ricordare, inoltre, che, anche se l’overlay viene
+memorizzato su un file del volume di sistema, questi viene perso al
+riavvio.
 
-Parallelamente all’idea “funzionale” di proteggere il sistema si è
-concretizzata la possibilità di utilizzare memorie flash al posto dei
-dischi rigidi con vantaggi legati all’eliminazione di parti in
-movimento, cioè diminuire l’usura e allungare la “vita” del dispositivo
-di massa. L’utilizzazione di memorie flash, inoltre, è fondamentale per
-utilizzi in cui il dispositivo è soggetto a forti sollecitazioni
-fisiche: scossoni e vibrazioni o ambienti particolari come quelli
-polverosi.
+Il ***filtro-UWF*** prevede un singolo overlay anche se i volumi da
+proteggere sono più di uno. Le variabili che configurano l’overlay,
+oltre al tipo, sono quelle che determinano e controllano la sua
+dimensione:
 
-Le memorie flash hanno, però, un numero di scritture limitato (anche se
-nel tempo si è passati dal milione di riscritture sulla stessa cella a
-più del doppio, pur rimanendo in costi contenuti!). L’effetto che si
-ottiene installando un sistema operativo Windows su di una flash senza
-l’abilitazione di un filtro di scrittura è che nel tempo (anche poche
-settimane, dipende dalla flash, dal sistema e dagli applicativi) la
-dimensione della flash diminuisce fino a non permettere più nessuna
-scrittura e il sistema comincia ad avere problemi.
+- ***OverlayMaximumSize*** che è la dimensione massima dell’overlay in MB;
+- ***OverlayWarningThreshold*** è la soglia di attenzione per cui si può
+ottenere un avvertimento;
+- ***OverlayCriticalThreshold*** è la soglia critica per cui si può sapere
+che l’overlay è pieno.
 
-Se, dopo l’installazione del sistema e degli applicativi non si
-scrivesse più (o si scrivesse molto poco) sul disco, la “vita” della
-flash si allungherebbe considerevolmente (decine di anni e non più
-settimane!).
+Con il termine volume di solito si individua una delle partizioni in cui
+può essere diviso un disco, ma ricordiamo che un volume può essere
+formato addirittura da più dischi. Il volume, che va selezionato sempre
+con una lettera di sistema con la variabile ***DriveLetter***, può
+essere poi memorizzato in due modi in accordo con la variabile
+***Binding***:
 
-Microsoft, già dai tempi di Windows NT Embedded, ha ricercato una
-soluzione semplice ed efficace e questa si è concretizzata, fino a ieri,
-in due funzionalità distinte: il filtro di scrittura avanzato (EWF =
-Enhanced Write Filter) e il filtro di scrittura su file (FBWF = File
-Based Write Filter).
+- Con il **DeviceID** che il sistema gli assegna al momento
+dell’abilitazione quando la variabile ***Binding*** vale “***Tight
+Binding***” che è la configurazione di default;
+- Con la lettera che il sistema gli assegna al momento dell’abilitazione
+(es. C:) quando la variabile ***Binding*** viene messa a “***Loose
+Binding***”;
 
-Con il rilascio di Windows Embedded 8 Standard le due funzionalità sono
-state “integrate” in un “filtro unificato” (UWF = Unified Write Filter)
-che ha migliorato, sotto vari aspetti, la fruibilità di questa
-tecnologia.
+Per la parte che riguarda il **filtro sul registro** che è stato
+integrato nel ***filtro-UWF***, ci sono tre parametri che si occupano
+della configurazione di questa parte:
 
-Il meccanismo di funzionamento è quello di mettere un filtro per non
-aggiornare “fisicamente” il disco di sistema e memorizzare le modifiche
-che questi subisce durante la sessione di lavoro in un altro posto,
-tipicamente la RAM oppure un altro disco; quando il sistema riparte, il
-disco non è stato modificato e ci si ritrova sempre nella stessa
-situazione iniziale.
+- **RegistryExceptionsUserDefined** che è la lista delle chiavi da
+escludere dalla protezione;
+- **DomainSecretKeyPersisted** che è una variabile booleana per escludere
+o meno la chiave segreta del Dominio;
+- **TSCALPersisted** che è una variabile booleana per escludere o meno la
+chiave di accesso dei client via RDP (Remote Desktop Protocol).
 
-L’architettura di Windows permette l’introduzione di questo filtro in
-più parti dello “stack di scrittura” per cui i filtri principali si
-differenziano proprio per il posto nello stack dove effettuano il loro
-compito.
+> ***Nota:*** Per la lista delle chiavi di registro escludibili dal
+**filtro sul registro** esistono alcune limitazioni:
+Come radice della chiave è ammessa soltanto **HKLM**.
+Il ramo “System” non può essere garantito alcune chiavi vengono
+aggiornate prima che il servizio di UWF sia attivo.
 
-Il filtro di scrittura avanzato (EWF=Enhanced Write Filter) viene
-applicato ad un livello molto vicino al driver HW di scrittura sul
-disco, potremmo dire che, nel momento in cui il sistema ha individuato
-il “settore” di disco da cui dovrebbe leggere, controlla se questo ha il
-filtro abilitato o meno. In caso positivo controlla se il dato è già
-stato aggiornato nella sessione corrente, in caso positivo legge il dato
-dal luogo (Overlay) dove la configurazione ha scelto di salvare i dati,
-in caso negativo legge “fisicamente” dal disco.
 
-Analogamente per la scrittura: nel momento in cui il sistema ha
-individuato il “settore” di disco su cui dovrebbe scrivere, controlla se
-questa ha il filtro abilitato o meno. In caso positivo scrive il dato
-nel luogo (Overlay) dove la configurazione ha scelto di salvare i dati,
-in caso negativo scrive “fisicamente” sul disco.
+Prerequisiti di sistema 
+------------------------
 
-Nella figura seguente riportiamo uno schema grossolano degli strati di
-sistema per arrivare al “settore” fisico del disco dove si trova
-l’informazione evidenziando la posizione del filtro di scrittura
-avanzato (di qui in avanti ***filtro-EWF***).
+Nel pianificare l’utilizzo di questa funzionalità è bene controllare le
+caratteristiche del disco che si vuole proteggere e tutta una serie di
+prerequisiti di sistema:
+
+- ***Modalità RAM*** durante l’attivazione del ***filtro-UWF*** esso
+stesso crea un nuovo overlay in memoria che verrà riempito via via dalle
+memorizzazioni dei settori che vengono aggiornati. Se dei dati che fanno
+parte dei settori all’interno dell’overlay vengono cancellati, l’overlay
+diminuisce di dimensioni;
+- ***Modalità DISK*** durante l’attivazione del ***filtro-UWF*** esso
+stesso crea un nuovo file di overlay sul disco di sistema di dimensioni
+definite dalla variabile ***OverlayMaximumSize***.
+  
+
+La funzionalità ***HORM*** (Hibernate Once/Resume Many) è prevista
+soltanto con un overlay di tipo RAM.
+
+Per tutti e due i tipi di overlay è possibile, a livello programmatico,
+essere avvertiti quando le dimensioni dell’overlay hanno superato la
+soglia di attenzione (***OverlayWarningThreshold***) o quella critica
+(***OverlayCriticalThreshold***).
+
+Per le sue segnalazioni operative, il ***filtro-UWF*** utilizza il
+repository degli eventi di sistema (**Event Logs**). Quindi, in caso di
+problemi legati al funzionamento del ***filtro-UWF***, vi consigliamo di
+riferirvi ai messaggi di sistema sia per indagare personalmente sia per
+coinvolgere un qualsiasi supporto tecnico esterno.
+
+Poiché, come vedremo tra poco, il ***filtro-UWF*** ha un’architettura
+che coinvolge sia l’area di sistema che l’area utente i messaggi
+verranno memorizzati, a seconda dei casi, nell’area corrispondente
+all’applicativo che li ha generati: “system” se generati dal servizio
+che si occupa dell’overlay, “application” se generati dai configuratori.
+
+Gli elementi del filtro-UWF 
+----------------------------
+
+La tecnologia del ***filtro-UWF*** utilizza un certo numero di elementi
+che si occupano, ognuno per il proprio compito, di eseguire tutte le
+funzionalità che il filtro prevede: dalla gestione dell’abilitazione e
+disabilitazione all’avvio fino alla possibilità di memorizzare
+stabilmente i cambiamenti avvenuti fino ad un certo momento con una
+chiamata a sistema.
+
+Il Modulo che contiene tutti questi elementi si chiama:
+“***UnifiedWriteFilter***”, nel catalogo è posizionato nel ramo:
+Features\\Lockdown\\Unified Write Filter (UWF)\\ e contiene gli elementi
+descritti nella seguente tabella:
+
+|  Elemento      |           Descrizione|
+|-----------|-------------|
+|Uwfreg.sys<br/>Uwfrtl.sys<br/>Uwfs.sys <br/>Uwfvol.sys   |            Sono i driver di sistema del ***filtro-UWF***. Come si può notare, dovendo intervenire a più livelli, il numero dei driver è maggiore di quello degli altri filtri sui dischi. Questi driver si occupano di intercettare le richieste di scrittura e lettura dal disco che si sta proteggendo indirizzando la funzione al disco fisico o all’overlay a seconda dei casi.|
+| UwfServiceingSvc.exe <br/>UwfServiceingShell.exe  |   Sono gli eseguibili dei servizi che gestiscono i vari elementi che compongono il ***filtro-UWF.***|
+| Uwfresources.dll  <br/> Uwfwmi.dll |       Sono le DLL di supporto agli eseguibili dei vari elementi che compongono il ***filtro-UWF.***|
+|Uwfmgr.exe    |           Uwfmgr.exe (UWF Manager Console Application) è l’applicazione a riga commando che permette di conoscere lo stato del ***filtro-UWF*** e la sua configurazione attuale. Inoltre, offre una serie di comandi per modificare lo stato del ***filtro-UWF*** e la sua configurazione. (Più avanti vedremo la lista dei comandi in dettaglio)|
+| Uwfservicingscr.scr  |    E’ lo screen-saver utilizzato durante l’aggiornamento di sistema (vedi ***UWF Servicing***).|
+
+
+Nei parametri di configurazione presentati dal configuratore ***ICE***
+per questa funzionalità, alcuni sono generici di tutti i filtri sui
+dischi:
+
+|Nome    |            Descrizione|
+|-----------|-------- |
+|BootStatusPolicy   | Determina, in caso di errori che si dovessero presentare all’avvio o al riavvio del sistema, quali debbano essere visualizzati. Poiché stiamo operando proprio per poter spegnere il dispositivo direttamente interrompendo l’alimentazione, è meglio evitare che, alla ripartenza del sistema, venga visualizzato un qualsiasi messaggio d’errore. I possibili valori sono:<br/>DisplayAllFailures – Visualizza tutti gli errori;<br/>IgnoreAllFailures – Non visualizzare errori (***default***);<br/>IgnoreBootFailures – Non visualizzare gli errori di avvio del sistema;<br/>IgnoreShutdownFailures – Non visualizzare gli errori di chiusura del sistema.|
+|DisableAutoDefrag |  Determina se disabilitare o meno il servizio di deframmentazione disco. Questo servizio, utile se si sta lavorando con un disco rigido, diventa inutile e dannoso se si sta lavorando con una flash che ha già internamente un sistema di organizzazione delle scritture ottimizzato per la propria natura. I valori possibili sono soltanto:<br/>**True**; Disabilita il Servizio (**default**);<br/>**False**; Abilita il Servizio.|
+|DisableSR |          Determina se disabilitare o meno la memorizzazione dei dati “di ripristino” del sistema.<br/>Nel nostro caso specifico, spesso conviene evitare che il sistema scriva dei dati “di ripristino” sul disco che, protetto dal ***filtro-UWF***, li scriverebbe di fatto in memoria e al riavvio, se non salvati con un comando specifico, li perderebbe.<br/>0; Abilita la memorizzazione dei dati “di ripristino”;<br/>1; Disabilita la memorizzazione dei dati “di ripristino” (**default**).|
+|EnablePrefetcher  |  La funzionalità di “Prefetch” fa in modo che il sistema cominci a caricare dei dati degli applicativi più utilizzati dall’utente nella sessione prima ancora che questi ne chieda nuovamente il caricamento. Tutto questo velocizza i tempi di risposta percepiti dall’utente nel momento in cui richiede i successivi caricamenti.<br/>0; Disabilita la funzionalità (**default**);<br/>1; Abilita la funzionalità.|
+|EnableSuperfetch|La funzionalità di “Superfetch” è una miglioria alla funzionalità di “Prefetch” estendendola oltre la sessione: il sistema memorizza gli applicativi più utilizzati dall’utente e comincia a precaricarli nella prossima sessione prima ancora che l’utente ne chieda il caricamento. Tutto questo velocizza i tempi di risposta percepiti dall’utente nel momento in cui richiede applicativi che aveva utilizzato nelle sessioni precedenti. In caso specifico di utilizzo del ***filtro-UWF***, questa memorizzazione verrebbe persa al riavvio e quindi in generale la funzionalità è meglio lasciarla disabilitata in modo da non affaticare il sistema con azioni inutili.<br/> 0; Disabilita la funzionalità (**default**);<br/>1; Abilita la funzionalità.|
+|PagingFiles   |      Determina il nome ed il posizionamento del file di ***paging*** del sistema. Il file di ***paging*** è il luogo dove il sistema si appoggia quando è in carenza di RAM. Nel nostro caso, dove stiamo utilizzando il ***filtro-UWF***, utilizzare un ***paging*** potrebbe portare ad un controsenso: il sistema è in carenza di RAM e tenta di scrivere su un ***paging*** file che è su un volume protetto e che quindi scriverebbe su un overlay che è esso stesso in RAM!!<br/>Come **default** la funzionalità è disabilitata ed il valore di questo parametro è una stringa vuota.|
+
+Altri parametri di configurazione sono specifici del ***filtro-UWF***:
+|  |  |
+|-------|--------|
+|  AddAllVolumes      |        Determinare se applicare il ***filtro-UWF*** a tutti i volumi del sistema.<br/> **True**; Applica il filtro a tutti i volumi del sistema.<br/>**False**; Non applica il filtro a tutti i volumi del sistema, ma si riferirà alle sezioni **ProtectedVolumeList** (**default**).|
+|  Binding     |               Seleziona il tipo di definizione del volume:<br/>Tipo   /         Descrizione<br/>Loose Binding  --> Il volume viene individuato tramite la sua lettera (es. **C:**).<br/>Tight Binding --> Il volume viene individuato tramite il suo device-ID (**default**).|
+|DomainSecret<br/>KeyPersisted   |    Determinare se escludere dal ***filtro sul registro***, interno alla funzionalità di ***filtro-UWF***, la chiave di autenticazione del dominio (secret key).<br/>      **True**; Mantiene la memorizzazione della chiave (**default**);<br/>**False**; Non esclude la chiave dal filtro e quindi questa verrà persa al prossimo riavvio.|
+|OverlayCriticalThreshold |  Determina il valore della soglia critica, in MB, per l’overlay del ***filtro-UWF***. Quando la dimensione dell’overlay raggiunge o supera questo valore di soglia critica, il servizio di controllo del ***filtro-UWF*** invia un evento di notifica. Il valore di default è 1024MB.|
+|OverlayMaximumSize    |     Contiene il valore della massima dimensione del l’overlay del ***filtro-UWF***. Il valore è un numero intero espresso in MB. Il default è 1024MB.|
+|OverlayType       |         Seleziona il tipo di overlay da utilizzare per il ***filtro-UWF***:<br/>Tipo      /     Descrizione<br/>RAM overlay  -->  L’overlay è memorizzato in RAM (default).<br/>DISK overlay  --> L’overlay è memorizzato su un file (pre-allocato) del disco di sistema.<br/><br/>NOTA: Anche se l’overlay è memorizzato su un file, con il riavvio tutti le modifiche verranno perse.|
+|OverlayWarning Threshold    |        Determina il valore della soglia di attenzione, in MB, per l’overlay del ***filtro-UWF***. Quando la dimensione dell’overlay raggiunge o supera questo valore di soglia, il servizio di controllo del ***filtro-UWF*** invia un evento di notifica. Il valore di default è 512MB|
+| ProtectedVolumeList   |     Elenca la lista dei volumi (partizioni) che devono essere protette dal ***filtro-UWF***. Se il volume non è presente in questa lista, non potrà essere protetto a “run-time”. Questo è un parametro “complesso” che prevede, per ogni volume inserito, un’ulteriore lista di parametri (vedi la prossima tabella).|
+|RegistryExceptions UserDefined   |     Contiene la lista delle chiavi di registro da escludere dal ***filtro sul registro***, interno alla funzionalità di ***filtro-UWF***. Quando una chiave è inserita in questa lista, tutte le modifiche che subisce durante la sessione verranno “mantenute” anche dopo il riavvio.|
+| TSCALPersisted    |         Determinare se escludere dal ***filtro sul registro***, interno alla funzionalità di ***filtro-UWF***, la chiave di accesso dei client via RDP (Remote Desktop Protocol).<br/>**True**; Mantiene la memorizzazione della chiave (**default**);<br/>**False**; Non esclude la chiave dal filtro e quindi questa verrà persa al prossimo riavvio.|
+
+Lista dei parametri per ogni volume configurato nel ***filtro-UWF***.
+
+|  Nome    |         Descrizione|
+|-------|--------- |
+| Action      |     Determina come deve essere inizializzato il volume. I possibili valori sono:<bt/>**AddListItem** La configurazione del volume viene aggiunta all’immagine (**default**);<br/> **Modify** La configurazione del volume viene aggiornata;<br/> **RemoteListItem** La configurazione del volume viene rimossa.|
+|DriveLetter  |    E’ la lettera del volume che si vuole proteggere. I valori permessi sono: da **C:** a **Z:**|
+|FileExceptions  | E’ la lista delle cartelle o dei file da escludere dalla protezione sul volume di questa sezione di configurazione.|
+|UserDefined   |   Per inserire più cartelle e/o più file basterà elencarli uno sotto l’altro:<br/>*C:\\BEPS-App\\Logs<br/>C:\\BEPS-App\\Traces*|
+  
+
+Nella figura seguente vediamo come si presenta la configurazione dei
+parametri del ***filtro-UWF*** nel configuratore ICE.
 
 ![](./img/embedded-filtri-su-dischi-registro-UWF/image2.png)
 
+La configurazione del filtro-UWF a riga comando 
+------------------------------------------------
 
-Per poter spiegare meglio le funzionalità messe a disposizione dai
-filtri di sistema, partiamo con introdurre il concetto di overlay.
-Abbiamo detto che il filtro di scrittura protegge il contenuto del disco
-ridirigendo le operazioni di scrittura in un altro luogo, chiamato
-overlay. L’overlay è il posto dove vengono memorizzate tutte le
-modifiche del disco protetto dal filtro, mentre la configurazione del
-filtro e la “lista” di dove sono state fatte queste modifiche può essere
-scritta o su una partizione particolare di un disco rigido o in memoria
-(nel registro).
+***Uwfmgr.exe*** è l’applicativo a livello console che permette di
+interagire con i servizi e le configurazioni del ***filtro-UWF.***
+L’applicazione può essere utilizzata da un utente senza privilegi di
+amministratore per ottenere informazioni sul filtro, ma per effettuare
+qualsiasi modifica si ha bisogno dei privilegi.
 
-Un “overlay” può essere visto come se fosse un filtro fotografico posto
-su un’immagine, il filtro contiene i cambiamenti (es: la variazione di
-colore con cui risulta proiettata l’immagine), ma l’immagine sotto
-rimane immutata. Quando si toglie il filtro si rivede l’immagine
-originale. Seguendo questo concetto quando si esegue la funzione di
-“commit”, cioè si riporta il contenuto dell’overlay su disco è come se
-avessi “incollato” il mio filtro all’immagine variandone il contenuto,
-nel nostro esempio: il colore.
+L’eseguibile si trova nelle cartelle di sistema
+(%windowsdir%\\system32), quindi è accessibile da qualsiasi cartella.
+Molti comandi del ***filtro-UWF*** hanno bisogno di un riavvio per
+diventare operativi.
 
-Il filtro di scrittura con memorizzazione su overlay era presente già
-nella versione embedded di Windows NT, ma non era facilmente gestibile,
-poi è stato migliorato in Windows XP Embedded, da qui il nome Enhanced.
-Con i rilasci successivi, nel Future pack 2007 di XP Embedded, al filtro
-avanzato si è aggiunto il filtro basato su file (FBWF=File Base Write
-Filter) e il filtro sul registro.
+La sintassi:
 
-La necessità di avere un filtro a livello di “file system” si è
-evidenziata con la necessità di avere una parte del disco “sprotetta”
-perché utilizzata per svariate motivazioni: file di log che non si
-riescono a spostare su altri volumi, cartelle di dati che chi ha scritto
-l’applicazione ha scelto di memorizzare nel disco di sistema, ecc…
+```
+uwfmgr.exe
+  Help | ?
+  Get-Config
+  Filter
+    Help | ?
+    Enable
+    Disable
+    Enable-HORM
+    Disable-HORM
+    Reset-Settings
+  Volume
+    Help | ?
+    Get-Config {<volume> | all}
+    Protect {<volume> | all}
+    Unprotect {<volume> | all}
+  File
+    Help | ?
+    Get-Exclusions {<volume> | all}
+    Add-Exclusion <file>
+    Remove-Exclusion <file>
+    Commit <file>
+  Registry
+    Help | ?
+    Get-Exclusions
+    Add-Exclusion <key>
+    Remove-Exclusion <key>
+    Commit <key> [<value>]
+  Overlay
+    Help | ?
+    Get-Config
+    Get-AvailableSpace
+    Get-Consumption
+    Get-Files {<drive> | <volume>}
+    Set-Size <size>
+    Set-Type {RAM | DISK}
+    Set-WarningThreshold <size>
+    Set-CriticalThreshold <size>
+  Servicing
+    Enable
+    Disable
+    Update-Windows
+    Get-Config
+    Help
+```
 
-Inoltre, un’altra richiesta era quella di poter memorizzare in modo
-permanente delle modifiche fatte a dei file senza dover aggiornare, in
-un’unica soluzione, l’intero sistema o fare un riavvio del dispositivo.
+I parametri di questo comando, come si vede dall’elenco riportato nella
+sintassi sono divisi in sezioni che evidenzieremo con i titoli in
+grassetto e sottolineati, vediamoli in dettaglio:
 
-Il filtro basato su file (da qui in avanti ***filtro-FBWF***) viene
-applicato ad un livello più alto rispetto a quello del ***filtro-EWF***,
-in un layer dove il sistema ha la capacità di gestire i file. A questo
-punto, infatti, invece di proteggere o meno l’intera partizione si può
-scegliere nel dettaglio quali file e/o cartelle lasciare sprotette.
 
-Nella figura seguente riportiamo, come nello schema precedente, gli
-strati di sistema per arrivare a scrivere fisicamente su disco, ma, come
-si può notare, il ***filtro-FBWF*** è posizionato più in alto rispetto
-al ***filtro-EWF***; in un punto dove si hanno tutte le informazioni
-legate al “file system”.
+|Nome |  Descrizione|
+|--------|----------------|
+| Help \| ?  |                                    Visualizza l’help della sintassi generale.|
+|Get-Config  |                                  Visualizza la configurazione del ***filtro-UWF*** e quella che avrà dopo il prossimo riavvio.|
+|Filter |                                       Questa è la sezione che configura i parametri dei filtri.|
+| Help \| ?   |                                   Visualizza l’help relativo ai comandi dei filtri.|
+| Enable  |                                      Abilita il ***filtro-UWF*** al prossimo riavvio. I parametri utilizzati saranno quelli del momento del riavvio.|
+| Disable |                                      Richiede la disabilitazione del ***filtro-UWF*** al prossimo riavvio.|
+| Enable-horm   |                                Richiede l’attivazione della funzionalità di ***HORM*** senza aspettare il prossimo avvio.|
+| Disable-horm   |                               Richiede la disattivazione della funzionalità di ***HORM*** senza aspettare il prossimo avvio.|
+| Reset-Settings   |                             Ripristina la configurazione del ***filtro-UWF*** come era al momento dell’installazione.|
+|Volume    |                                    Questa è la sezione che configura i parametri dei volumi.|
+| Help \| ?    |                                  Visualizza l’help relativo ai comandi sui volumi.|
+| Get-Config  {&lt;volume&gt; \| all}  |                                  Visualizza la configurazione del volume specificato (o di tutti i volumi se si è specificato ***all***) e quella che avrà (avranno) dopo il prossimo riavvio.|
+| Protect  {&lt;volume&gt; \| all}|     Aggiunge il volume specificato (o tutti i volumi se si è specificato ***all***) dalla lista dei volumi che verranno protetti al prossimo riavvio con il ***filtro-UWF*** abilitato.|
+| Unprotect   {&lt;volume&gt; | all}   |       Rimuove il volume specificato (o tutti i volumi se si è specificato ***all***) dalla lista dei volumi che verranno protetti al prossimo riavvio con il ***filtro-UWF*** abilitato.|
+| File                                          Questa è la sezione che configura i parametri relativi alla lista di esclusione delle cartelle e/o dei file dal ***filtro-UWF***.
+|Help \| ? |   Visualizza l’help relativo ai comandi sui file.|
+| Get-Exclusions {&lt;volume&gt; \| all}   |                              Visualizza la lista di esclusione delle cartelle e/o dei file del volume specificato (o di tutti i volumi se si è specificato ***all***) e quella che avrà (avranno) dopo il prossimo riavvio.|
+| Add-Exclusion &lt;file&gt;    |                Aggiunge la cartella (o il file) alla lista di esclusione del volume protetto dal ***filtro-UWF***. Questa esclusione sarà attiva al prossimo riavvio.|
+| Remove-Exclusion &lt;file&gt;   |              Rimuove la cartella (o il file) dalla lista di esclusione del volume protetto dal ***filtro-UWF***. Questa esclusione sarà aggiornata al prossimo riavvio.
+| Commit &lt;file&gt;   |                        Aggiorna il contenuto di un file NON protetto prendendo il suo valore dall’overlay e aggiornandolo sul volume fisico.  Il nome del file deve essere completo di volume e di percorso
+| Registry   |                                   Questa è la sezione che configura i parametri relativi alla parte di **filtro sul registro**.|
+|  Help \| ?    |                                  Visualizza l’help relativo ai comandi sul registro.|
+| Get-Exclusions   |                             Visualizza la lista di esclusione delle chiavi di registro del ***filtro-UWF*** e quella che avrà (avranno) dopo il prossimo riavvio.|
+| Add-Exclusion &lt;key&gt;   |                  Aggiunge la chiave alla lista di esclusione delle chiavi. Questa esclusione sarà attiva al prossimo riavvio.|
+| Remove-Exclusion &lt;key&gt;  |                Rimuove la chiave dalla lista di esclusione delle chiavi. Questa esclusione sarà aggiornata al prossimo riavvio.|
+|Commit &lt;key&gt; \[&lt;Value&gt;\]  |        Aggiorna il contenuto di una chiave NON protetta con il valore scelto o, se la variabile &lt;value&gt; è omessa, aggiorna tutti i valori dalla radice della chiave specificata in avanti con il loro valore attuale.|
+| Overlay   |                                    Questa è la sezione che configura i parametri relativi all’overlay.|
+| Help \| ?  |                                    Visualizza l’help relativo ai comandi sull’overlay.|
+| Get-Config     |                               Visualizza la configurazione attuale dell’overlay e quella che avrà dopo il prossimo riavvio.|
+|  Get-AvailableSpace    |                        Visualizza la quantità di spazio disponibile per l’overlay del ***filtro-UWF.***|
+| Get-Consumption     |                          Visualizza la quantità di spazio utilizzato dall’overlay del ***filtro-UWF.***|
+|  Get-Files { &lt;drive&gt; | &lt;Volume&gt;}  | Visualizza la lista dei file del volume contenuti nell’overlay. Il volume può essere indicato o con la sua lettera o con il suo Volume-ID.|
+| Set-Size &lt;size&gt;   |                      Assegna la dimensione dell’overlay in MB. Questa dimensione sarà effettiva al prossimo riavvio.|
+|  Set-Type {RAM | DISK}     |                    Assegna il tipo di overlay da utilizzare: RAM oppure DISCO. Per selezionare il tipo DISCO (DISK) il ***filtro-UWF*** deve essere disabilitato.|
+|  Set-WarningThreshold &lt;size&gt;   |          Assegna la dimensione di soglia in MB che utilizzerà il servizio del ***filtro-UWF*** per notificare il suo superamento a livello di attenzione.|
+| Set-CriticalThreshold &lt;size&gt;   |         Assegna la dimensione di soglia in MB che utilizzerà il servizio del ***filtro-UWF*** per notificare il suo superamento a livello di criticità.|
+| Servicing    |                                 Questa è la sezione che configura i parametri relativi all’aggiornamento. (vedi ***UWF Servicing*** più avanti)|
+| Help \| ? | Visualizza l’help relativo ai comandi all’aggiornamento.|
+| Enable  |                                      Disabilita la modalità di aggiornamento per la prossima sessione di lavoro.|
+| Disable   |                                    Abilita la modalità di aggiornamento per la prossima sessione di lavoro.|
+| Update-Windows    |                            Singolo comando per l’aggiornamento di Windows. Microsoft consiglia di utilizzare il comando Enable che, nel suo script, richiama questo singolo, ma lascia abilitato l’aggiornamento di Windows.|
+
+Tutti questi parametri di configurazione e tutti i comandi che abbiamo
+scorso possono essere richiesti anche in forma programmatica
+interfacciandosi alla libreria WMI (Windows Management Instrumentation)
+oppure con dei comandi power-shell dall’interno di un’applicazione con
+tutti i vantaggi che questo comporta:
+
+- NON dover chiedere all’utente di effettuare operazioni da riga comando
+sul ***filtro-UWF***;
+- Effettuare le richieste nel momento opportuno (dal punto di vista
+programmatico) ad esempio per richiedere l’ibernazione quando tutti gli
+applicativi coinvolti hanno finito le loro inizializzazioni.
+- Poter “tracciare” su dei file di log le operazioni fatte in modo da
+poter controllare a posteriori ed evitare ogni contestazione.
+
+
+UWF Servicing 
+--------------
+
+Con il termine ***Servicing*** si intende l’aggiornamento del sistema
+operativo quello, per intenderci, che in BIG Windows si effettua
+abilitando la funzionalità di ”Windows Update”. Generalmente per dei
+dispositivi Embedded si sconsiglia di effettuare aggiornamenti “senza
+uno stretto controllo” non tanto per una sfiducia nell’effetto che
+potrebbero avere degli aggiornamenti non preventivamente provati in
+laboratorio, ma soprattutto per non avere dispositivi nominalmente
+uguali, ma con livelli di aggiornamento diversi. Questa situazione,
+infatti, è uno dei fattori più problematici dell’assistenza sul campo.
+
+Ci sono però dispositivi embedded esposti ad internet o soluzioni
+specifiche tipo i Thin-Client che possono aver bisogno di essere
+allineati con gli aggiornamenti di Windows. Per questo il
+***filtro-UWF*** ha previsto tutta una serie di soluzioni per abilitare
+e disabilitare l’aggiornamento del sistema e, in particolare, delle
+cartelle contenenti i file di appoggio e i database degli anti-malware.
+
+Gli elementi coinvolti in questa funzione sono:
+
+- ***Uwfmgr.exe*** applicativo di configurazione e gestione del filtro-UWF
+a riga comando;
+- ***UwfServicingScr.scr*** applicativo di screensaver che viene attivato
+durante l’aggiornamento;
+- ***UwfServicingMasterScript.cmd*** comando di script che gestisce i
+singoli comandi di aggiornamento;
+- **E**mbedded **L**ockdown **M**anager (=***ELM***) applicativo di
+configurazione e gestione ad interfaccia grafica.
+  
+
+Quando si parla di aggiornamenti di sistema in ambiente embedded ci si
+riferisce sempre ad aggiornamenti **critici**, di **sicurezza** o di
+**driver**. Non si prevedono aggiornamenti legati a nuove versioni di
+applicativi o di pacchetti che non erano presenti al tempo della
+costruzione del sistema.
+
+Per abilitare gli aggiornamenti di sistema si dovrà procedere in questo
+modo:
+
+- Attivare un prompt di comandi con privilegi di amministratore e
+spostarsi sulla cartella: 
+
+  %windowsdir%\\system32&gt;
+
+- Abilitate il servizio di aggiornamento: 
+
+  &gt; uwfmgr.exe servicing enable
+
+- Riavviate il sistema: 
+
+  &gt;shutdown /r /t 0
+
+Il sistema si riavvierà utilizzando un utente abilitato e creato al
+momento (**UWF-Servicing**) ed inizierà l’aggiornamento.
+
+Durante l’aggiornamento verrà visualizzato lo screen-saver
+***UwfServicingScr.scr*** che può essere personalizzato in modo da
+aiutare l’utente a capire cosa sta accadendo.
+
+Il sistema verrà riavviato, se necessario e, se gli applicativi di
+aggiornamento incontreranno dei problemi, tutto verrà ripristinato come
+prima dell’inizio dell’aggiornamento ed il servizio verrà disabilitato.
+
+Al termine senza problemi dell’aggiornamento il servizio verrà
+disabilitato e verranno riabilitate tutte le liste di esclusione sui
+file, sulle cartelle e sulle chiavi di registro.
+
+L’Antivirus in presenza di filtri di scrittura 
+-----------------------------------------------
+
+In molte soluzioni Embedded c’è un uso di programmi di Antivirus,
+antimalware, ecc... questo perché con la parola Embedded si abbracciano
+numerose categorie di soluzioni: dai registratori di cassa alle macchine
+per il medicale, dalle macchine per l’industria ai chioschi informativi.
+Tutte le volte che bisogna lasciare il sistema “aperto”, senza filtri,
+senza la possibilità di limitare gli accessi al sistema dell’utente,
+senza la possibilità che l’utente non abbia privilegi da amministratore,
+allora l’uso di un antivirus è altamente consigliato. In molti altri
+casi, invece, quando si usano molti o tutti gli accorgimenti suggeriti
+in questo documento, l’uso di un antivirus può essere evitato,
+risparmiando così un notevole sforzo architetturale e organizzativo per
+tenerne aggiornate le definizioni.
+
+L’utilizzo di un filtro di scrittura è uno di quegli accorgimenti che
+limita completamente la possibilità del virus di installarsi
+permanentemente nel sistema (ad ogni riavvio verrà perso con tutti i
+dati volatili della sessione). Se il dispositivo è sempre acceso (7/24),
+però, non soltanto i filtri di scrittura non aiutano (dal momento che la
+loro azione non avrebbe mai effetto, attendendo un riavvio che non
+arriverà), ma l’eventuale azione di un’applicazione malevola potrebbe
+continuare in memoria.
+
+Per queste ragioni, nella versione Standard 8 sono stati introdotte
+delle funzionalità e degli accorgimenti che permettono di utilizzare
+agevolmente alcuni antivirus/antimalware anche in concomitanza con l’uso
+del ***filtro-UWF***.
+
+Il primo passo per poter utilizzare queste funzionalità è quello di
+inserire i moduli opportuni nella costruzione del sistema:
+
+- UWF-Antimalware che fa parte del ramo lockdown;
+- SCEP-Support che fa parte del ramo lockdown\\UWF Application Support 
+
+(SCEP è la sigla di “System Center EndPoint Protection”).
+
+I due moduli aggiungono, nelle liste di esclusione del ***filtro-UWF***,
+le cartelle di lavoro e le chiavi di registro necessarie agli antivirus
+standard di Microsoft per lavorare correttamente.
+
+UWF-Antimalware:
+
+Cartelle
+
+C:\\Program Files\\Windows Defender
+
+C:\\ProgramData\\Microsoft\\Windows Defender
+
+C:\\Windows\\WindowsUpdate.log
+
+C:\\Windows\\Temp\\MpCmdRun.log
+
+Chiavi di registro
+
+HKEY\_LOCAL\_MACHINE\\SOFTWARE\\Microsoft\\Windows Defender
+
+SCEP-Support:
+
+Cartelle
+
+C:\\Microsoft\\Security Client
+
+C:\\Windows\\Windowsupdate.log
+
+C:\\Windows\\Temp\\Mpcmdrun.log
+
+Chiavi di registro
+
+HKEY\_LOCAL\_MACHINE\\SOFTWARE\\Microsoft\\Microsoft Antimalware
+
+A questo punto potrebbe sorgere la domanda se altri antivirus possono
+essere utilizzati sui dispositivi embedded protetti da scrittura. La
+risposta è sì, conoscendo a sufficienza l’organizzazione delle cartelle
+e delle chiavi di registro si potrebbero aggiungere alle liste di
+esclusione, ma bisogna controllare se il produttore dell’antivirus che
+si vuole utilizzare ha dichiarato di conoscere e gestire questo sistema
+operativo embedded: Standard 8. Sul sito di Microsoft embedded:
+<http://www.microsoft.com/windowsembedded/en-us/catcatalog.aspx> potete
+trovare la lista degli applicativi dichiarati compatibili per un certa
+versione di Windows Embedded.
+
+Script e screen-saver per l’aggiornamento 
+------------------------------------------
+
+***UwfServicingMasterScript.cmd*** è il comando di script che gestisce
+l’aggiornamento del sistema. Si trova nella cartella
+**%windowsdir%\\system32** e può essere modificato perché possa
+eseguire, con le stesse modalità dell’aggiornamento di sistema, anche
+quello degli applicativi. Per far questo, intervenite sul paragrafo:
+:UPDATE\_SUCCESS del comando di script.
+
+***UwfServicingScr.scr*** è l’applicativo di screensaver che viene
+attivato durante l’aggiornamento e, anche per lui, possiamo intervenire
+con una sua completa configurazione modificando queste chiavi di
+registro:
+
+Windows Registry Editor Version 5.00
+
+\[HKEY\_LOCAL\_MACHINE\\Software\\Microsoft\\Windows
+Embedded\\ServicingScreenSaver\]
+
+"ColorBackground"=dword:000000ff
+
+"ColorText"=dword:0000ff00
+
+"ColorProgress"=dword:00ff0000
+
+"ScreenSaverTitle"="Device"
+
+"ScreenSaverSubTitle"="Servicing device…"
+
+"HideScreenSaverText"=dword:00000000
+
+"HideScreenSaverProgress"=dword:00000000
+
+"Font"="Algerian";
+
+Il filtro-UWF e HORM (=Hibernate Once, Resume Many)
+---------------------------------------------------
+
+Come abbiamo discusso precedentemente introducendo la funzionalità di
+ibernare lo stato del sistema in un certo momento e memorizzando questo
+stato in un disco protetto da scrittura con il ***filtro-EWF***, questa
+tecnologia è presente anche con il ***filtro-EWF*** a patto che questi
+sia utilizzato in modo opportuno.
+
+Per utilizzare la funzionalità di ***HORM***, infatti, il
+***filtro-EWF*** deve essere abilitato per poter attivare a sua volta
+l’***HORM*** e la configurazione del ***filtro-EWF*** deve sottostare a
+queste raccomandazioni:
+
+- Tutti i volumi montati al momento dell’ibernazione devono essere
+protetti dal ***filtro-EWF***;
+- Non devono essere presenti liste di esclusione né di file o cartelle né
+di chiavi di registro;
+- L’overlay del ***filtro-EWF*** deve essere di tipo RAM.
+- Controllare la configurazione delle power option del sistema poiché il
+***filtro-EWF*** NON protegge il file d’ibernazione dagli altri
+eventuali comandi di ibernazione del sistema. Quindi, se il sistema è
+configurato in modo che dopo un certo tempo va in “sleep” questo vuol
+dire che viene effettuata una sovrascrittura del file hiberfile.sys
+alterando le nostre aspettative del funzionamento dell’***HORM***.
+
+
+Per abilitare l’***HORM*** sul disco di sistema C: si dovrà procedere in
+questo modo:
+
+- Attivare un prompt di comandi con privilegi di amministratore e
+spostarsi sulla cartella:
+
+  %windowsdir%\\system32&gt;
+
+- Abilitate il ***filtro-EWF***: 
+
+  &gt;uwfmgr.exe filter enable
+
+- Proteggete tutti i volumi del sistema: 
+
+  &gt;uwfmgr.exe volume protect all
+
+- Riavviate il sistema: 
+
+  &gt;shutdown /r /t 0
+
+Attivate le applicazioni ed i servizi che riterrete opportuni fino ad
+arrivare al momento in cui volete effettuare l’ibernazione del sistema
+(che diverrà lo stato di partenza da questo momento in avanti).
+
+- Attivare un prompt di comandi con privilegi di amministratore e
+spostarsi sulla cartella:
+
+  %windowsdir%\\system32&gt;
+
+- Per abilitate l’ibernazione sul sistema: 
+
+  &gt;powercfg /h on
+
+- Per abilitare la funzionalità di ***HORM***: 
+
+  &gt;uwfmgr.exe filter
+  enable-horm
+
+- Per effettuare l’ibernazione: 
+
+  &gt; shutdown /h
+
+- Premere il tasto di alimentazione per far ripartire il sistema dopo che
+ha memorizzato il file d’ibernazione;
+
+Quando è attivata la funzionalità di ***HORM*** NON si possono
+effettuare modifiche alla configurazione del ***filtro-EWF***.
+
+Per disabilitare l’***HORM*** si dovrà procedere in questo modo:
+
+- Attivare un prompt di comandi con privilegi di amministratore e
+spostarsi sulla cartella:
+
+  %windowsdir%\\system32&gt;
+
+- Disabilitate la funzionalità di ***HORM***: 
+
+  &gt; uwfmgr.exe filter
+  disable-horm
+
+- Riavviate il sistema: 
+
+  &gt;shutdown /r /t 0
+
+Il sistema ripartirà normalmente e NON dal hiberfile.sys.
+
+Come si evince da questo paragrafo la funzionalità di ***HORM*** anche
+se ha dei benefici sul tempo di disponibilità dell’applicazione (tempo
+di avvio del sistema più il tempo di lancio delle applicazioni), risulta
+una procedura abbastanza complessa. Prima di scegliere di utilizzarla,
+vi consigliamo di valutare bene se l’avvio normale di Windows Embedded 8
+Standard non sia già soddisfacente per le vostre esigenze.
+
+Configurazione del filtro-UWF mediante ELM (Embedded Lockdown Manager)
+----------------------------------------------------------------------
+
+Un altro modo di configurare i parametri del filtro è quello di
+utilizzare un nuovo snap-in della Console di manutenzione di Windows
+(**MMC** = **M**icrosoft **M**anagement **C**onsole) che si chiama
+**ELM** (**E**mbedded **L**ockdown **M**anager). Questo strumento,
+creato proprio per le esigenze di Windows Embedded, ha un’interfaccia
+utente grafica e permette di configurare, oltre al filtro sul disco,
+anche altre funzionalità che aiutano a proteggere il sistema operativo
+bloccando ogni tentativo di accesso al sistema: filtro sulla tastiera,
+filtro dei messaggi, scelta della Shell di avvio, ecc… da cui
+**lockdown.**
+
+**ELM** è un nuovo tool di Windows Embedded 8 ed è così importante che
+merita di essere affrontato in un capitolo dedicato.
+
+Riportiamo soltanto un esempio di come si presenta:
 
 ![](./img/embedded-filtri-su-dischi-registro-UWF/image3.png)
 
-L’operatività sull’overlay rimane simile: invece di memorizzare dati legati a riferimenti di “settori” del disco come nel***filtro-EWF*** , si memorizzano più semplicemente i nomi di file e/o cartelle. In questo modo NON c’è più bisogno di creare e memorizzare una lista di ciò che si sta proteggendo o meno, perché si opera utilizzando direttamente quella della configurazione del ***filtro-FBWF***.
+Riepilogando il ***filtro-UWF*** protegge uno o più volumi operando in
+memoria o su un file di un disco in cui crea un overlay che può essere
+controllato programmaticamente. Questo filtro, oltre a offrire allo
+stesso tempo le funzionalità del filtro-EWF e del filtro-FBWF, ci
+presenta nuove soluzioni per semplificare l’aggiornamento del sistema e
+per gestire al meglio la sua convivenza con gli antivirus.
 
-Con l’arrivo di Windows Embedded 8 Standard c’è stata un’evoluzione con
-l’introduzione di un nuovo filtro di scrittura su disco Unified Write
-Filter (UWF) che da qui in avanti chiameremo ***filtro-UWF***. Questo
-filtro è stato chiamato così perché mette insieme le proprietà dei due
-filtri precedenti: ***filtro-EWF*** e ***filtro-FBWF*** che, da questa
-versione di avanti, vengono sconsigliati. I vantaggi portati da questo
-filtro sono legati ad una migliore integrazione con il sistema e con
-alcune sue funzionalità critiche come l’aggiornamento delle liste per
-l’antiMalware.
-
-Nella figura seguente riportiamo, come negli schemi precedenti, gli
-strati di sistema per arrivare a scrivere fisicamente su disco. Il
-***filtro-UWF***, mettendo insieme le potenzialità dei due filtri
-precedenti, è più complesso ed agisce a più livelli (ne parleremo
-approfonditamente in articoli a lui dedicati).
-
-![](./img/embedded-filtri-su-dischi-registro-UWF/image4.png)
-
-Tutti questi filtri sui dischi hanno numerose interazioni con altre
-funzionalità embedded. La più interessante è quella che si crea con
-l’abilità che ha Windows Embedded Standard di avviare il sistema da un
-dispositivo USB sia che questo sia un disco rigido con un adattatore o
-che sia un dispositivo flash. In questo secondo caso, oltre al fatto già
-citato che le flash abbiano un numero limitato di riscritture, bisogna
-evidenziare anche che la velocità di scrittura su flash è molto più
-lenta (10-20Mb/sec) di quella in memoria. Utilizzando uno dei filtri sui
-dischi salvaguardiamo la flash poiché memorizza le modifiche su un
-overlay (che è in memoria) e velocizziamo il sistema.
-
-Il filtro sul registro (Registry Filter)
-----------------------------------------
-
-Quando si utilizza un filtro di scrittura su disco, indipendentemente
-che si usi un ***filtro-EWF***, un ***filtro-FBWF*** o un
-***filtro-UWF***, automaticamente viene protetto anche il registro. Il
-filtro sul registro è stato creato perché tutte le modifiche al registro
-vengono memorizzate sul disco di sistema e, se questi è protetto da
-scrittura, verranno perse al prossimo riavvio e questo è un problema per
-tutte le informazioni che necessitano di essere mantenute anche nella
-sessione successiva.
-
-Il primo ad avere bisogno di questa funzionalità è stato chi utilizza un
-accesso ad un “Dominio” o una connessione RDP. In tutti e due i casi,
-infatti, la controparte server assegna, alla prima connessione, un
-“token” di licenza da “presentare” nelle connessioni successive. Se
-questo “token” non viene presentato, il server ritiene di essere di
-fronte ad una nuova connessione e ne assegna un altro. I “token” però
-sono legati alle licenze e quindi NON si devono sprecare.
-
-Fino a Windows Embedded Standard 2009 questo filtro era limitato a
-queste due chiavi, poi si è evidenziato che, se il dispositivo deve
-utilizzare un applicativo che ha i parametri di configurazione
-memorizzati sul registro, ad ogni riavvio, perdendo il registro, avrebbe
-perso anche tutte le modifiche a questi parametri durante la sessione di
-lavoro.
-
-Se l’applicativo è sotto il nostro controllo, quando lo integriamo in un
-sistema protetto da scrittura, possiamo spostare i parametri in un file
-di configurazione posizionato in posto sprotetto. Se però l’applicativo
-è di terze parti NON siamo in grado di modificarlo e quindi non saremmo
-in grado di utilizzarlo se non con i parametri di default. Con il filtro
-sul registro possiamo definire un certo ramo del registro che verrà
-salvato in modo da non essere perduto al prossimo riavvio.
-
-Nella versione Windows Embedded Standard 2009 sono presenti sia il
-***filtro-EWF*** sia il ***filtro-FBWF*** e sia il filtro sul registro
-con opzioni e capacità simili alla versione Windows Embedded Standard 7.
-Nell’ultima versione 8 Standard si è aggiunto il filtro unificato UWF
-(Unified Write Filter) di qui in avanti ***filtro-UWF***, per cui, nel
-corso dell’approfondimento dei parametri legati ad ogni filtro, della
-loro configurazione e gestione, evidenzieremo anche le differenze tra le
-varie versioni di Windows Embedded Standard.
-
-Considerazioni generali in presenza di filtri di scrittura
-----------------------------------------------------------
-
-Prima di addentrarci nelle caratteristiche di ogni filtro di scrittura,
-facciamo qualche riflessione su alcune funzionalità del sistema Windows
-che, in presenza di filtri di scrittura sul disco (in particolare su
-quello di sistema), vanno neutralizzate o quanto meno riviste:
-
-|  |  |
-|------|--------|
-| System Restore | Questa funzionalità permette di memorizzare dei “dati di ripristino” nel caso in cui si voglia (o si debba) tornare indietro dopo un’installazione o un aggiornamento. Nel caso in cui il disco di sistema è protetto da scrittura gli aggiornamenti devono venir organizzati in un modo più complesso e quindi questi “dati di ripristino” potrebbero rivelarsi inutili e quindi eliminare questo servizio potrebbe far migliorare l’efficienza del sistema.|
-|Background Defrag |              Questa funzionalità permette la deframmentazione dei dischi in background (mentre il sistema sta effettuando altre operazioni) senza disturbare le altre applicazioni che stanno lavorando. Molto apprezzato dagli utenti desktop può creare dei grossi problemi se il disco di sistema è una flash che patirebbe questo utilizzo spasmodico della riscrittura. Nel caso in cui il disco è protetto da scrittura questa deframmentazione avrebbe l’unico risultato di riempire l’overlay di scritture inutili.|
-|Prefetch, Superfetch    |        Queste funzionalità, in modalità diverse, fanno caricare al sistema le DLL delle applicazioni più usate prima che queste vengano richieste in modo da migliorare i tempi di attivazione delle applicazioni stesse. Nel caso in cui il disco di sistema è protetto da scrittura la memorizzazione degli elementi da caricare non sopravvivrebbe da una sessione alla successiva rendendo questa funzionalità inapplicabile.|
-|Last Access Time Stamps  |       Questa funzionalità aggiorna la data e l’ora d’accesso ad ogni file di un disco con formattazione NTFS. Nel caso in cui il disco è protetto da scrittura questa memorizzazione avverrebbe comunque in memoria occupando spazio senza dare nessun vantaggio. Bisogna tener presente che alcuni applicativi si basano su queste informazioni per effettuare o meno delle operazioni sui file. Per gestire questa funzionalità bisogna operare direttamente sul sistema intervenendo sul registro:<br/>**Chiave: HKEY\_LOCAL\_MACHINE\\SYSTEM\\CurrentControlSet\\<Co></Co>ntrol\\FileSystem** <br/>**Nome: NtfsDisableLastAccessUpdate** <br/>**Tipo: REG\_DWORD**<br/>**Valore: 1**  <br/> |
-| Temporary Files Folder  |        Nel caso in cui il disco è protetto da scrittura il consiglio è di spostare o sopprimere tutte le memorizzazioni temporanee: le cache di appoggio degli applicativi e/o le cartelle TEMP, TMP che normalmente il sistema crea per utilizzarle alla prossima sessione. In questo caso, se il dispositivo avesse oltre a quello di sistema un altro volume non protetto da scrittura, sarebbe meglio spostare lì queste cartelle in modo da utilizzarle al meglio. Ad esempio:<br/>**Chiave: HKEY\_CURRENT\_USER\\Software\\Microsoft\\Windows\\Current Version\\Explorer\\User Shell Folders** <br/>**Nome: Cache**<br/>**Tipo: REG\_EXPAND\_SZ**<br/>**Valore: <*percorso di un volume non protetto*>**<br/>**-------**<br/>**Chiave: HKEY\_CURRENT\_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders**<br/>**Nome: Cache**<br/>**Tipo: REG\_EXPAND\_SZ**<br/>**Valore: <*percorso di un volume non protetto*>**<br/>**-------**<br/>**Chiave: HKEY\_CURRENT\_USER\\Environment**<br/>**Nome: TEMP**<br/>**Tipo: REG\_SZ**<br/>**Valore: <*percorso di un volume non protetto*>**<br/>**-------**<br/>**Chiave: HKEY\_CURRENT\_USER\\Environment**<br/>**Nome: TMP**<br/>**Tipo: REG\_SZ**<br/>**Valore: <*percorso di un volume non protetto*>**<br/> |
-|  Pagefile | Il *pagefile* è il file di sistema utilizzato per poter superare i limiti della memoria fisica del dispositivo: quando il sistema lo ritiene opportuno usa questo disco come luogo di appoggio di aree di RAM non utilizzate che vengono poi riprese quando l’evolversi della sessione lo richiede. Nel mondo Windows Embedded Standard la configurazione di default è “disabilitato” nel senso che il sistema NON utilizza il *pagefile*. Se si hanno altri volumi oltre a quello di sistema, il *pagefile* può essere spostato su uno dei volumi sprotetti. In caso contrario è meglio lasciarlo disabilitato. Ad esempio per metterlo sul volume D:<br/>**Chiave: HKEY\_CURRENT\_USER\\Software\\Microsoft\\Windows\\Current Version\\Explorer\\User Shell Folders**<br/>**Nome: Cache**<br/>**Tipo: REG\_EXPAND\_SZ**<br/>**Valore: &lt;*percorso di un volume non protetto*&gt;**<br/>|
-|Event Log Location |             Nel caso in cui il disco è protetto da scrittura il consiglio è di spostare (ad esempio in rete dove un amministratore di sistema potrà gestirle) o sopprimere anche tutte le segnalazioni di sistema. Se il dispositivo avesse, oltre a quello di sistema, un altro volume non protetto da scrittura, sarebbe meglio spostare lì questo posizionamento dei file di sistema in modo da poterli utilizzare da una sessione alla successiva. Ad esempio spostando le segnalazioni sul volume D:<br/>**Chiave: HKEY\_LOCAL\_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\EventLog\\Application\\**<br/>**Nome: File**<br/>**Tipo: REG\_EXPAND\_SZ**<br/>**Valore: &lt;*percorso di un volume non protetto*&gt;\\AppEvent.evt**<br/>**-------**<br/>**Chiave: HKEY\_LOCAL\_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\EventLog\\Security\\**<br/>**Nome: File**<br/>**Tipo: REG\_EXPAND\_SZ**<br/>**Valore: &lt;*percorso di un volume non protetto*&gt;\\SecEvent.evt**<br/>**-------**<br/>**Chiave: HKEY\_LOCAL\_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\EventLog\\System\\**<br/>**Nome: File**<br/>**Tipo: REG\_EXPAND\_SZ**<br/>**Valore: &lt;*percorso di un volume non protetto*&gt;\\SysEvent.evt**<br/>|
-|Boot Status Policy |             Con questo termine si intende il modo con cui il sistema, al suo avvio, deve gestire gli eventuali errori di chiusura o di incongruenza determinatisi nella sessione precedente. Ad esempio quando il sistema non si è chiuso con uno shutdown normale, ma a seguito un a mancanza di corrente. In questo caso all’avvio (in situazioni da desktop) viene presentata una pagina a caratteri in cui si evidenzia che il sistema NON è stato chiuso correttamente e che quindi “potrebbero” esserci dei problemi. Nel caso embedded ed in particolare quando il disco di sistema è protetto da scrittura, questa pagina oltre ad essere inutile è anche dannoso: un sistema embedded protetto di solito si spegne così proprio perché non ci sono altri modi (basta pensare ad una cassa di un supermercato o a un chiosco informativo) e spesso, dopo tanti sforzi per togliere tutti i brand possibili perché si vuole che il sistema si presenti soltanto con i “colori” dell’OEM che lo ha costruito, questa pagina fa immediatamente riconoscere l’ambiente Windows e, dalla segnalazione inopportuna, erroneamente se ne dedurrebbe un punto di debolezza inesistente!|
-| Automatic Adjustment of    |     In Italiano suona come “adeguamento automatico all’ora legale”. Il problema nasce dal fatto che, in presenza di un filtro sul registro, quando cambia l’ora legale (sia in un verso che nell’altro) il sistema, dopo aver portato avanti (o indietro) l’ora, memorizza nel registro che questa operazione è stata conclusa. Ma, al successivo riavvio, il registro ritorna senza le modifiche della sessione e quindi, appena il sistema controlla se deve cambiare l’ora lo fa nuovamente!|
-| Daylight Saving Time     |       Per risolvere questo problema ci sono più possibilità:<br/>Se utilizzate un *filtro-UWF* potete aggiungere le seguenti chiavi di registro alla lista delle chiavi da escludere dalla protezione:<br/>**HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Time Zones **<br/>**HKLM\\SYSTEM\\CurrentControlSet\\Control\\TimeZoneInformation **<br/>Se utilizzate un *filtro-EWF* o un *filtro-FBWF* potete aggiungere le seguenti chiavi di registro alla lista del *filtro sul registro*:<br/>**HKEY\_LOCAL\_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\TimeZoneInformation\\RealTimeIsUniversal **<br/>In ogni caso, un’altra possibilità è quella di immettere nella data/ora del BIOS quella UTC (Coordinated Universal Time) diciamo: “l’ora solare di Greenwich” e di informare il sistema di questa scelta. In questo modo il sistema Windows Standard esegue i calcoli correttamente e, anche se il registro è protetto da scrittura, non ci sono problemi. Per eseguire questa configurazione operate in questo modo:<br/>Disabilitate i filtri di scrittura su disco (in modo da disabilitare anche quelli sul registro);<br/>Controllate di aver configurato correttamente il fuso orario desiderato;<br/>Aggiungete al registro:<br/>**Chiave: HKEY\_LOCAL\_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\TimeZoneInformation\\**<br/>**Nome: RealTimeIsUniversal **<br/>**Tipo: DWORD**<br/>**Valore: 1**<br/>Fate ripartire il sistema ed entrate nel BIOS;<br/>Selezionate la data e l’ora UTC. Ad esempio se siete nel fuso orario italiano in estate e sono le 11 del mattino impostate l’ora alle 9 poiché in Italia, durante l’estate, siamo 2 ore avanti rispetto a Greenwich;<br/>Fate ripartire il sistema ed abilitate il filtro sui dischi (ovvero sul registro)<br/>|
-|  Service write protect devices  | In Italiano suona come “aggiornamento di sistema su un disco di sistema protetto da scrittura”. Il Problema è dovuto al fatto che, se il disco è pretetto, tutti gli aggiornamenti effettuati durante una sessione verranno persi al prossimo riavvio!! Per gestire correttamente un aggiornamento bisognerà agire in questo modo:<br/>- Disabilitate i filtri di scrittura su disco (in modo da disabilitare anche quelli sul registro);<br/>- Riavviare il dispositivo;<br/>- Eseguire tutti gli aggiornamenti necessari ri-avviando il sistema se e quando necessario;<br/>- Abilitate i filtri di scrittura su disco (in modo da abilitare anche quelli sul registro);<br/>- Riavviare il dispositivo;|
-                       
-Di queste funzionalità e di come fare a gestirle mediante i tool di
-Windows Embedded Standard, ne parleremo nei prossimi articoli che
-riguarderanno degli approfondimenti per ognuno dei filtri sui dischi.
-
-***di [Beppe
-Platania](http://mvp.microsoft.com/it-it/mvp/Beppe%20Platania-4029281)***
-**- Microsoft eMVP**
+#### di [Beppe Platania](http://mvp.microsoft.com/it-it/mvp/Beppe%20Platania-4029281) - Microsoft eMVP
 
 Blog: <http://beppeplatania.com/it>
 
-Riveduto e corretto da: [Gianni Rosa
-Gallina](http://mvp.microsoft.com/it-it/mvp/Gianni%20Rosa%20Gallina-4034912) **-
-Microsoft eMVP**
+#### Riveduto e corretto da: [Gianni Rosa Gallina](http://mvp.microsoft.com/it-it/mvp/Gianni%20Rosa%20Gallina-4034912) - Microsoft eMVP
 
 Blog: <http://gianni.rosagallina.com/it>
+

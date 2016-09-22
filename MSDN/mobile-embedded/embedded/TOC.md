@@ -1,10 +1,7 @@
 # [Windows Embedded Standard - I filtri sui dischi e sul registro: UWF - Unified Write Filter](embedded-filtri-su-dischi-registro-UWF.md)
-
 # [Windows Embedded Standard I filtri sui dischi e sul registro: FBWF - File Based Write Filter](embedded-filtri-su-dischi-registro-FBWF.md)
-
 # [Windows Embedded Standard I filtri sui dischi e sul registro: EWF - Enhanced Write Filter](embedded-filtri-su-dischi-registro-EWF.md)
-
-# [Windows Embedded Standard I filtri sui dischi e sul registro: Introduzione](https://msdn.microsoft.com/it-it/library/dn722310.aspx)
+# [Windows Embedded Standard I filtri sui dischi e sul registro: Introduzione](embedded-filtri-su-dischi-registro-EWF.md)
 
 
 # [Windows Embedded 8 Standard: i filtri sui gesti (Gesture Filter) (*)](https://msdn.microsoft.com/it-it/library/dn175732.aspx)
