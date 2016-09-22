@@ -1,10 +1,12 @@
-***di [Beppe
-Platania](http://mvp.microsoft.com/it-it/mvp/Beppe%20Platania-4029281)***
+
+# Windows Embedded Standard I filtri sui dischi e sul registro - Introduzione
+
+#### di [Beppe Platania](http://mvp.microsoft.com/it-it/mvp/Beppe%20Platania-402928)
 **- Microsoft eMVP**
 
 Blog: <http://beppeplatania.com/it>
 
-1.  ![](./img//media/image1.png){width="0.59375in" height="0.9375in"}
+![](./img/MVPLogo.png.png)
 
 Riveduto e corretto da: [Gianni Rosa
 Gallina](http://mvp.microsoft.com/it-it/mvp/Gianni%20Rosa%20Gallina-4034912) **-
