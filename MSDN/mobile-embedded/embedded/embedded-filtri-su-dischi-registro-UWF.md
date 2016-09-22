@@ -286,34 +286,34 @@ grassetto e sottolineati, vediamoli in dettaglio:
 
 |Nome |  Descrizione|
 |--------|----------------|
-| Help \| ?  |                                    Visualizza l’help della sintassi generale.|
+| Help &#x7C; ?  |                                    Visualizza l’help della sintassi generale.|
 |Get-Config  |                                  Visualizza la configurazione del ***filtro-UWF*** e quella che avrà dopo il prossimo riavvio.|
 |Filter |                                       Questa è la sezione che configura i parametri dei filtri.|
-| Help \| ?   |                                   Visualizza l’help relativo ai comandi dei filtri.|
+| Help &#x7C; ?   |                                   Visualizza l’help relativo ai comandi dei filtri.|
 | Enable  |                                      Abilita il ***filtro-UWF*** al prossimo riavvio. I parametri utilizzati saranno quelli del momento del riavvio.|
 | Disable |                                      Richiede la disabilitazione del ***filtro-UWF*** al prossimo riavvio.|
 | Enable-horm   |                                Richiede l’attivazione della funzionalità di ***HORM*** senza aspettare il prossimo avvio.|
 | Disable-horm   |                               Richiede la disattivazione della funzionalità di ***HORM*** senza aspettare il prossimo avvio.|
 | Reset-Settings   |                             Ripristina la configurazione del ***filtro-UWF*** come era al momento dell’installazione.|
 |Volume    |                                    Questa è la sezione che configura i parametri dei volumi.|
-| Help \| ?    |                                  Visualizza l’help relativo ai comandi sui volumi.|
-| Get-Config  {&lt;volume&gt; \| all}  |                                  Visualizza la configurazione del volume specificato (o di tutti i volumi se si è specificato ***all***) e quella che avrà (avranno) dopo il prossimo riavvio.|
-| Protect  {&lt;volume&gt; \| all}|     Aggiunge il volume specificato (o tutti i volumi se si è specificato ***all***) dalla lista dei volumi che verranno protetti al prossimo riavvio con il ***filtro-UWF*** abilitato.|
+| Help &#x7C; ?    |                                  Visualizza l’help relativo ai comandi sui volumi.|
+| Get-Config  {&lt;volume&gt; &#x7C; all}  |                                  Visualizza la configurazione del volume specificato (o di tutti i volumi se si è specificato ***all***) e quella che avrà (avranno) dopo il prossimo riavvio.|
+| Protect  {&lt;volume&gt; &#x7C; all}|     Aggiunge il volume specificato (o tutti i volumi se si è specificato ***all***) dalla lista dei volumi che verranno protetti al prossimo riavvio con il ***filtro-UWF*** abilitato.|
 | Unprotect   {&lt;volume&gt; | all}   |       Rimuove il volume specificato (o tutti i volumi se si è specificato ***all***) dalla lista dei volumi che verranno protetti al prossimo riavvio con il ***filtro-UWF*** abilitato.|
 | File                                          Questa è la sezione che configura i parametri relativi alla lista di esclusione delle cartelle e/o dei file dal ***filtro-UWF***.
-|Help \| ? |   Visualizza l’help relativo ai comandi sui file.|
-| Get-Exclusions {&lt;volume&gt; \| all}   |                              Visualizza la lista di esclusione delle cartelle e/o dei file del volume specificato (o di tutti i volumi se si è specificato ***all***) e quella che avrà (avranno) dopo il prossimo riavvio.|
+|Help &#x7C; ? |   Visualizza l’help relativo ai comandi sui file.|
+| Get-Exclusions {&lt;volume&gt; &#x7C; all}   |                              Visualizza la lista di esclusione delle cartelle e/o dei file del volume specificato (o di tutti i volumi se si è specificato ***all***) e quella che avrà (avranno) dopo il prossimo riavvio.|
 | Add-Exclusion &lt;file&gt;    |                Aggiunge la cartella (o il file) alla lista di esclusione del volume protetto dal ***filtro-UWF***. Questa esclusione sarà attiva al prossimo riavvio.|
 | Remove-Exclusion &lt;file&gt;   |              Rimuove la cartella (o il file) dalla lista di esclusione del volume protetto dal ***filtro-UWF***. Questa esclusione sarà aggiornata al prossimo riavvio.
 | Commit &lt;file&gt;   |                        Aggiorna il contenuto di un file NON protetto prendendo il suo valore dall’overlay e aggiornandolo sul volume fisico.  Il nome del file deve essere completo di volume e di percorso
 | Registry   |                                   Questa è la sezione che configura i parametri relativi alla parte di **filtro sul registro**.|
-|  Help \| ?    |                                  Visualizza l’help relativo ai comandi sul registro.|
+|  Help &#x7C; ?    |                                  Visualizza l’help relativo ai comandi sul registro.|
 | Get-Exclusions   |                             Visualizza la lista di esclusione delle chiavi di registro del ***filtro-UWF*** e quella che avrà (avranno) dopo il prossimo riavvio.|
 | Add-Exclusion &lt;key&gt;   |                  Aggiunge la chiave alla lista di esclusione delle chiavi. Questa esclusione sarà attiva al prossimo riavvio.|
 | Remove-Exclusion &lt;key&gt;  |                Rimuove la chiave dalla lista di esclusione delle chiavi. Questa esclusione sarà aggiornata al prossimo riavvio.|
 |Commit &lt;key&gt; \[&lt;Value&gt;\]  |        Aggiorna il contenuto di una chiave NON protetta con il valore scelto o, se la variabile &lt;value&gt; è omessa, aggiorna tutti i valori dalla radice della chiave specificata in avanti con il loro valore attuale.|
 | Overlay   |                                    Questa è la sezione che configura i parametri relativi all’overlay.|
-| Help \| ?  |                                    Visualizza l’help relativo ai comandi sull’overlay.|
+| Help &#x7C; ?  |                                    Visualizza l’help relativo ai comandi sull’overlay.|
 | Get-Config     |                               Visualizza la configurazione attuale dell’overlay e quella che avrà dopo il prossimo riavvio.|
 |  Get-AvailableSpace    |                        Visualizza la quantità di spazio disponibile per l’overlay del ***filtro-UWF.***|
 | Get-Consumption     |                          Visualizza la quantità di spazio utilizzato dall’overlay del ***filtro-UWF.***|
@@ -323,7 +323,7 @@ grassetto e sottolineati, vediamoli in dettaglio:
 |  Set-WarningThreshold &lt;size&gt;   |          Assegna la dimensione di soglia in MB che utilizzerà il servizio del ***filtro-UWF*** per notificare il suo superamento a livello di attenzione.|
 | Set-CriticalThreshold &lt;size&gt;   |         Assegna la dimensione di soglia in MB che utilizzerà il servizio del ***filtro-UWF*** per notificare il suo superamento a livello di criticità.|
 | Servicing    |                                 Questa è la sezione che configura i parametri relativi all’aggiornamento. (vedi ***UWF Servicing*** più avanti)|
-| Help \| ? | Visualizza l’help relativo ai comandi all’aggiornamento.|
+| Help &#x7C; ? | Visualizza l’help relativo ai comandi all’aggiornamento.|
 | Enable  |                                      Disabilita la modalità di aggiornamento per la prossima sessione di lavoro.|
 | Disable   |                                    Abilita la modalità di aggiornamento per la prossima sessione di lavoro.|
 | Update-Windows    |                            Singolo comando per l’aggiornamento di Windows. Microsoft consiglia di utilizzare il comando Enable che, nel suo script, richiama questo singolo, ma lascia abilitato l’aggiornamento di Windows.|
