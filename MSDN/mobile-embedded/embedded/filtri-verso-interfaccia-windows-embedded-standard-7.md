@@ -1,9 +1,18 @@
+---
+title: Windows Embedded Standard 7 - I filtri verso l'interfaccia
+description: Windows Embedded Standard 7 - I filtri verso l'interfaccia
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: embedded
+ms.custom: CommunityDocs
+---
 
 # Windows Embedded Standard 7: I filtri verso l'interfaccia
 
 #### di [Beppe Platania](https://mvp.support.microsoft.com/profile/Beppe)
 
-![](./img/filtri-verso-interfaccia-windows-embedded-standard-7/image1.png)
+![](./img/MVPLogo.png)
 
 
 Riveduto e corretto da: Gianni Rosa Gallina e Marina Sabetta
