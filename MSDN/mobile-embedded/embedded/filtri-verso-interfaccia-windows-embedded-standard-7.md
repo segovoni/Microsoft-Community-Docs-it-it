@@ -20,15 +20,15 @@ imbarazzo l’utente, che non soltanto non ha la possibilità di
 intervenire ma, anche se fosse in grado di farlo, spesso non saprebbe
 cosa rispondere.
 
-![](./img/filtri-verso-interfaccia-windows-embedded-standard-7/image2.jpeg)
+![](./img/filtri-verso-interfaccia-windows-embedded-standard-7/image2.jpg)
 
-![](./img/filtri-verso-interfaccia-windows-embedded-standard-7/image3.jpeg)
-
-
-![](./img/filtri-verso-interfaccia-windows-embedded-standard-7/image4.jpeg)
+![](./img/filtri-verso-interfaccia-windows-embedded-standard-7/image3.jpg)
 
 
-![](./img/filtri-verso-interfaccia-windows-embedded-standard-7/image5.jpeg)
+![](./img/filtri-verso-interfaccia-windows-embedded-standard-7/image4.jpg)
+
+
+![](./img/filtri-verso-interfaccia-windows-embedded-standard-7/image5.jpg)
 
 
 Si torna, di fatto, alla differenza tra un sistema desktop, dove
@@ -461,7 +461,7 @@ Centro operativo” (Change Action Center Settings):
 -   Sulla colonna di sinistra selezionare “Modifica impostazioni
     Centro operativo”.
 
-![](./img/filtri-verso-interfaccia-windows-embedded-standard-7/image14.jpeg)
+![](./img/filtri-verso-interfaccia-windows-embedded-standard-7/image14.jpg)
 
 >  **Note:**
 >-   Questo pannello si riferisce ai “Messaggi” delle varie funzioni e
