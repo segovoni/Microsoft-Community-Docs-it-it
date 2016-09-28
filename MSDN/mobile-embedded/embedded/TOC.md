@@ -3,8 +3,8 @@
 # [Windows Embedded Standard I filtri sui dischi e sul registro: EWF - Enhanced Write Filter](embedded-filtri-su-dischi-registro-EWF.md)
 # [Windows Embedded Standard I filtri sui dischi e sul registro: Introduzione](embedded-filtri-su-dischi-registro-intro.md)
 # [Windows Embedded 8 Standard: i filtri sui gesti (Gesture Filter)](i-filtri-sui-gesti-windows-embedded-8.md)
+# [Windows Embedded Standard 7: I filtri verso l'interfaccia](filtri-verso-interfaccia-windows-embedded-standard-7.md)
 
-# [Windows Embedded Standard 7: I filtri verso l'interfaccia (*)](https://msdn.microsoft.com/it-it/library/jj714812.aspx)
 # [Windows Embedded Standard 7 SP1: Il filtro per la tastiera (*)](https://msdn.microsoft.com/it-it/library/hh925629.aspx)
 
 # [Creazione di una immagine Windows XP Embedded robusta (*)](https://msdn.microsoft.com/it-it/library/ms838351.aspx)
