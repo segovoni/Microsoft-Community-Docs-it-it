@@ -1,12 +1,12 @@
+# 10 anni di Windows Embedded
+
 #### di [*Beppe Platania*](https://mvp.support.microsoft.com/profile=1C0BBF0F-D101-443A-9230-E9D52D2E827A)
 
-1.  ![](./img//media/image1.png){width="0.5938331146106737in"
-    height="0.9376312335958005in"}
+![](./img/MVPLogo.png)
 
 *Ripubblicato in Giugno 2013*
 
-1.  ![](./img//media/image2.png){width="2.3402777777777777in"
-    height="0.35347222222222224in"}
+![](./img/10-anni-di-windows-embedded/image2.png)
 
 Sono ormai passati 10 anni da quando Microsoft ha deciso di entrare nel
 mondo dei sistemi operativi embedded e vale la pena tracciare un breve
@@ -15,8 +15,8 @@ prima versione di Windows CE fino ai nostri giorni, quando i sistemi
 operativi embedded di Microsoft occupano i primi posti della
 distribuzione mondiale del settore.
 
-Dispositivi e sistemi operativi Embedded
-----------------------------------------
+## Dispositivi e sistemi operativi Embedded
+
 
 Per iniziare, cerchiamo di chiarire cosa intendiamo, in breve, per
 dispositivi embedded: un apparato elettronico governato da un computer.
@@ -53,9 +53,7 @@ di mercato e la crescente esigenza di mutua comunicazione, si è andata
 concretizzando una richiesta di sistemi operativi embedded che
 coronassero esigenze precise:
 
-Affidabilità;
-
-1.  
+### Affidabilità;  
 
 Il dispositivo embedded, dedicato ad un numero finito di applicazioni,
 ha bisogno di avere un sistema operativo che funzioni sempre,
@@ -65,9 +63,7 @@ Si deve inoltre tenere presente che molti di questi dispositivi non
 prevedono aggiornamenti di sistema “sul campo” (palmari, navigatori,
 controllori di processo industriali, ecc).
 
-Performance;
-
-1.  
+### Performance;
 
 Ai dispositivi embedded vengono richieste alte prestazioni rispetto alle
 ridotte risorse di sitema (CPU, flash, RAM, alimentazione, ecc...); ad
@@ -82,9 +78,7 @@ di controllare tutte le combinazioni di priorità possibili. I processi
 dovranno essere organizzati e scritti tenendo ben presente il
 funzionamento del sistema.
 
-Economicità;
-
-1.  
+### Economicità;
 
 I prodotti di pubblico consumo devono avere un prezzo competitivo.
 Inoltre, l’evoluzione richiesta in molti ambienti embedded esige un
@@ -100,15 +94,14 @@ sempre di un sistema operativo per poter essere coordinate e per operare
 correttamente. Questa esigenza si manifesta quando si presentano una o
 più di queste necessità:
 
-sincronizzazione, schedulazione in condizioni di multitasking
+- sincronizzazione, schedulazione in condizioni di multitasking
 
-gestione di un gran numero di dispositivi di I/O (di tipo diverso);
+- gestione di un gran numero di dispositivi di I/O (di tipo diverso);
 
-gestione dei file, dispositivi di rete, dispositivi video grafici;
+- gestione dei file, dispositivi di rete, dispositivi video grafici;
 
-gestione della memoria, della sicurezza, dell’alimentazione.
-
-1.  
+- gestione della memoria, della sicurezza, dell’alimentazione.
+ 
 
 Le risorse del dispositivo, in questi casi, sono più facilmente
 controllabili utilizzando un sistema operativo.
@@ -118,23 +111,22 @@ in evidenza alcune particolarità dei prodotti embedded: prendiamo come
 esempio un chiosco informativo. Esso deve essere realizzato cercando di
 prevedere tutto ciò che può servire al dispositivo già in laboratorio:
 
-l’aggiornamento guidato: il prodotto dovrebbe essere ri-certificato in
+- l’aggiornamento guidato: il prodotto dovrebbe essere ri-certificato in
 laboratorio per qualsiasi modifica o aggiornamento, sia questo del
 sistema operativo, degli applicativi sviluppati internamente o di quelli
 di terzi integrati nel prodotto;
 
-l’affidabilità: il progetto del prodotto deve curare l’affidabilità in
+- l’affidabilità: il progetto del prodotto deve curare l’affidabilità in
 tutte le fasi di lavoro, di aggiornamento e anche di situazioni
 prevedibili (cadute improvvise di tensioni, aggiornamenti parziali,
 ecc...), in modo che il sistema sia mantenuto operativo il più a lungo
 possibile;
 
-la reperibilità: il materiale (sia hardware che software) utilizzato per
+- la reperibilità: il materiale (sia hardware che software) utilizzato per
 il prodotto deve rimanere reperibile per tutta la durata della vita del
 prodotto. Microsoft garantisce 10 anni di distribuzione per ognuna delle
 release dei sistemi operativi Windows Embedded;
 
-1.  
 
 Un’altra osservazione importante sui che ci può far capire molte scelte
 architetturali è che il destinatario oggetti dei prodotti embedded NON è
@@ -144,23 +136,20 @@ personalizzato il sistema operativo per le proprie esigenze, crea un
 
 Partiamo dalla situazione della metà degli anni novanta:
 
-I processori Pentium avevano appena pochi anni di vita, Windows 95 era
+- I processori Pentium avevano appena pochi anni di vita, Windows 95 era
 appena nato e la maggior parte dei Personal Computer utilizzava MS-DOS
 come sistema operativo.
 
-In ambito Microsoft non esisteva ancora un’offerta Embedded specifica e
+- In ambito Microsoft non esisteva ancora un’offerta Embedded specifica e
 lo sviluppo di queste soluzioni veniva effettuato con svariati
 linguaggi, senza piattaforme generalizzate, basandosi su sistemi
 operativi “aperti”: Ms-Dos, Windows 3.11, Windows NT.
 
-L’esigenza che si stava diffondendo tra gli sviluppatori Windows era
+- L’esigenza che si stava diffondendo tra gli sviluppatori Windows era
 quelle di poter scrivere e certificare anche i propri applicativi per il
 mondo embedded utilizzando strumenti familiari.
 
-1.  
-
-1996 – Windows CE 1.00
-----------------------
+## 1996 – Windows CE 1.00
 
 ### Nasce il primo Sistema operativo Embedded di Microsoft: Windows CE 1.00. 
 
@@ -180,8 +169,8 @@ diversa.
 Il primo prodotto disegnato per Windows CE fu un palmare con funzioni di
 “organizer”, con un video e una tastiera ridotte.
 
-1997-99 Windows CE 2.xx.
-------------------------
+## 1997-99 Windows CE 2.xx.
+
 
 Vengono rilasciate le versioni 2.0 2.01 2.11 e 2.12, utilizzate da un
 maggior numero di Original Equipment Manufacturer (OEM). Nel sistema
@@ -199,8 +188,8 @@ della “command-shell” tipo MS-DOS, una prima implementazione della
 sicurezza, una versione ridotta di Internet Explorer 4.0, l’IrDa e altro
 ancora.
 
-Windows NTe
------------
+## Windows NTe
+
 
 Nel frattempo si andava diffondendo l’esigenza di un sistema operativo
 embedded che permettesse l’utilizzo degli applicativi scritti per
@@ -220,8 +209,7 @@ ambiente, gestito da un database, può generare facilmente i propri
 componenti aggiuntivi, determinarne le dipendenze e combinarli per le
 più svariate esigenze. Nasce Windows NT Embedded!
 
-2000 Windows CE 3.00
---------------------
+## 2000 Windows CE 3.00
 
 Questa versione viene radicalmente ridisegnata con un’architettura
 “hard-real-time”. Il Platform Builder (l’ambiente per personalizzare il
@@ -231,13 +219,12 @@ e comprensiva di tool di sviluppo e di debug.
 Il nuovo kernel, che rimarrà fino alla versione 5.0, permette di gestire
 le funzionalità real-time mediante:
 
-256 livelli di priorità (nelle versioni precedenti erano soltanto 8);
+- 256 livelli di priorità (nelle versioni precedenti erano soltanto 8);
 
-La programmabilità del “quantum” di ogni trhead;
+- La programmabilità del “quantum” di ogni trhead;
 
-La gestione degli interrupt nidificati;
+- La gestione degli interrupt nidificati;
 
-1.  
 
 Naturalmente le novità non si fermarono al kernel, ma continuarono:
 l’object store fu allargato a 256Mb, la dimensione massima dei singoli
@@ -253,8 +240,8 @@ l’ambiente dei telefoni cellulari, per dare così inizio alla produzione
 di software per le esigenze di chi, pur muovendosi sul territorio,
 cominciava ad essere sempre “connesso”.
 
-Windows CE .NET 4.xx
---------------------
+## Windows CE .NET 4.xx
+
 
 Il nome dato a questa release di Windows CE mette in evidenza la nascita
 di una versione della piattaforma .NET dedicata al mondo “mobile” ed
@@ -268,9 +255,7 @@ prevalentemente alimentati a batteria.
 Il messaggio dei contenuti di questa serie di release si basava
 sostanzialmente su tre concetti:
 
-La produttività;
-
-1.  
+### La produttività;  
 
 Venne prestata attenzione a questa importante caratteristica ad iniziare
 dal “platform builder” (l’ambiente grafico per lo sviluppo dei driver,
@@ -284,19 +269,19 @@ piattaforme di sviluppo per gli applicativi: Visual Studio .NET e
 Embedded Visual C++ 4.00. Venne migliorato l’ambente di emulazione dei
 device e nacque nuove iniziative per migliorare la produttività:
 
-l’accesso al codice in forma sorgente (2 milioni di linee di codice
+- l’accesso al codice in forma sorgente (2 milioni di linee di codice
 disponibili);
 
-rafforzamento della comunità Windows Embedded con gruppi di discussione;
+- rafforzamento della comunità Windows Embedded con gruppi di discussione;
 
-oltre 60 “how-to” (descrizioni esplicative per rispondere alle domande
+- oltre 60 “how-to” (descrizioni esplicative per rispondere alle domande
 di sviluppi più frequenti);
 
-chat e molti eventi per divulgare i progressi ottenuti.
+- chat e molti eventi per divulgare i progressi ottenuti.
 
-1.  
 
-Consolidamento strutturale;
+
+### Consolidamento strutturale;
 
 Tutte le funzionalità del prodotto vennero consolidate ed ampliate:
 dalla parte “real-time” alle dimensioni del sistema, aumentando la
@@ -308,9 +293,7 @@ SOAP; dalla gestione dei file (TFAT, BinFS) ai server FTP, HTTP, RAS,
 PPTP; per finire con i supporti alla sicurezza: Cerberos, PPTP, PEAP a
 EAP.
 
-Soluzioni innovative;
-
-1.  
+### Soluzioni innovative;
 
 Queste release furono anche il risultato del lavoro svolto verso una
 mutua connessione dei device, soprattutto per le soluzioni wireless. La
@@ -324,8 +307,7 @@ Image, PDF), al supporto multi-lingue per 12 linguaggi, al client RDP
 5.1, all’estensione dei device driver (UPnP, 1394, ATA/IDE) e della
 piattaforma Real time per le comunicazioni IP (SIP, RTC).
 
-Windows CE 5.xx
----------------
+## Windows CE 5.xx
 
 Il messaggio principale di questa release è la ricerca della qualità di
 ogni componente. In quest’ottica nascono “Production-Quality OAL (OEM
@@ -338,9 +320,7 @@ aggiornamenti tecnici sono molteplici sia dal punto di vista della
 piattaforma di sviluppo che da quello del sistema operativo e dei nuovi
 componenti.Ne citiamo soltanto degli esempi:
 
-Ambiente di sviluppo per driver e build (Platform builder);
-
-1.  
+### Ambiente di sviluppo per driver e build (Platform builder);
 
 Possibilità di mettere dei breakpoint mentre il dispositivo sta
 lavorando, semplificazione della connessione di debug utilizzando il
@@ -348,26 +328,22 @@ KITL (Kernel Indipendent Transport Layer), unificazione dell’interfaccia
 grafica con la gestione a riga comando, nuove opzioni di compilazione e
 di link, ecc.
 
-Elementi di sistema;
-
-1.  
+### Elementi di sistema;
 
 Interrupt di sistema portati da 32 a 64, creazione del thread di
 power-down, possibilità di variare la frequenza di schedulazione,
 Embedded Database (EDB), integrazione di tecnologie grafiche e
 multimediali (Windows Media, Direct3D Mobile, Direct sound,ecc), ecc.
 
-Nuovi componenti;
-
-1.  
+### Nuovi componenti;
 
 internet explorer 6.0 per Windows CE, una serie di componenti per la
 sicurezza (crittografia, gestore delle credenziali, servizi di
 autenticazione, ecc), aggiornamento delle shell di sistema, Voice Over
 IP, RTC (real-time communication client), ecc.
 
-Windows Embedded CE (6.0)
--------------------------
+## Windows Embedded CE (6.0)
+
 
 Le due maggiori novità di questa release sono il nuovo kernel che ha
 permesso di superare alcune barriere sul numero dei processi e la
@@ -376,9 +352,7 @@ Builder nell’ambiente Visual Studio .NET 2005.
 
 Vediamo quali sono state le più importanti novità:
 
-a livello di sistema;
-
-1.  
+### a livello di sistema;
 
 2Gb di memoria virtuale per ogni processo, 32000 processi (fino alla
 release 5.0 erano 32!!); alcuni componenti critici di sistema sono stati
@@ -386,26 +360,22 @@ spostati all’interno del kernel; i driver possono essere scritti per
 lavorare in “kernel mode” con un incremento delle performance o in “user
 mode” per accrescere la robustezza del sistema, ecc.
 
-A livello di tool per lo sviluppo e il test;
-
-1.  
+### A livello di tool per lo sviluppo e il test;
 
 L’integrazione in Visual studio .NET 2005 ha portato immediati benefici:
 aggiornamento dei compilatori all’ultima release, miglioramento delle
 performance, aggiunta di editor dedicati (BIB e REG), runtime image
 viewer, ecc.
 
-Ulteriore disponibilità dei codici sorgente:
+### Ulteriore disponibilità dei codici sorgente:
 
-1.  
 
 Il codice sorgente presente tramite la licenza shared source arriva al
 100% del kernel e del device manager, che fino alla release precedente
 NON erano disponibili.
 
-Nuovi componenti per le nuove tecnologie.
+### Nuovi componenti per le nuove tecnologie.
 
-1.  
 
 Proiettore wired e wireless per i notebook con Windows Vista (networked
 projector e remote display); funzionalità legate alla telefonia
@@ -414,8 +384,8 @@ ecc; funzionalità multimediali (Network Media Device): il “middleware”
 NMD, la WM DRM 10 (Cardea) per la compatibilità con PlayForSure,
 componenti per il motore DVR in MPEG2, ecc.
 
-Windows XP Embedded
--------------------
+## Windows XP Embedded
+
 
 Passiamo al 2001 e l’interesse di Microsoft per i sistemi operativi
 Embedded diventa così marcato che passano soltanto 6 mesi tra il
@@ -441,9 +411,7 @@ componenti, ha preso in considerazione tre momenti fondamentali per la
 costruzione di un ambiente di produzione di un sistema operativo
 personalizzato:
 
-la creazione della piattaforma hardware;
-
-1.  
+### la creazione della piattaforma hardware;
 
 L’esigenza, in questa fase, è quella di creare una lista di tutti i
 singoli componenti hardware di cui sarà formato il dispositivo embedded
@@ -459,9 +427,9 @@ procurano i driver (è bene ricordare che i driver utilizzati da Windows
 XP embedded sono i driver rilasciati dai costruttori dei driver per XP,
 senza alcuna differenza!!).
 
-La scelta del template software;
 
-1.  
+### La scelta del template software;
+
 
 Il secondo passaggio riguarda la scelta del tipo di dispositivo che si
 vuole produrre. L’ambiente presenta una serie di template organicamente
@@ -472,13 +440,12 @@ l’integrazione dell’applicativo specifico dell’utente all’interno del
 sistema (es: il produttore di un “chiosco informativo” creerà il
 componente dell’applicativo “chiosco”).
 
-Le funzionalità embedded;
+### Le funzionalità embedded;
 
-1.  
 
 L’ultimo passaggio riguarda l’assemblaggio vero e proprio del sistema:
 
-Presentazione personalizzata e controllata;
+### Presentazione personalizzata e controllata;
 
 Microsoft autorizza i produttori di dispositivi embedded a sostituire la
 parte di “presentazione iniziale” del sistema (splash-screen) con un
@@ -492,9 +459,7 @@ apparire un pop-up che richiede un intervento sistemistico quando
 davanti allo schermo c’è il cliente della banca che aveva richiesto un
 estratto conto.
 
-Configurazioni di lavoro;
-
-1.  
+### Configurazioni di lavoro;
 
 Nell’ambiente embedded, le configurazioni degli utenti del sistema, dei
 privilegi e degli accessi vanno decisi, in gran parte, a livello di
@@ -506,9 +471,7 @@ l’utente del dispositivo non possa in alcun modo alterare il sistema
 operativo mentre il manutentore, per definizione, deve essere in grado
 di farlo.
 
-Automatismi di aggiornamento sul campo.
-
-1.  
+### Automatismi di aggiornamento sul campo.
 
 L’ultimo punto riguarda l’aggiornamento sul campo del dispositivo. Per
 questo, Microsoft ha previsto sia *soluzioni standard* (aggiornamenti
@@ -516,8 +479,8 @@ automatici e client di ambienti di distribuzione software tipo SMS), per
 permettere ai sistemi XP embedded di coesistere con sistemi XP
 professional, sia *soluzioni dedicate*.
 
-WEPOS (Windows Embedded for Point of Services)
-----------------------------------------------
+## WEPOS (Windows Embedded for Point of Services)
+
 
 Così come dall’ambiente Windows CE sono state create da Microsoft
 diverse distribuzioni per le specifiche esigenze di mercato (Windows
@@ -536,8 +499,8 @@ benefici di avere un sistema pensato per l’embedded con tutti i driver
 tipici dell’ambiente: PINPAD, Badge reader, stampanti, ecc e con la
 piattaforma .NET POS per poterli programmare in modo standard.
 
-Windows Embedded Server
------------------------
+## Windows Embedded Server
+
 
 Sotto questo nome, viene presentata un’intera famiglia di prodotti
 server. Il concetto è quello dell’embedded, ovvero singoli server
@@ -547,8 +510,8 @@ protezione, ecc. Questi server sono stati derivati da Windows Server
 funzionalità. Il vantaggio è squisitamente economico: i server embedded
 costano meno dell’omologo standard edition.
 
-Sistemi Operativi Desktop Classici per sistemi Embedded
--------------------------------------------------------
+## Sistemi Operativi Desktop Classici per sistemi Embedded
+
 
 Per “Classici” si intendono i sistemi Windows XP, 2000, NT, 3.1 e 3.11 e
 il “buon vecchio” MS-DOS 6.22. Per ognuno di questi sistemi, esiste a
@@ -558,8 +521,8 @@ vantaggio della reperibilità: quasi tutti, infatti, nella versione
 desktop non sono più in distribuzione. A questo si aggiunge nuovamente
 il vantaggio economico.
 
-.NET Micro Framework
---------------------
+## .NET Micro Framework
+
 
 Eccoci all’ultimo nato della famiglia Windows Embedded: “.NET Micro
 Framework”. Ideato dal dipartimento di ricerca di Microsoft per
@@ -579,8 +542,8 @@ delle librerie .NET e WPF (Windows Presentation Foundation).
 Per approfondimenti visita:
 [*http://www.microsoft.com/MSPress/books/10457.aspx*](http://www.microsoft.com/MSPress/books/10457.aspx)
 
-Le versioni disponibili
------------------------
+## Le versioni disponibili
+
 
 [***Windows Embedded CE (in
 inglese)***](http://www.microsoft.com/windows/embedded/eval/wince/getgoing.mspx)
