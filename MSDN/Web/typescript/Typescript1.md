@@ -93,23 +93,15 @@ Possiamo quindi sperimentare facilmente, e per farlo proviamo ad
 immettere il seguente codice nell'editor online oppure se preferite in
 Visual Studio 2012:
 
-1.  Typescript
-
-<!-- -->
-
-1.  1: function calculateHypotenuse()
-
-    2: {
-
-    3: var c1 = 5;
-
-    4: var c2 = '2';
-
-    5: var hy = Math.sqrt(c1 \* c1 + c2 \* c2);
-
-    6: alert(hy);
-
-    7: }
+```typescript
+function calculateHypotenuse()
+{
+    var c1 = 5;
+    var c2 = '2';
+    var hy = Math.sqrt(c1 * c1 + c2 * c2);
+    alert(hy);
+}
+```
 
 Ad un occhio attento appare evidente che, purtrattandosi di codice
 perfettamente legale per Javascript, esso poi genererà un errore di
@@ -155,21 +147,14 @@ mantenere sempre inalterato il paradigma che sostiene che un sorgente
 Javascript è un Typescript valido. Una volta corretto l'ultimo errore
 nell'esempio avremo finalmente un output Javascript come segue:
 
-1.  Typescript
-
-<!-- -->
-
-1.  1: function calculateHypotenuse() {
-
-    2: var c1 = 5;
-
-    3: var c2 = 2;
-
-    4: var hy = Math.sqrt(c1 \* c1 + c2 \* c2);
-
-    5: alert(hy.toString());
-
-    6: }
+```typescript
+function calculateHypotenuse() {
+    var c1 = 5;
+    var c2 = 2;
+    var hy = Math.sqrt(c1 * c1 + c2 * c2);
+    alert(hy.toString());
+}
+```
 
 Questo esempio banale, è però significativo e dà la misura di come,
 grazie al supporto di uno strumento di sviluppo quale il compilatore e

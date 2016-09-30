@@ -79,7 +79,7 @@ Un altro caso particolare sono le variabili che ammettono come valore
 una funzione:
 
 ```typescript
-var callback : (number) =&gt; string;
+var callback : (number) => string;
 
 callback = function(n)
 {

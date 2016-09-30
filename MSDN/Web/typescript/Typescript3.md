@@ -277,7 +277,7 @@ module Shapes
         
         getArea(): number
         {
-            return this.width \* this.height;
+            return this.width * this.height;
         }
     }
 
