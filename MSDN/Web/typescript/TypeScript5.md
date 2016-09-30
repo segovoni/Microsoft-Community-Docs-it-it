@@ -1,7 +1,20 @@
+---
+title: Typescript e le librerie di terze parti
+description: Typescript e le librerie di terze parti
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: TypeScript
+ms.custom: CommunityDocs
+---
+
+
+# Typescript e le librerie di terze parti
+
+
 #### di [Andrea Boschin](http://mvp.microsoft.com/en-us/mvp/Andrea%20Boschin-4000289) – Microsoft MVP
 
-1.  ![](./img//media/image1.png){width="0.5938331146106737in"
-    height="0.9376312335958005in"}
+![](./img/MVPLogo.png)
 
 *Giugno, 2013*
 
@@ -24,15 +37,13 @@ agli occhi quando scriviamo in Typescript, diventa immediatamente chiaro
 che, aldilà di un linguaggio efficace, c'è anche dell'altro. Proviamo ad
 esempio, in un banale esercizio a scrivere quanto segue:
 
-1.  Typescript
+```typescript
+var element: HTMLAnchorElement =
 
-<!-- -->
+<HTMLAnchorElement>document.getElementById('myLink');
 
-1.  1: var element: HTMLAnchorElement =
-
-    2: &lt;HTMLAnchorElement&gt;document.getElementById('myLink');
-
-    3: element.href = 'http://www.xamlplayground.org';
+element.href = 'http://www.xamlplayground.org';
+```
 
 La specifica di HTMLAnchorElement, qui utilizzata sia come dichiarazione
 di una variabile che come cast, in effetti rivela che vi è un substrato
@@ -43,58 +54,34 @@ Studio 2012, possiamo semplicemente andare con il cursore al tipo
 HtmlAnchorElement e premere F12 (Go To Definition) per ottenere quanto
 segue:
 
-1.  Typescript
-
-<!-- -->
-
-1.  1: interface HTMLAnchorElement extends HTMLElement,
+```typescript
+interface HTMLAnchorElement extends HTMLElement,
     MSHTMLAnchorElementExtensions, MSDataBindingExtensions {
+    rel: string;
+    protocol: string;
+    search: string;
+    coords: string;
+    hostname: string;
+    pathname: string;
+    target: string;
+    href: string;
+    name: string;
+    charset: string;
+    hreflang: string;
+    port: string;
+    host: string;
+    hash: string;
+    rev: string;
+    type: string;
+    shape: string;
+    toString(): string;
+}
 
-    2: rel: string;
-
-    3: protocol: string;
-
-    4: search: string;
-
-    5: coords: string;
-
-    6: hostname: string;
-
-    7: pathname: string;
-
-    8: target: string;
-
-    9: href: string;
-
-    10: name: string;
-
-    11: charset: string;
-
-    12: hreflang: string;
-
-    13: port: string;
-
-    14: host: string;
-
-    15: hash: string;
-
-    16: rev: string;
-
-    17: type: string;
-
-    18: shape: string;
-
-    19: toString(): string;
-
-    20: }
-
-    21: declare var HTMLAnchorElement: {
-
-    22: prototype: HTMLAnchorElement;
-
-    23: new(): HTMLAnchorElement;
-
-    24: }
+declare var HTMLAnchorElement: {
+    prototype: HTMLAnchorElement;
+    new(): HTMLAnchorElement;
+}
+```
 
 Il codice qui evidenziato, corrispondente alla dichiarazione del tipo
 suddetto, è estrapolato da un file denominato "lib.d.ts". Questo file è
@@ -150,8 +137,7 @@ Grazie a questa referenza il compilatore inizierà ad accorgersi della
 presenza di tipi di JQuery e di conseguenza a fornire l'intellisense
 come atteso:
 
-1.  ![](./img//media/image2.png){width="6.5in"
-    height="1.7347222222222223in"}
+![](./img/Typescript5/image2.png)
 
 Attenzione che la presenza di un file di definizione non ha solo lo
 scopo di supportare lo sviluppo alimentando l'intellisense. La vera
@@ -171,37 +157,22 @@ E' chiaro che all'interno di questo file importato dovremo organizzare i
 tipi secondo dei namespace opportunamente organizzati per facilitarne
 l'utilizzo.
 
-1.  Typescript
+```typescript
+/// <reference path="typings/jquery/jquery.d.ts" 
 
-<!-- -->
+module Utils
+{
+    export class Page
+    {
+        run(): void
+        {
+            $(() => this.onLoad());
+        }
 
-1.  1: /// &lt;reference path="typings/jquery/jquery.d.ts" /&gt;
-
-    2:  
-
-    3: module Utils
-
-    4: {
-
-    5: export class Page
-
-    6: {
-
-    7: run(): void
-
-    8: {
-
-    9: \$(() =&gt; this.onLoad());
-
-    10: }
-
-    11:  
-
-    12: onLoad(): void { }
-
-    13: }
-
-    14: }
+        onLoad(): void { }
+    }
+}
+```
 
 Nello snippet si vede l'utilizzo di "module" per creare un namespace.
 All'interno di esso ciascuna classe che è marcata con "export" (ma

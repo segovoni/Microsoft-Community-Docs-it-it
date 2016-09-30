@@ -1,3 +1,12 @@
+---
+title: Typescript - organizzare il codice con interfacce, classi e moduli
+description: Typescript - organizzare il codice con interfacce, classi e moduli
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: TypeScript
+ms.custom: CommunityDocs
+---
 
 # Typescript: organizzare il codice con interfacce, classi e moduli
 

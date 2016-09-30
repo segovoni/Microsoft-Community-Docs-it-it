@@ -1,4 +1,12 @@
-
+---
+title: Typescript - Javascript per applicazioni reali
+description: Typescript - Javascript per applicazioni reali
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: TypeScript
+ms.custom: CommunityDocs
+---
 
 # Typescript: Javascript per applicazioni reali
 
