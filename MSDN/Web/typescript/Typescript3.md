@@ -1,12 +1,15 @@
+
+# Typescript: organizzare il codice con interfacce, classi e moduli
+
 #### di [Andrea Boschin](http://mvp.microsoft.com/profiles/Andrea.Boschin) – Microsoft MVP
 
-1.  ![](./img//media/image1.png){width="0.5938331146106737in"
-    height="0.9376312335958005in"}
+![](./img/MVPLogo.png)
+
 
 *Aprile, 2013*
 
 Pur se lo [static type
-checking](http://msdn.microsoft.com/it-it/library/dn194074.aspx) è un
+checking](Typescript2.md) è un
 elemento importante nell'utilizzo di Typescript, tanto da essere già una
 ragione più che valida per la sua adozione, è chiaro che si può fare di
 più nella semplificazione del codice Javascript e nella sua
@@ -32,23 +35,14 @@ visto che grazie allo structured typing, Typescript è in grado di
 riconoscere i tipi semplicemente analizzando la corrispondenza delle
 proprietà. L'esempio seguente riassume in breve la questione:
 
-1.  TypeScript
-
-<!-- -->
-
-1.  1: function getArea(s: { width: number; height: number; }): number
-
-    2: {
-
-    3: return s.width \* s.height / 2;
-
-    4: }
-
-    5: 
-
-    6: var area = getArea({ width: 20, height: 30 });
-
-    7: console.log(area.toString());
+```typescript
+function getArea(s: { width: number; height: number; }): number
+{
+    return s.width * s.height / 2;
+}
+var area = getArea({ width: 20, height: 30 });
+console.log(area.toString());
+```
 
 E' del tutto chiaro che questo tipo di notazione, pur se tutelata dal
 compilatore, è eccessivamente prolissa e a lungo andare può essere
@@ -58,35 +52,21 @@ la definizione del contratto di un tipo cui il valore deve conformarsi.
 Un concetto più che normale per chi conosce la programmazione ad
 oggetti. Vediamo un esempio:
 
-1.  TypeScript
+```typescript
+interface Shape
+{
+    width: number;
+    height: number;
+}
 
-<!-- -->
+function getArea(s: Shape): number
+{
+    return s.width * s.height / 2;
+}
 
-1.  1: interface Shape
-
-    2: {
-
-    3: width: number;
-
-    4: height: number;
-
-    5: }
-
-    6: 
-
-    7: function getArea(s: Shape): number
-
-    8: {
-
-    9: return s.width \* s.height / 2;
-
-    10: }
-
-    11: 
-
-    12: var area = getArea({ width: 20, height: 30 });
-
-    13: console.log(area.toString());
+var area = getArea({ width: 20, height: 30 });
+console.log(area.toString());
+```
 
 Nelle prime righe dello snippet è visibile la dichiarazione di una
 interfaccia "Shape". Essa riporta le proprietà "width" e "height" e
@@ -98,51 +78,29 @@ parametro contro la definizione dell'intefaccia. Le interfacce ammettono
 oltre alle proprietà anche metodi e proprietà opzionali (usando il ?).
 Ecco un esempio:
 
-1.  TypeScript
+```typescript
+interface Shape
+{
+    width: number;
+    height: number;
+    color?: string;
+    getArea(): number;
+}
 
-<!-- -->
+function getArea(s: Shape): number
+{
+    return s.getArea();
+}
 
-1.  1: interface Shape
+var area = getArea(
+{
+    width: 20,
+    height: 30,
+    getArea: function() { return this.width * this.height / 2; }
+});
 
-    2: {
-
-    3: width: number;
-
-    4: height: number;
-
-    5: color?: string;
-
-    6: getArea(): number;
-
-    7: }
-
-    8: 
-
-    9: function getArea(s: Shape): number
-
-    10: {
-
-    11: return s.getArea();
-
-    12: }
-
-    13: 
-
-    14: var area = getArea(
-
-    15: {
-
-    16: width: 20,
-
-    17: height: 30,
-
-    18: getArea: function() { return this.width \* this.height / 2; }
-
-    19: });
-
-    20: 
-
-    21: console.log(area.toString());
+console.log(area.toString());
+```
 
 L'esempio in questione estremizza la definizione dell'interfaccia Shape
 richiedendo una proprietà opzionale "color" (che poi non viene passata
@@ -154,116 +112,65 @@ potremmo voler implementare l'interfaccia Shape in diverse figure e
 fornire una diversa implementazione del calcolo. Lo possiamo fare grazie
 alla presenza delle classi. Vediamo come:
 
-1.  TypeScript
+```typescript
+interface Shape
+{
+width: number;
+height: number;
+getArea(): number;
+}
 
-<!-- -->
+class Triangle implements Shape
+{
+constructor(
+    public width: number,
+    public height: number) { }
 
-1.  1: interface Shape
+getArea(): number {
+    return this.width * this.height / 2;
+    }
+}
 
-    2: {
+class Square implements Shape
+{
+constructor(
+    public width: number,
+    public height: number) { }
 
-    3: width: number;
+getArea(): number {
+    return this.width * this.height;
+    }
+}
 
-    4: height: number;
+function getArea(s: Shape): void
+{
+    var area = s.getArea();
+    console.log(area.toString());
+}
 
-    5: getArea(): number;
-
-    6: }
-
-    7: 
-
-    8: class Triangle implements Shape
-
-    9: {
-
-    10: constructor(
-
-    11: public width: number,
-
-    12: public height: number) { }
-
-    13: 
-
-    14: getArea(): number {
-
-    15: return this.width \* this.height / 2;
-
-    16: }
-
-    17: }
-
-    18: 
-
-    19: class Square implements Shape
-
-    20: {
-
-    21: constructor(
-
-    22: public width: number,
-
-    23: public height: number) { }
-
-    24: 
-
-    25: getArea(): number {
-
-    26: return this.width \* this.height;
-
-    27: }
-
-    28: }
-
-    29: 
-
-    30: function getArea(s: Shape): void
-
-    31: {
-
-    32: var area = s.getArea();
-
-    33: console.log(area.toString());
-
-    34: }
-
-    35: 
-
-    36: getArea(
-
-    37: new Square(20, 30));
-
-    38: getArea(
-
-    39: new Triangle(20, 30));
+getArea(new Square(20, 30));
+getArea(new Triangle(20, 30));
+```
 
 Grazie alla keyword "class" è possibile creare delle vere e proprie
 classi che, a differenza di quello che succede per le interfacce che
 spariscono nel codice Javascript, generano una struttura che chi è
 avvezzo alle strutture tipiche di Javascript riconoscerà sicuramente.
 
-1.  TypeScript
+```typescript
+var Triangle = (function () {
+    function Triangle(width, height) {
+        this.width = width;
+        this.height = height;
+    }
 
-<!-- -->
-
-1.  1: var Triangle = (function () {
-
-    2: function Triangle(width, height) {
-
-    3: this.width = width;
-
-    4: this.height = height;
-
-    5: }
-
-    6: Triangle.prototype.getArea = function () {
-
-    7: return this.width \* this.height / 2;
-
-    8: };
-
-    9: return Triangle;
-
-    10: })();
+    Triangle.prototype.getArea = function () {
+        return this.width * this.height / 2;
+    };
+    
+    return Triangle;
+})();
+```
 
 Nel precedente snippet abbiamo anche la dimostrazione che una classe può
 implementare una specifica interfaccia, per mezzo della keyword
@@ -279,45 +186,26 @@ classi esistenti. Per fare questo dovremo utilizzare la keywork
 "extends" al posto di "implements". Vediamo come usare l'ereditarietà
 per create una classe "Cube" derivando da "Square":
 
-1.  TypeScript
-
-<!-- -->
-
-1.  1: class Cube
-
-    2: extends Square
-
-    3: {
-
-    4: constructor(
-
-    5: width: number,
-
-    6: height: number,
-
-    7: public depth: number)
-
-    8: {
-
-    9: super(width, height);
-
-    10: }
-
-    11: 
-
-    12: getArea(): number
-
-    13: {
-
-    14: return (super.getArea() \* 2) +
-
-    15: (this.depth \* this.width \* 2) +
-
-    16: (this.depth \* this.height \* 2);
-
-    17: }
-
-    18: }
+```typescript
+class Cube
+    extends Square
+    {
+        constructor(
+            width: number,
+            height: number,
+            public depth: number)
+            {
+                super(width, height);
+            }
+        
+        getArea(): number
+        {
+            return (super.getArea() * 2) +
+                (this.depth * this.width * 2) +
+                (this.depth * this.height * 2);
+        }
+    }
+```
 
 In questo esempio vediamo che al costruttore della classe viene aggiunto
 un ulteriore parametro "depth" che identifica l'altezza del
@@ -336,43 +224,28 @@ Usare i moduli
 Una volta che abbiamo classi e interfacce i benefici che ne derivano
 sono numerosi, soprattutto in termini di organizzazione logica del
 codice e di manutenzione. Il passo successivo è di organizzare il codice
-in moduli - i programmatori c\# li conosceranno meglio come "namespace"
+in moduli - i programmatori C\# li conosceranno meglio come "namespace"
 (o Spazi dei Nomi) - per riuscire a creare vere e proprie librerie i cui
 i nomi siano univoci. Anche in questo Typescript ci aiuta; grazie alla
 keyword "module" infatti sarà possibile creare dei veri e propri
 namespace:
 
-1.  TypeScript
-
-<!-- -->
-
-1.  1: module Shapes
-
-    2: {
-
-    3: export class Square implements Shape
-
-    4: {
-
-    5: constructor(
-
-    6: public width: number,
-
-    7: public height: number) { }
-
-    8:  
-
-    9: getArea(): number
-
-    10: {
-
-    11: return this.width \* this.height;
-
-    12: }
-
-    13: }
-
-    14: }
+```typescript
+module Shapes
+{
+    export class Square implements Shape
+    {
+        constructor(
+            public width: number,
+            public height: number) { }
+            
+            getArea(): number
+            {
+                return this.width * this.height;
+            }
+    }
+}
+```
 
 Interessante notare che la classe definita nel modulo "Shapes" è stata
 decorata con "export". Infatti, una volta che abbiamo messo una classe
@@ -384,104 +257,64 @@ Come si è abituati a fare con i namespace in C\#, anche in Typescript i
 moduli possono essere annidati in modo del tutto analogo, creandoli
 effettivamente l'uno nell'altro:
 
-1.  TypeScript
+```typescript
+module Shapes
+{
+    export class Square implements Shape
+    {
+        constructor(
+            public width: number,
+            public height: number) { }
+        
+        getArea(): number
+        {
+            return this.width \* this.height;
+        }
+    }
 
-<!-- -->
-
-1.  1: module Shapes
-
-    2: {
-
-    3: export class Square implements Shape
-
-    4: {
-
-    5: constructor(
-
-    6: public width: number,
-
-    7: public height: number) { }
-
-    8:  
-
-    9: getArea(): number
-
-    10: {
-
-    11: return this.width \* this.height;
-
-    12: }
-
-    13: }
-
-    14:  
-
-    15: export module ThreeD
-
-    16: {
-
-    17: export class Cube extends Square
-
-    18: {
-
-    19: // ... omissis
-
-    20: }
-
-    21: }
-
-    22: }
+    export module ThreeD
+    {
+        export class Cube extends Square
+        {
+            // ... omissis
+        }
+    }
+}
+```
 
 Oppure usando una notazione puntata
 
-1.  TypeScript
-
-<!-- -->
-
-1.  1: module Shapes.ThreeD
-
-    2: {
-
-    3: export class Cube extends Square
-
-    4: {
-
-    5: // ... omissis
-
-    6: }
-
-    7: }
+```typescript
+module Shapes.ThreeD
+{
+    export class Cube extends Square
+    {
+        // ... omissis
+    }
+}
+```
 
 Ciascuna delle due notazioni può essere tranquillamente utilizzata
 assieme all'altra creando vere e proprie composizioni in cui i moduli si
 combinano. Una volta che i moduli sono stati creati sarà possibile
 raggiungere i tipi definiti nei moduli specificando l'intero namespace:
 
-1.  TypeScript
-
-<!-- -->
-
-1.  1: var square: Shapes.Square;
-
-    2: var cube: Shapes.ThreeD.Cube;
+```typescript
+var square: Shapes.Square;
+var cube: Shapes.ThreeD.Cube;
+```
 
 Data la notevole lunghezza e ridondanza che i nomi completi di namespace
 possono raggiungere è del tutto possibile creare degli shortcut che
 siano in grado di semplificare la scrittura del codice:
 
-1.  TypeScript
+```typescript
+import sh = Shapes;
+import sh3d = Shapes.ThreeD;
 
-<!-- -->
-
-1.  1: import sh = Shapes;
-
-    2: import sh3d = Shapes.ThreeD;
-
-    3:  
-
-    4: var square: sh.Square;
-
-    5: var cube: sh3d.Cube;
+var square: sh.Square;
+var cube: sh3d.Cube;
+```
 
 Come a casa propria
 -------------------
@@ -495,128 +328,68 @@ grado di fornire strumenti che la programmazione Javascript può dare
 solo a caro prezzo. Per intenderci vediamo un esempio di cosa sia
 possibile fare:
 
-1.  TypeScript
+```typescript
+module Shapes
+{
+    export interface Shape
+    {
+        width: number;
+        height: number;
+        getArea(): number;
+    }
+    
+    export enum ShapeType
+    {
+        Square,
+        Triangle
+    }
 
-<!-- -->
+    export class ShapeFactory
+    {
+        static create(type: ShapeType, width: number, height: number): Shape
+        {
+            switch (type)
+            {
+                case ShapeType.Square:
+                    return new Square(width, height);
+                case ShapeType.Triangle:
+                    return new Triangle(width, height);
+            }
+            
+            return null;
+        }
+    }
 
-1.  1: module Shapes
+    class Triangle implements Shape
+    {
+        constructor(
+            public width: number,
+            public height: number) { }
 
-    2: {
+            getArea(): number
+            {
+                return this.width * this.height / 2;
+            }
+    }
 
-    3: export interface Shape
+    class Square implements Shape
+    {
+        constructor(
+            public width: number,
+            public height: number) { }
+        
+        getArea(): number
+            {
+                return this.width * this.height;
+            }
+    }
+}
 
-    4: {
+import sh = Shapes;
 
-    5: width: number;
-
-    6: height: number;
-
-    7: getArea(): number;
-
-    8: }
-
-    9:  
-
-    10: export enum ShapeType
-
-    11: {
-
-    12: Square,
-
-    13: Triangle
-
-    14: }
-
-    15:  
-
-    16: export class ShapeFactory
-
-    17: {
-
-    18: static create(type: ShapeType, width: number, height: number):
-    Shape
-
-    19: {
-
-    20: switch (type)
-
-    21: {
-
-    22: case ShapeType.Square:
-
-    23: return new Square(width, height);
-
-    24: case ShapeType.Triangle:
-
-    25: return new Triangle(width, height);
-
-    26: }
-
-    27:  
-
-    28: return null;
-
-    29: }
-
-    30: }
-
-    31:  
-
-    32: class Triangle implements Shape
-
-    33: {
-
-    34: constructor(
-
-    35: public width: number,
-
-    36: public height: number) { }
-
-    37:  
-
-    38: getArea(): number
-
-    39: {
-
-    40: return this.width \* this.height / 2;
-
-    41: }
-
-    42: }
-
-    43:  
-
-    44: class Square implements Shape
-
-    45: {
-
-    46: constructor(
-
-    47: public width: number,
-
-    48: public height: number) { }
-
-    49:  
-
-    50: getArea(): number
-
-    51: {
-
-    52: return this.width \* this.height;
-
-    53: }
-
-    54: }
-
-    55: }
-
-    56:  
-
-    57: import sh = Shapes;
-
-    58: var sq = sh.ShapeFactory.create(sh.ShapeType.Square, 20, 30);
-
-    59: console.log(sq.getArea());
+var sq = sh.ShapeFactory.create(sh.ShapeType.Square, 20, 30);
+console.log(sq.getArea());
+```
 
 Credo che la combinazione di moduli, classi, interfacce ed enumeratori
 di questo esempio, assieme con l'applicazione di metodi statici e

@@ -1,7 +1,11 @@
+
+# Typescript: Static type checking
+
+
 #### di [Andrea Boschin](http://mvp.microsoft.com/profiles/Andrea.Boschin) – Microsoft MVP
 
-1.  ![](./img//media/image1.png){width="0.5938331146106737in"
-    height="0.9376312335958005in"}
+![](./img/MVPLogo.png)
+
 
 *Marzo, 2013*
 
@@ -15,15 +19,11 @@ compilazione. Questo può portare a errori comuni che si possono
 verificare come vere e proprie eccezioni oppure come più subdoli errori
 logici. Vediamo il seguente esempio:
 
-1.  Typescript
-
-<!-- -->
-
-1.  1: var a = 10;
-
-    2: var b = '32';
-
-    3: console.log(a + b);
+```typescript
+var a = 10;
+var b = '32';
+console.log(a + b);
+```
 
 Il risultato di questo snippet Javascript è la implicita concatenazione
 di stringhe che deriva dalla conversione del valore numerico 10 in
@@ -44,23 +44,15 @@ subito grazie alla capacità di inferire i tipi dall'utilizzo e applicare
 il risultato di questa inferenza come vere e proprie dichiarazioni di
 tipo. Vediamo uno snippet di esempio:
 
-1.  Typescript
-
-<!-- -->
-
-1.  1: function getArea()
-
-    2: {
-
-    3: var width = 20;
-
-    4: var height = '30';
-
-    5: var area = width \* height / 2;
-
-    6: alert(area);
-
-    7: }
+```typescript
+function getArea()
+{
+    var width = 20;
+    var height = '30';
+    var area = width * height / 2;
+    alert(area);
+}
+```
 
 Il risultato della compilazione di questo codice - che ad una attenta
 analisi contiene due palesi errori che Javascript rivelerebbe solo a
@@ -78,23 +70,15 @@ offerto dal compilatore ma in Typescript possiamo anche tutelarci da
 ulteriori errori esprimendo esplicitamente il tipo delle variabili come
 segue:
 
-1.  Typescript
-
-<!-- -->
-
-1.  1: function getArea()
-
-    2: {
-
-    3: var width: number = 20;
-
-    4: var height: number = 30;
-
-    5: var area: number = width \* height / 2;
-
-    6: alert(area.toString());
-
-    7: }
+```typescript
+function getArea()
+{
+    var width: number = 20;
+    var height: number = 30;
+    var area: number = width * height / 2;
+    alert(area.toString());
+}
+```
 
 La differenza in questo caso non è immediatamente apprezzabile se non
 nel fatto che, riproducendo l'errore precedente esprimendo il valore
@@ -106,23 +90,14 @@ verifica:
 Il beneficio diventa più evidente se introduciamo dei parametri di
 ingresso della funzione, ai quali venga applicato il calcolo:
 
-1.  Typescript
-
-<!-- -->
-
-1.  1: function getArea(width, height)
-
-    2: {
-
-    3: return width \* height / 2;
-
-    4: }
-
-    5: 
-
-    6: var area = getArea(20, '30');
-
-    7: alert(area.toString());
+```typescript
+function getArea(width, height)
+{
+    return width * height / 2;
+}
+var area = getArea(20, '30');
+alert(area.toString());
+```
 
 Il problema in questo caso passa inosservato anche all'inferenza in
 quanto i due parametri vengono interpretati di tipo "any". Quest'ultimo
@@ -132,23 +107,14 @@ l'operazione "width \* height" passa il controllo perchè "any" potrebbe
 contenere un "number". A tutela di questa situazione esprimere il tipo
 dei parametri è essenziale:
 
-1.  Typescript
-
-<!-- -->
-
-1.  1: function getArea(width: number, height: number) : number
-
-    2: {
-
-    3: return width \* height / 2;
-
-    4: }
-
-    5: 
-
-    6: var area = getArea(20, '30');
-
-    7: alert(area.toString());
+```typescript
+function getArea(width: number, height: number) : number
+{
+    return width * height / 2;
+}
+var area = getArea(20, '30');
+alert(area.toString());
+```
 
 "any", "number", "string" e "bool" sono i soli tipi primitivi
 disponibili in Typescript ma grazie ad essi il codice, come dimostra la
@@ -160,23 +126,14 @@ concetto di "structural typing". Questo concetto è in grado, con il
 minimo dispendio in termini di codice, di gestire anche i tipi impliciti
 tipici di Javascript. Facciamo un esempio per chiarezza:
 
-1.  Typescripts
-
-<!-- -->
-
-1.  1: function getArea(s: { width: number; height: number; }): number
-
-    2: {
-
-    3: return s.width \* s.height / 2;
-
-    4: }
-
-    5: 
-
-    6: var area = getArea({ width: 20, height: 30 });
-
-    7: console.log(area.toString());
+```typescript
+function getArea(s: { width: number; height: 
+{
+    return s.width * s.height / 2;
+}
+var area = getArea({ width: 20, height: 30 });
+console.log(area.toString());
+```
 
 In questo esempio la dichiarazione del parametro "s" impone che esso
 debba avere almeno le proprietà "width" e "height". A questo parametro
@@ -185,8 +142,8 @@ requisito minimo. Nelle riga 6 ad esempio viene fornito un JSON che
 rispetta questo vincolo. Rimuovendo l'uno o l'altro delle proprietà il
 compilatore ci avviserà che il tipo non è conforme alle aspettative
 
-1.  ![](./img//media/image2.png){width="6.5in"
-    height="1.5340277777777778in"}
+![](./img/Typescript2/image2.png)
+
 
 Inutile rimarcare l'utilità di questa caratteristica che ha un valore
 decisamente importante nella tutela del codice. Ricordo che, pur se in
@@ -201,34 +158,18 @@ rendere opzionale uno dei campi, salvo poi avere l'onere della verifica.
 A titolo di esempio modifichiamo il tipo di cui sopra aggiungendo la
 proprietà "color".
 
-1.  Typescript
-
-<!-- -->
-
-1.  1: function getArea(s: { width: number; height: number; color?:
-    string; }): number
-
-    2: {
-
-    3: if (typeof color !== "undefined")
-
-    4: {
-
-    5: // qui posso usare "color".
-
-    6: }
-
-    7: 
-
-    8: return s.width \* s.height / 2;
-
-    9: }
-
-    10: 
-
-    11: var area = getArea({ width: 20, height: 30 });
-
-    12: console.log(area.toString());
+```typescript
+function getArea(s: { width: number; height: number; color?: string; }): number
+{
+    if (typeof color !== "undefined")
+    {
+        // qui posso usare "color".
+    }
+    return s.width * s.height / 2;
+}
+var area = getArea({ width: 20, height: 30 });
+console.log(area.toString());
+```
 
 La proprietà color, grazie all'utilizzo del carattere "?", è a tutti gli
 effetti opzionale e di conseguenza alla riga 11, una istanza che
@@ -243,35 +184,20 @@ passaggio come argomento di funzioni di callback. Mediante una opportuna
 dichiarazione sarà possibile verificare la firma del metodo passato come
 gestore del callback:
 
-1.  Typescript
-
-<!-- -->
-
-1.  1: function getArea(
-
-    2: s: { width: number; height: number; },
-
-    3: callback: (area: number) =&gt; void): void
-
-    4: {
-
-    5: callback(
-
-    6: s.width \* s.height / 2);
-
-    7: }
-
-    8: 
-
-    9: getArea({ width: 20, height: 30 },
-
-    10: function (area)
-
-    11: {
-
-    12: console.log(area.toString());
-
-    13: });
+```typescript
+function getArea(
+    s: { width: number; height: number; },
+        callback: (area: number) => void): void
+    {
+    callback(
+        s.width * s.height / 2);
+    }
+    getArea({ width: 20, height: 30 },
+    function (area)
+    {
+        console.log(area.toString());
+    });
+```
 
 In questo esempio è simulato una chiamata asincrona, in cui il metodo
 gestore deve ricevere un valore di tipo "number". Il requisito è
@@ -280,8 +206,8 @@ non confondere con le lambda expression di C\#. Passando come argomento
 un metodo che non rispetti il requisito, il compilatore ci avviserà
 puntualmente dell'anomalia:
 
-1.  ![](./img//media/image3.png){width="3.0004188538932635in"
-    height="0.9688856080489939in"}
+![](./img/Typescript2/image3.png)
+
 
 E' del tutto evidente che i costrutti che abbiamo visto finora sono
 propri di Typescript. Tali dichiarazioni rispettano i dettami delle
