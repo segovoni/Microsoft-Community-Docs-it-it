@@ -1,7 +1,19 @@
+---
+title: Typescript - Javascript per applicazioni reali
+description: Typescript - Javascript per applicazioni reali
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: TypeScript
+ms.custom: CommunityDocs
+---
+
+# Typescript: Javascript per applicazioni reali
+
 #### di [Andrea Boschin](http://mvp.microsoft.com/profiles/Andrea.Boschin) – Microsoft MVP
 
-1.  ![](./img//media/image1.png){width="0.5938331146106737in"
-    height="0.9376312335958005in"}
+![](./img/Typescript1/image1.png)
+
 
 *Marzo, 2013*
 
@@ -41,8 +53,8 @@ Javascript diventa un linguaggio ostico e, troppo spesso, pericoloso per
 la sua capacità di *digerire* qualunque cosa salvo poi *scoppiare* nel
 momento peggiore e cioè dopo il rilascio in produzione.
 
-1.  ![](./img//media/image2.png){width="4.385416666666667in"
-    height="2.8333333333333335in"}
+![](./img/Typescript1/image2.png)
+
 
 E' questa la ragione per cui molti si stanno orientando ad un nuovo tipo
 di strumenti, che abbia la capacità di tutelare lo sviluppatore mediante
@@ -81,23 +93,15 @@ Possiamo quindi sperimentare facilmente, e per farlo proviamo ad
 immettere il seguente codice nell'editor online oppure se preferite in
 Visual Studio 2012:
 
-1.  Typescript
-
-<!-- -->
-
-1.  1: function calculateHypotenuse()
-
-    2: {
-
-    3: var c1 = 5;
-
-    4: var c2 = '2';
-
-    5: var hy = Math.sqrt(c1 \* c1 + c2 \* c2);
-
-    6: alert(hy);
-
-    7: }
+```typescript
+function calculateHypotenuse()
+{
+    var c1 = 5;
+    var c2 = '2';
+    var hy = Math.sqrt(c1 * c1 + c2 * c2);
+    alert(hy);
+}
+```
 
 Ad un occhio attento appare evidente che, purtrattandosi di codice
 perfettamente legale per Javascript, esso poi genererà un errore di
@@ -109,7 +113,7 @@ essere passato direttamente alla funzione *alert()* che richiede una
 stringa. Il codice così com'è incollato nell'editor di Visual Studio ci
 metterà immediatamente in guardia proprio a causa dei suddetti problemi:
 
-1.  ![](./img//media/image3.png){width="3.28125in" height="1.21875in"}
+![](./img/Typescript1/image3.png)
 
 Visual Studio 2012, mediante le sottolineature in rosso evidenzia il
 problema, pur trattandosi di codice Javascript senza alcun costrutto
@@ -130,8 +134,8 @@ evidenzia la causa dell'errore molto chiaramente. Poco sotto,
 parzialmente nascosto dal tooltip, viene usato toString() per fornire
 una stringa ad alert.
 
-1.  ![](./img//media/image4.png){width="4.072916666666667in"
-    height="1.2395833333333333in"}
+![](./img/Typescript1/image4.png)
+
 
 La sintassi di Typescript è piuttosto semplice e *leggera* rispetto a
 javascript, lasciando per quanto possibile inalterato il codice
@@ -143,21 +147,14 @@ mantenere sempre inalterato il paradigma che sostiene che un sorgente
 Javascript è un Typescript valido. Una volta corretto l'ultimo errore
 nell'esempio avremo finalmente un output Javascript come segue:
 
-1.  Typescript
-
-<!-- -->
-
-1.  1: function calculateHypotenuse() {
-
-    2: var c1 = 5;
-
-    3: var c2 = 2;
-
-    4: var hy = Math.sqrt(c1 \* c1 + c2 \* c2);
-
-    5: alert(hy.toString());
-
-    6: }
+```typescript
+function calculateHypotenuse() {
+    var c1 = 5;
+    var c2 = 2;
+    var hy = Math.sqrt(c1 * c1 + c2 * c2);
+    alert(hy.toString());
+}
+```
 
 Questo esempio banale, è però significativo e dà la misura di come,
 grazie al supporto di uno strumento di sviluppo quale il compilatore e

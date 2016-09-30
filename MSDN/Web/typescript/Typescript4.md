@@ -1,12 +1,24 @@
+---
+title: Typescript - dichiarare variabili, parametri, classi e interfacce
+description: Typescript - dichiarare variabili, parametri, classi e interfacce
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: TypeScript
+ms.custom: CommunityDocs
+---
+
+# Typescript: dichiarare variabili, parametri, classi e interfacce
+
 #### di [Andrea Boschin](http://mvp.microsoft.com/en-us/mvp/Andrea%20Boschin-4000289) – Microsoft MVP
 
-1.  ![](./img//media/image1.png){width="0.5938331146106737in"
-    height="0.9376312335958005in"}
+![](./img/Typescript4/image1.png)
+
 
 *Maggio, 2013*
 
 Nel [precedente
-articolo](http://msdn.microsoft.com/it-it/library/dn133041.aspx) abbiamo
+articolo](Typescript3.md) abbiamo
 visto rapidamante l'espressività che ci è consentita da Typescript nella
 dichiarazione di nostri tipi ed interfacce. Abbiamo anche evidenziato
 che il compilatore applica lo structured typing consentendoci di
@@ -47,13 +59,10 @@ essere di uso comune a chiunque e che obbiettivamente non presentano
 sorprese, vale la pena approfondire l'utilizzo di any e delle
 dichiarazioni di funzione:
 
-1.  TypeScript
-
-<!-- -->
-
-1.  1: var theWindow : any = &lt;any&gt;window;
-
-    2: theWindow.execute();
+```typescript
+var theWindow : any = <any>window;
+theWindow.execute();
+```
 
 La precedente dichiarazione rende la variabile myObject generica a tal
 punto che è possibile chiamare su di essa un metodo di cui typescript
@@ -69,25 +78,16 @@ possibile chiamare la funzione senza che il compilatore si impunti.
 Un altro caso particolare sono le variabili che ammettono come valore
 una funzione:
 
-1.  TypeScript
+```typescript
+var callback : (number) => string;
 
-<!-- -->
+callback = function(n)
+{
+    return "The answer is " + n;
+};
 
-1.  1: var callback : (number) =&gt; string;
-
-    2: 
-
-    3: callback = function(n)
-
-    4: {
-
-    5: return "The answer is " + n;
-
-    6: };
-
-    7: 
-
-    8: var result = callback(42);
+var result = callback(42);
+```
 
 La variabile callback in questione viene dichiarata con una sintassi che
 mima quella delle lambda expression. La sintassi "(int) =&gt; string"
@@ -96,16 +96,15 @@ ritorno di tipo stringa.
 
 Inutile dire che è ammissibile avere funzioni senza parametri
 
-var callback : () =&gt; string
+    var callback : () => string
 
 con un valore di ritorno void
 
-var callback : (mynum: number) =&gt; void
+    var callback : (mynum: number) => void
 
 oppure con parametri multipli
 
-var callback : (mynum: number, mystring: string, mybool: bool) =&gt;
-string
+    var callback : (mynum: number, mystring: string, mybool: bool) => string
 
 Interessante comunque notare che il compilatore non richiede che la
 funzione passata abbia esplicitato il tipo dei parametri ma, per mezzo
@@ -114,76 +113,43 @@ sempre ammesso esplicitarli. Per passare una funzione alla variabile
 callback è possibile operare come nell'esempio, oppure utilizzare la
 sintassi lambda-expression come segue:
 
-1.  TypeScript
+```typescript
+var callback : (number) => string;
 
-<!-- -->
+callback = (n) => { return "The answer is " + n };
 
-1.  1: var callback : (number) =&gt; string;
-
-    2: 
-
-    3: callback = (n) =&gt; { return "The answer is " + n };
-
-    4: 
-
-    5: var result = callback(42);
+var result = callback(42);
+```
 
 Fin'ora per semplicità abbiamo visto le dichiarazioni applicate alle
 variabile, ma i medesimi tipi possono essere utilizzati anche per
 dichiare i parametri di un metodo piuttosto che le proprietà di una
 interfaccia o di una classe. Vediamo alcuni esempi:
 
-1.  TypeScript
+```typescript
+// metodo
+function getRemoteData(callback: (result) => void) : void
+{
+    // download here
+}
 
-<!-- -->
+// interfaccia
 
-1.  1: // metodo
+interface IHandler
+{
+    value: number;
+    callback : (result) => void;
+}
 
-    2: 
+// costruttore di classe
 
-    3: function getRemoteData(callback: (result) =&gt; void) : void
-
-    4: {
-
-    5: // download here
-
-    6: }
-
-    7: 
-
-    8: // interfaccia
-
-    9: 
-
-    10: interface IHandler
-
-    11: {
-
-    12: value: number;
-
-    13: callback : (result) =&gt; void;
-
-    14: }
-
-    15: 
-
-    16: // costruttore di classe
-
-    17: 
-
-    18: class MyHandler implements IHandler
-
-    19: {
-
-    20: value: number;
-
-    21: 
-
-    22: constructor(public callback: (result) =&gt; void)
-
-    23: {}
-
-    24: }
+class MyHandler implements IHandler
+{
+    value: number;
+    constructor(public callback: (result) =>void)
+    {}
+}
+```
 
 In ordine di apparizione, nel primo esempio viene utilizzato un
 parametro denominato "callback" che è richiesto sia una funzione che
@@ -207,19 +173,13 @@ metodi non esiste, se non nelle dichiarazioni delle interfacce, ma vige
 invece la possibilità di definire opzionali alcuni o tutti i parametri.
 Partendo da questa ultima abbiamo:
 
-1.  TypeScript
-
-<!-- -->
-
-1.  1: function addItem(name: string, value?: number): void
-
-    2: {
-
-    3: if (value == null)
-
-    4: value = 0;
-
-    5: }
+```typescript
+function addItem(name: string, value?: number): void
+{
+    if (value == null)
+        value = 0;
+}
+```
 
 L'indicazione di un "?" dopo il nome del parametro lo rende opzionale.
 E' chiaro che a questo punto abbiamo l'onere di verificare che esso sia
@@ -231,53 +191,37 @@ simulare l'overload del metodo, fornendo una descrizione
 nell'intellisense che è di grande aiuto per lo sviluppatore. Prima di
 tutto dichiariamo una classe con il precedente metodo:
 
-1.  TypeScript
-
-<!-- -->
-
-1.  1: class List
-
-    2: implements IList
-
-    3: {
-
-    4: addItem(name: string, value?: number): void
-
-    5: {
-
-    6: if (value == null)
-
-    7: value = 0;
-
-    8: }
-
-    9: }
+```typescript
+class List
+implements IList
+{
+    addItem(name: string, value?: number): void
+    {
+        if (value == null)
+            value = 0;
+    }
+}
+```
 
 A questo punto, nell'interfaccia IList possiamo dare la definizione di
 due metodi con il medesimo nome. Attenzione che questa operazione nella
 classe darà adito ad un errore di compilazione mentre è perfettamente
 ammessa nell'interfaccia:
 
-1.  TypeScript
-
-<!-- -->
-
-1.  1: interface IList
-
-    2: {
-
-    3: addItem(name: string): void;
-
-    4: addItem(name: string, value: number): void;
-
-    5: }
+```typescript
+interface IList
+{
+    addItem(name: string): void;
+    addItem(name: string, value: number): void;
+}
+```
 
 In seguito a questa dichiarazione potremmo sfruttare l'interfaccia e
 l'intellisense di Visual Studio 2012 ci fornirà una descrizione del
 tutto simile a quella cui siamo abituati con C\#:
 
-![](./img//media/image2.png){width="4.345506342957131in"
-height="0.8232491251093613in"}
+![](./img/Typescript4/image2.png)
+
 
 ### Conclusioni
 
