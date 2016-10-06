@@ -38,7 +38,7 @@ da farsi grazie a strumenti di *machine learning*.
 Va da se che questa complessità si ribalta sulle attività di governance
 dei nascenti progetti annessi, per cui è necessario avvalersi di
 strumenti, metodologici e tecnologici, in grado di supportarli
-adeguatamente.
+adeguatamente..
 
 Proprio su queste basi nasce **AgileIoT**, un progetto tutto italiano
 che scaturisce dall’esperienza di MVP ed esperti, tecnologi e
