@@ -12,7 +12,7 @@ Twitter: [@segovoni](https://twitter.com/segovoni)
 
 *Giugno, 2013*
 
-Introduzione {#introduzione .ppSection}
+Introduzione
 ============
 
 La vista di sistema
@@ -23,17 +23,11 @@ come, ad esempio, viste o tabelle. Gli oggetti database in grado di
 contenere colonne sono elencati di seguito:
 
 -   Funzioni assembly con valori di tabella
-
 -   Funzioni in-line con valori di tabella
-
 -   Tabelle interne
-
 -   Tabelle di sistema
-
 -   Funzioni con valori di tabella
-
 -   Tabelle utente
-
 -   Viste
 
 
