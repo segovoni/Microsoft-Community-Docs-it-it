@@ -8,11 +8,8 @@
 # [Comunicazione intra-ruolo Web-Worker e bilanciamento del carico](Comunicazione-Web-Worker-Bilanciamento-del-carico.md)
 # [Integrazione di un login Facebook nelle applicazioni Web con ACSV2](Integrazione_login_Facebook_in_ACSV2.md)
 # [Backup e DataSync con SQL Azure e SQL Server](Backup-e-DataSync-con-SQL-Azure-e-SQL-Server.md)
-
 # [Esempio di storage efficace privato su Azure con CloudSaver](Esempio-di-storage-efficace-privato-Azure-Clousaver.md)
-
-# [Interoperabilità e migrazione verso il cloud - il caso DotNetLombardia (*)](https://msdn.microsoft.com/it-it/library/hh923933.aspx)
-# [Installazione su Windows Azure di Umbraco 4.7.x (*)](https://msdn.microsoft.com/it-it/library/hh923934.aspx)
-
+# [Interoperabilità e migrazione verso il cloud - il caso DotNetLombardia](interop-e-migrazione-verso-il-cloud.md)
+# [Installazione su Windows Azure di Umbraco 4.7.x](installazione-CMS-su-Azure-Umbraco.md)
 
 # [Certificare applicazioni LightSwitch per Windows Azure, con Microsoft Platform Ready (*)](https://msdn.microsoft.com/it-it/library/jj127266.aspx)

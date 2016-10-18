@@ -1,29 +1,34 @@
+---
+title: Installazione su Windows Azure di Umbraco 4.7.x
+description: Installazione su Windows Azure di Umbraco 4.7.x
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: cloud
+ms.custom: CommunityDocs
+---
+
+
+# Installazione su Windows Azure di Umbraco 4.7.x
+
 #### Di [Roberto Freato](https://mvp.support.microsoft.com/profile=9F9B3C0A-2016-4034-ACD6-9CEDEE74FAF3)
 
-1.  ![](./img//media/image1.png){width="0.5938331146106737in"
-    height="0.9376312335958005in"}
+![](./img/installazione-CMS-su-Azure-Umbraco/image1.png)
+
 
 *Marzo 2012*
 
 In questo articolo verranno discussi i seguenti argomenti:
 
-1.  Supporto di soluzioni Open-Source su Windows Azure
-
-    Deployment del CMS Umbraco su Windows Azure
-
-    Windows Azure Accelerator for Umbraco (CodePlex)
-
-    1.  
+- Supporto di soluzioni Open-Source su Windows Azure
+- Deployment del CMS Umbraco su Windows Azure
+- Windows Azure Accelerator for Umbraco (CodePlex)
 
 E le seguenti tecnologie:
 
-1.  Windows Azure
-
-    Windows Azure Storage
-
-    SQL Azure
-
-    1.  
+- Windows Azure
+- Windows Azure Storage
+- SQL Azure
 
 In questo articolo analizzeremo l’importanza dei CMS OpenSource e il
 loro effettivo utilizzo negli ambienti commerciali, che ne hanno
@@ -92,10 +97,10 @@ attualmente può girare in Full Trust e Medium Trust . La versione a cui
 facciamo riferimento in questo articolo è la 4.7.1 anche se Umbraco è
 disponibile fino alla versione 5 .
 
-1.  **Note: Esiste una versione staccata (branched) da quella mainstream
+> **Nota: Esiste una versione staccata (branched) da quella mainstream
     che supporta il Medium Trust.**
 
-    **Note: La versione 5 di Umbraco ha un supporto nativo all’accesso
+> **Nota: La versione 5 di Umbraco ha un supporto nativo all’accesso
     allo storage di Azure, quindi per chi iniziasse una nuova
     implementazione, il consiglio è di usare nativamente il supporto al
     cloud introdotto di recente.**
@@ -158,50 +163,36 @@ avvalendosi della struttura Full IIS di Azure (a partire dalla versione
 L’acceleratore si prenderà carico della sincronizzazione di ogni nuovo
 Web Site, nel momento in cui esso verrà caricato nell’Azure Storage.
 
-1.  Note:
+> Nota:
     https://github.com/WindowsAzure-Accelerators/wa-accelerator-umbraco
+> Nota: SLA del 99.95% in configurazione normale, 2 istanze per ruolo.
 
-    Note: SLA del 99.95% in configurazione normale, 2 istanze per ruolo.
+Figura 1 - Architettura dell'acceleratore per Umbraco
 
-<!-- -->
-
-1.  Figura 1 - Architettura dell'acceleratore per Umbraco
-
-<!-- -->
-
-1.  ![](./img//media/image2.png){width="6.5in" height="3.15625in"}
+![](./img/installazione-CMS-su-Azure-Umbraco/image2.png)
 
 Per utilizzare gli script che stiamo andando ad elencare ed analizzare è
 necessario avere installato:
 
-1.  [Visual Studio 2010 e .NET
+- [Visual Studio 2010 e .NET
     4.0](http://msdn.microsoft.com/vstudio/products/)
-
-    [Windows Azure SDK e Visual Studio Tools for Windows Azure 1.4
+- [Windows Azure SDK e Visual Studio Tools for Windows Azure 1.4
     (o superiore)](http://go.microsoft.com/fwlink/?LinkID=128752)
-
-    [SQL Express 2008 R2 (con SQL Server
+- [SQL Express 2008 R2 (con SQL Server
     Management Studio)](http://www.microsoft.com/express/sql/download/)
-
-    [Windows Azure Accelerator for
+- [Windows Azure Accelerator for
     Umbraco](https://github.com/WindowsAzure-Accelerators/wa-accelerator-umbraco)
 
-    1.  
 
 Una volta eseguito l’archivio autoestraente dell’acceleratore, si devono
 seguire questi passi:
 
 1.  Creazione dello storage account per Umbraco
-
 2.  Esecuzione dello script di setup
-
 3.  Deployment dell’acceleratore su Azure
-
 4.  Creazione di un server SQL Azure
-
 5.  Configurazione di Umbraco nello script di setup
 
-6.  
 
 Creazione dello storage account per Umbraco
 -------------------------------------------
@@ -211,41 +202,29 @@ all’acceleratore. È necessario loggarsi al portale di Windows Azure e
 selezionare New Storage Account . Nella Figura 2 specificare la
 subscription, il nome dello storage e la regione di creazione.
 
-1.  Note: Si è scelta la lingua inglese poiché la maggioranza del
+> Note: Si è scelta la lingua inglese poiché la maggioranza del
     materiale informativo di riferimento è in inglese. Se il portale di
     Windows Azure fosse visualizzato in Italiano, sarebbe sufficiente
     cambiare la lingua di visualizzazione nella schermata principale
     di avvio.
 
-<!-- -->
+Figura 2 – Creazione dell’Account di Storage
 
-1.  Figura 2 – Creazione dell’Account di Storage
-
-<!-- -->
-
-1.  ![](./img//media/image3.png){width="3.0012128171478567in"
-    height="2.501010498687664in"}
+![](./img/installazione-CMS-su-Azure-Umbraco/image3.png)
 
 Una volta creato ottenere la chiave di accesso (primaria o secondaria)
 come in Figura 3 e copiarla negli appunti.
 
-1.  Figura 3 - Copia negli appunti della chiave di accesso
-
-<!-- -->
-
-1.  ![](./img//media/image4.png){width="5.89821741032371in"
-    height="2.2404888451443568in"}
+Figura 3 - Copia negli appunti della chiave di accesso
+![](./img/installazione-CMS-su-Azure-Umbraco/image4.png)
 
 Ora è il momento di eseguire lo script di setup (Setup.cmd) presente
 nella directory dell’acceleratore ed inserire la coppia nome/key
 dell’account di storage appena creato.
 
-1.  Figura 4 - Esecuzione dello script ed inserimento dei parametri
+Figura 4 - Esecuzione dello script ed inserimento dei parametri
 
-<!-- -->
-
-1.  ![](./img//media/image5.png){width="6.5in"
-    height="3.2805555555555554in"}
+![](./img/installazione-CMS-su-Azure-Umbraco/image5.png)
 
 Deployment dell’acceleratore su Azure
 -------------------------------------
@@ -254,7 +233,7 @@ Deployment dell’acceleratore su Azure
 “Umbraco” nella cartella Code dell’acceleratore. Una volta aperto il
 progetto Cloud, selezionare Package su progetto “UmbracoAccelerator” .
 
-1.  **Note: Di default, nella definizione del servizio è impostato
+> **Nota: di default, nella definizione del servizio è impostato
     l’utilizzo di macchine virtuali Extra-Small: per cambiarle
     modificare a mano o con Visual Studio il
     file ServiceDefinition.csdef.**
@@ -264,23 +243,17 @@ pannello di controllo Windows Azure, come in Figura 5: selezioniamo il
 nome del servizio, l’Url, la regione e il percorso del pacchetto di
 deployment appena creato.
 
-1.  Figura 5 - Creazione del servizio Hosted di Azure
+Figura 5 - Creazione del servizio Hosted di Azure
 
-<!-- -->
-
-1.  ![](./img//media/image6.png){width="4.293402230971129in"
-    height="5.09580927384077in"}
+![](./img/installazione-CMS-su-Azure-Umbraco/image6.png)
 
 Prima di confermare, come in Figura 6, aggiungiamo il certificato
 Remote.pfx, presente nella cartella assets dell’acceleratore (password:
 q3&d3new7@0):
 
-1.  Figura 6 - Aggiunta del certificato
+Figura 6 - Aggiunta del certificato
 
-<!-- -->
-
-1.  ![](./img//media/image7.png){width="3.5639402887139107in"
-    height="1.636078302712161in"}
+![](./img/installazione-CMS-su-Azure-Umbraco/image7.png)
 
 Infine aspettiamo 10-15 minuti che il deployment su Windows Azure sia
 completato, prima di procedere.
@@ -297,19 +270,17 @@ amministrativa come in Figura 7 e confermare. Vedremo apparire
 nell’elenco dei server il nostro, con al suo interno il solo database
 master.
 
-1.  Figura 7 - Creazione del SQL Azure Server
+Figura 7 - Creazione del SQL Azure Server
 
-<!-- -->
-
-1.  ![](./img//media/image8.png){width="2.6990080927384077in"
-    height="1.625657261592301in"}
+![](./img/installazione-CMS-su-Azure-Umbraco/image8.png)
+    
 
 È il momento di tenere nota del nome del server creato e delle
 credenziali di accesso amministrativo e di aprire temporaneamente il
 firewall del server per consentire l’accesso remoto dalla propria
 macchina .
 
-1.  **Note: Per una apertura completa del firewall del server SQL Azure
+> **Nota: Per una apertura completa del firewall del server SQL Azure
     è necessario impostare una regola di grant che abbia come start ip
     0.0.0.0 e end ip 255.255.255.255. Si prega di considerare che questa
     configurazione è la più insicura possibile, pertanto modificarla non
@@ -326,17 +297,12 @@ verrà creato lo schema del database e verrà chiesto se procedere ad una
 installazione clean . In questo caso partirà uno script di creazione
 della durata di qualche secondo, come in Figura 8.
 
-1.  **Note: L’alternativa è utilizzare un database esistente e migrarne
+> **Nota: L’alternativa è utilizzare un database esistente e migrarne
     i contenuti.**
 
-<!-- -->
+Figura 8 - Creazione di un DB pulito su SQL Azure
 
-1.  Figura 8 - Creazione di un DB pulito su SQL Azure
-
-<!-- -->
-
-1.  ![](./img//media/image9.png){width="6.5in"
-    height="3.2805555555555554in"}
+![](./img/installazione-CMS-su-Azure-Umbraco/image9.png)
 
 Nel frattempo è necessario scaricare l’ultima versione di Umbraco
 (l’ultima supportata è la 4.7) ed estrarla in una location nota; lo
@@ -344,12 +310,9 @@ script chiederà tale location una volta terminato lo script di
 importazione dati su SQL Azure, come in Figura 9, per customizzare
 automaticamente le impostazioni del Web.config di Umbraco.
 
-1.  Figura 9 - Individuazione del path di installazione di Umbraco
+Figura 9 - Individuazione del path di installazione di Umbraco
 
-<!-- -->
-
-1.  ![](./img//media/image10.png){width="6.5in"
-    height="3.2805555555555554in"}
+![](./img/installazione-CMS-su-Azure-Umbraco/image10.png)
 
 Alla fine verrà chiesto che database utilizzare per salvare la Session
 State dell’applicazione; il server di destinazione sarà lo stesso
@@ -365,14 +328,10 @@ proprio file Hosts automaticamente, scegliendo l’opzione “Update Hosts
 File”. Questo consentirà di raggiungere l’hostname indicato sul server
 di Azure, prima di modificare effettivamente i DNS di produzione.
 
-1.  Figura 10 - Tool di upload di Umbraco su Azure Storage
+Figura 10 - Tool di upload di Umbraco su Azure Storage
 
-    Insert Caption
+![](./img/installazione-CMS-su-Azure-Umbraco/image11.png)
 
-<!-- -->
-
-1.  ![](./img//media/image11.png){width="5.10623031496063in"
-    height="3.5743613298337706in"}
 
 Conclusioni
 -----------
@@ -396,25 +355,15 @@ https://github.com/WindowsAzure-Accelerators/wa-accelerator-umbraco.
 Approfondimenti
 ---------------
 
-1.  Aggiungere istanze alla soluzione Azure
+- Aggiungere istanze alla soluzione Azure
+- Implementare una architettura multi-site
+- Utilizzare AppFabric per la gestione della Session State
+- Utilizzare CDN peri contenuti statici
+- Integrare ACS per l’autenticazione
+- Creare i record DNS
 
-    Implementare una architettura multi-site
-
-    Utilizzare AppFabric per la gestione della Session State
-
-    Utilizzare CDN peri contenuti statici
-
-    Integrare ACS per l’autenticazione
-
-    Creare i record DNS
-
-    1.  
 
 #### di Roberto Freato ([blog](http://dotnetlombardia.org/blogs/rob/default.aspx)) - Microsoft MVP
 
-1.  *[Altri articoli di Roberto Freato nella
-    Libr](http://sxp.microsoft.com/feeds/3.0/msdntn/TA_MSDN_ITA?contenttype=Article&author=Roberto%20Freato)ary*
-    ![](./img//media/image12.png){width="0.1771084864391951in"
-    height="0.1771084864391951in"}
 
 

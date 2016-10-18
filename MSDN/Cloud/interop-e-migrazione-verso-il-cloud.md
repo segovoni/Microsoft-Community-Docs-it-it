@@ -1,31 +1,33 @@
+---
+title: Interoperabilità e migrazione verso il cloud – il caso DotNetLombardia
+description: Interoperabilità e migrazione verso il cloud – il caso DotNetLombardia
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: cloud
+ms.custom: CommunityDocs
+---
+
+# Interoperabilità e migrazione verso il cloud – il caso DotNetLombardia
+
 #### di [Roberto Freato](https://mvp.support.microsoft.com/profile=9F9B3C0A-2016-4034-ACD6-9CEDEE74FAF3) 
 
-1.  ![](./img//media/image1.png){width="0.5938331146106737in"
-    height="0.9376312335958005in"}
+![](./img/interop-e-migrazione-verso-il-cloud/image1.png)
 
 *Marzo 2012*
 
 In questo articolo verranno discussi i seguenti argomenti:
 
-1.  Interoperabilità
-
-    Soluzioni Ibride on-the-cloud
-
-    Metodologia ed approccio alla migrazione verso il cloud
-
-    1.  
+- Interoperabilità
+- Soluzioni Ibride on-the-cloud
+- Metodologia ed approccio alla migrazione verso il cloud
 
 E le seguenti tecnologie:
 
-1.  Windows Azure Compute
-
-    SQL Azure
-
-    Telligent Community
-
-    Amazon Web Services S3
-
-    1.  
+- Windows Azure Compute
+- SQL Azure
+- Telligent Community
+- Amazon Web Services S3
 
 La migrazione di ambienti e applicazioni esistenti verso il cloud è un
 tema caldissimo e su cui, molto probabilmente, i consulenti e le aziende
@@ -40,7 +42,6 @@ business è dovuto in prima approssimazione a due grandi variabili:
 
 3.  Ottimizzazione dei costi
 
-4.  
 
 Chiaramente negli scenari reali che ho incontrato c’erano tipicamente
 tutti questi punti ben mescolati tra loro. Oggi quindi, a parità di
@@ -186,10 +187,4 @@ Parte del materiale di questo articolo è già presente sul blog:
 <http://dotnetlombardia.org/b/rob/default.aspx>.
 
 #### di Roberto Freato ([blog](http://dotnetlombardia.org/blogs/rob/default.aspx)) - Microsoft MVP
-
-1.  *[Altri articoli di Roberto Freato nella
-    Libr](http://sxp.microsoft.com/feeds/3.0/msdntn/TA_MSDN_ITA?contenttype=Article&author=Roberto%20Freato)ary*
-    ![](./img//media/image2.png){width="0.1771084864391951in"
-    height="0.1771084864391951in"}
-
 
