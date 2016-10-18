@@ -1,27 +1,33 @@
+---
+title: Esempio di storage efficace privato su Azure con CloudSaver
+description: Esempio di storage efficace privato su Azure con CloudSaver
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: cloud
+ms.custom: CommunityDocs
+---
+
+# Esempio di storage efficace privato su Azure con CloudSaver
+
 #### Di [Roberto Freato](https://mvp.support.microsoft.com/profile=9F9B3C0A-2016-4034-ACD6-9CEDEE74FAF3)
 
-1.  ![](./img//media/image1.png){width="0.5938331146106737in"
-    height="0.9376312335958005in"}
+![](./img/Esempio-di-storage-efficace-privato-Azure-Clousaver/image1.png)
 
 *Marzo 2012*
 
 In questo articolo verranno discussi i seguenti argomenti:
 
-1.  Il problema dello storage nel cloud
+- Il problema dello storage nel cloud
+- La soluzione
 
-    La soluzione
-
-    1.  
 
 E le seguenti tecnologie:
 
-1.  Windows Azure Storage
+- Windows Azure Storage
+- Windows Azure Hosted Services
+- ASP.NET
 
-    Windows Azure Hosted Services
-
-    ASP.NET
-
-    1.  
 
 In questo articolo si parlerà del problema dello storage e di una sua
 possibile chiave di lettura in ottica cloud computing. Inoltre,
@@ -126,11 +132,9 @@ CloudSaver, dritti all’installazione
 
 Si può decidere di procedere all’installazione in due modalità:
 
-1.  Dal codice sorgente
+- Dal codice sorgente
+- Dal programma già compilato ed assemblato
 
-    Dal programma già compilato ed assemblato
-
-    1.  
 
 Partendo dal codice sorgente si ha la possibilità di modificare a
 piacimento le funzionalità di CloudSaver; utilizzando il prodotto già
@@ -146,15 +150,11 @@ avere installato l’SDK di Windows Azure, disponibile qui:
 
 Il progetto è realizzato in ASP.NET 4 Web Forms e utilizza:
 
-1.  .NET Framework 4
+- .NET Framework 4
+- ELMAH
+- AJAX Toolkit
+- AspProviders
 
-    ELMAH
-
-    AJAX Toolkit
-
-    AspProviders
-
-    1.  
 
 Una volta personalizzato il prodotto, si può fare tasto destro sul
 progetto cloud e poi cliccare “Package”. Questo genererà un pacchetto
@@ -171,154 +171,85 @@ guida su
 
 Attivata la sottoscrizione, la procedura è abbastanza intuitiva:
 
-1.  Andare sul portale <https://windows.azure.com>
+- Andare sul portale <https://windows.azure.com>
+- Nella sezione “Hosted Services, Storage Accouts & CDN”, selezionare “Hosted Services”.
 
-    Nella sezione “Hosted Services, Storage Accouts & CDN”, selezionare
-    “Hosted Services”.
-
-    1.  
-
-    <!-- -->
-
-    1.  Figura 1 - Sezione "Hosted Services" del pannello di controllo
+Figura 1 - Sezione "Hosted Services" del pannello di controllo
         di Azure
+![](./img/Esempio-di-storage-efficace-privato-Azure-Clousaver/image2.png)
 
-    <!-- -->
-
-    1.  ![](./img//media/image2.png){width="6.5in"
-        height="4.590277777777778in"}
-
-    <!-- -->
-
-    1.  Ora si deve creare un nuovo spazio di servizio, cliccando su
+- Ora si deve creare un nuovo spazio di servizio, cliccando su
         “New Hosted Service”
+    - Specificando il nome, l’alias dell’url e la regione di deploy
 
-    2.  Specificando il nome, l’alias dell’url e la regione di deploy
-
-    <!-- -->
-
-    1.  Figura 2 - Pagina di creazione di un "Hosted Service"
-
-    <!-- -->
-
-    1.  ![](./img//media/image3.png){width="5.65625in"
-        height="5.489583333333333in"}
-
-    <!-- -->
-
-    1.  Successivamente si può procedere all’upload del certificato SSL
+ Figura 2 - Pagina di creazione di un "Hosted Service"
+![](./img/Esempio-di-storage-efficace-privato-Azure-Clousaver/image3.png)
+   
+- Successivamente si può procedere all’upload del certificato SSL
         preventivamente creato ed esportato insieme alla chiave privata
         (se non se ne possiede uno, si può procedere alla generazione
         seguendo la breve guida in 4.14.1):
 
-    <!-- -->
+Figura 3 - Upload del certificato SSL
 
-    1.  Figura 3 - Upload del certificato SSL
+![](./img/Esempio-di-storage-efficace-privato-Azure-Clousaver/image4.png)
 
-    <!-- -->
 
-    1.  ![](./img//media/image4.png){width="5.6875in" height="3.375in"}
-
-    <!-- -->
-
-    1.  È necessario annotarsi il thumbprint del certificato,
+- È necessario annotarsi il thumbprint del certificato,
         disponibile nella barra laterale nel pannello, dopo l’upload
         dello stesso:
 
-    <!-- -->
+Figura 4 - Certificato caricato, annotazione del Thumbprint
+![](./img/Esempio-di-storage-efficace-privato-Azure-Clousaver/image5.png)
 
-    1.  Figura 4 - Certificato caricato, annotazione del Thumbprint
 
-    <!-- -->
-
-    1.  ![](./img//media/image5.png){width="5.489583333333333in"
-        height="3.2604166666666665in"}
-
-    <!-- -->
-
-    1.  Ci spostiamo ora nella sezione “Storage Accounts” e creiamo un
+- Ci spostiamo ora nella sezione “Storage Accounts” e creiamo un
         nuovo servizio di storage (“New Storage Account”) come in
         figura:
 
-    <!-- -->
-
-    1.  Figura 5 - Creazione di un nuovo "Storage Account" e scelta
+Figura 5 - Creazione di un nuovo "Storage Account" e scelta
         della regione
 
-    <!-- -->
-
-    1.  ![](./img//media/image6.png){width="5.6875in"
-        height="3.2083333333333335in"}
-
-    <!-- -->
-
-    1.  Annotiamo anche in questo caso il nome che abbiamo dato allo
+![](./img/Esempio-di-storage-efficace-privato-Azure-Clousaver/image6.png)
+   
+- Annotiamo anche in questo caso il nome che abbiamo dato allo
         storage account e una delle sue chiavi di accesso (sempre nella
         barra laterale a destra):
 
-    <!-- -->
-
-    1.  Figura 6 - Finestra "Copia/Incolla" con le chiavi di accesso
+Figura 6 - Finestra "Copia/Incolla" con le chiavi di accesso
         allo Storage
 
-    <!-- -->
-
-    1.  ![](./img//media/image7.png){width="5.677083333333333in"
-        height="2.0625in"}
-
-    <!-- -->
-
-    1.  Ora dobbiamo modificare il file ServiceConfiguration.cscfg
+![](./img/Esempio-di-storage-efficace-privato-Azure-Clousaver/image7.png)
+   
+-  Ora dobbiamo modificare il file ServiceConfiguration.cscfg
         fornito con i seguenti parametri:
-
-    2.  Nome account di storage (parametro {0})
-
-    3.  Chiave di accesso allo storage (parametro {1})
-
-    4.  Thumbprint del certificato SSL (parametro {2})
-
-    5.  *Alternativamente* , si può anche utilizzare il Tool
+    - Nome account di storage (parametro {0})
+    - Chiave di accesso allo storage (parametro {1})
+    - Thumbprint del certificato SSL (parametro {2})
+- *Alternativamente* , si può anche utilizzare il Tool
         **Microsoft.CloudSaver.Configurator.exe** per creare un file
         cscfg già compilato con i parametri necessari:
 
-    <!-- -->
+Figura 7 - Tool di autogenerazione del file CSCFG
 
-    1.  Figura 7 - Tool di autogenerazione del file CSCFG
-
-    <!-- -->
-
-    1.  ![](./img//media/image8.png){width="4.604166666666667in"
-        height="1.8125in"}
-
-    <!-- -->
-
-    1.  8\. A questo punto possiamo tornare negli “Hosted Services” e creare
+![](./img/Esempio-di-storage-efficace-privato-Azure-Clousaver/image8.png)
+   
+-  A questo punto possiamo tornare negli “Hosted Services” e creare
         un deployment. Clicchiamo su “New Production Deployment”, diamo un
         nome (es. “v1.0”) e specifichiamo la location del pacchetto di deploy e
         del file di configurazione precedentemente modificato:
 
-    <!-- -->
+Figura 8 - Schermata di Deployment su Azure del pacchetto
 
-    1.  Figura 8 - Schermata di Deployment su Azure del pacchetto
 
-    <!-- -->
+![](./img/Esempio-di-storage-efficace-privato-Azure-Clousaver/image9.png)
 
-    1.  ![](./img//media/image9.png){width="5.6875in"
-        height="4.020833333333333in"}
-
-    <!-- -->
-
-    1.  Se tutto è andato a buon fine, vedrete dopo pochi minuti una
+- Se tutto è andato a buon fine, vedrete dopo pochi minuti una
         situazione del genere:
 
-    <!-- -->
+Figura 9 - Stato dell'applicazione caricata
 
-    1.  Figura 9 - Stato dell'applicazione caricata
-
-    <!-- -->
-
-    1.  ![](./img//media/image10.png){width="5.416666666666667in"
-        height="1.8958333333333333in"}
+![](./img/Esempio-di-storage-efficace-privato-Azure-Clousaver/image10.png)
 
 #### Utilizzo
 
@@ -329,21 +260,16 @@ Ci rechiamo quindi all’indirizzo attivato e eseguiamo il primo accesso;
 dopo qualche secondo in cui l’applicazione applicherà un autosetup,
 vedremo la pagina principale:
 
-1.  Figura 10 - Schermata principale di CloudSaver
+Figura 10 - Schermata principale di CloudSaver
 
-<!-- -->
 
-1.  ![](./img//media/image11.png){width="6.5in"
-    height="5.440972222222222in"}
+[](./img/Esempio-di-storage-efficace-privato-Azure-Clousaver/image11.png)
 
 Il primo login è da effettuarsi con le credenziali amministrative di
 default:
 
-1.  Username: Admin
-
+    Username: Admin
     Password: Passw0rd!
-
-    1.  
 
 Nella modalità Amministratore (ovvero per tutti gli utenti con ruolo
 “Admin”) si ha a disposizione una pagina “admin” in cui è possibile
@@ -352,20 +278,18 @@ gestire le impostazioni di sistema. Vediamo per esempio come aggiungere
 un utente normale e come impostare il nostro logo e il nome della nostra
 azienda:
 
-1.  Figura 11 - Inserimento di un nuovo utente (modo Admin)
+Figura 11 - Inserimento di un nuovo utente (modo Admin)
 
-<!-- -->
 
-1.  ![](./img//media/image12.png){width="6.5in" height="1.76875in"}
+![](./img/Esempio-di-storage-efficace-privato-Azure-Clousaver/image12.png)
 
-<!-- -->
 
-1.  Figura 12 - Modifica delle impostazioni di sistema
 
-<!-- -->
+Figura 12 - Modifica delle impostazioni di sistema
 
-1.  ![](./img//media/image13.png){width="6.5in"
-    height="2.3465277777777778in"}
+
+![](./img/Esempio-di-storage-efficace-privato-Azure-Clousaver/image13.png)
+
 
 #### Processo di salvataggio dei files
 
@@ -374,12 +298,12 @@ files. Nella pagina “files” è possibile caricare, scaricare e cancellare
 i propri documenti. Infine ogni utente può cambiare il suo tema
 preferito con il menù a tendina sulla sinistra:
 
-1.  Figura 13 - Aggiunta/Rimozione del files nello storage sicuro
 
-<!-- -->
+Figura 13 - Aggiunta/Rimozione del files nello storage sicuro
 
-1.  ![](./img//media/image14.png){width="6.5in"
-    height="2.7847222222222223in"}
+
+![](./img/Esempio-di-storage-efficace-privato-Azure-Clousaver/image14.png)
+
 
 CloudSaver, dritti al codice
 ----------------------------
@@ -388,72 +312,49 @@ In questa sezione vedremo in rassegna quali sono i punti salienti di
 questa semplice applicazione web che la abilitino a girare su Azure,
 utilizzando il servizio di Blob Storage.
 
-1.  Figura 14 - Esempio di azione sullo storage allo scattare del login
+
+Figura 14 - Esempio di azione sullo storage allo scattare del login
     utente
 
-<!-- -->
+![](./img/Esempio-di-storage-efficace-privato-Azure-Clousaver/image15.png)
 
-1.  ![](./img//media/image15.png){width="4.59375in"
-    height="0.8854166666666666in"}
 
-<!-- -->
-
-1.  Figura 15 - La creazione del profilo consiste nella creazione di un
+Figura 15 - La creazione del profilo consiste nella creazione di un
     container e di alcune settings nel Table Storage
 
-<!-- -->
+![](./img/Esempio-di-storage-efficace-privato-Azure-Clousaver/image16.png)
 
-1.  ![](./img//media/image16.png){width="6.5in"
-    height="2.0416666666666665in"}
 
-<!-- -->
-
-1.  Figura 16 - Come si evince, si può utilizzare il RoleManager con
+Figura 16 - Come si evince, si può utilizzare il RoleManager con
     provider sul Cloud
 
-<!-- -->
+![](./img/Esempio-di-storage-efficace-privato-Azure-Clousaver/image17.png)
 
-1.  ![](./img//media/image17.png){width="6.333333333333333in"
-    height="3.0in"}
 
-<!-- -->
-
-1.  Figura 17 - La sicurezza, nonostante il provider sia on-the-cloud,
+Figura 17 - La sicurezza, nonostante il provider sia on-the-cloud,
     rimane gestita in modo "classico"
 
-<!-- -->
 
-1.  ![](./img//media/image18.png){width="2.0104166666666665in"
-    height="1.2604166666666667in"}
+![](./img/Esempio-di-storage-efficace-privato-Azure-Clousaver/image18.png)
 
-<!-- -->
 
-1.  Figura 18 - Procedura per listare i blobs di un particolare
+
+Figura 18 - Procedura per listare i blobs di un particolare
     utente/container
 
-<!-- -->
 
-1.  ![](./img//media/image19.png){width="6.09375in"
-    height="2.9166666666666665in"}
+![](./img/Esempio-di-storage-efficace-privato-Azure-Clousaver/image19.png)
 
-<!-- -->
-
-1.  Figura 19 - Procedura per scaricare tutti i blob da un blob storage
+Figura 19 - Procedura per scaricare tutti i blob da un blob storage
     pubblico su CloudSaver
 
-<!-- -->
+![](./img/Esempio-di-storage-efficace-privato-Azure-Clousaver/image20.png)
 
-1.  ![](./img//media/image20.png){width="5.8125in"
-    height="2.5208333333333335in"}
 
-<!-- -->
-
-1.  Figura 20 - Riferimenti ai provider compatibili con Azure
+Figura 20 - Riferimenti ai provider compatibili con Azure
     (necessitano di una connectionstring apposita)
 
-<!-- -->
-
-1.  ![](./img//media/image21.png){width="6.5in" height="3.95625in"}
+![](./img/Esempio-di-storage-efficace-privato-Azure-Clousaver/image21.png)
 
 Conclusioni
 -----------
@@ -474,9 +375,5 @@ utilizzabili e reperibili al sito:
 
 #### di Roberto Freato ([blog](http://dotnetlombardia.org/blogs/rob/default.aspx)) - Microsoft MVP
 
-1.  *[Altri articoli di Roberto Freato nella
-    Libr](http://sxp.microsoft.com/feeds/3.0/msdntn/TA_MSDN_ITA?contenttype=Article&author=Roberto%20Freato)ary*
-    ![](./img//media/image22.png){width="0.1771084864391951in"
-    height="0.1771084864391951in"}
 
 
