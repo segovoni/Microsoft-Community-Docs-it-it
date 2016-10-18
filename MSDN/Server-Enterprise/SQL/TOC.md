@@ -4,8 +4,8 @@
 # [SQL Server sotto source control](SQL-DB-sotto-source-control.md)
 # [Una inaspettata variazione di SPID (SQL Server, Session Process ID)](Inaspettata-variazione-di-SPID.md)
 # [Il primo comando di ogni Trigger](Il-primo-comando-di-ogni-Trigger.md)
+# [CREATE e DROP di colonne temporanee](SQL-CREATE-e-DROP-di-colonne-temporanee.md)
 
-# [CREATE e DROP di colonne temporanee (*)](https://msdn.microsoft.com/it-it/library/dn269828.aspx)
 # [Lo Statement MERGE e i Trigger (T-SQL) (*)](https://msdn.microsoft.com/it-it/library/dn169486.aspx)
 # [Come usare lo Statement MERGE (T-SQL) (*)](https://msdn.microsoft.com/it-it/library/jj973188.aspx)
 # [EXECUTE statement in SQL Server 2012 (*)](https://msdn.microsoft.com/it-it/library/jj884336.aspx)
