@@ -1,11 +1,22 @@
+---
+title: SQL - Lo Statement MERGE e i Trigger
+description: SQL - Lo Statement MERGE e i Trigger
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: SQLServer
+ms.custom: CommunityDocs
+---
+
+# SQL: Lo Statement MERGE e i Trigger
+
 #### di [Sergio Govoni](http://mvp.microsoft.com/en-us/mvp/Sergio%20Govoni-4029181) - Microsoft MVP
 
 Blog: <http://www.ugiss.org/sgovoni/>
 
 Twitter: <https://twitter.com/segovoni>
 
-1.  ![](./img//media/image1.png){width="0.5938331146106737in"
-    height="0.9376312335958005in"}
+1.  ![](./img/SQL-lo-statement-MERGE-e-i-Trigger/image1.png)
 
 *Aprile, 2013*
 
@@ -146,7 +157,8 @@ prodotti in magazzino:
 
 L’output è illustrato in figura 1.
 
-1.  ![](./img//media/image2.png){width="6.5in" height="1.78125in"}
+1.  ![](./img/SQL-lo-statement-MERGE-e-i-Trigger/image2.png)
+
 
 <!-- -->
 
@@ -290,12 +302,9 @@ dbo.FrequentInventory.
 
 L’output è illustrato in figura 2.
 
-1.  ![](./img//media/image3.png){width="6.480071084864392in"
-    height="1.791917104111986in"}
+![](./img/SQL-lo-statement-MERGE-e-i-Trigger/image3.png)
 
-<!-- -->
-
-1.  Figura 2 – Rilevazioni inventariali nella tabella
+Figura 2 – Rilevazioni inventariali nella tabella
     dbo.FrequentInventory
 
 Il comportamento dei Trigger scatenati dalle azioni del comando MERGE {#il-comportamento-dei-trigger-scatenati-dalle-azioni-del-comando-merge .ppSection}
@@ -313,125 +322,79 @@ unità) che dalla clausola WHEN NOT MATCHED BY SOURCE (per i prodotti
 “Ipoh Coffee” e “Ravioli Angelo” che non sono stati rilevati durante
 l’inventario).
 
-1.  USE \[AdventureWorks2012\];
+```SQL
+USE [AdventureWorks2012];
+GO
 
-    GO
+------------------------------------------------------------------------
+-- Applichiamo l'inventario utilizzando il comando MERGE e analizziamo
+-- il comportamento dei Trigger attivi sulla tabella di destinazione
+-- dbo.ProductInventory
+------------------------------------------------------------------------
 
-    ------------------------------------------------------------------------
+BEGIN TRANSACTION;
+GO
 
-    -- Applichiamo l'inventario utilizzando il comando MERGE e
-    analizziamo
+SELECT * FROM dbo.ProductInventory;
+GO
 
-    -- il comportamento dei Trigger attivi sulla tabella di destinazione
+MERGE INTO
+dbo.ProductInventory AS itarget
+USING
+dbo.FrequentInventory AS isource
+ON ((itarget.ProductId = isource.ProductId)
+AND (itarget.LocationId = isource.LocationId))
+WHEN MATCHED AND
+(isource.Quantity <> 0)
+AND ((itarget.Quantity <> isource.Quantity)
+OR (itarget.ModifiedDate <> isource.ModifiedDate)) THEN
 
-    -- dbo.ProductInventory
+UPDATE SET
+itarget.Quantity = isource.Quantity
+,itarget.ModifiedDate = isource.ModifiedDate
+WHEN MATCHED AND
+(isource.Quantity = 0) THEN
+DELETE
+WHEN NOT MATCHED THEN
+INSERT
+(
+ProductId
+,LocationId
+,Quantity
+,ModifiedDate
+)
+VALUES
+(
+isource.ProductId
+,isource.LocationId
+,isource.Quantity
+,isource.ModifiedDate
+)
+WHEN NOT MATCHED BY SOURCE THEN
+UPDATE SET
+status = 0;
+GO
 
-    ------------------------------------------------------------------------
+SELECT * FROM dbo.ProductInventory;
+GO
 
-    BEGIN TRANSACTION;
-
-    GO
-
-    SELECT \* FROM dbo.ProductInventory;
-
-    GO
-
-    MERGE INTO
-
-    dbo.ProductInventory AS itarget
-
-    USING
-
-    dbo.FrequentInventory AS isource
-
-    ON ((itarget.ProductId = isource.ProductId)
-
-    AND (itarget.LocationId = isource.LocationId))
-
-    WHEN MATCHED AND
-
-    (isource.Quantity &lt;&gt; 0)
-
-    AND ((itarget.Quantity &lt;&gt; isource.Quantity)
-
-    OR (itarget.ModifiedDate &lt;&gt; isource.ModifiedDate)) THEN
-
-    UPDATE SET
-
-    itarget.Quantity = isource.Quantity
-
-    ,itarget.ModifiedDate = isource.ModifiedDate
-
-    WHEN MATCHED AND
-
-    (isource.Quantity = 0) THEN
-
-    DELETE
-
-    WHEN NOT MATCHED THEN
-
-    INSERT
-
-    (
-
-    ProductId
-
-    ,LocationId
-
-    ,Quantity
-
-    ,ModifiedDate
-
-    )
-
-    VALUES
-
-    (
-
-    isource.ProductId
-
-    ,isource.LocationId
-
-    ,isource.Quantity
-
-    ,isource.ModifiedDate
-
-    )
-
-    WHEN NOT MATCHED BY SOURCE THEN
-
-    UPDATE SET
-
-    status = 0;
-
-    GO
-
-    SELECT \* FROM dbo.ProductInventory;
-
-    GO
-
-    ROLLBACK TRANSACTION;
-
-    GO
+ROLLBACK TRANSACTION;
+GO
+```
 
 L’output è illustrato in Figura 3.
 
-1.  ![](./img//media/image4.png){width="6.5in"
-    height="3.588888888888889in"}
+![](./img/SQL-lo-statement-MERGE-e-i-Trigger/image4.png)
 
-<!-- -->
-
-1.  Figura 3 – Giacenze dei prodotti in magazzino prima e dopo
+Figura 3 – Giacenze dei prodotti in magazzino prima e dopo
     l’inventario
 
 Oltre all’aggiornamento dei dati, per effetto dei Trigger si ottiene
 anche il seguente output:
 
-1.  INSERT detected on dbo.ProductInventory
-
-    UPDATE detected on dbo.ProductInventory
-
-    DELETE detected on dbo.ProductInventory
+- INSERT detected on dbo.ProductInventory
+- UPDATE detected on dbo.ProductInventory
+- DELETE detected on dbo.ProductInventory
 
 Conclusioni {#conclusioni .ppSection}
 ===========

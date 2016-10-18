@@ -6,7 +6,8 @@
 # [Il primo comando di ogni Trigger](Il-primo-comando-di-ogni-Trigger.md)
 # [CREATE e DROP di colonne temporanee](SQL-CREATE-e-DROP-di-colonne-temporanee.md)
 
-# [Lo Statement MERGE e i Trigger (T-SQL) (*)](https://msdn.microsoft.com/it-it/library/dn169486.aspx)
+# [Lo Statement MERGE e i Trigger (T-SQL)](SQL-lo-statement-MERGE-e-i-Trigger.md)
+
 # [Come usare lo Statement MERGE (T-SQL) (*)](https://msdn.microsoft.com/it-it/library/jj973188.aspx)
 # [EXECUTE statement in SQL Server 2012 (*)](https://msdn.microsoft.com/it-it/library/jj884336.aspx)
 # [SEQUENCE in SQL Server 2012 (*)](https://msdn.microsoft.com/it-it/library/jj714731.aspx)
