@@ -5,7 +5,6 @@
 # [Una inaspettata variazione di SPID (SQL Server, Session Process ID)](Inaspettata-variazione-di-SPID.md)
 # [Il primo comando di ogni Trigger](Il-primo-comando-di-ogni-Trigger.md)
 # [CREATE e DROP di colonne temporanee](SQL-CREATE-e-DROP-di-colonne-temporanee.md)
-
 # [Lo Statement MERGE e i Trigger (T-SQL)](SQL-lo-statement-MERGE-e-i-Trigger.md)
 
 # [Come usare lo Statement MERGE (T-SQL) (*)](https://msdn.microsoft.com/it-it/library/jj973188.aspx)

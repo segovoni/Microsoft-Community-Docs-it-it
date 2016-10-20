@@ -1,5 +1,14 @@
+---
+title: SQL - CREATE e DROP di colonne temporanee
+description: SQL - CREATE e DROP di colonne temporanee
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: SQLServer
+ms.custom: CommunityDocs
+---
 
-# CREATE e DROP di colonne temporanee
+# SQL - CREATE e DROP di colonne temporanee
 
 #### di [Sergio Govoni](http://mvp.microsoft.com/en-us/mvp/Sergio%20Govoni-4029181) - Microsoft MVP
 
@@ -36,7 +45,7 @@ l’identificativo univoco (ID) assegnato ad ogni colonna presente
 all’interno di un oggetto, che da questo momento in poi ipotizziamo, per
 semplicità, essere una tabella.
 
-Scenario {#scenario .ppSection}
+Scenario
 ========
 
 Un po’ di tempo fa, ho avuto l’occasione di occuparmi del problema che
@@ -54,95 +63,60 @@ segnalazione è pervenuta proprio durante la generazione di un nuovo
 documento. Per la memorizzazione delle testate dei documenti di
 trasporto, si utilizza la tabella dbo.ShippingHeader.
 
-Messaggio di Errore 1714 (SQL Server 2005) {#messaggio-di-errore-1714-sql-server-2005 .ppSection}
+Messaggio di Errore 1714 (SQL Server 2005)
 ==========================================
 
-Il seguente frammento di codice T-SQL implementa la creazione
+Il seguente frammento di codice T-SQL implementa la creazi
 (semplificata) della tabella dbo.ShippingHeader nel database di sistema
 tempdb. Per completezza vengono create anche le tabelle dbo.Product
 (anagrafica prodotti) e dbo.Customer (anagrafica clienti).
 
-USE \[tempdb\];
+```SQL
+USE [tempdb];
+GO
 
-    GO
-
-    -- dbo.Product
-
-    CREATE TABLE dbo.Product
-
-    (
-
+-- dbo.Product
+CREATE TABLE dbo.Product
+(
     ProductID VARCHAR(25) NOT NULL
-
     ,SafetyStockLevel SMALLINT NOT NULL
-
     ,Size VARCHAR(5) NULL
-
     ,ModifiedDate DATETIME NOT NULL DEFAULT GETDATE()
-
     ,Status BIT NOT NULL DEFAULT(1)
+    ,CONSTRAINT PK_Product PRIMARY KEY(ProductID)
+);
+GO
 
-    ,CONSTRAINT PK\_Product PRIMARY KEY(ProductID)
-
-    );
-
-    GO
-
-    -- dbo.Customer
-
-    CREATE TABLE dbo.Customer
-
-    (
-
+-- dbo.Customer
+CREATE TABLE dbo.Customer
+(
     CustomerID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY
-
     ,CustomerName VARCHAR(40) NOT NULL
+);
+GO
 
-    );
-
-    GO
-
-    -- dbo.ShippingHeader
-
-    CREATE TABLE dbo.ShippingHeader
-
-    (
-
+-- dbo.ShippingHeader
+CREATE TABLE dbo.ShippingHeader
+(
     ShippingID INTEGER IDENTITY(1, 1) NOT NULL
-
     ,ProductID VARCHAR(25) NOT NULL
-
     FOREIGN KEY (ProductID)
-
     REFERENCES dbo.Product(ProductID)
-
     ,ShipDate DATETIME DEFAULT GETDATE() NOT NULL
-
     ,ShipNumber VARCHAR(20)
-
     ,CustomerID INT DEFAULT(1) NOT NULL
-
     FOREIGN KEY (CustomerID)
-
     REFERENCES dbo.Customer(CustomerID)
-
     ,ShipName VARCHAR(20) DEFAULT('Name')
-
     ,ShipAddress VARCHAR(40) DEFAULT('Address')
-
     ,ShipCity VARCHAR(20) DEFAULT('City')
-
     ,ShipPostalCode VARCHAR(20) DEFAULT('Postal code')
-
     ,ShipCountry VARCHAR(20) DEFAULT('Country')
-
     ,DeliveryDate DATETIME DEFAULT GETDATE()
-
     PRIMARY KEY(ShippingID)
-
-    );
-
-    GO
+);
+GO
+```
 
 La tabella dbo.ShippingHeader è utilizzata per memorizzare i documenti
 di trasporto emessi dall’azienda. Su questa tabella, **per ogni nuovo
@@ -154,73 +128,51 @@ La stored procedure di generazione DdT eseguiva un frammento di codice
 T-SQL simile a quello riportato di seguito, dove nei tratti commentati
 c’era la logica di generazione del documento.
 
-1.  BEGIN
+```SQL
+BEGIN
+-- ...
+-- Creazione colonna temporanea
 
-    -- ...
+ALTER TABLE dbo.ShippingHeader ADD TestField INTEGER;
 
-    -- Creazione colonna temporanea
+-- ...
+-- ...
+-- ...
 
-    ALTER TABLE dbo.ShippingHeader ADD TestField INTEGER;
-
-    -- ...
-
-    -- ...
-
-    -- ...
-
-    -- Memorizzazione di un valore temporaneo
-
-    UPDATE
-
+-- Memorizzazione di un valore temporaneo
+UPDATE
     dbo.ShippingHeader
-
-    SET
-
+SET
     TestField = @value
+WHERE
+    (<condizione>)
 
-    WHERE
+-- ...
+-- ...
+-- ...
 
-    (&lt;condizione&gt;)
-
-    -- ...
-
-    -- ...
-
-    -- ...
-
-    -- Utilizzo del valore memorizzato
-
-    SELECT
-
+-- Utilizzo del valore memorizzato
+SELECT
     TestField
-
-    FROM
-
+FROM
     dbo.ShippingHeader
+WHERE
+    (<condizione>)
 
-    WHERE
+-- ...
+-- ...
+-- ...
 
-    (&lt;condizione&gt;)
+-- Eliminazione colonna temporanea
+ALTER TABLE dbo.ShippingHeader DROP COLUMN TestField
 
-    -- ...
+-- ...
+-- ...
+-- ...
 
-    -- ...
-
-    -- ...
-
-    -- Eliminazione colonna temporanea
-
-    ALTER TABLE dbo.ShippingHeader DROP COLUMN TestField
-
-    -- ...
-
-    -- ...
-
-    -- ...
-
-    END;
-
-    GO
+END;
+GO
+```
 
 Dopo alcuni mesi di lavoro della stored procedure (in produzione), è
 stato raggiunto il limite massimo degli identificativi univoci (ID)
@@ -237,7 +189,7 @@ e con questo tipo di dato si possono rappresentare positivamente 2\^15 -
 1 elementi, ossia 32.767… dopo qualche mese, il cliente aveva inserito
 più di 32.767 documenti di trasporto!
 
-Messaggio di Errore 1701 (SQL Server 2012) {#messaggio-di-errore-1701-sql-server-2012 .ppSection}
+Messaggio di Errore 1701 (SQL Server 2012)
 ==========================================
 
 In SQL Server 2012, il tipo di dato della colonna column\_id della vista
@@ -258,7 +210,7 @@ di una colonna temporanea ad ogni esecuzione, ci siamo subito posti il
 problema di come poter applicare futuri aggiornamenti (aggiunta di nuove
 colonne) alla tabella dbo.ShippingHeader.
 
-Soluzione {#soluzione .ppSection}
+Soluzione
 =========
 
 La soluzione adottata consiste nel ricreare la tabella
@@ -266,41 +218,31 @@ dbo.ShippingHeader. Ricreando la tabella, il contatore colid (column\_id
 nella vista sys.columns) verrà resettato. L’assegnazione dei prossimi
 identificativi univoci (ID) ripartirà dal valore successivo a quello
 estratto nella colonna MAX\_ColID nel seguente comando T-SQL:
+```SQL
+USE [tempdb];
+GO
 
-1.  USE \[tempdb\];
-
-    GO
-
-    SELECT
-
-    MAX(c.column\_id) AS MAX\_ColID
-
-    FROM
-
+SELECT
+    MAX(c.column_id) AS MAX_ColID
+FROM
     sys.columns AS c
+WHERE
+    (c.object_id = object_id('dbo.ShippingHeader'));
 
-    WHERE
-
-    (c.object\_id = object\_id('dbo.ShippingHeader'));
-
-    GO
+GO
+```
 
 Per ricreare la tabella dbo.ShippingHeader possiamo eseguire,
 nell’ordine, le seguenti attività:
 
 -   Duplicazione della tabella (e copia dei dati)
-
--   Eliminazione delle integrità referenziali definite su
-    dbo.ShippingHeader
-
+-   Eliminazione delle integrità referenziali definite su dbo.ShippingHeader
 -   Eliminazione della tabella dbo.ShippingHeader
-
 -   Rinomina (in dbo.ShippingHeader) della tabella precedentemente
     copiata
-
 -   Applicazione delle integrità referenziali
 
-Duplicazione della tabella e copia dei dati {#duplicazione-della-tabella-e-copia-dei-dati .ppSection}
+Duplicazione della tabella e copia dei dati
 ===========================================
 
 Per duplicare (copiando i dati) la tabella dbo.ShippingHeader abbiamo
@@ -316,7 +258,7 @@ figura seguente.
 Figura 3 – Tabella dbo.ShippingHeader2 (copia dalle
     tabella dbo.ShippingHeader)
 
-Eliminazione delle integrità referenziali definite su dbo.ShippingHeader {#eliminazione-delle-integrità-referenziali-definite-su-dbo.shippingheader .ppSection}
+Eliminazione delle integrità referenziali definite su dbo.ShippingHeader 
 ========================================================================
 
 Per ottenere, in modo semplice e veloce, i comandi di eliminazione delle
@@ -332,76 +274,66 @@ Figura 4 – Funzioni di scripting di SQL Server
 Abbiamo quindi eseguito la cancellazione dei vincoli definiti sulla la
 tabella dbo.ShippingHeader, il seguente frammento di codice T-SQL
 riporta gli statement eseguiti:
+```SQL
+USE [tempdb]
+GO
 
-1.  USE \[tempdb\]
+ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT
+[FK__ShippingH__Produ__1A14E395]
+GO
 
-    GO
+ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT
+[FK__ShippingH__Custo__1CF15040]
+GO
 
-    ALTER TABLE \[dbo\].\[ShippingHeader\] DROP CONSTRAINT
-    \[FK\_\_ShippingH\_\_Produ\_\_1A14E395\]
+ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT
+[DF__ShippingH__Deliv__22AA2996]
+GO
 
-    GO
+ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT
+[DF__ShippingH__ShipC__21B6055D]
+GO
 
-    ALTER TABLE \[dbo\].\[ShippingHeader\] DROP CONSTRAINT
-    \[FK\_\_ShippingH\_\_Custo\_\_1CF15040\]
+ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT
+[DF__ShippingH__ShipP__20C1E124]
+GO
 
-    GO
+ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT
+[DF__ShippingH__ShipC__1FCDBCEB]
+GO
 
-    ALTER TABLE \[dbo\].\[ShippingHeader\] DROP CONSTRAINT
-    \[DF\_\_ShippingH\_\_Deliv\_\_22AA2996\]
+ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT
+[DF__ShippingH__ShipA__1ED998B2]
+GO
 
-    GO
+ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT
+[DF__ShippingH__ShipN__1DE57479]
+GO
 
-    ALTER TABLE \[dbo\].\[ShippingHeader\] DROP CONSTRAINT
-    \[DF\_\_ShippingH\_\_ShipC\_\_21B6055D\]
+ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT
+[DF__ShippingH__Custo__1BFD2C07]
+GO
 
-    GO
+ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT
+[DF__ShippingH__ShipD__1B0907CE]
+GO
+```
 
-    ALTER TABLE \[dbo\].\[ShippingHeader\] DROP CONSTRAINT
-    \[DF\_\_ShippingH\_\_ShipP\_\_20C1E124\]
-
-    GO
-
-    ALTER TABLE \[dbo\].\[ShippingHeader\] DROP CONSTRAINT
-    \[DF\_\_ShippingH\_\_ShipC\_\_1FCDBCEB\]
-
-    GO
-
-    ALTER TABLE \[dbo\].\[ShippingHeader\] DROP CONSTRAINT
-    \[DF\_\_ShippingH\_\_ShipA\_\_1ED998B2\]
-
-    GO
-
-    ALTER TABLE \[dbo\].\[ShippingHeader\] DROP CONSTRAINT
-    \[DF\_\_ShippingH\_\_ShipN\_\_1DE57479\]
-
-    GO
-
-    ALTER TABLE \[dbo\].\[ShippingHeader\] DROP CONSTRAINT
-    \[DF\_\_ShippingH\_\_Custo\_\_1BFD2C07\]
-
-    GO
-
-    ALTER TABLE \[dbo\].\[ShippingHeader\] DROP CONSTRAINT
-    \[DF\_\_ShippingH\_\_ShipD\_\_1B0907CE\]
-
-    GO
-
-Eliminazione della tabella dbo.ShippingHeader {#eliminazione-della-tabella-dbo.shippingheader .ppSection}
+Eliminazione della tabella dbo.ShippingHeader 
 =============================================
 
 Dopo aver eliminato i vincoli (integrità referenziali e di dominio), è
 stato possibile eliminare la tabella dbo.ShippingHeader.
 
-1.  USE \[tempdb\]
+```SQL
+USE [tempdb]
+GO
 
-    GO
+DROP TABLE [dbo].[ShippingHeader]
+GO
+```
 
-    DROP TABLE \[dbo\].\[ShippingHeader\]
-
-    GO
-
-Rinomina (in dbo.ShippingHeader) della tabella precedentemente copiata {#rinomina-in-dbo.shippingheader-della-tabella-precedentemente-copiata .ppSection}
+Rinomina (in dbo.ShippingHeader) della tabella precedentemente copiata
 ======================================================================
 
 Per rinominare la tabella dbo.ShippingHeader2 in dbo.ShippingHeader,
@@ -411,19 +343,17 @@ consente di modificare il nome di un oggetto creato dall’utente, nel
 database corrente. Il seguente comando T-SQL illustra l’utilizzo di
 sp\_rename:
 
-1.  USE \[tempdb\];
+```SQL
+USE [tempdb];
+GO
 
-    GO
-
-    EXEC sp\_rename
-
+EXEC sp_rename
     @objname = 'dbo.ShippingHeader2'
-
     ,@newname = 'ShippingHeader';
+GO
+```
 
-    GO
-
-Applicazione delle integrità referenziali {#applicazione-delle-integrità-referenziali .ppSection}
+Applicazione delle integrità referenziali
 =========================================
 
 L’ultimo step consiste nel ripristinare la PRIMARY KEY e i vincoli della
@@ -432,70 +362,47 @@ delle integrità sulla tabella dbo.ShippingHeader rigenerata sono stati
 precedentemente generati (nello step 2), vengono ora utilizzati come
 illustrato di seguito:
 
-1.  USE \[tempdb\]
+```SQL
+USE [tempdb]
+GO
 
-    GO
+ALTER TABLE [dbo].[ShippingHeader] ADD PRIMARY KEY([ShippingID])
+GO
 
-    ALTER TABLE \[dbo\].\[ShippingHeader\] ADD
-    PRIMARY KEY(\[ShippingID\])
+ALTER TABLE [dbo].[ShippingHeader] ADD DEFAULT (getdate()) FOR [ShipDate]
+GO
 
-    GO
+ALTER TABLE [dbo].[ShippingHeader] ADD DEFAULT ((1)) FOR [CustomerID]
+GO
 
-    ALTER TABLE \[dbo\].\[ShippingHeader\] ADD DEFAULT (getdate()) FOR
-    \[ShipDate\]
+ALTER TABLE [dbo].[ShippingHeader] ADD DEFAULT ('Name') FOR [ShipName]
+GO
 
-    GO
+ALTER TABLE [dbo].[ShippingHeader] ADD DEFAULT ('Address') FOR [ShipAddress]
+GO
 
-    ALTER TABLE \[dbo\].\[ShippingHeader\] ADD DEFAULT ((1)) FOR
-    \[CustomerID\]
+ALTER TABLE [dbo].[ShippingHeader] ADD DEFAULT ('City') FOR [ShipCity]
+GO
 
-    GO
+ALTER TABLE [dbo].[ShippingHeader] ADD DEFAULT ('Postal code') FOR [ShipPostalCode]
+GO
 
-    ALTER TABLE \[dbo\].\[ShippingHeader\] ADD DEFAULT ('Name') FOR
-    \[ShipName\]
+ALTER TABLE [dbo].[ShippingHeader] ADD DEFAULT ('Country') FOR [ShipCountry]
+GO
 
-    GO
+ALTER TABLE [dbo].[ShippingHeader] ADD DEFAULT (getdate()) FOR [DeliveryDate]
+GO
 
-    ALTER TABLE \[dbo\].\[ShippingHeader\] ADD DEFAULT ('Address') FOR
-    \[ShipAddress\]
+ALTER TABLE [dbo].[ShippingHeader] WITH CHECK ADD FOREIGN KEY([CustomerID]) 
+REFERENCES [dbo].[Customer] ([CustomerID])
+GO
 
-    GO
+ALTER TABLE [dbo].[ShippingHeader] WITH CHECK ADD FOREIGN KEY([ProductID])
+REFERENCES [dbo].[Product] ([ProductID])
+GO
+```
 
-    ALTER TABLE \[dbo\].\[ShippingHeader\] ADD DEFAULT ('City') FOR
-    \[ShipCity\]
-
-    GO
-
-    ALTER TABLE \[dbo\].\[ShippingHeader\] ADD DEFAULT ('Postal code')
-    FOR \[ShipPostalCode\]
-
-    GO
-
-    ALTER TABLE \[dbo\].\[ShippingHeader\] ADD DEFAULT ('Country') FOR
-    \[ShipCountry\]
-
-    GO
-
-    ALTER TABLE \[dbo\].\[ShippingHeader\] ADD DEFAULT (getdate()) FOR
-    \[DeliveryDate\]
-
-    GO
-
-    ALTER TABLE \[dbo\].\[ShippingHeader\] WITH CHECK ADD
-    FOREIGN KEY(\[CustomerID\])
-
-    REFERENCES \[dbo\].\[Customer\] (\[CustomerID\])
-
-    GO
-
-    ALTER TABLE \[dbo\].\[ShippingHeader\] WITH CHECK ADD
-    FOREIGN KEY(\[ProductID\])
-
-    REFERENCES \[dbo\].\[Product\] (\[ProductID\])
-
-    GO
-
-Conclusioni {#conclusioni .ppSection}
+Conclusioni
 ===========
 
 L’utilizzo **ciclico** di una **colonna temporanea creata** e

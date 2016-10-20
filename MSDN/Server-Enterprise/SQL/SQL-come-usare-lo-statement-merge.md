@@ -1,15 +1,28 @@
+---
+title: T-SQL - Come usare lo Stament MERGE
+description: T-SQL - Come usare lo Stament MERGE
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: SQLServer
+ms.custom: CommunityDocs
+---
+
+
+# T-SQL - Come usare lo Stament MERGE
+
 #### di [Sergio Govoni](http://mvp.microsoft.com/profiles/Sergio.Govoni) - Microsoft MVP
 
 Blog: <http://www.ugiss.org/sgovoni/>
 
 Twitter: <https://twitter.com/segovoni>
 
-1.  ![](./img//media/image1.png){width="0.5938331146106737in"
-    height="0.9376312335958005in"}
+![](./img/SQL-come-usare-lo-statement-merge/image1.png)
+
 
 *Febbraio, 2013*
 
-Introduzione {#introduzione .ppSection}
+Introduzione
 ============
 
 SQL Server 2008 introduce il supporto al comando MERGE. Questo comando
@@ -21,16 +34,13 @@ aggiunge, a queste, alcune importanti estensioni disponibili solo nel
 linguaggio T-SQL.
 
 La figura seguente schematizza sorgente e destinazione in un comando
-MERGE.
+MERGE
 
-1.  ![](./img//media/image2.png){width="5.886239063867016in"
-    height="1.7606627296587927in"}
+![](./img/SQL-come-usare-lo-statement-merge/image2.png)
 
-<!-- -->
+Figura 1 – Sorgente e Destinazione nel comando MERGE
 
-1.  Figura 1 – Sorgente e Destinazione nel comando MERGE
-
-Ambiti di utilizzo {#ambiti-di-utilizzo .ppSection}
+Ambiti di utilizzo
 ==================
 
 Il comando MERGE può essere utilizzato in ambienti OLTP, ma anche OLAP.
@@ -46,20 +56,18 @@ collegare le righe della tabella sorgente con le righe della tabella
 destinazione. Si potrà quindi specificare quale azione avviare quando la
 riga:
 
-1.  Esiste sia nella tabella sorgente che nella tabella destinazione
+- Esiste sia nella tabella sorgente che nella tabella destinazione
     (WHEN MATCHED)
-
-    Esiste nella tabella sorgente, ma non nella tabella destinazione
+- Esiste nella tabella sorgente, ma non nella tabella destinazione
     (WHEN NOT MATCHED \[BY TARGET\])
-
-    Esiste nella tabella destinazione, ma non in quella sorgente (WHEN
+- Esiste nella tabella destinazione, ma non in quella sorgente (WHEN
     NOT MATCHED \[BY SOURCE\])
 
 L’ultima clausola WHEN NOT MATCHED \[BY SOURCE\] rappresenta
 un’estensione proprietaria del linguaggio T-SQL, non è disponibile nel
 comando MERGE standard ANSI SQL.
 
-Scenario OLTP: Inventario di magazzino {#scenario-oltp-inventario-di-magazzino .ppSection}
+Scenario OLTP: Inventario di magazzino
 ======================================
 
 Vediamo ora come il comando MERGE può aiutarci nel caricamento di un
@@ -72,164 +80,116 @@ giacenze fisiche rilevate dagli operatori durante l’inventario. Il
 comando MERGE sarà di grande aiuto per aggiornare i dati contenuti nella
 tabella dbo.ProductInventory. Si dovrà quindi prevedere di:
 
-1.  Aggiornare la quantità giacente di un prodotto
-
-    Eliminare, dalla tabella dbo.ProductInventory, i prodotti non
+- Aggiornare la quantità giacente di un prodotto
+- Eliminare, dalla tabella dbo.ProductInventory, i prodotti non
     presenti a magazzino (rilevazioni con giacenza uguale a zero)
-
-    Inserire, nella tabella dbo.ProductInventory, i nuovi prodotti
+- Inserire, nella tabella dbo.ProductInventory, i nuovi prodotti
     rilevati a magazzino (non presenti nella destinazione)
-
-    1.  
 
 Procediamo con la creazione della tabella dbo.ProductInventory sul
 database AdventureWorks2012 (scaricabile da CodePlex) e inseriamo alcuni
 dati di prova.
 
-1.  use \[AdventureWorks2012\];
+```SQL
+use [AdventureWorks2012];
+go
 
-    go
+------------------------------------------------------------------------
+-- Setup table & insert data
+------------------------------------------------------------------------
 
-    ------------------------------------------------------------------------
-
-    -- Setup table & insert data
-
-    ------------------------------------------------------------------------
-
-    -- dbo.ProductInventory
-
-    if OBJECT\_ID('dbo.ProductInventory', 'U') is not null
-
+-- dbo.ProductInventory
+if OBJECT_ID('dbo.ProductInventory', 'U') is not null
     drop table dbo.ProductInventory;
+go
 
-    go
-
-    create table dbo.ProductInventory
-
-    (
-
+create table dbo.ProductInventory
+(
     ProductID varchar(25) not null
-
     ,LocationID varchar(20) not null
-
     ,Quantity decimal(9, 2) not null
-
     ,ModifiedDate date not null default getdate()
-
     ,Status bit not null default 1
+    ,constraint PK_ProductInventory primary key(ProductID, LocationID)
+);
 
-    ,constraint PK\_ProductInventory primary key(ProductID, LocationID)
-
-    );
-
-    insert into dbo.ProductInventory
-
+insert into dbo.ProductInventory
     (ProductID, LocationID, Quantity, ModifiedDate)
-
-    values
-
+values
     ('ravioli angelo', 'b002', 10, '20100101'),
-
     ('chocolade', 'f015', 5, '20100101'),
-
     ('ipoh coffee', 'h001', 70, '20100201'),
-
     ('mascarpone doc', 'd214', 30, '20100201');
-
-    go
+go
+```
 
 Consultiamo i dati inseriti, che rappresentano le giacenze logiche dei
 prodotti disponibili in magazzino:
 
-1.  use \[AdventureWorks2012\];
+```SQL
+use [AdventureWorks2012];
+go
 
-    go
-
-    select \* from dbo.ProductInventory;
-
-    go
+select * from dbo.ProductInventory;
+go
+```
 
 L’output è illustrato in figura 2.
 
-1.  ![](./img//media/image3.png){width="3.9484678477690287in"
-    height="1.7085717410323709in"}
+![](./img/SQL-come-usare-lo-statement-merge/image3.png)
 
-<!-- -->
-
-1.  Figura 2 – Giacenze logiche dei prodotti disponibili in magazzino
+Figura 2 – Giacenze logiche dei prodotti disponibili in magazzino
 
 Ipotizziamo di raccogliere i dati inventariali nella tabella
 dbo.FrequentInventory, che possiamo creare e popolare con alcuni dati di
 test attraverso il seguente frammento di codice T-SQL:
 
-1.  use \[AdventureWorks2012\];
+```SQL
+use [AdventureWorks2012];
+go
 
-    go
-
-    -- dbo.FrequentInventory
-
-    if OBJECT\_ID('dbo.FrequentInventory', 'U') is not null
-
+-- dbo.FrequentInventory
+if OBJECT_ID('dbo.FrequentInventory', 'U') is not null
     drop table dbo.FrequentInventory;
+go
 
-    go
-
-    create table dbo.FrequentInventory
-
-    (
-
+create table dbo.FrequentInventory
+(
     ProductID varchar(25) not null
-
     ,LocationID varchar(20) not null
-
     ,Quantity decimal(9, 2) not null
-
     ,ModifiedDate date not null default getdate()
+    ,constraint PK_FrequentInventory primary key(ProductID, LocationID)
+);
+go
 
-    ,constraint PK\_FrequentInventory primary key(ProductID, LocationID)
-
-    );
-
-    go
-
-    insert into dbo.FrequentInventory
-
+insert into dbo.FrequentInventory
     (ProductID, LocationID, Quantity, ModifiedDate)
-
-    values
-
+values
     ('CHOCOLADE', 'F015', 7, '20100612'),
-
     ('GORGONZOLA TELINO', 'F001', 22, '20100612'),
-
     ('SEATTLE CRAB', 'G004', 80, '20100612'),
-
     ('MASCARPONE DOC', 'D214', 0, '20100201');
-
-    go
+go
+```
 
 Consultiamo i dati rilevati durante l’inventario, l’output è illustrato
 in figura 3.
 
-1.  use \[AdventureWorks2012\];
+```SQL
+use [AdventureWorks2012];
+go
 
-    go
+select * from dbo.FrequentInventory;
+go
+```
 
-    select \* from dbo.FrequentInventory;
+![](./img/SQL-come-usare-lo-statement-merge/image4.png)
 
-    go
-
-<!-- -->
-
-1.  ![](./img//media/image4.png){width="3.9067957130358706in"
-    height="1.6668996062992125in"}
-
-<!-- -->
-
-1.  Figura 3 – Giacenze fisiche rilevate dai magazzinieri durante
+Figura 3 – Giacenze fisiche rilevate dai magazzinieri durante
     l’inventario
 
-Il comando MERGE in azione {#il-comando-merge-in-azione .ppSection}
+Il comando MERGE in azione
 ==========================
 
 Il primo comando MERGE che esaminiamo è quello che ci permette di
@@ -246,66 +206,51 @@ Osserviamo il comando UPDATE, non è stata specificata la tabella
 dbo.ProductInventory, quest’ultima è infatti già nota by design, è la
 tabella di destinazione.
 
-1.  -- MERGE con la clausola WHEN MATCHED
+```SQL
+-- MERGE con la clausola WHEN MATCHED
 
-    begin tran;
+begin tran;
+go
 
-    go
+select * from dbo.ProductInventory;
+go
 
-    select \* from dbo.ProductInventory;
+merge into dbo.ProductInventory as itarget
+using dbo.FrequentInventory as isource
+on ((itarget.ProductId = isource.ProductId)
+and (itarget.LocationId = isource.LocationId))
+when matched then
+update /* dbo.ProductInventory */ set
+itarget.Quantity = isource.Quantity
+,itarget.ModifiedDate = isource.ModifiedDate;
+select * from dbo.ProductInventory;
+go
 
-    go
+rollback tran;
 
-    merge into dbo.ProductInventory as itarget
-
-    using dbo.FrequentInventory as isource
-
-    on ((itarget.ProductId = isource.ProductId)
-
-    and (itarget.LocationId = isource.LocationId))
-
-    when matched then
-
-    update /\* dbo.ProductInventory \*/ set
-
-    itarget.Quantity = isource.Quantity
-
-    ,itarget.ModifiedDate = isource.ModifiedDate;
-
-    select \* from dbo.ProductInventory;
-
-    go
-
-    rollback tran;
-
-    go
+go
+```
 
 L’output è illustrato in figura 4, le righe nei riquadri rossi
 rappresentano i record che verranno aggiornati, mentre quelle nei
 riquadri verdi rappresentano i record dopo l’esecuzione del comando
 MERGE.
 
-1.  ![](./img//media/image5.png){width="3.969304461942257in"
-    height="2.8858191163604547in"}
+![](./img/SQL-come-usare-lo-statement-merge/image5.png)
 
-<!-- -->
-
-1.  Figura 4 – Aggiornamenti eseguiti dal comando MERGE con clausola
+Figura 4 – Aggiornamenti eseguiti dal comando MERGE con clausola
     WHEN MATCHED
 
 In presenza della sola clausola WHEN MATCHED, il comando MERGE viene
 implementato con una INNER JOIN che possiamo vedere nel piano di
 esecuzione illustrato nella figura seguente.
 
-1.  ![](./img//media/image6.png){width="6.5in"
-    height="0.9965277777777778in"}
+![](./img/SQL-come-usare-lo-statement-merge/image6.png)
 
-<!-- -->
-
-1.  Figura 5 – Piano di esecuzione per il comando MERGE con clausola
+Figura 5 – Piano di esecuzione per il comando MERGE con clausola
     WHEN MATCHED
 
-La clausola WHEN NOT MATCHED {#la-clausola-when-not-matched .ppSection}
+La clausola WHEN NOT MATCHED
 ============================
 
 Soddisfiamo un altro requisito richiesto, ovvero la possibilità di
@@ -320,83 +265,56 @@ viene specificata perché la tabella di destinazione è già nota.
 Eseguiamo il seguente frammento di codice, anche in questo caso la
 transazione viene annullata con un ROLLBACK.
 
-1.  -- MERGE con le clausole WHEN MATCHED e WHEN NOT MATCHED
+```SQL
+-- MERGE con le clausole WHEN MATCHED e WHEN NOT MATCHED
 
-    begin tran;
+begin tran;
+go
 
-    go
+select * from dbo.ProductInventory;
+go
 
-    select \* from dbo.ProductInventory;
+merge into dbo.ProductInventory as itarget
+using dbo.FrequentInventory as isource
+on ((itarget.ProductId = isource.ProductId)
+and (itarget.LocationId = isource.LocationId))
+when matched then
+update /* dbo.ProductInventory */ set
+itarget.Quantity = isource.Quantity
+,itarget.ModifiedDate = isource.ModifiedDate
+when not matched then
+insert /* into dbo.ProductInventory */
+(
+ProductId
+,LocationId
+,Quantity
+,ModifiedDate
+)
+values
+(
+isource.ProductId
+,isource.LocationId
+,isource.Quantity
+,isource.ModifiedDate
+);
 
-    go
+select * from dbo.ProductInventory;
+go
 
-    merge into dbo.ProductInventory as itarget
-
-    using dbo.FrequentInventory as isource
-
-    on ((itarget.ProductId = isource.ProductId)
-
-    and (itarget.LocationId = isource.LocationId))
-
-    when matched then
-
-    update /\* dbo.ProductInventory \*/ set
-
-    itarget.Quantity = isource.Quantity
-
-    ,itarget.ModifiedDate = isource.ModifiedDate
-
-    when not matched then
-
-    insert /\* into dbo.ProductInventory \*/
-
-    (
-
-    ProductId
-
-    ,LocationId
-
-    ,Quantity
-
-    ,ModifiedDate
-
-    )
-
-    values
-
-    (
-
-    isource.ProductId
-
-    ,isource.LocationId
-
-    ,isource.Quantity
-
-    ,isource.ModifiedDate
-
-    );
-
-    select \* from dbo.ProductInventory;
-
-    go
-
-    rollback tran;
-
-    go
+rollback tran;
+go
+```
 
 Otteniamo l’output illustrato in figura 6, osserviamo che i prodotti
 “GORGONZOLA TELINO” e “SEATTLE CRAB” sono stati inseriti nella tabella
 destinazione dbo.ProductInventory per effetto dell’azione specificata
 nella clausola WHEN NOT MATCHED.
 
-1.  ![](./img//media/image7.png){width="4.365192475940508in"
-    height="3.229617235345582in"}
+![](./img/SQL-come-usare-lo-statement-merge/image7.png)
 
-<!-- -->
+Figura 6 – MERGE con clausole WHEN MATCHED e WHEN NOT MATCHED
 
-1.  Figura 6 – MERGE con clausole WHEN MATCHED e WHEN NOT MATCHED
-
-La soluzione nelle precedenti versioni di SQL Server (SQL Server 2005 o precedenti) {#la-soluzione-nelle-precedenti-versioni-di-sql-server-sql-server-2005-o-precedenti .ppSection}
+La soluzione nelle precedenti versioni di SQL Server (SQL Server 2005 o precedenti)
 ===================================================================================
 
 Come avremmo implementato la soluzione di questo problema in SQL Server
@@ -404,85 +322,86 @@ Come avremmo implementato la soluzione di questo problema in SQL Server
 UPDATE ed un INSERT, come quelli riportati di seguito, che avrebbero
 permesso di ottenere lo stesso output di figura 6.
 
-1.  begin tran
+```SQL
+begin tran
+go
 
-    go
+select * from dbo.ProductInventory;
 
-    select \* from dbo.ProductInventory;
+go
 
-    go
+update
 
-    update
+itarget
 
-    itarget
+set
 
-    set
+itarget.Quantity = isource.Quantity
 
-    itarget.Quantity = isource.Quantity
+,itarget.ModifiedDate = isource.ModifiedDate
 
-    ,itarget.ModifiedDate = isource.ModifiedDate
+from
 
-    from
+dbo.ProductInventory itarget
 
-    dbo.ProductInventory itarget
+join
 
-    join
+dbo.FrequentInventory isource
 
-    dbo.FrequentInventory isource
+on (itarget.ProductID = isource.ProductID) and
 
-    on (itarget.ProductID = isource.ProductID) and
+(itarget.LocationID = isource.LocationID);
 
-    (itarget.LocationID = isource.LocationID);
+go
 
-    go
+insert into dbo.ProductInventory
 
-    insert into dbo.ProductInventory
+(
 
-    (
+ProductID, LocationID, Quantity, ModifiedDate
 
-    ProductID, LocationID, Quantity, ModifiedDate
+)
 
-    )
+select
 
-    select
+isource.ProductID
 
-    isource.ProductID
+,isource.LocationID
 
-    ,isource.LocationID
+,isource.Quantity
 
-    ,isource.Quantity
+,isource.ModifiedDate
 
-    ,isource.ModifiedDate
+from
 
-    from
+dbo.FrequentInventory as isource
 
-    dbo.FrequentInventory as isource
+where
 
-    where
+not exists (select \*
 
-    not exists (select \*
+from
 
-    from
+dbo.ProductInventory as itarget
 
-    dbo.ProductInventory as itarget
+where
 
-    where
+(isource.ProductID = itarget.ProductID)
 
-    (isource.ProductID = itarget.ProductID)
+and (isource.LocationID = itarget.LocationID)
 
-    and (isource.LocationID = itarget.LocationID)
+);
 
-    );
+go
 
-    go
+select \* from dbo.ProductInventory;
 
-    select \* from dbo.ProductInventory;
+go
 
-    go
+rollback tran
 
-    rollback tran
-
-    go
+go
+```
 
 Rispetto alla soluzione tradizionale, uno dei vantaggi che deriva
 dall’utilizzo del comando MERGE è nell’accesso ai dati, con MERGE i dati
@@ -681,12 +600,9 @@ che la riga relativa al prodotto “mascarpone doc” è stata eliminata (in
 dbo.ProductInventory) per effetto dell’azione DELETE specificata nella
 seconda clausola WHEN MATCHED.
 
-1.  ![](./img//media/image8.png){width="4.375611329833771in"
-    height="3.073345363079615in"}
+![](./img/SQL-come-usare-lo-statement-merge/image8.png)
 
-<!-- -->
-
-1.  Figura 7 – MERGE con clausole WHEN MATCHED multiple
+Figura 7 – MERGE con clausole WHEN MATCHED multiple
 
 Estensioni proprietarie del linguaggio T-SQL {#estensioni-proprietarie-del-linguaggio-t-sql .ppSection}
 ============================================
@@ -791,14 +707,11 @@ L’output ottenuto è illustrato in figura 8, in particolare osserviamo i
 valori della colonna Status per i prodotti “ipoh coffee” e “ravioli
 angelo” non presenti nella tabella dbo.FrequentInventory.
 
-1.  ![](./img//media/image9.png){width="4.386029090113736in"
-    height="3.0004188538932635in"}
+![](./img/SQL-come-usare-lo-statement-merge/image9.png)
 
-<!-- -->
+Figura 8 – MERGE con clausola WHEN NOT MATCHED \[BY SOURCE\]
 
-1.  Figura 8 – MERGE con clausola WHEN NOT MATCHED \[BY SOURCE\]
-
-Conclusioni {#conclusioni .ppSection}
+Conclusioni
 ===========
 
 Il comando MERGE permette di eseguire, nella destinazione, operazioni
