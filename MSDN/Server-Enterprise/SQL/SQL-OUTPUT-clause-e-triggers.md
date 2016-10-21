@@ -1,7 +1,19 @@
+---
+title: SQL - OUTPUT clause and Triggers
+description: SQL - OUTPUT clause and Triggers
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: SQLServer
+ms.custom: CommunityDocs
+---
+
+# SQL: OUTPUT clause and Triggers
+
 #### di Sergio Govoni – Microsoft MVP ([Blog](http://community.ugiss.org/blogs/sgovoni) / [MVP Profile](http://mvp.microsoft.com/profiles/Sergio.Govoni))
 
-1.  ![](./img//media/image1.png){width="0.5938331146106737in"
-    height="0.9376312335958005in"}
+![](./img/SQL-OUTPUT-clause-e-triggers/image1.png)
+
 
 *Agosto, 2012*
 
@@ -20,7 +32,7 @@ Come indicano i books on-line, la [clausola
 OUTPUT](http://msdn.microsoft.com/en-us/library/ms177564.aspx),
 implementata nell’edizione 2005 di SQL Server:
 
-1.  “Restituisce le informazioni da (o le espressioni basate su) ogni
+> “Restituisce le informazioni da (o le espressioni basate su) ogni
     riga interessata da un’istruzione INSERT, UPDATE, DELETE o MERGE.
     Questi risultati possono essere restituiti all’applicazione di
     elaborazione per l’utilizzo nei messaggi di errore, l’archiviazione
@@ -36,71 +48,51 @@ Un esempio di utilizzo della clausola OUTPUT
 Di seguito, riportiamo un esempio (opportunamente semplificato) di
 utilizzo della clausola OUTPUT. Ipotizziamo di avere a disposizione la
 tabella dbo.TableA e di voler ottenere in output, per ogni statement di
-tipo INSERT, i valori assegnati alle colonne ColA e ID (in particolare
+tipo INSERT, i valori assegnati alle OUTPUT clause and Triggers ColA e ID (in particolare
 quelli assegnati alla colonna ID), per ogni riga inserita.
 
 Il seguente frammento di codice in linguaggio T-SQL esegue il setup
 della tabella dbo.TableA sul database di sistema tempdb.
 
-1.  USE \[tempdb\];
+```SQL
+USE [tempdb];
+GO
 
-    GO
-
-    -- Creazione tabella dbo.TableA
-
-    CREATE TABLE dbo.TableA
-
-    (
-
+-- Creazione tabella dbo.TableA
+CREATE TABLE dbo.TableA
+(
     ID INTEGER IDENTITY(1, 1) NOT NULL PRIMARY KEY
-
     ,ColA VARCHAR(64)
-
-    );
-
-    GO
+);
+GO
+```
 
 Eseguiamo ora un’operazione di INSERT, sulla tabella dbo.TableA,
 aggiungendo la clausola OUTPUT in modo che siano restituite le
 informazioni richieste, relative alle righe inserite; la figura 1
 illustra l’output (atteso) del seguente comando di INSERT:
 
-1.  USE \[tempdb\];
+```SQL
+USE [tempdb];
+GO
 
-    GO
+-- Inserimento dati di prova con restituzione delle informazioni inserite
 
-    -- Inserimento dati di prova con restituzione delle informazioni
-    inserite
-
-    INSERT INTO dbo.TableA
-
+INSERT INTO dbo.TableA
     (
-
-    ColA
-
+        ColA
     )
-
-    OUTPUT
-
+OUTPUT
     inserted.ID
-
     ,inserted.ColA
-
-    VALUES
-
+VALUES
     ('Row 1'), ('Row 2');
+GO
+```
 
-    GO
+![](./img/SQL-OUTPUT-clause-e-triggers/image2.png)
 
-<!-- -->
-
-1.  ![](./img//media/image2.png){width="2.5211854768153983in"
-    height="1.1251574803149607in"}
-
-<!-- -->
-
-1.  Figura 1 – Inserimento dati di prova con utilizzo della clausola
-    OUTPUT
+Figura 1 – Inserimento dati di prova con utilizzo della clausola OUTPUT
 
 Ipotizziamo ora che questo comando di INSERT sia stato utilizzato
 all’interno di un’applicazione, distribuita a un cliente. Dopo qualche
@@ -112,12 +104,9 @@ precedente (illustrato in figura 1).
 Il messaggio di errore segnalato all’assistenza è quello illustrato in
 figura 2, che abbiamo riprodotto su SQL Server Management Studio (SSMS):
 
-1.  ![](./img//media/image3.png){width="6.5in"
-    height="0.8986111111111111in"}
+![](./img/SQL-OUTPUT-clause-e-triggers/image3.png)
 
-<!-- -->
-
-1.  Figura 2 – SQL Server Error Message 334
+Figura 2 – SQL Server Error Message 334
 
 Che cosa è successo all’applicazione? Che è in produzione già da molto
 tempo senza alcun problema? Non sono state eseguite modifiche al codice
@@ -139,68 +128,43 @@ Il seguente frammento di codice T-SQL contiene i comandi di creazione
 del Trigger TR\_LogTableA e della tabella di Log dbo.LogTableA su cui il
 Trigger tenta di memorizzare (inserire) altre informazioni.
 
-1.  USE \[tempdb\];
+```SQL
+USE [tempdb];
+GO
 
-    GO
-
-    -- Creazione tabella dbo.LogTableA
-
-    CREATE TABLE dbo.LogTableA
-
-    (
-
+-- Creazione tabella dbo.LogTableA
+CREATE TABLE dbo.LogTableA
+(
     LogID INTEGER NOT NULL
-
     ,LogColA VARCHAR(64)
-
     ,Operation VARCHAR(1) NOT NULL DEFAULT 'I'
+);
+GO
 
-    );
+-- Creazione trigger TR_LogTableA
+CREATE TRIGGER TR_LogTableA on dbo.TableA
+FOR INSERT
+AS BEGIN
 
-    GO
-
-    -- Creazione trigger TR\_LogTableA
-
-    CREATE TRIGGER TR\_LogTableA on dbo.TableA
-
-    FOR INSERT
-
-    AS BEGIN
-
-    /\*
-
+    /*
     Log degli INSERT eseguiti sulla tabella dbo.TableA
-
-    \*/
+    */
 
     INSERT INTO dbo.LogTableA
-
     (
-
-    LogID
-
-    ,LogColA
-
-    ,Operation
-
+        LogID
+        ,LogColA
+        ,Operation
     )
-
     SELECT
-
-    ID
-
-    ,ColA
-
-    ,'I'
-
+        ID
+        ,ColA
+        ,'I'
     FROM
-
-    INSERTED
-
-    END;
-
-    GO
-
+        INSERTED
+END;
+GO
+```
 Dopo aver adeguato il codice dell’applicazione attraverso l’utilizzo
 dell’opzione INTO per la clausola OUTPUT, abbiamo cercato di comprendere
 i motivi dell’errore, che sono da ricercarsi nel numero di result-set
@@ -233,10 +197,5 @@ descrive il numero di righe interessare dalle operazioni eseguite nel
 Trigger, tipicamente il testo “Affected number of rows”.
 
 #### di Sergio Govoni – Microsoft MVP ([Blog](http://community.ugiss.org/blogs/sgovoni) / [MVP Profile](http://mvp.microsoft.com/profiles/Sergio.Govoni))
-
-1.  [*Altri articoli di Sergio Govoni nella
-    Libreria*](http://sxp.microsoft.com/feeds/3.0/msdntn/TA_MSDN_ITA?contenttype=Article&author=Sergio%20Govoni)
-    ![](./img//media/image4.png){width="0.1771084864391951in"
-    height="0.1771084864391951in"}
 
 
