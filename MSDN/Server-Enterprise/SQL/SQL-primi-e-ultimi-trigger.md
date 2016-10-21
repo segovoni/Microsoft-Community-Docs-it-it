@@ -1,7 +1,19 @@
+---
+title: SQL - Primi e Ultimi Trigger
+description: SQL - Primi e Ultimi Trigger
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: SQLServer
+ms.custom: CommunityDocs
+---
+
+# SQL - Primi e Ultimi Trigger
+
 #### di Sergio Govoni – Microsoft MVP ([Blog](http://community.ugiss.org/blogs/sgovoni) / [MVP Profile](http://mvp.microsoft.com/profiles/Sergio.Govoni))
 
-1.  ![](./img//media/image1.png){width="0.5938331146106737in"
-    height="0.9376312335958005in"}
+![](./img/SQL-primi-e-ultimi-trigger/image1.png)
+
 
 *Agosto, 2012*
 
@@ -33,22 +45,17 @@ La tabella Production.Product, al momento, non ha oggetti Trigger, lo
 verifichiamo con il seguente frammento di codice in linguaggio T-SQL, il
 cui output è illustrato in figura 1.
 
-1.  USE \[AdventureWorks2012\];
+```SQL
+USE [AdventureWorks2012];
+GO
 
-    GO
+EXEC sp_helptrigger 'Production.Product';
+GO
+```
 
-    EXEC sp\_helptrigger 'Production.Product';
+![](./img/SQL-primi-e-ultimi-trigger/image2.jpg)
 
-    GO
-
-<!-- -->
-
-1.  ![](./img//media/image2.jpg){width="6.5in"
-    height="0.9256944444444445in"}
-
-<!-- -->
-
-1.  Figura 1 – Trigger definiti per la tabella Production.Product nel
+Figura 1 – Trigger definiti per la tabella Production.Product nel
     database AdventureWorks2012
 
 Dopo aver verificato l’assenza di Trigger sulla tabella
@@ -59,38 +66,26 @@ funzione [PRINT](http://msdn.microsoft.com/it-it/library/ms176047.aspx)
 con lo scopo di restituire in output un messaggio informativo che ci
 permetterà di analizzare l’ordine di attivazione.
 
-1.  USE \[AdventureWorks2012\];
+```SQL
+USE [AdventureWorks2012];
+GO
 
-    GO
+-- Create triggers on Production.Product
+CREATE TRIGGER Production.tr_Product_INSERT_1 ON Production.Product AFTER INSERT
+AS
+    PRINT 'Fire trigger Production.tr_Product_INSERT_1';
+GO
 
-    -- Create triggers on Production.Product
+CREATE TRIGGER Production.tr_Product_INSERT_2 ON Production.Product AFTER INSERT
+AS
+    PRINT 'Fire trigger Production.tr_Product_INSERT_2';
+GO
 
-    CREATE TRIGGER Production.tr\_Product\_INSERT\_1 ON
-    Production.Product AFTER INSERT
-
-    AS
-
-    PRINT 'Fire trigger Production.tr\_Product\_INSERT\_1';
-
-    GO
-
-    CREATE TRIGGER Production.tr\_Product\_INSERT\_2 ON
-    Production.Product AFTER INSERT
-
-    AS
-
-    PRINT 'Fire trigger Production.tr\_Product\_INSERT\_2';
-
-    GO
-
-    CREATE TRIGGER Production.tr\_Product\_INSERT\_3 ON
-    Production.Product AFTER INSERT
-
-    AS
-
-    PRINT 'Fire trigger Production.tr\_Product\_INSERT\_3';
-
-    GO
+CREATE TRIGGER Production.tr_Product_INSERT_3 ON Production.Product AFTER INSERT
+AS
+    PRINT 'Fire trigger Production.tr_Product_INSERT_3';
+GO
+```
 
 Come possiamo garantire l’ordine di attivazione dei tre oggetti Trigger
 (after) INSERT appena creati?
@@ -104,130 +99,75 @@ del comando per il quale è stato definito.
 Eseguiamo l’inserimento di un prodotto nella tabella Production.Product,
 ci aspettiamo vengano attivati, in sequenza, i trigger appena definiti…
 
-1.  USE \[AdventureWorks2012\];
+```SQL
+USE [AdventureWorks2012];
+GO
 
-    GO
-
-    INSERT INTO Production.Product
-
-    (
-
+INSERT INTO Production.Product
+(
     Name
-
     ,ProductNumber
-
     ,MakeFlag
-
     ,FinishedGoodsFlag
-
     ,Color
-
     ,SafetyStockLevel
-
     ,ReorderPoint
-
     ,StandardCost
-
     ,ListPrice
-
     ,Size
-
     ,SizeUnitMeasureCode
-
     ,WeightUnitMeasureCode
-
     ,Weight
-
     ,DaysToManufacture
-
     ,ProductLine
-
     ,Class
-
     ,Style
-
     ,ProductSubcategoryID
-
     ,ProductModelID
-
     ,SellStartDate
-
     ,SellEndDate
-
     ,DiscontinuedDate
-
     ,rowguid
-
     ,ModifiedDate
-
-    )
-
-    VALUES
-
-    (
-
+)
+VALUES
+(
     N'CityBike'
-
     ,N'CB-5381'
-
     ,0
-
     ,0
-
     ,NULL
-
     ,1000
-
     ,750
-
     ,0.0000
-
     ,0.0000
-
     ,NULL
-
     ,NULL
-
     ,NULL
-
     ,NULL
-
     ,0
-
     ,NULL
-
     ,NULL
-
     ,NULL
-
     ,NULL
-
     ,NULL
-
     ,GETDATE()
-
     ,NULL
-
     ,NULL
-
     ,NEWID()
-
     ,GETDATE()
+);
 
-    );
-
-    GO
+GO
+```
 
 L’ordine di attivazione by default dei tre oggetti Trigger coincide, ma
 non è scontato, con l’ordine di creazione, lo possiamo constatare
 osservando la scheda Messaggi illustrata in figura 2.
 
-1.  ![](./img//media/image3.jpg){width="6.5in"
-    height="1.5430555555555556in"}
+![](./img/SQL-primi-e-ultimi-trigger/image3.jpg)
 
-<!-- -->
-
-1.  Figura 2 – Ordine di attivazione by default dei Trigger definiti
+Figura 2 – Ordine di attivazione by default dei Trigger definiti
     sulla tabella Production.Product
 
 Ipotizziamo ora, sia necessario garantire che il Trigger
@@ -237,149 +177,89 @@ Il seguente frammento di codice in linguaggio T-SQL utilizza la stored
 procedure di sistema sp\_settriggerorder che permette di specificare il
 primo Trigger da attivare in corrispondenza di un comando INSERT.
 
-1.  USE \[AdventureWorks2012\];
+```SQL
+USE [AdventureWorks2012];
+GO
 
-    GO
-
-    -- Impostazione del primo Trigger attivo per lo statement INSERT
-
-    EXEC sp\_settriggerorder
-
-    @triggername = 'Production.tr\_Product\_INSERT\_3'
-
+-- Impostazione del primo Trigger attivo per lo statement INSERT
+EXEC sp_settriggerorder
+    @triggername = 'Production.tr_Product_INSERT_3'
     ,@order = 'First'
-
     ,@stmttype = 'INSERT';
-
-    GO
+GO
+```
 
 Inseriamo un altro record nella tabella prodotti e verifichiamo l’ordine
 di attivazione dei Trigger, ci aspettiamo che il primo ad attivarsi sia
 proprio Production.tr\_Product\_INSERT\_3. L’output del seguente INSERT
 è illustrato in figura 3.
 
-1.  USE \[AdventureWorks2012\];
+```SQL
+USE [AdventureWorks2012];
+GO
 
-    GO
-
-    INSERT INTO Production.Product
-
-    (
-
+INSERT INTO Production.Product
+(
     Name
-
     ,ProductNumber
-
     ,MakeFlag
-
     ,FinishedGoodsFlag
-
     ,Color
-
     ,SafetyStockLevel
-
     ,ReorderPoint
-
     ,StandardCost
-
     ,ListPrice
-
     ,Size
-
     ,SizeUnitMeasureCode
-
     ,WeightUnitMeasureCode
-
     ,Weight
-
     ,DaysToManufacture
-
     ,ProductLine
-
     ,Class
-
     ,Style
-
     ,ProductSubcategoryID
-
     ,ProductModelID
-
     ,SellStartDate
-
     ,SellEndDate
-
     ,DiscontinuedDate
-
     ,rowguid
-
     ,ModifiedDate
-
-    )
-
-    VALUES
-
-    (
-
+)
+VALUES
+(
     N'CityBike PRO'
-
     ,N'CB-5382'
-
     ,0
-
     ,0
-
     ,NULL
-
     ,1000
-
     ,750
-
     ,0.0000
-
     ,0.0000
-
     ,NULL
-
     ,NULL
-
     ,NULL
-
     ,NULL
-
     ,0
-
     ,NULL
-
     ,NULL
-
     ,NULL
-
     ,NULL
-
     ,NULL
-
     ,GETDATE()
-
     ,NULL
-
     ,NULL
-
     ,NEWID()
-
     ,GETDATE()
-
-    );
-
-    GO
-
-<!-- -->
-
-1.  ![](./img//media/image4.jpg){width="6.5in"
-    height="1.5986111111111112in"}
+);
+GO
+```
 
 <!-- -->
 
-1.  Figura 3 – Ordine di attivazione personalizzato per i Trigger della
+![](./img/SQL-primi-e-ultimi-trigger/image4.jpg)
+
+Figura 3 – Ordine di attivazione personalizzato per i Trigger della
     tabella Production.Product
 
 Osserviamo un cambiamento nell’ordine di attivazione dei Trigger, ora il
@@ -393,148 +273,86 @@ sia Production.tr\_Product\_INSERT\_1, per questa impostazione
 utilizziamo di nuovo la stored procedure sp\_settriggerorder come
 illustrato di seguito.
 
-1.  USE \[AdventureWorks2012\];
+```SQL
+USE [AdventureWorks2012];
+GO
 
-    GO
-
-    -- Impostazione dell’ultimo Trigger attivo per lo statement INSERT
-
-    EXEC sp\_settriggerorder
-
-    @triggername = ' Production.tr\_Product\_INSERT\_1'
-
+-- Impostazione dell’ultimo Trigger attivo per lo statement INSERT
+EXEC sp_settriggerorder
+    @triggername = ' Production.tr_Product_INSERT_1'
     ,@order = 'Last'
-
     ,@stmttype = 'INSERT';
-
-    GO
+GO
+```
 
 Inseriamo un altro record nella tabella prodotti e verifichiamo
 nuovamente l’ordine di attivazione dei Trigger. L’output del seguente
 INSERT è illustrato in figura 4.
 
-1.  USE \[AdventureWorks2012\];
+```SQL
+USE [AdventureWorks2012];
+GO
 
-    GO
-
-    INSERT INTO Production.Product
-
-    (
-
+INSERT INTO Production.Product
+(
     Name
-
     ,ProductNumber
-
     ,MakeFlag
-
     ,FinishedGoodsFlag
-
     ,Color
-
     ,SafetyStockLevel
-
     ,ReorderPoint
-
     ,StandardCost
-
     ,ListPrice
-
     ,Size
-
     ,SizeUnitMeasureCode
-
     ,WeightUnitMeasureCode
-
     ,Weight
-
     ,DaysToManufacture
-
     ,ProductLine
-
     ,Class
-
     ,Style
-
     ,ProductSubcategoryID
-
     ,ProductModelID
-
     ,SellStartDate
-
     ,SellEndDate
-
     ,DiscontinuedDate
-
     ,rowguid
-
     ,ModifiedDate
-
-    )
-
-    VALUES
-
-    (
-
+)
+VALUES
+(
     N'CityBike PRO2'
-
     ,N'CB-5383'
-
     ,0
-
     ,0
-
     ,NULL
-
     ,1000
-
     ,750
-
     ,0.0000
-
     ,0.0000
-
     ,NULL
-
     ,NULL
-
     ,NULL
-
     ,NULL
-
     ,0
-
     ,NULL
-
     ,NULL
-
     ,NULL
-
     ,NULL
-
     ,NULL
-
     ,GETDATE()
-
     ,NULL
-
     ,NULL
-
     ,NEWID()
-
     ,GETDATE()
+);
+GO
+```
 
-    );
+![](./img/SQL-primi-e-ultimi-trigger/image5.jpg)
 
-    GO
-
-<!-- -->
-
-1.  ![](./img//media/image5.jpg){width="6.5in"
-    height="1.4361111111111111in"}
-
-<!-- -->
-
-1.  Figura 4 – Ordine di attivazione personalizzato per i Trigger della
+Figura 4 – Ordine di attivazione personalizzato per i Trigger della
     tabella Production.Product
 
 Conclusioni
@@ -551,35 +369,23 @@ Pulizia del database
 Eliminazione dei Trigger e dei dati di prova inseriti nella tabella
 Production.Product del database AdventureWorks2012.
 
-1.  USE \[AdventureWorks2012\];
+```SQL
+USE [AdventureWorks2012];
+GO
 
-    GO
+DROP TRIGGER Production.tr_Product_INSERT_1;
+DROP TRIGGER Production.tr_Product_INSERT_2;
+DROP TRIGGER Production.tr_Product_INSERT_3;
+GO
 
-    DROP TRIGGER Production.tr\_Product\_INSERT\_1;
-
-    DROP TRIGGER Production.tr\_Product\_INSERT\_2;
-
-    DROP TRIGGER Production.tr\_Product\_INSERT\_3;
-
-    GO
-
-    DELETE
-
-    FROM
-
+DELETE
+FROM
     Production.Product
-
-    WHERE
-
+WHERE
     ProductNumber IN (N'CB-5381', N'CB-5382', N'CB-5383');
-
-    GO
+GO
+```
 
 #### di Sergio Govoni – Microsoft MVP ([Blog](http://community.ugiss.org/blogs/sgovoni) / [MVP Profile](http://mvp.microsoft.com/profiles/Sergio.Govoni))
-
-1.  [*Altri articoli di Sergio Govoni nella
-    Libreria*](http://sxp.microsoft.com/feeds/3.0/msdntn/TA_MSDN_ITA?contenttype=Article&author=Sergio%20Govoni)
-    ![](./img//media/image6.png){width="0.1771084864391951in"
-    height="0.1771084864391951in"}
 
 

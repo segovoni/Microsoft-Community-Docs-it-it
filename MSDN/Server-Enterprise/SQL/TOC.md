@@ -10,13 +10,12 @@
 # [EXECUTE statement in SQL Server 2012](EXECUTE-statement-in-SQL-Server-2012.md)
 # [SEQUENCE in SQL Server 2012](SQL-SEQUENCE-in-SQL-Server-2012.md)
 # [SQL Server: OUTPUT clause and Triggers](SQL-OUTPUT-clause-e-triggers.md)
-
-# [SQL Server: Primi e Ultimi Trigger (*)](https://msdn.microsoft.com/it-it/library/jj573930.aspx)
-
+# [SQL Server: Primi e Ultimi Trigger](SQL-primi-e-ultimi-trigger.md)
 # [FileTable in SQL Server 2012](FileTable_in_SQL_Server_2012.md)
+# [SQL Server: Database Resource e gli oggetti di sistema](Database-Resource-e-gli-oggetti-di-sistema.md)
 
-# [SQL Server: Database Resource e gli oggetti di sistema (*)](https://msdn.microsoft.com/it-it/library/jj191713.aspx)
 # [SQL Server: Trasferire le statistiche di una tabella (*)](https://msdn.microsoft.com/it-it/library/jj127260.aspx)
+
 # [Introduzione alle funzionalità di Full-Text Search con SQL Server 2005 (*)](https://msdn.microsoft.com/it-it/library/cc185066.aspx)
 # [Le transazioni (*)](https://msdn.microsoft.com/it-it/library/cc185104.aspx)
 # [Alta disponibilità con SQL Server 2005 (*)](https://msdn.microsoft.com/it-it/library/cc185065.aspx)
