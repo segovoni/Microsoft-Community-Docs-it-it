@@ -227,7 +227,6 @@ select * from dbo.ProductInventory;
 go
 
 rollback tran;
-
 go
 ```
 
@@ -276,27 +275,27 @@ go
 
 merge into dbo.ProductInventory as itarget
 using dbo.FrequentInventory as isource
-on ((itarget.ProductId = isource.ProductId)
-and (itarget.LocationId = isource.LocationId))
+  on ((itarget.ProductId = isource.ProductId)
+    and (itarget.LocationId = isource.LocationId))
 when matched then
-update /* dbo.ProductInventory */ set
-itarget.Quantity = isource.Quantity
-,itarget.ModifiedDate = isource.ModifiedDate
+  update /* dbo.ProductInventory */ set
+    itarget.Quantity = isource.Quantity
+    ,itarget.ModifiedDate = isource.ModifiedDate
 when not matched then
-insert /* into dbo.ProductInventory */
-(
-ProductId
-,LocationId
-,Quantity
-,ModifiedDate
-)
-values
-(
-isource.ProductId
-,isource.LocationId
-,isource.Quantity
-,isource.ModifiedDate
-);
+  insert /* into dbo.ProductInventory */
+  (
+    ProductId
+    ,LocationId
+    ,Quantity
+    ,ModifiedDate
+  )
+  values
+  (
+    isource.ProductId
+    ,isource.LocationId
+    ,isource.Quantity
+    ,isource.ModifiedDate
+  );
 
 select * from dbo.ProductInventory;
 go
@@ -327,79 +326,47 @@ begin tran
 go
 
 select * from dbo.ProductInventory;
-
 go
 
 update
-
-itarget
-
+  itarget
 set
-
-itarget.Quantity = isource.Quantity
-
-,itarget.ModifiedDate = isource.ModifiedDate
-
+  itarget.Quantity = isource.Quantity
+  ,itarget.ModifiedDate = isource.ModifiedDate
 from
-
-dbo.ProductInventory itarget
-
+  dbo.ProductInventory itarget
 join
-
-dbo.FrequentInventory isource
-
-on (itarget.ProductID = isource.ProductID) and
-
-(itarget.LocationID = isource.LocationID);
-
+  dbo.FrequentInventory isource
+    on (itarget.ProductID = isource.ProductID) and
+       (itarget.LocationID = isource.LocationID);
 go
 
 insert into dbo.ProductInventory
-
 (
-
-ProductID, LocationID, Quantity, ModifiedDate
-
+  ProductID, LocationID, Quantity, ModifiedDate
 )
 
 select
-
-isource.ProductID
-
-,isource.LocationID
-
-,isource.Quantity
-
-,isource.ModifiedDate
-
+  isource.ProductID
+  ,isource.LocationID
+  ,isource.Quantity
+  ,isource.ModifiedDate
 from
-
-dbo.FrequentInventory as isource
-
+  dbo.FrequentInventory as isource
 where
-
-not exists (select \*
-
-from
-
-dbo.ProductInventory as itarget
-
-where
-
-(isource.ProductID = itarget.ProductID)
-
-and (isource.LocationID = itarget.LocationID)
-
-);
-
+  not exists (select *
+            from
+            dbo.ProductInventory as itarget
+            where
+            (isource.ProductID = itarget.ProductID)
+            and (isource.LocationID = itarget.LocationID)
+            );
 go
 
-select \* from dbo.ProductInventory;
-
+select * from dbo.ProductInventory;
 go
 
 rollback tran
-
 go
 ```
 
@@ -415,7 +382,7 @@ una volta, l’intero comando di MERGE fallirà.
 Le clausole WHEN supportano la presenza dell’operatore AND seguito da un
 predicato, la clausola assumerà quindi la forma:
 
-1.  WHEN MATCHED AND &lt;predicato&gt; THEN &lt;azione&gt;
+    WHEN MATCHED AND <predicato> THEN <azione>
 
 Aggiunta dell’operatore AND {#aggiunta-delloperatore-and .ppSection}
 ===========================
@@ -430,75 +397,50 @@ di destinazione solo se gli attributi non chiave sono diversi da quelli
 nella sorgente. Con questa tecnica, le performance migliorano, si
 previene inoltre l’attivazione di eventuali trigger.
 
-1.  -- MERGE con operatore AND nella clausola WHEN MATCHED
+```SQL
+-- MERGE con operatore AND nella clausola WHEN MATCHED
 
-    begin tran;
+begin tran;
+go
 
-    go
+select * from dbo.ProductInventory;
+go
 
-    select \* from dbo.ProductInventory;
-
-    go
-
-    merge into dbo.ProductInventory as itarget
-
-    using dbo.FrequentInventory as isource
-
-    on ((itarget.ProductId = isource.ProductId)
-
+merge into dbo.ProductInventory as itarget
+using dbo.FrequentInventory as isource
+  on ((itarget.ProductId = isource.ProductId)
     and (itarget.LocationId = isource.LocationId))
-
-    when matched AND
-
-    ((itarget.Quantity &lt;&gt; isource.Quantity)
-
-    or (itarget.ModifiedDate &lt;&gt; isource.ModifiedDate)) then
-
+when matched AND
+  ((itarget.Quantity <> isource.Quantity)
+  or (itarget.ModifiedDate <> isource.ModifiedDate)) then
     update set
+        itarget.Quantity = isource.Quantity
+        ,itarget.ModifiedDate = isource.ModifiedDate
 
-    itarget.Quantity = isource.Quantity
+when not matched then
+insert
+(
+  ProductId
+  ,LocationId
+  ,Quantity
+  ,ModifiedDate
+)
+values
+(
+  isource.ProductId
+  ,isource.LocationId
+  ,isource.Quantity
+  ,isource.ModifiedDate
+);
 
-    ,itarget.ModifiedDate = isource.ModifiedDate
+select * from dbo.ProductInventory;
+go
 
-    when not matched then
+rollback tran;
+go
+```
 
-    insert
-
-    (
-
-    ProductId
-
-    ,LocationId
-
-    ,Quantity
-
-    ,ModifiedDate
-
-    )
-
-    values
-
-    (
-
-    isource.ProductId
-
-    ,isource.LocationId
-
-    ,isource.Quantity
-
-    ,isource.ModifiedDate
-
-    );
-
-    select \* from dbo.ProductInventory;
-
-    go
-
-    rollback tran;
-
-    go
-
-Clausole WHEN MATCHED multiple {#clausole-when-matched-multiple .ppSection}
+Clausole WHEN MATCHED multiple
 ==============================
 
 Il comando MERGE supporta al più due clausole WHEN MATCHED con l’obbligo
@@ -519,81 +461,51 @@ prodotto con giacenza uguale a zero (= non presente a magazzino), la
 rispettiva riga, nella tabella destinazione, deve essere eliminata. Il
 seguente comando MERGE implementa anche questo requisito.
 
-1.  -- MERGE con WHEN MATCHED multipli
+```SQL
+-- MERGE con WHEN MATCHED multipli
 
-    begin tran;
+begin tran;
+go
 
-    go
+select * from dbo.ProductInventory;
+go
 
-    select \* from dbo.ProductInventory;
-
-    go
-
-    merge into dbo.ProductInventory as itarget
-
-    using dbo.FrequentInventory as isource
-
-    on ((itarget.ProductId = isource.ProductId)
-
+merge into dbo.ProductInventory as itarget
+using dbo.FrequentInventory as isource
+  on ((itarget.ProductId = isource.ProductId)
     and (itarget.LocationId = isource.LocationId))
-
-    when matched AND
-
-    (isource.Quantity &lt;&gt; 0)
-
-    and ((itarget.Quantity &lt;&gt; isource.Quantity)
-
-    or (itarget.ModifiedDate &lt;&gt; isource.ModifiedDate)) then
-
+when matched AND
+  (isource.Quantity <> 0)
+  and ((itarget.Quantity <> isource.Quantity)
+    or (itarget.ModifiedDate <> isource.ModifiedDate)) then
     update set
-
-    itarget.Quantity = isource.Quantity
-
-    ,itarget.ModifiedDate = isource.ModifiedDate
-
-    when matched AND
-
-    (isource.Quantity = 0) then
-
+        itarget.Quantity = isource.Quantity
+        ,itarget.ModifiedDate = isource.ModifiedDate
+when matched AND
+  (isource.Quantity = 0) then
     delete
-
-    when not matched then
-
-    insert
-
-    (
-
+when not matched then
+  insert
+  (
     ProductId
-
     ,LocationId
-
     ,Quantity
-
     ,ModifiedDate
-
-    )
-
-    values
-
-    (
-
+  )
+  values
+  (
     isource.ProductId
-
     ,isource.LocationId
-
     ,isource.Quantity
-
     ,isource.ModifiedDate
+  );
 
-    );
+select * from dbo.ProductInventory;
+go
 
-    select \* from dbo.ProductInventory;
-
-    go
-
-    rollback tran;
-
-    go
+rollback tran;
+go
+```
 
 L’output ottenuto è illustrato in figura 7, in particolare osserviamo
 che la riga relativa al prodotto “mascarpone doc” è stata eliminata (in
@@ -604,7 +516,7 @@ seconda clausola WHEN MATCHED.
 
 Figura 7 – MERGE con clausole WHEN MATCHED multiple
 
-Estensioni proprietarie del linguaggio T-SQL {#estensioni-proprietarie-del-linguaggio-t-sql .ppSection}
+Estensioni proprietarie del linguaggio T-SQL
 ============================================
 
 Il comando MERGE, solo nel linguaggio T-SQL, supporta una terza clausola
@@ -619,89 +531,55 @@ sorgente aggiornare il campo Status impostando il valore zero. Il
 seguente frammento di codice T-SQL rappresenta un esempio di utilizzo
 della clausola WHEN NOT MATCHED \[BY SOURCE\].
 
-1.  -- MERGE con terza clausola WHEN NOT MATCHED BY SOURCE
+```SQL
+-- MERGE con terza clausola WHEN NOT MATCHED BY SOURCE
 
-    begin tran;
+begin tran;
+go
 
-    go
+select * from dbo.ProductInventory;
+go
 
-    select \* from dbo.ProductInventory;
-
-    go
-
-    merge into dbo.ProductInventory as itarget
-
-    using dbo.FrequentInventory as isource
-
-    on ((itarget.ProductId = isource.ProductId)
-
+merge into dbo.ProductInventory as itarget
+using dbo.FrequentInventory as isource
+  on ((itarget.ProductId = isource.ProductId)
     and (itarget.LocationId = isource.LocationId))
-
-    when matched AND
-
-    (isource.Quantity &lt;&gt; 0)
-
-    and ((itarget.Quantity &lt;&gt; isource.Quantity)
-
-    or (itarget.ModifiedDate &lt;&gt; isource.ModifiedDate)) then
-
+when matched AND
+  (isource.Quantity <> 0)
+    and ((itarget.Quantity <> isource.Quantity)
+    or (itarget.ModifiedDate <> isource.ModifiedDate)) then
     update set
-
-    itarget.Quantity = isource.Quantity
-
-    ,itarget.ModifiedDate = isource.ModifiedDate
-
-    when matched AND
-
-    (isource.Quantity = 0) then
-
+        itarget.Quantity = isource.Quantity
+        ,itarget.ModifiedDate = isource.ModifiedDate
+when matched AND
+  (isource.Quantity = 0) then
     delete
-
-    when not matched then
-
-    insert
-
-    (
-
+when not matched then
+  insert
+  (
     ProductId
-
     ,LocationId
-
     ,Quantity
-
     ,ModifiedDate
-
-    )
-
-    values
-
-    (
-
+  )
+  values
+  (
     isource.ProductId
-
     ,isource.LocationId
-
     ,isource.Quantity
-
     ,isource.ModifiedDate
-
-    )
-
-    when not matched by source then
-
-    update set
-
+  )
+when not matched by source then
+  update set
     status = 0;
+go
 
-    go
+select * from dbo.ProductInventory;
+go
 
-    select \* from dbo.ProductInventory;
-
-    go
-
-    rollback tran;
-
-    go
+rollback tran;
+go
+```
 
 L’output ottenuto è illustrato in figura 8, in particolare osserviamo i
 valori della colonna Status per i prodotti “ipoh coffee” e “ravioli
