@@ -1,7 +1,21 @@
+---
+title: SQL - Trasferire le statistiche di una tabella
+description: SQL - Trasferire le statistiche di una tabella
+author: MSCommunityPubService
+ms.date: 08/01/2016
+ms.topic: how-to-article
+ms.service: SQLServer
+ms.custom: CommunityDocs
+---
+
+
+
+# SQL: Trasferire le statistiche di una tabella
+
+
 #### di [Sergio Govoni](https://mvp.support.microsoft.com/profile/Sergio.Govoni) – Microsoft MVP ([blog](http://community.ugiss.org/blogs/sgovoni/))
 
-1.  ![](./img//media/image1.png){width="0.5938331146106737in"
-    height="0.9376312335958005in"}
+![](./img/SQL-trasferire-statistiche-di-una-tabella-da-un-database-ad-un-altro/image1.png)
 
 *Maggio 2012*
 
@@ -21,13 +35,10 @@ le quinte” quando chiediamo a SQL Server di eseguire una query. Le tre
 fasi fondamentali compiute, dall’Engine di SQL Server, durante
 l’esecuzione di una query sono:
 
-1.  [Query Parsing](#query-parsing)
+- [Query Parsing](#query-parsing)
+- [Query Optimizer](#query-optimizer)
+- [Query Execution](#query-execution)
 
-    [Query Optimizer](#query-optimizer)
-
-    [Query Execution](#query-execution)
-
-    1.  
 
 Query Parsing
 -------------
@@ -76,175 +87,114 @@ denominata dbo.Contact che rappresenta l’anagrafica contatti. Il
 seguente frammento di codice in linguaggio T-SQL permette di eseguire il
 setup del database DB\_Export\_Stats:
 
-1.  ------------------------------------------------------------------------
+```SQL
+------------------------------------------------------------------------
+-- Setup DB for export statistics
+------------------------------------------------------------------------
 
-    -- Setup DB for export statistics
+use [master];
+go
 
-    ------------------------------------------------------------------------
+if exists(select * from sys.databases where name = 'db_export_stats')
+begin
+    alter database [db_export_stats]
+    set single_user with rollback immediate;
 
-    use \[master\];
+    drop database [db_export_stats];
+end
+go
 
-    go
-
-    if exists(select \* from sys.databases where name
-    = 'db\_export\_stats')
-
-    begin
-
-    alter database \[db\_export\_stats\]
-
-    set single\_user with rollback immediate;
-
-    drop database \[db\_export\_stats\];
-
-    end
-
-    go
-
-    -- Create database
-
-    create database \[db\_export\_stats\];
-
-    go
+-- Create database
+create database [db_export_stats];
+go
+```
 
 Dopo aver creato il database, eseguiamo il seutp della tabella
 dbo.Contact e il caricamento di 1.000.000 di record (contatti di test)
 utilizzando il seguente codice T-SQL:
 
-1.  ------------------------------------------------------------------------
+```SQL
+------------------------------------------------------------------------
+-- Setup table and insert data
+------------------------------------------------------------------------
+-- Change database context
+use [db_export_stats];
+go
 
-    -- Setup table and insert data
-
-    ------------------------------------------------------------------------
-
-    -- Change database context
-
-    use \[db\_export\_stats\];
-
-    go
-
-    -- Create table dbo.Contact (drop if exists)
-
-    if object\_id('dbo.Contact', 'U') is not null
-
+-- Create table dbo.Contact (drop if exists)
+if object_id('dbo.Contact', 'U') is not null
     drop table dbo.Contact;
+go
 
-    go
-
-    create table dbo.Contact
-
-    (
-
+create table dbo.Contact
+(
     ContactID int identity(1, 1) not null
-
     ,FirstName varchar(128) not null
-
     ,LastName varchar(128) not null
-
     ,AddressLine varchar(40) default 'AddressLine'
-
     ,City varchar(40) default 'City'
-
     ,PostalCode varchar(5) default 'PCode'
-
     ,Phone varchar(20) not null
-
     ,ModifiedDate datetime default getdate()
+);
+go
 
-    );
+-- Create function dbo.udf_GetNums
+if (object_id('dbo.udf_GetNums') is not null)
+    drop function dbo.udf_GetNums;
+go
 
-    go
-
-    -- Create function dbo.udf\_GetNums
-
-    if (object\_id('dbo.udf\_GetNums') is not null)
-
-    drop function dbo.udf\_GetNums;
-
-    go
-
-    create function dbo.udf\_GetNums(@m as bigint) returns table
-
-    as
-
-    return
-
-    with
-
+create function dbo.udf_GetNums(@m as bigint) returns table
+as
+return
+with
     cte0 as (select n = 1 union all select n = 1),
-
     cte1 as (select n = 1 from cte0 as a, cte0 as b),
-
     cte2 as (select n = 1 from cte1 as a, cte1 as b),
-
     cte3 as (select n = 1 from cte2 as a, cte2 as b),
-
     cte4 as (select n = 1 from cte3 as a, cte3 as b),
-
     cte5 as (select n = 1 from cte4 as a, cte4 as b),
+    cteres as (select row_number() over (order by n) as n from cte5)
+    select n from cteres where n <= @m;
+go
 
-    cteres as (select row\_number() over (order by n) as n from cte5)
-
-    select n from cteres where n &lt;= @m;
-
-    go
-
-    with cte\_rows as
-
-    (
-
+with cte_rows as
+(
     select
-
-    n
-
+        n
     from
+        dbo.udf_GetNums(1000000)
+)
 
-    dbo.udf\_GetNums(1000000)
-
-    )
-
-    insert into dbo.Contact
-
-    (
-
+insert into dbo.Contact
+(
     FirstName,
-
     LastName,
-
     Phone
+)
 
-    )
-
-    select
-
-    'Nome\_' + ltrim(str(n)),
-
-    'Cognome\_' + ltrim(str(n)),
-
+select
+    'Nome_' + ltrim(str(n)),
+    'Cognome_' + ltrim(str(n)),
     '059/' + ltrim(str(n))
-
-    from
-
-    cte\_rows;
-
-    go
+from
+    cte_rows;
+go
+```
 
 Familiarizziamo con i dati di prova inseriti nella tabella dbo.Contact,
 la Figura 1 illustra l’output che si ottiene eseguendo la SELECT
 riportata di seguito:
 
-1.  select \* from dbo.Contact;
+```SQL
+select * from dbo.Contact;
+go
+```
 
-    go
+![](./img/SQL-trasferire-statistiche-di-una-tabella-da-un-database-ad-un-altro/image2.jpeg)
 
-<!-- -->
 
-1.  ![](./img//media/image2.jpeg){width="6.5in"
-    height="3.3930555555555557in"}
-
-<!-- -->
-
-1.  Figura 1 – Contenuto della tabella dbo.Contact
+Figura 1 – Contenuto della tabella dbo.Contact
 
 Applichiamo ora la Primary Key alla tabella dbo.Contact definita sulla
 colonna ContactID; la creazione di questo Constraint, in questo
@@ -257,61 +207,43 @@ Osserviamo anche l’utilizzo della stored procedure di sistema
 che permette di creare le Statistiche per ogni colonna nelle tabelle
 utente del database corrente.
 
-1.  ------------------------------------------------------------------------
+```SQL
+------------------------------------------------------------------------
+-- Setup constraint and statistics
+------------------------------------------------------------------------
 
-    -- Setup constraint and statistics
+alter table dbo.Contact
+    add constraint PK_Contact_ContactID primary key (ContactID);
+go
 
-    ------------------------------------------------------------------------
+create index NCI_Contact_FirstName_LastName on dbo.Contact
+(
+    [Phone]
+)
+include
+(
+    [FirstName]
+    ,[LastName]
+);
+go
 
-    alter table dbo.Contact
-
-    add constraint PK\_Contact\_ContactID primary key (ContactID);
-
-    go
-
-    create index NCI\_Contact\_FirstName\_LastName on dbo.Contact
-
-    (
-
-    \[Phone\]
-
-    )
-
-    include
-
-    (
-
-    \[FirstName\]
-
-    ,\[LastName\]
-
-    );
-
-    go
-
-    exec sp\_createstats;
-
-    go
+exec sp_createstats;
+go
+```
 
 Consultiamo ora le statistiche riguardanti la tabella dbo.Contact,
 l’output è illustrato in Figura 2:
 
-1.  exec sp\_helpstats
-
+```SQL
+exec sp_helpstats
     @objname = 'dbo.Contact',
-
     @results = 'ALL';
+go
+```
 
-    go
+![](./img/SQL-trasferire-statistiche-di-una-tabella-da-un-database-ad-un-altro/image3.jpeg)
 
-<!-- -->
-
-1.  ![](./img//media/image3.jpeg){width="4.697916666666667in"
-    height="2.90625in"}
-
-<!-- -->
-
-1.  Figura 2 – Statistiche per la tabella dbo.Contact
+Figura 2 – Statistiche per la tabella dbo.Contact
 
 Abbiamo allestito il database di produzione, ipotizziamo ora ci siano
 diversi utenti pronti a interrogare i dati attraverso un’applicazione,
@@ -321,36 +253,23 @@ riportata di seguito. In Figura 3 osserviamo il piano di esecuzione
 effettivo generato per la query; consultandolo si osserva la
 parallelizzazione del task Clustered Index Scan.
 
-1.  -- Query data
-
-    select
-
+```SQL
+-- Query data
+select
     FirstName
-
     ,LastName
-
     ,Phone
-
     ,AddressLine
-
-    from
-
+from
     dbo.Contact
-
-    where
-
+where
     (Phone like '059/21%')
+go
+```
 
-    go
+![](./img/SQL-trasferire-statistiche-di-una-tabella-da-un-database-ad-un-altro/image4.jpeg)
 
-<!-- -->
-
-1.  ![](./img//media/image4.jpeg){width="6.5in"
-    height="1.2666666666666666in"}
-
-<!-- -->
-
-1.  Figura 3 – Piano di esecuzione effettivo in ambiente di produzione
+Figura 3 – Piano di esecuzione effettivo in ambiente di produzione
 
 La query precedente rappresenta (ovviamente) un esempio, nel mondo reale
 l’istanza SQL Server si troverà a dover gestire migliaia di query al
@@ -372,112 +291,72 @@ la tabella dbo.Contact con lo stesso schema dell’omologa tabella sul
 database DB\_Export\_Stats, unica differenza: sul database
 DB\_Stats\_Only non verrà eseguito il caricamento dei contatti.
 
-1.  ------------------------------------------------------------------------
+```SQL
+------------------------------------------------------------------------
+-- Setup DB with statistics only
+------------------------------------------------------------------------
+use [master];
+go
 
-    -- Setup DB with statistics only
+if exists(select * from sys.databases where name = 'db_stats_only')
+begin
+    alter database [db_stats_only]
+    set single_user with rollback immediate;
 
-    ------------------------------------------------------------------------
+    drop database [db_stats_only];
+end
+go
 
-    use \[master\];
+-- Create database
+create database [db_stats_only];
+go
 
-    go
+------------------------------------------------------------------------
+-- Setup table dbo.Contact
+------------------------------------------------------------------------
 
-    if exists(select \* from sys.databases where name
-    = 'db\_stats\_only')
+-- Change database context
+use [db_stats_only];
+go
 
-    begin
-
-    alter database \[db\_stats\_only\]
-
-    set single\_user with rollback immediate;
-
-    drop database \[db\_stats\_only\];
-
-    end
-
-    go
-
-    -- Create database
-
-    create database \[db\_stats\_only\];
-
-    go
-
-    ------------------------------------------------------------------------
-
-    -- Setup table dbo.Contact
-
-    ------------------------------------------------------------------------
-
-    -- Change database context
-
-    use \[db\_stats\_only\];
-
-    go
-
-    -- Create table dbo.Contact
-
-    if object\_id('dbo.Contact', 'U') is not null
-
+-- Create table dbo.Contact
+if object_id('dbo.Contact', 'U') is not null
     drop table dbo.Contact;
+go
 
-    go
-
-    create table dbo.Contact
-
-    (
-
+create table dbo.Contact
+(
     ContactID int identity(1, 1) not null
-
     ,FirstName varchar(128) not null
-
     ,LastName varchar(128) not null
-
     ,AddressLine varchar(40) default 'AddressLine'
-
     ,City varchar(40) default 'City'
-
     ,PostalCode varchar(5) default 'PCode'
-
     ,Phone varchar(20) not null
-
     ,ModifiedDate datetime default getdate()
+);
+go
 
-    );
+------------------------------------------------------------------------
+-- Setup constraint
+------------------------------------------------------------------------
+alter table dbo.Contact
+    add constraint PK_Contact_ContactID primary key (ContactID);
+go
 
-    go
+create index NCI_Contact_FirstName_LastName on dbo.Contact
+(
+    [Phone]
+)
 
-    ------------------------------------------------------------------------
+include
+(
+    [FirstName]
+    ,[LastName]
+);
+go
+```
 
-    -- Setup constraint
-
-    ------------------------------------------------------------------------
-
-    alter table dbo.Contact
-
-    add constraint PK\_Contact\_ContactID primary key (ContactID);
-
-    go
-
-    create index NCI\_Contact\_FirstName\_LastName on dbo.Contact
-
-    (
-
-    \[Phone\]
-
-    )
-
-    include
-
-    (
-
-    \[FirstName\]
-
-    ,\[LastName\]
-
-    );
-
-    go
 
 Eseguiamo, in ambiente di test, la stessa query eseguita in precedenza
 in ambiente di produzione (piano di esecuzione illustrato in Figura 3),
@@ -487,39 +366,28 @@ dbo.Contact), sceglierà di eseguire una scansione dell’indice cluster,
 ma senza parallelizzare il task; il piano di esecuzione effettivo è
 illustrato in Figura 4.
 
-1.  use \[db\_stats\_only\];
+```SQL
+use [db_stats_only];
+go
 
-    go
-
-    -- Query data
-
-    select
-
+-- Query data
+select
     FirstName
-
     ,LastName
-
     ,Phone
-
     ,AddressLine
-
-    from
-
+from
     dbo.Contact
-
-    where
-
+where
     (Phone like '059/21%');
-
-    go
-
-<!-- -->
-
-1.  ![](./img//media/image5.jpeg){width="6.5in" height="1.33125in"}
+go
+```
 
 <!-- -->
 
-1.  Figura 4 – Piano di esecuzione effettivo in ambiente di test
+![](./img/SQL-trasferire-statistiche-di-una-tabella-da-un-database-ad-un-altro/image5.jpeg)
+
+Figura 4 – Piano di esecuzione effettivo in ambiente di test
 
 L’esportazione delle Statistiche può essere eseguita utilizzando il
 Wizard “Generazione guidata script di SQL Server” raggiungibile con un
@@ -529,67 +397,43 @@ semplici click, si accede alla finestra illustrata in Figura 5 dove si
 dovrà selezionare, per l’opzione “Script Statistiche”, il valore “Genera
 script per statistiche e istogrammi”.
 
-1.  ![](./img//media/image6.jpeg){width="6.5in"
-    height="6.058333333333334in"}
+![](./img/SQL-trasferire-statistiche-di-una-tabella-da-un-database-ad-un-altro/image6.jpeg)
 
-<!-- -->
-
-1.  Figura 5 – Selezione del valore “Genera script per statistiche e
+Figura 5 – Selezione del valore “Genera script per statistiche e
     istogrammi” per l’opzione “Script Statistiche”
 
 Scegliendo di ottenere l’output in una nuova finestra di query, SQL
 Server produrrà uno script simile a quello riportato di seguito:
 
-1.  SET ANSI\_PADDING OFF
+```SQL
+SET ANSI_PADDING OFF
+GO
 
-    GO
+CREATE STATISTICS [AddressLine] ON [dbo].[Contact]([AddressLine]) WITH STATS_STREAM = 0x01000...0F0000000000
+GO
 
-    CREATE STATISTICS \[AddressLine\]
-    ON \[dbo\].\[Contact\](\[AddressLine\]) WITH STATS\_STREAM =
-    0x01000...0F0000000000
+CREATE STATISTICS [City] ON [dbo].[Contact]([City]) WITH STATS_STREAM = 0x01000...000000000
+GO
 
-    GO
+CREATE STATISTICS [FirstName] ON [dbo].[Contact]([FirstName]) WITH STATS_STREAM = 0x010000000100...00000000
+GO
 
-    CREATE STATISTICS \[City\] ON \[dbo\].\[Contact\](\[City\]) WITH
-    STATS\_STREAM = 0x01000...000000000
+CREATE STATISTICS [LastName] ON [dbo].[Contact]([LastName]) WITH STATS_STREAM = 0x010000...40420F0000000000
+GO
 
-    GO
+CREATE STATISTICS [ModifiedDate] ON [dbo].[Contact]([ModifiedDate]) WITH STATS_STREAM = 0x01000000010...000000000
+GO
 
-    CREATE STATISTICS \[FirstName\]
-    ON \[dbo\].\[Contact\](\[FirstName\]) WITH STATS\_STREAM =
-    0x010000000100...00000000
+UPDATE
+STATISTICS [dbo].[Contact]([NCI_Contact_FirstName_LastName]) WITH STATS_STREAM = 0x010000000200...000040420F0000000000, ROWCOUNT = 1000000, PAGECOUNT = 6025
+GO
 
-    GO
+UPDATE STATISTICS [dbo].[Contact]([PK_Contact_ContactID]) WITH STATS_STREAM = 0x0100000001...0F0000000000, ROWCOUNT = 1000000, PAGECOUNT = 11061
+GO
 
-    CREATE STATISTICS \[LastName\] ON \[dbo\].\[Contact\](\[LastName\])
-    WITH STATS\_STREAM = 0x010000...40420F0000000000
-
-    GO
-
-    CREATE STATISTICS \[ModifiedDate\]
-    ON \[dbo\].\[Contact\](\[ModifiedDate\]) WITH STATS\_STREAM =
-    0x01000000010...000000000
-
-    GO
-
-    UPDATE
-    STATISTICS \[dbo\].\[Contact\](\[NCI\_Contact\_FirstName\_LastName\])
-    WITH STATS\_STREAM = 0x010000000200...000040420F0000000000, ROWCOUNT
-    = 1000000, PAGECOUNT = 6025
-
-    GO
-
-    UPDATE STATISTICS \[dbo\].\[Contact\](\[PK\_Contact\_ContactID\])
-    WITH STATS\_STREAM = 0x0100000001...0F0000000000, ROWCOUNT =
-    1000000, PAGECOUNT = 11061
-
-    GO
-
-    CREATE STATISTICS \[PostalCode\]
-    ON \[dbo\].\[Contact\](\[PostalCode\]) WITH STATS\_STREAM =
-    0x010000000...420F0000000000
-
-    GO
+CREATE STATISTICS [PostalCode] ON [dbo].[Contact]([PostalCode]) WITH STATS_STREAM = 0x010000000...420F0000000000
+GO
+```
 
 Osserviamo l’opzione non documentata STATS\_STREAM del comando CREATE
 STATISTICS.
@@ -611,42 +455,30 @@ statistiche importate dal database DB\_Export\_Stats… deciderà quindi di
 parallelizzare gli operatori esattamente come avviene in produzione, lo
 illustra la Figura 6.
 
-1.  DBCC FREEPROCCACHE;
+```SQL
+DBCC FREEPROCCACHE;
+go
 
-    go
-
-    -- Query data
-
-    select
-
+-- Query data
+select
     FirstName
-
     ,LastName
-
     ,Phone
-
     ,AddressLine
-
-    from
-
+from
     dbo.Contact
-
-    where
-
+where
     (Phone like '059/21%');
+go
+```
 
-    go
+![](./img/SQL-trasferire-statistiche-di-una-tabella-da-un-database-ad-un-altro/image7.jpeg)
 
-<!-- -->
 
-1.  ![](./img//media/image7.jpeg){width="6.5in" height="2.175in"}
+![](./img/SQL-trasferire-statistiche-di-una-tabella-da-un-database-ad-un-altro/image8.jpeg)
 
-    ![](./img//media/image8.jpeg){width="6.5in"
-    height="2.411111111111111in"}
 
-<!-- -->
-
-1.  Figura 7 – Piano di esecuzione effettivo (grafico e XML) in ambiente
+Figura 7 – Piano di esecuzione effettivo (grafico e XML) in ambiente
     di test
 
 Conclusioni
@@ -660,51 +492,31 @@ copiare il contenuto delle tabelle interessate.
 Pulizia dati
 ------------
 
-1.  ------------------------------------------------------------------------
+```SQL
+------------------------------------------------------------------------
+-- Cleanup DB
+------------------------------------------------------------------------
+use [master];
+go
 
-    -- Cleanup DB
+if exists(select * from sys.databases where name = 'db_export_stats')
+begin
+    alter database [db_export_stats]
+    set single_user with rollback immediate;
 
-    ------------------------------------------------------------------------
+    drop database [db_export_stats];
+end
+go
 
-    use \[master\];
+if exists(select * from sys.databases where name= 'db_stats_only')
+begin
+    alter database [db_stats_only]
+    set single_user with rollback immediate;
 
-    go
-
-    if exists(select \* from sys.databases where name
-    = 'db\_export\_stats')
-
-    begin
-
-    alter database \[db\_export\_stats\]
-
-    set single\_user with rollback immediate;
-
-    drop database \[db\_export\_stats\];
-
-    end
-
-    go
-
-    if exists(select \* from sys.databases where name
-    = 'db\_stats\_only')
-
-    begin
-
-    alter database \[db\_stats\_only\]
-
-    set single\_user with rollback immediate;
-
-    drop database \[db\_stats\_only\];
-
-    end
-
-    go
+    drop database [db_stats_only];
+end
+go
+```
 
 #### di [Sergio Govoni](https://mvp.support.microsoft.com/profile/Sergio.Govoni) – Microsoft MVP ([blog](http://community.ugiss.org/blogs/sgovoni/))
-
-1.  *[Altri articoli di Sergio Govoni nella
-    Libr](http://sxp.microsoft.com/feeds/3.0/msdntn/TA_MSDN_ITA?contenttype=Article&author=Sergio%20Govoni)ary*
-    ![](./img//media/image9.png){width="0.1771084864391951in"
-    height="0.1771084864391951in"}
-
 
