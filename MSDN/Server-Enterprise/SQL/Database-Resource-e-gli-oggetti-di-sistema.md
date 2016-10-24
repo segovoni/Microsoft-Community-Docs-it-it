@@ -14,7 +14,7 @@ ms.custom: CommunityDocs
 
 Blog: <http://community.ugiss.org/blogs/sgovoni/>
 
-![](./img/Database-Resource-e-gli-oggetti-di-sistema/image1.png)
+![](./img/MVPLogo.png)
 
 
 *Maggio 2012*
@@ -107,7 +107,7 @@ La figura seguente illustra una parte del contenuto della cartella:
 che ospita i file mssqlsystemresource.mdf e mssqlsystemresource.ldf per
 l’istanza MSSQLSERVER relativa ad una installazione di SQL Server 2012.
 
-![](./img/Database-Resource-e-gli-oggetti-di-sistema/image2.jpeg)
+![](./img/Database-Resource-e-gli-oggetti-di-sistema/image2.jpg)
 
 Figura 1 - Directory che ospita i file del database Resource
 
@@ -124,7 +124,7 @@ GO
 
 L’output è illustrato in figura 2:
 
-![](./img/Database-Resource-e-gli-oggetti-di-sistema/image3.jpeg)
+![](./img/Database-Resource-e-gli-oggetti-di-sistema/image3.jpg)
 
 Figura 2 - Versione e data/ora ultimo aggiornamento del database
     Resource
@@ -144,7 +144,7 @@ consiste nell’avviare il servizio principale di SQL Server in single
 user mode ovvero con il flag “-m“ nei parametri di avvio (del servizio),
 come illustrato in figura 3.
 
-![](./img/Database-Resource-e-gli-oggetti-di-sistema/image4.jpeg)
+![](./img/Database-Resource-e-gli-oggetti-di-sistema/image4.jpg)
 
 Figura 3 - Avvio del servizio principale di SQL Server in single
     user mode
@@ -170,7 +170,7 @@ GO
 ```
 
 
-![](./img/Database-Resource-e-gli-oggetti-di-sistema/image5.jpeg)
+![](./img/Database-Resource-e-gli-oggetti-di-sistema/image5.jpg)
 
 Figura 4 - Connessione al database Resource
 
@@ -182,7 +182,7 @@ riavviamo il servizio SQL Server in multi user mode senza specificare
 alcun flag nei parametri di avvio del servizio, come illustrato in
 figura 5.
 
-![](./img/Database-Resource-e-gli-oggetti-di-sistema/image6.jpeg)
+![](./img/Database-Resource-e-gli-oggetti-di-sistema/image6.jpg)
 
 Figura 5 - Avvio del servizio SQL Server in multi user mode
 
@@ -199,7 +199,7 @@ mssqlsystemresource.mdf e mssqlsystemresource.ldf del database Resource
 riavvio del servizio principale, il sistema ha restituito il messaggio
 di errore illustrato in figura 6.
 
-![](./img/Database-Resource-e-gli-oggetti-di-sistema/image7.jpeg)
+![](./img/Database-Resource-e-gli-oggetti-di-sistema/image7.jpg)
 
 Figura 6 - Visualizzatore eventi applicativi: Errore durante l’avvio
     del servizio SQL Server
