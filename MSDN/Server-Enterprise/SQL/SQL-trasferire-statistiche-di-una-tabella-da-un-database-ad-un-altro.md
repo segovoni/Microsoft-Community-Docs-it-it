@@ -15,7 +15,7 @@ ms.custom: CommunityDocs
 
 #### di [Sergio Govoni](https://mvp.support.microsoft.com/profile/Sergio.Govoni) – Microsoft MVP ([blog](http://community.ugiss.org/blogs/sgovoni/))
 
-![](./img/SQL-trasferire-statistiche-di-una-tabella-da-un-database-ad-un-altro/image1.png)
+![](./img/MVPLogo.png)
 
 *Maggio 2012*
 
@@ -191,7 +191,7 @@ select * from dbo.Contact;
 go
 ```
 
-![](./img/SQL-trasferire-statistiche-di-una-tabella-da-un-database-ad-un-altro/image2.jpeg)
+![](./img/SQL-trasferire-statistiche-di-una-tabella-da-un-database-ad-un-altro/image2.jpg)
 
 
 Figura 1 – Contenuto della tabella dbo.Contact
@@ -241,7 +241,7 @@ exec sp_helpstats
 go
 ```
 
-![](./img/SQL-trasferire-statistiche-di-una-tabella-da-un-database-ad-un-altro/image3.jpeg)
+![](./img/SQL-trasferire-statistiche-di-una-tabella-da-un-database-ad-un-altro/image3.jpg)
 
 Figura 2 – Statistiche per la tabella dbo.Contact
 
@@ -267,7 +267,7 @@ where
 go
 ```
 
-![](./img/SQL-trasferire-statistiche-di-una-tabella-da-un-database-ad-un-altro/image4.jpeg)
+![](./img/SQL-trasferire-statistiche-di-una-tabella-da-un-database-ad-un-altro/image4.jpg)
 
 Figura 3 – Piano di esecuzione effettivo in ambiente di produzione
 
@@ -385,7 +385,7 @@ go
 
 <!-- -->
 
-![](./img/SQL-trasferire-statistiche-di-una-tabella-da-un-database-ad-un-altro/image5.jpeg)
+![](./img/SQL-trasferire-statistiche-di-una-tabella-da-un-database-ad-un-altro/image5.jpg)
 
 Figura 4 – Piano di esecuzione effettivo in ambiente di test
 
@@ -397,7 +397,7 @@ semplici click, si accede alla finestra illustrata in Figura 5 dove si
 dovrà selezionare, per l’opzione “Script Statistiche”, il valore “Genera
 script per statistiche e istogrammi”.
 
-![](./img/SQL-trasferire-statistiche-di-una-tabella-da-un-database-ad-un-altro/image6.jpeg)
+![](./img/SQL-trasferire-statistiche-di-una-tabella-da-un-database-ad-un-altro/image6.jpg)
 
 Figura 5 – Selezione del valore “Genera script per statistiche e
     istogrammi” per l’opzione “Script Statistiche”
@@ -472,10 +472,10 @@ where
 go
 ```
 
-![](./img/SQL-trasferire-statistiche-di-una-tabella-da-un-database-ad-un-altro/image7.jpeg)
+![](./img/SQL-trasferire-statistiche-di-una-tabella-da-un-database-ad-un-altro/image7.jpg)
 
 
-![](./img/SQL-trasferire-statistiche-di-una-tabella-da-un-database-ad-un-altro/image8.jpeg)
+![](./img/SQL-trasferire-statistiche-di-una-tabella-da-un-database-ad-un-altro/image8.jpg)
 
 
 Figura 7 – Piano di esecuzione effettivo (grafico e XML) in ambiente
