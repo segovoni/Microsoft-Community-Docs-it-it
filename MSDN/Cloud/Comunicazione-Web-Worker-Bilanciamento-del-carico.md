@@ -210,7 +210,9 @@ possibile però ottenere la topologia del nostro ruolo e delle sue
 istanze ed infine, come poter implementare un rudimentale bilanciatore
 round-robin.
 
-#### di Roberto Freato ([blog](http://dotnetlombardia.org/blogs/rob/default.aspx)) - Microsoft MVP
+#### di Roberto Freato - Microsoft MVP
+
+
 
 
 
