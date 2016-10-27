@@ -1,10 +1,11 @@
-
 ---
-title: Lean Startup, Jump Start (parte 1/3) 
+title: Lean Startup, Jump Start (parte 1/3)
 description: Lean Startup, Jump Start (parte 1/3)
 author: felicepescatore
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: ALM
 ms.custom: CommunityDocs
 ---
@@ -124,3 +125,5 @@ nelle azioni chiave finalizzare alla creazione del nuovo business.
 Figura 2 - win-fail vs fail-fail-win
 
 [L'articolo prosegue qui](LeanStartupJumpStart2.md)
+
+

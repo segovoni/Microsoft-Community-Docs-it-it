@@ -2,8 +2,10 @@
 title: Strategie di condivisione dati tra istanze nel Cloud
 description: Strategie di condivisione dati tra istanze nel Cloud
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: cloud
 ms.custom: CommunityDocs
 ---
@@ -272,6 +274,8 @@ Azure.
 Un approfondimento tecnico con gli esempi di codice per perseguire la
 soluzione sopra sono disponibili all’indirizzo: <http://bit.ly/fAfmey>.
 
-#### di Roberto Freato ([blog](http://dotnetlombardia.org/blogs/rob/default.aspx)) - Microsoft MVP
+#### di Roberto Freato - Microsoft MVP
+
+
 
 

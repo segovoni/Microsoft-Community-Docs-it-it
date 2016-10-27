@@ -2,8 +2,10 @@
 title: SQL Server sotto source control
 description: SQL Server sotto source control
 author: suxstellino
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: SQLServer
 ms.custom: CommunityDocs
 ---
@@ -360,3 +362,5 @@ Risorse
 [Red-Gate SQL Source Control](http://www.red-gate.com/products/sql-development/sql-source-control/)
 [ApexSQL Source Control](http://www.apexsql.com/sql_tools_source_control.aspx) 
 [Kdiff3](http://kdiff3.sourceforge.net/)
+
+

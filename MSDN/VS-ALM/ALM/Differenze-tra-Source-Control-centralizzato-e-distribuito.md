@@ -1,9 +1,11 @@
 ---
 title: Differenze tra Source Control centralizzato e distribuito
 description: Differenze tra Source Control centralizzato e distribuito
-author: MSCommunityPubService
+author: alkampfergit
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: ALM
 ms.custom: CommunityDocs
 ---
@@ -351,5 +353,7 @@ github.
 
 
 #### di [Gian Maria Ricci](http://mvp.microsoft.com/en-us/mvp/Gian%20Maria%20Ricci-4025635) – Microsoft MVP
+
+
 
 

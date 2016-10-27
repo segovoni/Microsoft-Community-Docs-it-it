@@ -2,8 +2,10 @@
 title: Windows Embedded Standard I filtri sui dischi e sul registro - FBWF
 description: Windows Embedded Standard I filtri sui dischi e sul registro - FBWF – File Based Write Filter
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: embedded
 ms.custom: CommunityDocs
 ---
@@ -295,3 +297,5 @@ un’intera cartella, va fatta per ogni singolo file. E’ possibile
 ripristinare un file “protetto” con il contenuto effettivo del volume.
 E’ possibile utilizzare il ***filtro-FBWF*** anche in assenza di una
 lista di esclusione: in questo caso sarà protetto l’intero volume.
+
+

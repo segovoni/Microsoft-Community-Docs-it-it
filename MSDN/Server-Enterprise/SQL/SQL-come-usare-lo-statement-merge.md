@@ -2,12 +2,13 @@
 title: T-SQL - Come usare lo Stament MERGE
 description: T-SQL - Come usare lo Stament MERGE
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: SQLServer
 ms.custom: CommunityDocs
 ---
-
 
 # T-SQL - Come usare lo Stament MERGE
 
@@ -604,3 +605,5 @@ effettuare gli opportuni test prima di utilizzarlo in produzione.
 Blog: <http://www.ugiss.org/sgovoni/>
 
 Twitter: <https://twitter.com/segovoni>
+
+

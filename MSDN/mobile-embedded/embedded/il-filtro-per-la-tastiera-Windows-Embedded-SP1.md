@@ -1,9 +1,11 @@
 ---
 title: Windows Embedded Standard 7 SP1 - Il filtro per la tastiera
-description: Windows Embedded Standard 7 SP1: Il filtro per la tastiera
+description: Windows Embedded Standard 7 SP1- Il filtro per la tastiera
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: embedded
 ms.custom: CommunityDocs
 ---
@@ -665,6 +667,8 @@ inglese):
 <http://msdn.microsoft.com/en-us/library/ff794908(v=WinEmbedded.60).aspx>
 
 #### di Beppe Platania ([blog](http://beppeplatania.cloudapp.net/)) – Microsoft MVP
+
+
 
 
 

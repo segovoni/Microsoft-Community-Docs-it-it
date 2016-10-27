@@ -1,9 +1,11 @@
 ---
 title: Gestione delle Branch in Git e Visual Studio
 description: Gestione delle Branch in Git e Visual Studio
-author: MSCommunityPubService
+author: alkampfergit
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: ALM
 ms.custom: CommunityDocs
 ---
@@ -495,6 +497,8 @@ sviluppatori vedranno questa strutturazione, mentre grazie al rebase, il
 fix del bug 42 è un unico commit ed il flusso è lineare.
 
 #### di [Gian Maria Ricci](http://mvp.microsoft.com/en-us/mvp/Gian%20Maria%20Ricci-4025635) – Microsoft MVP
+
+
 
 
 

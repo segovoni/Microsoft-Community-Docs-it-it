@@ -1,10 +1,11 @@
-
 ---
-title: Lean Startup, Jump Start (parte 2/3) - Build-Measure-Learn 
+title: Lean Startup, Jump Start (parte 2/3) - Build-Measure-Learn
 description: Lean Startup, Jump Start (parte 2/3) - Build-Measure-Learn
 author: felicepescatore
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: ALM
 ms.custom: CommunityDocs
 ---
@@ -403,4 +404,6 @@ gratuito, alle startup. Per i dettagli si rimanda al [*link
 ufficiale*](http://www.microsoft.com/bizspark/).
 
 [Lean Startup, Jump Start (parte 3/3) - Growth Engine](LeanStartupJumpStart3.md)
+
+
 

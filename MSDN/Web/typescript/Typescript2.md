@@ -2,8 +2,10 @@
 title: Typescript - Static type checking
 description: Typescript - Static type checking
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: TypeScript
 ms.custom: CommunityDocs
 ---
@@ -242,3 +244,5 @@ linguaggio di alto livello.
 
 Articolo pubblicato anche [sul Blog
 italiano](http://blog.boschin.it/post/2013/03/18/Typescript-Static-type-checking.aspx)
+
+

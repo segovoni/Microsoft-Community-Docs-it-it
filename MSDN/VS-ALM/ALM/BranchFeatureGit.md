@@ -1,10 +1,11 @@
-
 ---
 title: Branch per feature in Git
 description: Branch per feature in Git
-author: MSCommunityPubService
+author: alkampfergit
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: ALM
 ms.custom: CommunityDocs
 ---
@@ -278,3 +279,5 @@ una nuova analisi sui modelli di branch adottati, in modo da poter
 sfruttare al meglio la potenza dello strumento.
 
 #### di [Gian Maria Ricci](http://mvp.microsoft.com/en-us/mvp/Gian%20Maria%20Ricci-4025635) – Microsoft MVP
+
+

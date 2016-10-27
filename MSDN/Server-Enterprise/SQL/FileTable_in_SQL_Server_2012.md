@@ -2,8 +2,10 @@
 title: FileTable in SQL Server 2012
 description: FileTable in SQL Server 2012
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: SQLServer
 ms.custom: CommunityDocs
 ---
@@ -322,4 +324,6 @@ Windows che ora possono salvare con estrema facilità i propri documenti
 all’interno di SQL Server.
 
 #### di Sergio Govoni – [Microsoft MVP](http://mvp.microsoft.com/profiles/Sergio.Govoni)
+
+
 

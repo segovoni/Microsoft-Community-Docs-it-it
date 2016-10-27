@@ -2,8 +2,10 @@
 title: SQL - Database Resource e gli oggetti di sistema
 description: SQL - Database Resource e gli oggetti di sistema
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: SQLServer
 ms.custom: CommunityDocs
 ---
@@ -233,6 +235,8 @@ Clienti Microsoft.
 #### Di [Sergio Govoni](http://mvp.microsoft.com/profiles/Sergio.Govoni) – Microsoft MVP
 
 Blog: <http://community.ugiss.org/blogs/sgovoni/>
+
+
 
 
 

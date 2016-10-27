@@ -1,10 +1,11 @@
-
 ---
 title: Pubblicare un package nuget grazie alla build vNext di TFS / VSTS
 description: Pubblicare un package nuget grazie alla build vNext di TFS / VSTS
-author: MSCommunityPubService
+author: alkampfergit
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: ALM
 ms.custom: CommunityDocs
 ---
@@ -274,3 +275,5 @@ stesso tempo la flessibilità nella pubblicazione contemporanea di
 package in pre-release oppure in versione stabile.
 
 Gian Maria.
+
+

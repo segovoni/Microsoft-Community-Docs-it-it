@@ -1,10 +1,11 @@
-
 ---
 title: Gestione dei Conflitti durante lo sviluppo concorrente
 description: Gestione dei Conflitti durante lo sviluppo concorrente
-author: MSCommunityPubService
+author: alkampfergit
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: ALM
 ms.custom: CommunityDocs
 ---
@@ -366,6 +367,8 @@ secondo è quello che risolve il conflitto.
     
 
 #### di [Gian Maria Ricci](http://mvp.microsoft.com/en-us/mvp/Gian%20Maria%20Ricci-4025635) – Microsoft MVP
+
+
 
 
 

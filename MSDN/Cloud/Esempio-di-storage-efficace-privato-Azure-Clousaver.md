@@ -2,8 +2,10 @@
 title: Esempio di storage efficace privato su Azure con CloudSaver
 description: Esempio di storage efficace privato su Azure con CloudSaver
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: cloud
 ms.custom: CommunityDocs
 ---
@@ -373,7 +375,9 @@ Tutti gli screenshot utilizzati in questi articolo sono liberamente
 utilizzabili e reperibili al sito:
 [http://cloudsaver.cloudapp.net](http://cloudsaver.cloudapp.net/).
 
-#### di Roberto Freato ([blog](http://dotnetlombardia.org/blogs/rob/default.aspx)) - Microsoft MVP
+#### di Roberto Freato - Microsoft MVP
+
+
 
 
 

@@ -2,8 +2,10 @@
 title: Windows Embedded Standard I filtri sui dischi e sul registro - UWF
 description: Windows Embedded Standard I filtri sui dischi e sul registro - UWF (Unified Write Filter)
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: embedded
 ms.custom: CommunityDocs
 ---
@@ -666,4 +668,6 @@ Blog: <http://beppeplatania.com/it>
 #### Riveduto e corretto da: [Gianni Rosa Gallina](http://mvp.microsoft.com/it-it/mvp/Gianni%20Rosa%20Gallina-4034912) - Microsoft eMVP
 
 Blog: <http://gianni.rosagallina.com/it>
+
+
 

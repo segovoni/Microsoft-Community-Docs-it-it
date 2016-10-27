@@ -1,9 +1,11 @@
 ---
-title: Autenticazione login Facebook in app Web con ACSV2 
+title: Autenticazione login Facebook in app Web con ACSV2
 description: Autenticazione login Facebook in app Web con ACSV2
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: cloud
 ms.custom: CommunityDocs
 ---
@@ -258,7 +260,9 @@ una applicazione web, come supportare il meccanismo di autenticazione
 basato su provider Facebook e di conseguenza come creare e configurare
 una applicazione Facebook allo scopo.
 
-#### di Roberto Freato ([blog](http://dotnetlombardia.org/blogs/rob/default.aspx)) - Microsoft MVP
+#### di Roberto Freato - Microsoft MVP
+
+
 
 
 

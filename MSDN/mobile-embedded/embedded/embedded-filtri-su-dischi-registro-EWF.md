@@ -2,12 +2,13 @@
 title: Windows Embedded Standard - I filtri sui dischi e sul registro - EWF
 description: Windows Embedded Standard - I filtri sui dischi e sul registro - EWF (Enhanced Write Filter)
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: embedded
 ms.custom: CommunityDocs
 ---
-
 
 # Windows Embedded Standard - I filtri sui dischi e sul registro: EWF - Enhanced Write Filter
 
@@ -359,3 +360,5 @@ all’articolo:
 #### di [Beppe Platania](http://mvp.microsoft.com/it-it/mvp/Beppe%20Platania-4029281) - Microsoft eMVP
 
 Blog: <http://beppeplatania.com/it>
+
+

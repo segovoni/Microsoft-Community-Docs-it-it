@@ -1,9 +1,11 @@
 ---
-title: Articoli Tecnici - Community Docs 
+title: Articoli Tecnici - Community Docs
 description: Insieme di Articoli Tecnici forniti dagli MVP e dalla Community di sviluppatori
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: landing
+ms.topic: article
 ms.service: MSDN
 ms.custom: CommunityDocs
 ---
@@ -26,6 +28,8 @@ La conversione degli articoli è "work in progress" - quelli identificati con un
 Di seguito trovate in evidenza l’elenco degli articoli più recenti
 - [Agile IoT - Agile meets IoT](VS-ALM/ALM/AgileIOT.md) - di Felice Pescatore
 - [Migrazioni e deployment in SQL Server](Server-Enterprise/SQL/Migrations.md) - di Alessandro Alpi
+
+
 
 
 

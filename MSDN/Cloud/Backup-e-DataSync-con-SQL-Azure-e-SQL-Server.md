@@ -2,8 +2,10 @@
 title: Backup e DataSync con SQL Azure e SQL Server
 description: Backup e DataSync con SQL Azure e SQL Server
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: cloud
 ms.custom: CommunityDocs
 ---
@@ -295,6 +297,10 @@ SQL Azure, per la migrazione in ingresso o in uscita dello schema e dei
 dati da/verso database SQL Server.
 
 #### di [Roberto Freato](https://mvp.microsoft.com/en-us/PublicProfile/4028383?fullName=Roberto%20%20Freato) - Microsoft MVP
+
+
+
+
 
 
 

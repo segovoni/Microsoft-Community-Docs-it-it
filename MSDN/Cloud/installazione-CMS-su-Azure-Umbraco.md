@@ -2,12 +2,13 @@
 title: Installazione su Windows Azure di Umbraco 4.7.x
 description: Installazione su Windows Azure di Umbraco 4.7.x
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: cloud
 ms.custom: CommunityDocs
 ---
-
 
 # Installazione su Windows Azure di Umbraco 4.7.x
 
@@ -363,7 +364,9 @@ Approfondimenti
 - Creare i record DNS
 
 
-#### di Roberto Freato ([blog](http://dotnetlombardia.org/blogs/rob/default.aspx)) - Microsoft MVP
+#### di Roberto Freato - Microsoft MVP
+
+
 
 
 

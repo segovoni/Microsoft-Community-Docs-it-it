@@ -2,8 +2,10 @@
 title: Il Cloud Computing - origini
 description: Il Cloud Computing - origini
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: cloud
 ms.custom: CommunityDocs
 ---
@@ -599,6 +601,8 @@ Romagnolo, S. (2007, Gennaio 19). Grid computing: un prezioso alleato
 informatico per la ricerca. Torino, Torino, Toscana.
 
 #### Di [Roberto Freato](https://mvp.support.microsoft.com/profile/Roberto) – Microsoft MVP
+
+
 
 
 

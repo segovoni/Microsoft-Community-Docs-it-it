@@ -1,10 +1,11 @@
-
 ---
-title: Gestire la Semantic Versioning con GitFlow e GitVersion in una vNext Build 
+title: Gestire la Semantic Versioning con GitFlow e GitVersion in una vNext Build
 description: Gestire la Semantic Versioning con GitFlow e GitVersion in una vNext Build
-author: MSCommunityPubService
+author: alkampfergit
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: ALM
 ms.custom: CommunityDocs
 ---
@@ -343,3 +344,5 @@ repository basati su Git, non solamente se hostati su VSO/TFS. Si
 ricorda infatti che è anche possibile utilizzare la build vNext per
 effettuare build di repository presenti su GitHub o su altri servizi di
 hosting.
+
+

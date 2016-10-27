@@ -1,9 +1,11 @@
 ---
-title: Migrazioni e deployment in SQL Server 
+title: Migrazioni e deployment in SQL Server
 description: Migrazioni e deployment in SQL Server
 author: suxstellino
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: SQLServer
 ms.custom: CommunityDocs
 ---
@@ -307,5 +309,7 @@ nel nostro strumento di deploy, ed è fatta. Anche il database non sarà
 più un enorme problema di release.
 
 Stay Tuned! 
+
+
 
 
