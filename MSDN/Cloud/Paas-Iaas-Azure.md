@@ -1,10 +1,11 @@
-
 ---
 title: PaaS vs. IaaS e il caso Azure
 description: PaaS vs. IaaS e il caso Azure
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: cloud
 ms.custom: CommunityDocs
 ---
@@ -223,7 +224,7 @@ crea le tecnologie che ha assemblato in Azure): in questo scenario, lo
 IaaS è utile per colmare le necessità residue di chi ha soluzioni
 inevitabilmente complesse.
 
-#### di Roberto Freato ([blog](http://dotnetlombardia.org/blogs/rob/default.aspx)) - Microsoft MVP
+#### di Roberto Freato - Microsoft MVP
   
 
 [^1]: Barelli, L. (2009, Febbraio 27). Virtualizzazione e cloud, coppia
@@ -234,3 +235,5 @@ inevitabilmente complesse.
     il PaaS, lo IaaS e il SaaS. Il resto, sono “voli pindarici” dal
     vacuo significato e dalle mancate fondamenta nella letteratura del
     settore.
+
+

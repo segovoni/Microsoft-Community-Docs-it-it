@@ -2,8 +2,10 @@
 title: SQL - Primi e Ultimi Trigger
 description: SQL - Primi e Ultimi Trigger
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: SQLServer
 ms.custom: CommunityDocs
 ---
@@ -387,5 +389,7 @@ GO
 ```
 
 #### di Sergio Govoni – Microsoft MVP ([Blog](http://community.ugiss.org/blogs/sgovoni) / [MVP Profile](http://mvp.microsoft.com/profiles/Sergio.Govoni))
+
+
 
 

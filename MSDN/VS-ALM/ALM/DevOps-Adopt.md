@@ -1,10 +1,11 @@
-
 ---
 title: DevOps Jump Start - Adottare concretamente DevOps
 description: DevOps Jump Start - Adottare concretamente DevOps
 author: felicepescatore
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: ALM
 ms.custom: CommunityDocs
 ---
@@ -182,3 +183,5 @@ Indipendentemente dal grado di automazione che si decide di raggiungere,
 l’importante è che non si perda mai di vista l’obiettivo primario,
 ovvero quello di **supportare in modo più efficace le moderne esigenze
 di business**.
+
+

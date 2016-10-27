@@ -2,8 +2,10 @@
 title: SQL - OUTPUT clause and Triggers
 description: SQL - OUTPUT clause and Triggers
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: SQLServer
 ms.custom: CommunityDocs
 ---
@@ -197,5 +199,7 @@ descrive il numero di righe interessare dalle operazioni eseguite nel
 Trigger, tipicamente il testo “Affected number of rows”.
 
 #### di Sergio Govoni – Microsoft MVP ([Blog](http://community.ugiss.org/blogs/sgovoni) / [MVP Profile](http://mvp.microsoft.com/profiles/Sergio.Govoni))
+
+
 
 

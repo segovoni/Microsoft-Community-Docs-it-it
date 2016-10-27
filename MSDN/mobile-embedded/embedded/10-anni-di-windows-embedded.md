@@ -566,3 +566,5 @@ inglese)***](http://www.microsoft.com/presspass/press/2007/apr07/04-19POSUpdateP
 
 Windows Embedded for Point Of Services (WEPOS) viene distribuito nella
 versione 1.1 e si prevede un FP2007 prima della fine dell’anno.
+
+

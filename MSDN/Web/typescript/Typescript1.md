@@ -2,8 +2,10 @@
 title: Typescript - Javascript per applicazioni reali
 description: Typescript - Javascript per applicazioni reali
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: TypeScript
 ms.custom: CommunityDocs
 ---
@@ -188,3 +190,5 @@ essa ha perso la sua utilità.
 
 Articolo pubblicato anche [sul Blog
 italiano](http://blog.boschin.it/post/2013/03/07/Typescript-Javascript-per-applicazioni-vere.aspx)
+
+

@@ -2,12 +2,13 @@
 title: SQL - SEQUENCE in SQL Server 2012
 description: SQL - SEQUENCE in SQL Server 2012
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: SQLServer
 ms.custom: CommunityDocs
 ---
-
 
 # SEQUENCE in SQL Server 2012
 
@@ -295,5 +296,7 @@ Numbers](http://msdn.microsoft.com/en-us/library/ff878058%28v=SQL.110%29.aspx).
 
 
 #### di [Sergio Govoni](http://mvp.microsoft.com/profiles/Sergio.Govoni) - Microsoft MVP ([blog](http://www.ugiss.org/sgovoni/))
+
+
 
 

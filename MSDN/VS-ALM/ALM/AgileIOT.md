@@ -1,9 +1,11 @@
 ---
-title: AgileIoT - Agile meets IoT 
+title: AgileIoT - Agile meets IoT
 description: AgileIoT - Agile meets IoT
 author: felicepescatore
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: ALM
 ms.custom: CommunityDocs
 ---
@@ -527,3 +529,5 @@ far maturare e crescere il progetto.
 
 Tutti i dettagli, i riferimenti ai canali social e le guide complete
 sono disponibili sul portale ufficiale:  [*www.agileiot.org*](http://www.agileiot.org)
+
+

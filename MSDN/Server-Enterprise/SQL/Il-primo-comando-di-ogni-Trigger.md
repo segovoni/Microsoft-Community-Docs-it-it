@@ -1,9 +1,11 @@
 ---
-title: Il primo comando di ogni Trigger 
+title: Il primo comando di ogni Trigger
 description: Il primo comando di ogni Trigger
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: SQLServer
 ms.custom: CommunityDocs
 ---
@@ -163,3 +165,5 @@ sua durata è breve.
 Blog: <http://www.ugiss.org/sgovoni/>
 
 Twitter: [@segovoni](https://twitter.com/segovoni)
+
+

@@ -1,9 +1,11 @@
 ---
-title: Windows Embedded 8 Standard: i filtri sui gesti (Gesture Filter) 
-description: Windows Embedded 8 Standard: i filtri sui gesti (Gesture Filter)
+title: Windows Embedded 8 Standard- i filtri sui gesti (Gesture Filter)
+description: Windows Embedded 8 Standard- i filtri sui gesti (Gesture Filter)
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: embedded
 ms.custom: CommunityDocs
 ---
@@ -293,3 +295,5 @@ tutti i filtri dei gesti per evitare che l’utente acceda alla
 condivisione, ma poi si lascia attivo il tasto Windows (tasto Windows)
 l’utente potrà richiamare la funzione “Condividi” utilizzando la
 sequenza di tastiera (tasto Windows+H).
+
+

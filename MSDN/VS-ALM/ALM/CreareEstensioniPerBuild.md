@@ -2,12 +2,13 @@
 title: Creare un Task personalizzato per la nuova build di TFS2015 / Visual Studio Team Services
 description: Creare un Task personalizzato per la nuova build di TFS2015 / Visual Studio Team Services
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: ALM
 ms.custom: CommunityDocs
 ---
-
 
 # Creare un Task personalizzato per la nuova build di TFS2015 / Visual Studio Team Services
 
@@ -279,4 +280,6 @@ la dipendenza)
 
 L’esempio completo può essere scaricato a questo indirizzo:
 http://tinyurl.com/vsotask (ndr. è richiesto login con un Account Microsoft)
+
+
 

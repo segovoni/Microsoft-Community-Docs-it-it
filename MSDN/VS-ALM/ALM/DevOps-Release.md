@@ -1,10 +1,11 @@
-
 ---
 title: DevOps Jump Start - Release Management
 description: DevOps Jump Start - Release Management
 author: felicepescatore
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: ALM
 ms.custom: CommunityDocs
 ---
@@ -165,3 +166,5 @@ Microsoft, è possibile consultare le relative sezioni MSDN:
 [*https://msdn.microsoft.com/en-us/Library/vs/alm/Release/overview-rm2015*](https://msdn.microsoft.com/en-us/Library/vs/alm/Release/overview-rm2015)
 e
 [*https://msdn.microsoft.com/en-us/powershell/dsc/overview*](https://msdn.microsoft.com/en-us/powershell/dsc/overview)
+
+

@@ -2,8 +2,10 @@
 title: Interoperabilità e migrazione verso il cloud – il caso DotNetLombardia
 description: Interoperabilità e migrazione verso il cloud – il caso DotNetLombardia
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: cloud
 ms.custom: CommunityDocs
 ---
@@ -186,5 +188,7 @@ Riferimenti
 Parte del materiale di questo articolo è già presente sul blog:
 <http://dotnetlombardia.org/b/rob/default.aspx>.
 
-#### di Roberto Freato ([blog](http://dotnetlombardia.org/blogs/rob/default.aspx)) - Microsoft MVP
+#### di Roberto Freato - Microsoft MVP
+
+
 

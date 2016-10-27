@@ -1,9 +1,11 @@
 ---
-title: La storia di Windows Azure 
+title: La storia di Windows Azure
 description: La storia di Windows Azure
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: cloud
 ms.custom: CommunityDocs
 ---
@@ -255,6 +257,8 @@ andare a lavorare, stimolandone l’adozione, la consapevolezza e la
 conoscenza.
 
 #### di Roberto Freato) - Microsoft MVP
+
+
 
 
 

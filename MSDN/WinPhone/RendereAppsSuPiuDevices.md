@@ -2,8 +2,10 @@
 title: Come rendere le proprie applicazioni con i nuovi device di fascia bassa
 description: Come rendere le proprie applicazioni con i nuovi device di fascia bassa
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: WindowsPhone
 ms.custom: CommunityDocs
 ---
@@ -357,6 +359,8 @@ sperimentano problemi di crash che non sono legati a bug della vostra
 applicazione, ma al quantitativo di memoria usata.
 
 #### di [Matteo Pagani](https://mvp.microsoft.com/profile/Matteo.Pagani), Microsoft MVP
+
+
 
 
 

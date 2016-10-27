@@ -1,10 +1,11 @@
-
 ---
 title: DevOps Jump Start - L'approccio DevOps
 description: DevOps Jump Start - L'approccio DevOps
 author: felicepescatore
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: ALM
 ms.custom: CommunityDocs
 ---
@@ -393,3 +394,5 @@ disponibile immediatamente su tale ambiente.
 Anche se non esiste una definizione del tutto univoca di Continuous
 Deployment, quello che ne contraddistingue il processo, e gli ambienti
 afferenti, è tipicamente una maggiore **stabilità generale**.
+
+

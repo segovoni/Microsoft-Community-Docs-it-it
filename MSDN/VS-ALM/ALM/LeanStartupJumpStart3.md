@@ -1,10 +1,11 @@
-
 ---
-title: Jump Start (parte 3/3) - Growth Engine  
-description: Jump Start (parte 3/3) - Growth Engine 
+title: Jump Start (parte 3/3) - Growth Engine
+description: Jump Start (parte 3/3) - Growth Engine
 author: felicepescatore
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: ALM
 ms.custom: CommunityDocs
 ---
@@ -192,3 +193,5 @@ dovendo garantire un alto livello di qualità ai propri clienti. In tal
 caso è opportuno approcciare una (mini) divisione o un (mini) Team che
 ha il compito di continuare a sperimentare soluzioni innovative
 parallelamente al core business.
+
+

@@ -2,8 +2,10 @@
 title: Typescript - dichiarare variabili, parametri, classi e interfacce
 description: Typescript - dichiarare variabili, parametri, classi e interfacce
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: TypeScript
 ms.custom: CommunityDocs
 ---
@@ -249,3 +251,5 @@ possiamo gestire correttamente il tipo in questione.
 
 Articolo pubblicato anche [sul Blog
 italiano](http://www.boschin.it/post/2013/05/17/Typescript-dichiarare-variabili-parametri-classi-e-interfacce.aspx)
+
+

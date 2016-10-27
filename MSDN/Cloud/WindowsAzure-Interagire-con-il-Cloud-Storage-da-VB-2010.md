@@ -1,9 +1,11 @@
 ---
-title: Windows Azure - interagire con il Cloud Storage da Visual Basic 2010 
+title: Windows Azure - interagire con il Cloud Storage da Visual Basic 2010
 description: Windows Azure - interagire con il Cloud Storage da Visual Basic 2010
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: cloud
 ms.custom: CommunityDocs
 ---
@@ -856,5 +858,7 @@ possibile memorizzare e gestire i propri dati in maniera totalmente
 managed.
 
 #### di [Alessandro Del Sole](https://mvp.support.microsoft.com/profile/Alessandro.Del%20Sole)
+
+
 
 

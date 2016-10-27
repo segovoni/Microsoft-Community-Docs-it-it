@@ -2,8 +2,10 @@
 title: Windows Embedded Standard 7 - I filtri verso l'interfaccia
 description: Windows Embedded Standard 7 - I filtri verso l'interfaccia
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: embedded
 ms.custom: CommunityDocs
 ---
@@ -1077,3 +1079,5 @@ inglese):
 <http://msdn.microsoft.com/en-us/library/ee832759.aspx>
 
 #### di Beppe Platania ([blog](http://beppeplatania.cloudapp.net/)) – Microsoft MVP
+
+

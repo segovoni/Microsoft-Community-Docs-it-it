@@ -2,8 +2,10 @@
 title: Riscrivere la storia in Git
 description: Riscrivere la storia in Git
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: ALM
 ms.custom: CommunityDocs
 ---
@@ -645,3 +647,5 @@ Blog inglese: <http://www.codewrecks.com>
 Blog Italiano ALM: <http://www.getlatestversion.it/author/alkampfer/>
 
 Blog Italiano: <http://blogs.ugidotnet.org/rgm>
+
+

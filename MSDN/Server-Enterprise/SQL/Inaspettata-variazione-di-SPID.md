@@ -1,12 +1,15 @@
 ---
-title: Una inaspettata variazione di SPID 
+title: Una inaspettata variazione di SPID
 description: Una inaspettata variazione di SPID (SQL Server, Session Process ID)
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: SQLServer
 ms.custom: CommunityDocs
 ---
+
 # Una inaspettata variazione di SPID (SQL Server, Session Process ID)
 
 #### di [Sergio Govoni](http://mvp.microsoft.com/en-us/mvp/Sergio%20Govoni-4029181) – Microsoft MVP
@@ -115,3 +118,5 @@ Blog (Italiano): [http://www.ugiss.org/sgovoni
 /](http://www.ugiss.org/sgovoni%20/) Blog (Inglese): <http://sqlblog.com/blogs/sergio_govoni>
 
 Twitter: [@segovoni](https://twitter.com/segovoni)
+
+

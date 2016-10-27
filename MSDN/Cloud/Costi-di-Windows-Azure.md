@@ -2,12 +2,13 @@
 title: Pricing - capire i costi di Windows Azure
 description: Pricing - capire i costi di Windows Azure
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: cloud
 ms.custom: CommunityDocs
 ---
-
 
 # Pricing - capire i costi di Windows Azure
 
@@ -266,7 +267,9 @@ essere un lavoro arduo. Tuttavia, in un modello cloud, l’enfasi è
 sull’on-demand, per cui non scandalizziamoci se ogni cosa che comporti
 un “consumo” sia giustamente tariffata.
 
-#### di Roberto Freato ([blog](http://dotnetlombardia.org/blogs/rob/default.aspx)) - Microsoft MVP
+#### di Roberto Freato - Microsoft MVP
+
+
 
 
 

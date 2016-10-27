@@ -2,8 +2,10 @@
 title: Supportare i dispositivi Windows Phone 8 da un’applicazione Windows Phone 7.x
 description: Supportare i dispositivi Windows Phone 8 da un’applicazione Windows Phone 7.x
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: WindowsPhone
 ms.custom: CommunityDocs
 ---
@@ -354,6 +356,8 @@ strada più adatta! Di seguito trovate la possibilità di scaricare un
 progetto di esempio.
 
 #### di Matteo Pagani ([blog](http://www.qmatteoq.com/)) – Microsoft MVP
+
+
 
 
 

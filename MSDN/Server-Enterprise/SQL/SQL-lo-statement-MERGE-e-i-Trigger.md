@@ -2,8 +2,10 @@
 title: SQL - Lo Statement MERGE e i Trigger
 description: SQL - Lo Statement MERGE e i Trigger
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: SQLServer
 ms.custom: CommunityDocs
 ---
@@ -409,3 +411,5 @@ righe modificate.
 Blog: <http://www.ugiss.org/sgovoni/>
 
 Twitter: <https://twitter.com/segovoni>
+
+

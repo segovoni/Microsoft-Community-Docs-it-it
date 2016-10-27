@@ -2,8 +2,10 @@
 title: Agile Application Lifecycle Management con VSO/TFS (parte 2/3)
 description: Agile Application Lifecycle Management con VSO/TFS (parte 2/3)
 author: felicepescatore
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: ALM
 ms.custom: CommunityDocs
 ---
@@ -378,3 +380,5 @@ Blog/Sito Personale:
 [www.felicepescatore.it](http://www.felicepescatore.it)
 
 ALM Blog: <http://www.getlatestversion.it/>
+
+

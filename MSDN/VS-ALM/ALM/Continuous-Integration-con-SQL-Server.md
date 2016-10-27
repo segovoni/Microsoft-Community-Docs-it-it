@@ -1,10 +1,11 @@
-
 ---
-title: Continuous Integration con SQL Server 
-description: Continuous Integration con SQL Server 
+title: Continuous Integration con SQL Server
+description: Continuous Integration con SQL Server
 author: suxstellino
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: ALM
 ms.custom: CommunityDocs
 ---
@@ -512,3 +513,5 @@ blog italiano: <http://blogs.dotnethell.it/suxstellino>
 blog inglese: <http://suxstellino.wordpress.com>
 
 sito web: <http://www.alessandroalpi.net>
+
+

@@ -2,8 +2,10 @@
 title: Unit Testing con SQL Server
 description: Unit Testing con SQL Server
 author: suxstellino
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: SQLServer
 ms.custom: CommunityDocs
 ---
@@ -720,3 +722,5 @@ Risorse
 
 
 #### di [Alessandro Alpi](http://mvp.microsoft.com/it-it/mvp/Alessandro%20Alpi-4014222) – Microsoft MVP
+
+
