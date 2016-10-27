@@ -1,7 +1,7 @@
 ---
 title: Branch per feature in Git
 description: Branch per feature in Git
-author: MSCommunityPubService
+author: alkampfergit
 ms.author: aldod
 ms.manager: csiism
 ms.date: 08/01/2016

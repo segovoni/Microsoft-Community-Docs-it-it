@@ -1,7 +1,7 @@
 ---
 title: Riscrivere la storia in Git
 description: Riscrivere la storia in Git
-author: MSCommunityPubService
+author: alkampfergit
 ms.author: aldod
 ms.manager: csiism
 ms.date: 08/01/2016

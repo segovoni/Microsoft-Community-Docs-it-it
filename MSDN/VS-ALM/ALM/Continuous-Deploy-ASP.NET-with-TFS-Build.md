@@ -1,7 +1,7 @@
 ---
 title: Continuous Deployment di Asp.Net web sites con TFS Build
 description: Continuous Deployment di Asp.Net web sites con TFS Build
-author: MSCommunityPubService
+author: alkampfergit
 ms.author: aldod
 ms.manager: csiism
 ms.date: 08/01/2016

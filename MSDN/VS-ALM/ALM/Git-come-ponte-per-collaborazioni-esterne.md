@@ -1,7 +1,7 @@
 ---
 title: Utilizzare Git come 'ponte' per collaborazioni esterne
 description: Utilizzare Git come 'ponte' per collaborazioni esterne
-author: MSCommunityPubService
+author: alkampfergit
 ms.author: aldod
 ms.manager: csiism
 ms.date: 08/01/2016

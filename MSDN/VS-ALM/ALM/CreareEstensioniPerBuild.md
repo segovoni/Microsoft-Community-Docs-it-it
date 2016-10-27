@@ -1,7 +1,7 @@
 ---
 title: Creare un Task personalizzato per la nuova build di TFS2015 / Visual Studio Team Services
 description: Creare un Task personalizzato per la nuova build di TFS2015 / Visual Studio Team Services
-author: MSCommunityPubService
+author: alkampfergit
 ms.author: aldod
 ms.manager: csiism
 ms.date: 08/01/2016

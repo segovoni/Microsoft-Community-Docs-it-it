@@ -1,7 +1,7 @@
 ---
 title: Differenze tra Source Control centralizzato e distribuito
 description: Differenze tra Source Control centralizzato e distribuito
-author: MSCommunityPubService
+author: alkampfergit
 ms.author: aldod
 ms.manager: csiism
 ms.date: 08/01/2016

@@ -1,7 +1,7 @@
 ---
 title: Gestione delle Branch in Git e Visual Studio
 description: Gestione delle Branch in Git e Visual Studio
-author: MSCommunityPubService
+author: alkampfergit
 ms.author: aldod
 ms.manager: csiism
 ms.date: 08/01/2016

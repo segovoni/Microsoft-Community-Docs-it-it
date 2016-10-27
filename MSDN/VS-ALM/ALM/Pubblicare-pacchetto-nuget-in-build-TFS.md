@@ -1,7 +1,7 @@
 ---
 title: Pubblicare automaticamente un pacchetto NuGet durante una build TFS
 description: Pubblicare automaticamente un pacchetto NuGet durante una build TFS
-author: MSCommunityPubService
+author: alkampfergit
 ms.author: aldod
 ms.manager: csiism
 ms.date: 08/01/2016

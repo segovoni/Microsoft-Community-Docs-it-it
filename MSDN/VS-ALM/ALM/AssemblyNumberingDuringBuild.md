@@ -1,7 +1,7 @@
 ---
 title: Gestire la numerazione degli assembly durante la build
 description: Gestire la numerazione degli assembly durante la build
-author: MSCommunityPubService
+author: alkampfergit
 ms.author: aldod
 ms.manager: csiism
 ms.date: 08/01/2016

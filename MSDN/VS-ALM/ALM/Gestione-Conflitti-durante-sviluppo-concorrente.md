@@ -1,7 +1,7 @@
 ---
 title: Gestione dei Conflitti durante lo sviluppo concorrente
 description: Gestione dei Conflitti durante lo sviluppo concorrente
-author: MSCommunityPubService
+author: alkampfergit
 ms.author: aldod
 ms.manager: csiism
 ms.date: 08/01/2016

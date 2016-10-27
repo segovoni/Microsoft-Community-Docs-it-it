@@ -1,7 +1,7 @@
 ---
 title: Gestire la Semantic Versioning con GitFlow e GitVersion in una vNext Build
 description: Gestire la Semantic Versioning con GitFlow e GitVersion in una vNext Build
-author: MSCommunityPubService
+author: alkampfergit
 ms.author: aldod
 ms.manager: csiism
 ms.date: 08/01/2016

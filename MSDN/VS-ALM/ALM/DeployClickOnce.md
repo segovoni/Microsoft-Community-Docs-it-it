@@ -1,7 +1,7 @@
 ---
 title: Rilasciare un package ClickOnce su un Blob di Windows Azure con la build vNext
 description: Rilasciare un package ClickOnce su un Blob di Windows Azure con la build vNext
-author: MSCommunityPubService
+author: alkampfergit
 ms.author: aldod
 ms.manager: csiism
 ms.date: 08/01/2016

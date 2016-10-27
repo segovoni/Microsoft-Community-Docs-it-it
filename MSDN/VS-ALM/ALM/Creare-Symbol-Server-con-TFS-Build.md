@@ -1,7 +1,7 @@
 ---
 title: Creare un Symbol Server con le Build di Team Foundation Server
 description: Creare un Symbol Server con le Build di Team Foundation Server
-author: MSCommunityPubService
+author: alkampfergit
 ms.author: aldod
 ms.manager: csiism
 ms.date: 08/01/2016
