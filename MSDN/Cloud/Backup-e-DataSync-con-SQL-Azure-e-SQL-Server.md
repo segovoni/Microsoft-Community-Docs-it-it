@@ -1,16 +1,14 @@
 ---
-title: Backup e DataSync con SQL Azure e SQL Server
-description: Backup e DataSync con SQL Azure e SQL Server
-author: MSCommunityPubService
+title: Backup e DataSync con SQL Azure e SQL Server
+description: Backup e DataSync con SQL Azure e SQL Server
+author: MSCommunityPubService
 ms.author: aldod
 ms.manager: csiism
-ms.date: 08/01/2016
+ms.date: 08/01/2016
 ms.topic: article
-ms.service: cloud
+ms.service: cloud
 ms.custom: CommunityDocs
 ---
-
-
 
 # Backup e DataSync con SQL Azure e SQL Server
 

@@ -2,8 +2,10 @@
 title: Comunicazione intra-ruolo Web-Worker e bilanciamento del carico
 description: Comunicazione intra-ruolo Web-Worker e bilanciamento del carico
 author: MSCommunityPubService
+ms.author: aldod
+ms.manager: csiism
 ms.date: 08/01/2016
-ms.topic: how-to-article
+ms.topic: article
 ms.service: cloud
 ms.custom: CommunityDocs
 ---
@@ -209,5 +211,7 @@ istanze ed infine, come poter implementare un rudimentale bilanciatore
 round-robin.
 
 #### di Roberto Freato ([blog](http://dotnetlombardia.org/blogs/rob/default.aspx)) - Microsoft MVP
+
+
 
 
