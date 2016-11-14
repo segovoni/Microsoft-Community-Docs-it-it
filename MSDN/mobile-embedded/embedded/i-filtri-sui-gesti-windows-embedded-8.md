@@ -297,3 +297,5 @@ l’utente potrà richiamare la funzione “Condividi” utilizzando la
 sequenza di tastiera (tasto Windows+H).
 
 
+
+

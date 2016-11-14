@@ -531,3 +531,5 @@ Tutti i dettagli, i riferimenti ai canali social e le guide complete
 sono disponibili sul portale ufficiale:  [*www.agileiot.org*](http://www.agileiot.org)
 
 
+
+

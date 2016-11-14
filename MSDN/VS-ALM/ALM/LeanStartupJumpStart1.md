@@ -127,3 +127,5 @@ Figura 2 - win-fail vs fail-fail-win
 [L'articolo prosegue qui](LeanStartupJumpStart2.md)
 
 
+
+
