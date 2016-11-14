@@ -502,3 +502,5 @@ fix del bug 42 è un unico commit ed il flusso è lineare.
 
 
 
+
+

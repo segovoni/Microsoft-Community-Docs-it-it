@@ -7,8 +7,7 @@
         ],
         "exclude": [
           "**/obj/**",
-          "communitydocs/**",
-          "**/includes/**"
+          "communitydocs/**"
         ]
       }
     ],
@@ -20,8 +19,7 @@
         ],
         "exclude": [
           "**/obj/**",
-          "communitydocs/**",
-          "**/includes/**"
+          "communitydocs/**"
         ]
       }
     ],
@@ -29,7 +27,9 @@
     "externalReference": [],
     "globalMetadata": {},
     "fileMetadata": {},
-    "template": [],
+    "template": [
+      null
+    ],
     "dest": "communitydocs"
   }
 }

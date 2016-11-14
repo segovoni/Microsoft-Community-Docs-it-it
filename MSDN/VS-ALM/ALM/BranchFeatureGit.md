@@ -281,3 +281,5 @@ sfruttare al meglio la potenza dello strumento.
 #### di [Gian Maria Ricci](http://mvp.microsoft.com/en-us/mvp/Gian%20Maria%20Ricci-4025635) – Microsoft MVP
 
 
+
+

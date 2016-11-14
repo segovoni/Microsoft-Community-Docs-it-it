@@ -1,1 +1,1 @@
-# Welcome to TN_Community!
+# Index test file for Open Publishing

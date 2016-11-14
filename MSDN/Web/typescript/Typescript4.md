@@ -253,3 +253,5 @@ Articolo pubblicato anche [sul Blog
 italiano](http://www.boschin.it/post/2013/05/17/Typescript-dichiarare-variabili-parametri-classi-e-interfacce.aspx)
 
 
+
+
