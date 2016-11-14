@@ -15,8 +15,8 @@ ms.custom: CommunityDocs
 Pagani](http://twitter.com/qmatteoq), Windows AppConsult Engineer in
 Microsoft*
 
-[Nel corso del post
-precedente](https://blogs.msdn.microsoft.com/italy/2016/10/27/guest-post-desktop-bridge-espandere-unapplicazione-desktop-con-un-componente-uwp/)
+[Nel corso dell'articolo
+precedente](desktop-bridge-espandere-unapplicazione-desktop-con-un-componente-uwp.md)
 abbiamo visto come espandere un’applicazione desktop con un background
 task della Universal Windows Platform. Per la prima volta, non avevamo
 più solamente un unico processo in esecuzione come nei casi precedenti
@@ -54,7 +54,7 @@ toast
 I due processi, combinati insieme, permettevano di ottenere
 un’applicazione che era in grado di inviare una notifica all’utente e di
 aggiornare la propria tile ogni qualvolta l’utente cambiava la propria
-time zone nella configurazione del computer. Nel corso del post
+time zone nella configurazione del computer. Nel corso dell'articolo
 espanderemo l’applicazione per sfruttare il fatto che entrambi i
 processi girano all’interno dello stesso container, aggiungendo le
 seguenti funzionalità:
@@ -75,7 +75,7 @@ controllo di tipo **TextBox,** nel quale l’utente potrà inserire il
 proprio messaggio. Dopodiché, andremo a cambiare leggermente il codice
 associato al pulsante di registrazione del task:
 
-``` {.brush: .csharp;}
+```cs
 private async void OnRegisterTask(object sender, EventArgs e)
 {
     if (!string.IsNullOrEmpty(txtMessage.Text))
@@ -129,7 +129,7 @@ recuperiamo sotto forma di stringa. Ecco come appare la nuova
 implementazione del metodo **Run()** all’interno della classe
 **TileTask** del Windows Runtime Component:
 
-``` {.brush: .plain;}
+```
 public sealed class TileTask : IBackgroundTask
 {
     public void Run(IBackgroundTaskInstance taskInstance)
@@ -227,7 +227,7 @@ all’interno un pulsante legato ad un evento che si fa carico, usando API
 del framework .NET, di creare una nuova chiave di registro nel caso in
 cui questa non esista:
 
-``` {.brush: .csharp;}
+```cs
 private void OnCreateRegistryKey(Object sender, EventArgs e)
 {
     var RegKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Matteo Pagani\DesktopBridge", true);
@@ -284,7 +284,7 @@ alla nostra soluzione un nuovo progetto Windows Forms che, questa volta,
 conterrà un pulsante che, al click, invocherà un metodo di lettura della
 chiave di registro:
 
-``` {.brush: .csharp;}
+```cs
 private void OnReadRegistryKey(Object sender, EventArgs e)
 {
     bool isAppInstalled = false;
@@ -337,7 +337,7 @@ eseguibili delle due applicazioni desktop che abbiamo creato in
 precedenza e li va a copiare all’interno della cartella
 **PackageLayout**:
 
-``` {.brush: .xml;}
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
@@ -354,8 +354,8 @@ precedenza e li va a copiare all’interno della cartella
 </Project>
 ```
 
-L’approccio è simile a quello che avevamo visto [in un post
-precedente](https://blogs.msdn.microsoft.com/italy/2016/09/22/guest-post-desktop-bridge-convertire-unapplicazione/),
+L’approccio è simile a quello che avevamo visto [in un articolo
+precedente](desktop-bridge-convertire-unapplicazione.md),
 con la differenza che in quel caso andavamo a includere nel pacchetto un
 eseguibile (l’applicazione Windows Forms) e la DLL di JSON.NET. Questa
 volta, invece, includiamo direttamente due eseguibili. Dato che
@@ -365,7 +365,7 @@ aggiungendo un nuovo pulsante nella prima applicazione (quella che nella
 soluzione di esempio si chiama **DesktopApp.WriteRegistry**), che
 invocherà il seguente codice:
 
-``` {.brush: .csharp;}
+```cs
 private void OnOpenReadApp(Object sender, EventArgs e)
 {
     string result = System.Reflection.Assembly.GetExecutingAssembly().Location;
