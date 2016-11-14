@@ -38,8 +38,8 @@ esempio, condividono lo stesso storage locale: l’area AppData, in cui le
 applicazioni desktop e UWP possono scrivere, è comune, perciò i due
 processi possono leggere e scrivere dagli stessi file. Facciamo un
 esempio concreto, espandendo l’applicazione che avevamo usato come
-esempio [nel post
-precedente](https://blogs.msdn.microsoft.com/italy/2016/10/27/guest-post-desktop-bridge-espandere-unapplicazione-desktop-con-un-componente-uwp/)
+esempio [nell'articolo
+precedente](desktop-bridge-espandere-unapplicazione-desktop-con-un-componente-uwp.md)
 e che trovate su GitHub:
 <https://github.com/qmatteoq/DesktopBridge/tree/master/5.%20Extend>
 

@@ -176,8 +176,8 @@ all’interno del repository stesso all’indirizzo
 
 Anche il [progetto
 originale](https://github.com/qmatteoq/DesktopBridge/tree/master/4.%20Enhance)
-usato [nel post
-precedente](https://blogs.msdn.microsoft.com/italy/2016/09/23/guest-post-desktop-bridge-espandere-unapplicazione-win32-con-la-universal-windows-platform/)
+usato [nell'articolo
+precedente](desktop-bridge-espandere-unapplicazione-win32-con-la-universal-windows-platform.md)
 è stato aggiornato per sfruttare questa libreria: all’interno della
 finestra dell’applicazione Windows Forms, infatti, è stato aggiunto un
 controllo **Label,** nel quale viene mostrato un testo diverso a seconda

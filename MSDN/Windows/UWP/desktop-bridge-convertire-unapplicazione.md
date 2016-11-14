@@ -44,8 +44,8 @@ possesso di un installer.
 
 ### La procedura di conversione manuale
 
-In realtà, [nel post
-precedente](https://blogs.msdn.microsoft.com/italy/2016/09/16/guest-post-desktop-bridge-utilizzare-il-desktop-app-converter/),
+In realtà, [nell'articolo
+precedente](desktop-bridge-utilizzare-il-desktop-app-converter.md),
 abbiamo già potuto vedere un esempio di conversione manuale, anche se
 non è stato esplicitamente indicato. Ricordate quando abbiamo cambiato
 il contenuto della cartella **Assets** generata dal Desktop App
@@ -232,8 +232,8 @@ da usare come punto di partenza per le fasi successive.
 
 Il passaggio successivo è ricreare un pacchetto AppX partendo da questa
 cartella e, per farlo, utilizzeremo lo stesso approccio manuale che
-abbiamo visto [nel post
-precedente](https://blogs.msdn.microsoft.com/italy/2016/09/16/guest-post-desktop-bridge-utilizzare-il-desktop-app-converter/)
+abbiamo visto [nell'articolo
+precedente](desktop-bridge-utilizzare-il-desktop-app-converter.md)
 quando abbiamo sostituito gli assett fittizi generati dal Desktop App
 Converter con quelli reali della nostra applicazione. La prima
 operazione da compiere è aprire un prompt dei comandi di Visual Studio e
