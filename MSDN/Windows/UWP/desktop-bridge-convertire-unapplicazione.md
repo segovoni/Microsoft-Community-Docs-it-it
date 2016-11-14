@@ -1,6 +1,6 @@
 ---
 title: Desktop Bridge - convertire un’applicazione 
-description: Desktop Bridge: convertire un’applicazione 
+description: Desktop Bridge - convertire un’applicazione 
 author: qmatteoq
 ms.author: aldod
 ms.date: 11/01/2016
