@@ -12,12 +12,12 @@ ms.custom: CommunityDocs
 # Desktop Bridge: gestire le dipendenze da librerie C e C++ con il Desktop App Converter
 
 
-*Questo post è stato scritto da [Matteo
+*Questo articolo è stato scritto da [Matteo
 Pagani](http://twitter.com/qmatteoq), Windows AppConsult Engineer in
 Microsoft*
 
-[Nel post
-precedente](https://blogs.msdn.microsoft.com/italy/2016/09/16/guest-post-desktop-bridge-utilizzare-il-desktop-app-converter/)
+[Nell'articolo
+precedente](desktop-bridge-utilizzare-il-desktop-app-converter.md)
 abbiamo imparato a convertire l’installer di un’applicazione desktop
 tradizionale (basata su tecnologie Win32 come il framework .NET, C,
 Delphi, Java, ecc.) in un pacchetto AppX, così da poter iniziare a

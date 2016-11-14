@@ -12,12 +12,12 @@ ms.custom: CommunityDocs
 # Desktop Bridge: convertire un’applicazione 
 
 
-*Questo post è stato scritto da [Matteo
+*Questo articolo è stato scritto da [Matteo
 Pagani](http://twitter.com/qmatteoq), Windows AppConsult Engineer in
 Microsoft*
 
-[Nel post
-precedente](https://blogs.msdn.microsoft.com/italy/2016/09/16/guest-post-desktop-bridge-utilizzare-il-desktop-app-converter/)
+[Nell'articolo
+precedente](desktop-bridge-utilizzare-il-desktop-app-converter.md)
 abbiamo visto come, sfruttando il Desktop App Converter, sia possibile
 convertire un installer (come un file MSI) in un pacchetto AppX, che può
 essere installato manualmente su un altro computer, distribuito in
@@ -56,7 +56,7 @@ per ricreare il pacchetto e firmarlo con un certificato valido.
 
 Questa procedura è esattamente la stessa che dobbiamo mettere in pratica
 quando vogliamo convertire un semplice eseguibile sprovvisto di un
-installer. La differenza principale è che, nel post precedente, siamo
+installer. La differenza principale è che, nell'articolo precedente, siamo
 partiti da una cartella chiamata **PackageFiles** che il Desktop App
 Converter aveva creato in automatico per noi: di conseguenza, avevamo
 già una cartella con, al suo interno, il file di manifest, una
@@ -115,7 +115,7 @@ L’ultimo passaggio è aggiungere il file di manifest vero e proprio,
 creando un file di nome **AppxManifest.xml** usando un editor di testo
 qualsiasi (Notepad, Visual Studio Code o Visual Studio tradizionale sono
 solo alcuni esempi). Potete anche riutilizzare, per semplicità, il file
-di manifest generato nel post precedente tramite il Desktop App
+di manifest generato nell'articolo precedente tramite il Desktop App
 Converter. Indipendentemente dalla vostra scelta, ecco come appare il
 file di manifest che dovete creare:
 
@@ -243,14 +243,14 @@ sfruttare il tool **makeappx.exe** per creare il pacchetto AppX:
 makeappx pack -d "C:\Centennial\PackageLayout" -p "C:\Centennial\Output\AppConverter.appx"
 ```
 
-Nel post precedente abbiamo scoperto il significato dei vari parameteri:
+Nell'articolo precedente abbiamo scoperto il significato dei vari parameteri:
 –**d** è il percorso della cartella con il contenuto del pacchetto,
 mentre –**p** è il percorso completo del file .appx che vogliamo
 generare. Al termine del processo, otterremo un file di nome
 **AppConverter.appx,** che però non saremo in grado di installare
 immediatamente in quanto non debitamente firmato con un certificato
 valido. Anche in questo caso, dobbiamo utilizzare un altro tool di ci
-abbiamo parlato nel post precedente, chiamato **signtool.exe**. Potete
+abbiamo parlato nell'articolo precedente, chiamato **signtool.exe**. Potete
 sfruttare il certificato generato automaticamente dal Desktop App
 Converter oppure crearne uno manualmente, seguendo la procedura indicata
 all’indirizzo
@@ -630,9 +630,9 @@ il nostro scopo:
     esecuzione all’interno di un container.
 
 Vi ricordo che trovate tutti i progetti di esempio utilizzati nel corso
-del post sul mio repository GitHub all’indirizzo
+dell'articolo sul mio repository GitHub all’indirizzo
 <https://github.com/qmatteoq/DesktopBridge>. Nello specifico, i progetti
-utilizzati in questo post sono:
+utilizzati in questo articolo sono:
 
 -   <https://github.com/qmatteoq/DesktopBridge/tree/master/2.%20Manual>
     per quanto riguarda l’approccio manuale

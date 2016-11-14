@@ -11,7 +11,7 @@ ms.custom: CommunityDocs
 
 # Desktop Bridge: il ponte tra le applicazioni Win32 e la UWP
 
-*Questo post è stato scritto da [Matteo
+*Questo articolo è stato scritto da [Matteo
 Pagani](http://twitter.com/qmatteoq), Windows App Consult Engineer in
 Microsoft*
 
@@ -129,7 +129,7 @@ tradizionali applicazioni Win32.
 
 Esistono tre approcci differenti per utilizzare il Desktop Bridge, in
 base allo scenario di partenza e ai requisiti. Nel corso dei prossimi
-mesi vedremo alcuni post più dettagliati in cui analizzeremo in
+mesi vedremo alcuni articoli più dettagliati in cui analizzeremo in
 profondità il loro funzionamento. Per ora, mi limiterò a darvi una
 panoramica generale, per aiutarvi a capire le sue potenzialità:
 
@@ -322,7 +322,7 @@ sviluppatori, perciò un articolo solamente teorico probabilmente sarebbe
 troppo noioso per i vostri interessi
 ![Smile](img/desktop-bridge-il-ponte-tra-le-applicazioni-win32-e-la-UWP/wlEmoticon-smile4.png)
 Come già anticipato, nel prossimo futuro troverete
-una serie di post che che analizzeranno in profondità i vari approcci
+una serie di articoli che analizzeranno in profondità i vari approcci
 descritti in precedenza ma, giusto per iniziare a solleticare il vostro
 interesse, vediamo brevemente come possiamo installare il **Desktop App
 Converter** per convertire un installer in un pacchetto AppX.
@@ -349,7 +349,7 @@ Una volta fatta questa verifica, dovete installare due componenti:
     Windows corrisponde un’immagine specifica perciò, se siete iscritti
     al programma Insider, fate attenzione perché non sempre vengono
     rilasciate immagini per ogni build, soprattutto se sono quelle del
-    ramo Fast. Nel corso del post darò per scontato che stiate
+    ramo Fast. Nel corso dell'articolo darò per scontato che stiate
     utilizzando la versione ufficiale dell’Anniversary Update (la già
     citata build 14393), di conseguenza all’indirizzo
     <https://www.microsoft.com/en-us/download/details.aspx?id=53428>
@@ -369,7 +369,7 @@ versione proveniente dallo Store, invece, si tratta di un eseguibile
 tradizione (DesktopAppConverter.exe) ma, anche in questo caso,
 l’applicazione va eseguita con diritti di amministratore.
 
-Tutti gli esempi successivi e nel prossimo post saranno basati sulla
+Tutti gli esempi successivi e nel prossimo articolo saranno basati sulla
 versione Powershell, ma i parametri e i comandi sono assolutamente
 identici: se volete usare la versione proveniente dallo Store, dovrete
 semplicemente sostituire **DesktopAppConverter.ps1** con
@@ -427,7 +427,7 @@ dialogo). L’installer vi permetterà di fare esperimenti in tutta
 tranquillità, dato che rispetta i requisiti richiesti dal Desktop App
 Converter.
 
-Nei prossimi post vedremo, passo per passo, come ottenere un pacchetto
+Nei prossimi articoli vedremo, passo per passo, come ottenere un pacchetto
 AppX a partire da questa applicazione (o da qualsiasi altro installer).
 Nel frattempo, se volete un’anteprima potete fare riferimento alla
 documentazione presente sul sito ufficiale

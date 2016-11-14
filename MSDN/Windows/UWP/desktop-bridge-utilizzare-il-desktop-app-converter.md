@@ -11,24 +11,24 @@ ms.custom: CommunityDocs
 
 # Desktop Bridge: utilizzare il Desktop App Converter 
 
-*Questo post è stato scritto da [Matteo
+*Questo articolo è stato scritto da [Matteo
 Pagani](http://twitter.com/qmatteoq), Windows AppConsult Engineer in
 Microsoft*
 
-In uno dei post precedenti abbiamo introdotto il Desktop Bridge, ovvero
+In uno degli articoli precedenti abbiamo introdotto il Desktop Bridge, ovvero
 la serie di tool rilasciati con l’Anniversary Update di Windows 10 che
 consentono di creare un ponte tra le applicazioni Win32 e la Universal
 Windows Platform, permettendoci di sfruttare i vantaggi di entrambi i
 mondi. Non ripeterò quali sono i vantaggi nell’adozione di questa
 tecnologia o quali sono i meccanismi di conversione supportati al
-momento: queste (e altre) domande trovano risposta nel post precedente.
+momento: queste (e altre) domande trovano risposta nell'articolo precedente.
 
-Al termine del post avevamo iniziato ad avviare la procedura di
+Al termine dell'articolo avevamo iniziato ad avviare la procedura di
 installazione del Desktop App Converter, ovvero uno degli strumenti
 messi a disposizione dal bridge, che ci permette di prendere
-un’installer (come un exe o un msi) e convertirlo in un’applicazione
+un installer (come un exe o un msi) e convertirlo in un’applicazione
 UWP, che può essere poi pacchettizzata e distribuita tramite un file
-AppX. Ancora una volta, vi rimando al post precedente per seguire i vari
+AppX. Ancora una volta, vi rimando all'articolo precedente per seguire i vari
 passaggi di configurazione, che vi porteranno ad avere il Desktop App
 Converter (insieme ai tool di sviluppo per la Universal Windows
 Platform) installato e pronto per essere utilizzato. Per testare il
@@ -38,7 +38,7 @@ ricordo, sono elencati nella documentazione ufficiale MSDN:
 <https://msdn.microsoft.com/en-us/windows/uwp/porting/desktop-to-uwp-root>
 
 Per semplificare la procedura di conversione di cui andrò a parlarvi in
-questo post, partiremo dall’installer di una semplice applicazione
+questo articolo, partiremo dall’installer di una semplice applicazione
 Windows Forms che ho realizzato e che è scaricabile da GitHub
 all’indirizzo
 <https://github.com/qmatteoq/DesktopBridge/blob/master/1.%20Desktop%20App%20Converter/HelloCentennial.msi>
@@ -73,7 +73,7 @@ amministratore, nella quale dobbiamo posizionarci, come percorso, nella
 cartella in cui abbiamo scompattato il Desktop App Converter. Ecco il
 comando da eseguire che ci permetterà di effettuare la conversione:
 
-``` {.brush: .ps;}
+```ps
 PS C:\>.\DesktopAppConverter.ps1 -Installer C:\Installer\HelloCentennial.msi -Destination C:\Output\HelloCentennial -PackageName "HelloCentennial" -Publisher "CN=<publisher_name>" -Version 1.0.0.0 -MakeAppx -Verbose -Sign
 ```
 
@@ -127,7 +127,7 @@ silenziosa. Ipotizzando, invece, che non sia questo il caso e che
 l’installer vada lanciato con il comando **Setup.exe /s**, il comando
 Powershell da eseguire sarebbe:
 
-``` {.brush: .ps;}
+```ps
 PS C:\>.\DesktopAppConverter.ps1 -Installer C:\Installer\Setup.exe -Destination C:\Output\HelloCentennial -PackageName "HelloCentennial" -Publisher "CN=<publisher_name>" -Version 1.0.0.0 -MakeAppx -Verbose -Sign -InstallerArguments "/s"
 ```
 
@@ -210,7 +210,7 @@ utenti, distribuire all’interno di un ambiente enterprise o pubblicare
 sullo Store, previa autorizzazione da parte di Microsoft.
 
 Facendo doppio clic sul file **HelloCentennial.appx** potrete vedere in
-azione la novità dell’Anniversary Update riportata nel post precedente:
+azione la novità dell’Anniversary Update riportata nell'articolo precedente:
 ora i pacchetti AppX possono essere installati direttamente con un setup
 visuale, senza dover passare per l’esecuzione di script Powershell, come
 potete vedere nell’immagine seguente:
@@ -222,7 +222,7 @@ subito che c’è qualcosa che non va:
 
 ![image\_thumb12](img/desktop-bridge-utilizzare-il-desktop-app-converter/image_thumb12_thumb1.png)
 
-Se ricordate quanto detto nel post precedente, dovreste capirne il
+Se ricordate quanto detto nell'articolo precedente, dovreste capirne il
 motivo: le nuove funzionalità dell’Anniversary Update consentono una
 distribuzione e installazione molto più semplice dei pacchetti AppX ma,
 per una questione di sicurezza dell’utente finale, questo non vi esenta
@@ -420,7 +420,7 @@ precedenza con l’utilizzo dello strumento **signtool.exe**
 
 ### In conclusione
 
-Nel corso di questo post abbiamo visto come utilizzare, in maniera più
+Nel corso di questo articolo abbiamo visto come utilizzare, in maniera più
 approfondita, il Desktop App Converter per trasformare una classica
 applicazione Win32 in un pacchetto AppX, dandoci la possibilità perciò
 di espanderla aggiungendo alcune funzionalità tipiche del mondo UWP

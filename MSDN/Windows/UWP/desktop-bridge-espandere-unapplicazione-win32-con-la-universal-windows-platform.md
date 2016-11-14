@@ -12,22 +12,22 @@ ms.custom: CommunityDocs
 # Desktop Bridge: Espandere un’applicazione Win32 con la UWP
 
 
-*Questo post è stato scritto da [Matteo
+*Questo articolo è stato scritto da [Matteo
 Pagani](http://twitter.com/qmatteoq), Windows AppConsult Engineer in
 Microsoft*
 
-[Nel post
-precedente](https://blogs.msdn.microsoft.com/italy/2016/09/22/guest-post-desktop-bridge-convertire-unapplicazione/)
+[Nell'articolo
+precedente](desktop-bridge-convertire-unapplicazione.md)
 abbiamo imparato a sfruttare il Desktop Bridge per convertire
 un’applicazione in maniera manuale, senza passare per il Desktop App
 Converter e un installer: si tratta dell’approccio da utilizzare quando
 il punto di partenza della conversione è un eseguibile o, più in
 generale, un’applicazione Win32 da noi sviluppata, di cui possediamo il
-codice sorgente. Nei post precedenti, avevamo usato, ad esempio, come
+codice sorgente. Negli articoli precedenti, avevamo usato, ad esempio, come
 punto di partenza un’applicazione Windows Forms.
 
-In questo post riprenderemo i concetti visti [nel post
-precedente](https://blogs.msdn.microsoft.com/italy/2016/09/22/guest-post-desktop-bridge-convertire-unapplicazione/)
+In questo articolo riprenderemo i concetti visti [nell'articolo
+precedente](desktop-bridge-convertire-unapplicazione.md)
 ma, questa volta, inizieremo ad espandere l’applicazione Win32 per
 sfruttare alcune delle funzionalità offerte dalla Universal Windows
 Platform. Uno sviluppatore desktop potrebbe chiedersi, a questo punto,
@@ -38,7 +38,7 @@ Win32, che potrebbero perciò rendere difficoltoso il lavoro dello
 sviluppatore.
 
 Abbiamo già visto [nel corso del primo
-post](https://blogs.msdn.microsoft.com/italy/2016/09/15/guest-post-desktop-bridge-il-ponte-tra-le-applicazioni-win32-e-la-universal-windows-platform/)
+articolo](desktop-bridge-il-ponte-tra-le-applicazioni-win32-e-la-universal-windows-platform.md)
 i numerosi vantaggi portati dalla conversione del Desktop Bridge, come
 la maggiore efficienza del meccanismo di deployment (installazione e
 disinstallazione) e la maggiore sicurezza, dovuta al fatto che le app
@@ -78,7 +78,7 @@ ovvero le notifiche push.
 Come potete vedere, ci sono decine di scenari nei quali integrare API
 della Universal Windows Platform all’interno di un’applicazione Win32
 potrebbe semplificarvi parecchio la vita. Perciò, facciamolo! In questo
-articolo partiremo dalla stessa applicazione Windows Forms del post
+articolo partiremo dalla stessa applicazione Windows Forms dell'articolo
 precedente, ma aggiungeremo una nuova feature: ogni volta che il file di
 testo viene creato sul desktop, mostreremo una notifica toast all’utente
 per confermare l’esito dell’operazione.
@@ -87,7 +87,7 @@ per confermare l’esito dell’operazione.
 
 Come appena citato, il punto di partenza per il nostro esperimento sarà
 l’applicazione Windows Forms creata [nel precedente
-post](https://blogs.msdn.microsoft.com/italy/2016/09/22/guest-post-desktop-bridge-convertire-unapplicazione/),
+articolo](desktop-bridge-convertire-unapplicazione.md),
 che potete scaricare da GitHub all’indirizzo
 <https://github.com/qmatteoq/DesktopBridge/tree/master/3.%20Convert>. Vi
 ricordo solamente che, per lavorare su questa applicazione di esempio,
@@ -171,7 +171,7 @@ il metodo **Show()**, che ci serve per mostrare la notifica vera e
 propria che abbiamo appena creato.
 
 Ora che abbiamo creato questo metodo, siamo pronti per modificare il
-codice che avevamo scritto nel post precedente per creare il file di
+codice che avevamo scritto nell'articolo precedente per creare il file di
 testo sul desktop dell’utente:
 
 ```csharp
@@ -471,7 +471,7 @@ un’applicazione Win32. Vi segnalo due link importanti:
 
 -   Nel mio repository GitHub, all’indirizzo
     <https://github.com/qmatteoq/DesktopBridge/tree/master/4.%20Enhance>,
-    troverete l’applicazione di esempio utilizzata in questo post.
+    troverete l’applicazione di esempio utilizzata in questo articolo.
 -   All’indirizzo
     <https://msdn.microsoft.com/en-us/windows/uwp/porting/desktop-to-uwp-supported-api>
     troverete l’elenco ufficiale di tutte le API della Universal Windows

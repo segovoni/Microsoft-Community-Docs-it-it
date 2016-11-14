@@ -11,7 +11,7 @@ ms.custom: CommunityDocs
 
 # Desktop Bridge: diversi processi, un solo container 
 
-*Questo post è stato scritto da [Matteo
+*Questo articolo è stato scritto da [Matteo
 Pagani](http://twitter.com/qmatteoq), Windows AppConsult Engineer in
 Microsoft*
 
@@ -24,7 +24,7 @@ più solamente un unico processo in esecuzione come nei casi precedenti
 UWP), ma due veri e propri processi separati: l’applicazione Win32 e il
 processo backgroundTaskHost.exe che gestisce il background task.
 
-Lo scopo di questo post è quello di sottolineare e aiutarvi a capire con
+Lo scopo di questo articolo è quello di sottolineare e aiutarvi a capire con
 due esempi concreti che, anche se si tratta di più processi separati,
 quando girano come pacchetti AppX sono eseguiti in realtà all’interno
 dello stesso container della Universal Windows Platform, come mostra
@@ -108,7 +108,7 @@ private async void OnRegisterTask(object sender, EventArgs e)
 }
 ```
 
-La novità rispetto al codice che abbiamo visto nel post precedente sta
+La novità rispetto al codice che abbiamo visto nell'articolo precedente sta
 nelle prime righe: se il contenuto della proprietà **Text** del
 controllo di nome **txtMessage** non è vuoto, allora lo aggiungiamo
 all’interno dei setting locali. Le API UWP per gestire i setting sono
@@ -117,7 +117,7 @@ molto semplici: possiamo accedere tramite la classe
 di nome **Values** che è un semplice dizionario, ovvero un insieme di
 coppie chiave / valore. In questo caso, aggiungiamo un elemento che ha,
 come chiave, la stringa **message** e, come valore, il testo inserito
-dall’utente. Il resto del codice è identico a quello del post precedente
+dall’utente. Il resto del codice è identico a quello dell'articolo precedente
 ed è quello che si fa carico di registrare il background task.
 
 ### Il background task
@@ -185,7 +185,7 @@ utilizziamo prima il metodo **ContainsKey()** sulla collezione
 **ApplicationData.Current.LocalSettings.Values** per verificare che
 esista veramente un elemento identificato dalla chiave **message.** In
 caso affermativo, lo recuperiamo e lo salviamo in una variabile. Il
-resto del codice è praticamente identico a quello del post precedente,
+resto del codice è praticamente identico a quello dell'articolo precedente,
 con una differenza: in entrambi i casi, nel payload XML della notifica
 tile e toast abbiamo aggiunto un nuovo elemento di tipo **text** con, al
 suo interno, il messaggio recuperato dai setting.
@@ -197,7 +197,7 @@ suo interno, il messaggio recuperato dai setting.
 Il gioco è fatto: ora ricompilate la soluzione, lanciate il progetto di
 deploy di Visual Studio 15 Preview e, questa volta, prima di premere il
 pulsante di registrazione del task scrivete un messaggio all’interno
-della casella di testo. Ora ripetete l’esperimento del post precedente:
+della casella di testo. Ora ripetete l’esperimento dell'articolo precedente:
 andate nei Setting di Windows e cambiate la time zone. Questa volta, sia
 la tile che la notifica toast, oltre al titolo e alla data e ora di
 ultimo aggiornamento, conterranno il messaggio personalizzato che avete
@@ -211,7 +211,7 @@ notification](img/desktop-bridge-diversi-processi-un-solo-container/timezone-not
 Vediamo ora un altro esempio di gestione del container UWP, legato ad un
 approccio più tradizionale: in questo caso non coinvolgeremo alcuna API
 UWP, ma solo API standard del framework .NET. Come abbiamo imparato nei
-primi post della serie, le applicazioni convertite tramite il Desktop
+primi articoli della serie, le applicazioni convertite tramite il Desktop
 Bridge girano all’interno di un container, ovvero di un contesto
 virtualizzato: file system e registro verranno astratti e uniti, in
 tempo reale, con quello di sistema. In questo modo, l’applicazione avrà
@@ -263,8 +263,8 @@ cartella di nome **Matteo Pagani**) e, questa volta, aggiungiamo un
 progetto di deployment UWP all’interno della nostra soluzione e
 configuriamolo affinché ci permetta di lanciare l’applicazione Windows
 Forms appena creata all’interno del container UWP (trovate tutte le
-indicazioni su come farlo [in uno dei post precedenti della
-serie](https://blogs.msdn.microsoft.com/italy/2016/09/22/guest-post-desktop-bridge-convertire-unapplicazione/)).
+indicazioni su come farlo [in uno degli articoli precedenti della
+serie](desktop-bridge-convertire-unapplicazione.md)).
 Ora rilanciamo l’applicazione, questa volta impostando come progetto di
 startup quello di deployment, e premiamo nuovamente il pulsante per
 creare la chiave di registro. L’operazione andrà a buon fine e non
@@ -398,12 +398,12 @@ avevamo visto nel primo esempio) ma anche nello stesso registro.
 
 ### In conclusione
 
-Nel corso di questo post abbiamo approfondito il concetto di container
+Nel corso di questo articolo abbiamo approfondito il concetto di container
 UWP all’interno del quale girano le applicazioni convertite tramite uno
 qualsiasi degli approcci del desktop bridge. Nel primo caso, abbiamo
 visto due processi differenti (un’applicazione Windows Forms e un
 background task) accedere allo stesso file system: come demo, abbiamo
-esteso il progetto su GitHub creato nel post precedente e disponibile
+esteso il progetto su GitHub creato nell'articolo precedente e disponibile
 all’indirizzo precedente
 <https://github.com/qmatteoq/DesktopBridge/tree/master/5.%20Extend>. Nel
 secondo caso, invece, abbiamo visto due applicazioni Windows Forms

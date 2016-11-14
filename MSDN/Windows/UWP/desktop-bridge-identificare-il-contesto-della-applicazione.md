@@ -12,12 +12,12 @@ ms.custom: CommunityDocs
 # Desktop Bridge – Identificare il contesto dell’applicazione 
 
 
-*Questo post è stato scritto da [Matteo
+*Questo articolo è stato scritto da [Matteo
 Pagani](http://twitter.com/qmatteoq), Windows AppConsult Engineer in
 Microsoft*
 
-[Nei post
-precedenti](https://blogs.msdn.microsoft.com/italy/2016/09/23/guest-post-desktop-bridge-espandere-unapplicazione-win32-con-la-universal-windows-platform/)
+[Nell'articolo
+precedente](desktop-bridge-espandere-unapplicazione-win32-con-la-universal-windows-platform.md)
 abbiamo visto come il Desktop Bridge ci offra la possibilità non solo di
 includere la nostra applicazione desktop tradizionale così com’è
 all’interno di un container UWP ed, eventualmente, di pubblicarla sullo
@@ -35,8 +35,8 @@ vogliamo aggiungere una nuova feature (soprattutto nel caso in cui non
 sia legata a Windows 10, quindi necessaria per entrambe le versioni)
 dobbiamo duplicare i nostri sforzi.
 
-Nel corso [del post
-precedente](https://blogs.msdn.microsoft.com/italy/2016/09/23/guest-post-desktop-bridge-espandere-unapplicazione-win32-con-la-universal-windows-platform/)
+Nel corso [dell'articolo
+precedente](desktop-bridge-espandere-unapplicazione-win32-con-la-universal-windows-platform.md)
 abbiamo visto un primo approccio per evitare di dover mantenere due
 branch completamente separate: la compilazione condizionale. Grazie ad
 essa, possiamo usare le keyword **\#if** e **\#endif** oppure marcare
@@ -46,7 +46,7 @@ l’applicazione viene compilata per essere poi inclusa all’interno di un
 pacchetto AppX.
 
 Avevamo implementato un caso reale di questa funzionalità
-nell’applicazione utilizzata come esempio per il post precedente,
+nell’applicazione utilizzata come esempio per l'articolo precedente,
 disponibile su GitHub all’indirizzo
 <https://github.com/qmatteoq/DesktopBridge/tree/master/4.%20Enhance>
 L’applicazione includeva un pulsante per creare un file sul desktop
@@ -131,7 +131,7 @@ int __cdecl wmain()
 
 Come vedete, se il contesto in cui state lavorando è quello di
 un’applicazione .NET scritta in C\# (come quella di esempio utilizzata
-nei post precedenti), sorge una complessità: non si tratta di una API
+negli articoli precedenti), sorge una complessità: non si tratta di una API
 resa disponibile dal framework .NET, ma di un metodo nativo offerto da
 Windows in C++. Di conseguenza, utilizzarlo all’interno di
 un’applicazione managed non è così semplice utilizzarla: bisogna
@@ -226,8 +226,8 @@ messaggio *I’m running inside a UWP container*.
 
 Questa libreria può essere utile anche per un altro scenario: evitare
 errori in fase di deployment quando utilizzate la compilazione
-condizionale. [Se avete letto il post precedente con
-attenzione](https://blogs.msdn.microsoft.com/italy/2016/09/23/guest-post-desktop-bridge-espandere-unapplicazione-win32-con-la-universal-windows-platform/),
+condizionale. [Se avete letto l'articolo precedente con
+attenzione](desktop-bridge-espandere-unapplicazione-win32-con-la-universal-windows-platform.md),
 ricorderete infatti che, lanciando direttamente l’applicazione Windows
 Forms utilizzando, però, la configurazione **DesktopUWP**, si otteneva
 in fase di creazione del file su desktop un’eccezione: questo perché,

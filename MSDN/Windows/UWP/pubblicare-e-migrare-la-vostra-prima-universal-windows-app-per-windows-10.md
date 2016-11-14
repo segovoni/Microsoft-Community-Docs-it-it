@@ -11,7 +11,7 @@ ms.custom: CommunityDocs
 
 # Pubblicare e migrare la vostra prima Universal Windows app per Windows 10
 
-*Questo post è stato scritto da [Matteo
+*Questo articolo è stato scritto da [Matteo
 Pagani](https://twitter.com/qmatteoq), Support Engineer in
 Microsoft per il programma AppConsult.*
 

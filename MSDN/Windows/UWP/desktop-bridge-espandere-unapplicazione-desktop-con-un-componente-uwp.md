@@ -12,12 +12,12 @@ ms.custom: CommunityDocs
 # Desktop Bridge: Espandere un’applicazione desktop con un componente UWP
 
 
-*Questo post è stato scritto da [Matteo
+*Questo articolo è stato scritto da [Matteo
 Pagani](http://twitter.com/qmatteoq), Windows AppConsult Engineer in
 Microsoft*
 
-[In uno dei post
-precedenti](https://blogs.msdn.microsoft.com/italy/2016/09/23/guest-post-desktop-bridge-espandere-unapplicazione-win32-con-la-universal-windows-platform/)
+[In uno degli articoli
+precedenti](desktop-bridge-espandere-unapplicazione-win32-con-la-universal-windows-platform.md)
 abbiamo visto come sia possibile, grazie al Desktop Bridge, espandere
 un’applicazione desktop tradizionale con le API della Universal Windows
 Platform. Quando un’applicazione Win32, infatti, gira all’interno del
@@ -26,7 +26,7 @@ Forms), abbiamo la possibilità di sfruttare alcune delle API di nuova
 generazione, come quelle per inviare notifiche toast o sfruttare i
 servizi di speech.
 
-Nel corso di questo post vedremo un’altra tipologia di espansione: non
+Nel corso di questo articolo vedremo un’altra tipologia di espansione: non
 più l’utilizzo di semplici API, ma di veri e propri componenti specifici
 del mondo UWP, come i background task.
 
@@ -93,7 +93,7 @@ a delineare in questo post. Potete approfondire il funzionamento dei
 background task grazie alla documentazione ufficiale all’indirizzo
 <https://msdn.microsoft.com/en-us/windows/uwp/launch-resume/support-your-app-with-background-tasks>
 
-Se state leggendo questo post probabilmente siete sviluppatori desktop e
+Se state leggendo questo articolo probabilmente siete sviluppatori desktop e
 vi potreste stare chiedendo perché dovreste sentire il bisogno di
 integrare un background task in un’applicazione Win32: dato che non
 avete le limitazioni di un’app UWP, potete eseguire il vostro codice in
@@ -125,7 +125,7 @@ un’applicazione desktop tradizionale:
     quelli legati alla connessone con dispostivi Bluetooth, al cambio di
     tipologia di connettività, al cambio di time zone, ecc.
 
-Nel corso di questo post vedremo come implementare uno di questi
+Nel corso di questo articolo vedremo come implementare uno di questi
 scenari: l’applicazione Windows Forms registrerà un background task, che
 sarà invocato ogni volta che la time zone del device cambierà. Nel
 momento in cui si verificherà questo evento, il task si farà carico di
