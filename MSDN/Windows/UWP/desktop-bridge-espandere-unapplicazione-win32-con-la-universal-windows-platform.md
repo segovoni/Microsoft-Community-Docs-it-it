@@ -38,7 +38,7 @@ Win32, che potrebbero perciò rendere difficoltoso il lavoro dello
 sviluppatore.
 
 Abbiamo già visto [nel corso del primo
-articolo](desktop-bridge-il-ponte-tra-le-applicazioni-win32-e-la-universal-windows-platform.md)
+articolo](desktop-bridge-il-ponte-tra-le-applicazioni-win32-e-la-UWP.md)
 i numerosi vantaggi portati dalla conversione del Desktop Bridge, come
 la maggiore efficienza del meccanismo di deployment (installazione e
 disinstallazione) e la maggiore sicurezza, dovuta al fatto che le app
