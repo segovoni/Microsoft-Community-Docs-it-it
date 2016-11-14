@@ -20,7 +20,7 @@
     {
       "docset_name": "TN_Community",
       "build_source_folder": "TechNet",
-      "build_output_subfolder": "TechNet",
+      "build_output_subfolder": "communitydocs",
       "locale": "it-it",
       "version": 0,
       "open_to_public_contributors": false,
