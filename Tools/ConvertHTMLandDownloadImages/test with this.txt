@@ -8,6 +8,7 @@ or this
 
 ./dlconv.ps1 -URL "https://blogs.msdn.microsoft.com/italy/2016/09/22/guest-post-desktop-bridge-convertire-unapplicazione/" -oProject "desktop-bridge-convertire-unapplicazione" -imageFolder img
 
+./dlconv.ps1 -URL "https://msdn.microsoft.com/pt-br/library/mt621160.aspx" -oProject "Crie-um-Experimento-com-o-Azure-Machine-Learning" -imageFolder img
 
 =======================================
 temp notes
