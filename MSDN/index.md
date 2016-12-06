@@ -25,6 +25,7 @@ Il progetto iniziale nasce con la pubblicazione degli articoli sulla [Library](h
 La conversione degli articoli è "work in progress" - quelli identificati con un (*) nell'indice si riferiscono all copia nella Library MSDN e non sono editabili.
 
 Di seguito trovate in evidenza l’elenco degli articoli più recenti
+- [Desktop Bridge: convertire un’applicazione manualmente o con Visual Studio 2017](Windows/UWP/desktop-bridge-convertire-unapplicazione-2.md)
 - [Desktop Bridge: diversi processi, un solo container](Windows/UWP/desktop-bridge-diversi-processi-un-solo-container.md) - di Matteo Pagani
 - [Desktop Bridge: Espandere un’applicazione desktop con un componente UWP](Windows/UWP/desktop-bridge-espandere-unapplicazione-desktop-con-un-componente-uwp.md) - di Matteo Pagani
 - [Desktop Bridge: Identificare il contesto dell'Applicazione](Windows/UWP/desktop-bridge-identificare-il-contesto-della-applicazione.md) - di Matteo Pagani
