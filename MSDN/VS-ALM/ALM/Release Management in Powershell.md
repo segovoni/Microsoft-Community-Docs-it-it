@@ -2,7 +2,7 @@
 title: Utilizzare Release Management con script PowerShell
 description: Come strutturare il proprio software per supportare il rilascio automatico con scripts PowerShell
 author: alkampfergit
-ms.date: 18/01/2017
+ms.date: 01/18/2017
 ms.topic: how-to-article
 ms.service: ALM
 ms.custom: CommunityDocs
@@ -27,7 +27,7 @@ Scenario standard: rilascio di una applicazione non web
 
 Quando si parla di Release Management (nella versione VSTS e TFS 2017 o superiore) l'esempio più classico è quello di una applicazione web hostata su Azure o su IIS, ma su progetti reali molto spesso è necessario **rilasciare semplici applicazioni di tipo Console o Desktop**. 
 
-Grazie al self host offerto da Owin e Katana è anche possibile **creare una applicazione web basata su paradigma SPA (Single Page Application) che si appoggia ad API di tipo ASP.NET Web Api hostate direttamente in un applicativo Desktop**, spesso di tipo Console. Usando librerie come [TopShelf](https://github.com/Topshelf/Topshelf)si può facilmente installare e configurare l'applicativo come servizio di Windows.
+Grazie al self host offerto da Owin e Katana è anche possibile **creare una applicazione web basata su paradigma SPA (Single Page Application) che si appoggia ad API di tipo ASP.NET Web Api hostate direttamente in un applicativo Desktop**, spesso di tipo Console. Usando librerie come [TopShelf](https://github.com/Topshelf/Topshelf) si può facilmente installare e configurare l'applicativo come servizio di Windows.
 
 Questo tipo di applicazioni richiede talvolta installazioni leggermente più complesse, che possono comunque essere automatizzate utilizzando un linguaggio di scripting come PowerShell. L'uso di tecnologie come PowerShell, al posto di adottare sistemi di packaging proprietari (come potrebbero essere quelli di Octopus o similari), permette di generare uno script di installazione che può essere eseguito in qualsiasi ambiente e non richiede nessuna dipendenza.
  
