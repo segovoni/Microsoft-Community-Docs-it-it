@@ -1,8 +1,8 @@
 ---
 title: Utilizzare Release Management con script PowerShell
 description: Come strutturare il proprio software per supportare il rilascio automatico con scripts PowerShell
-author: MSCommunityPubService
-ms.date: 08/01/2016
+author: alkampfergit
+ms.date: 18/01/2017
 ms.topic: how-to-article
 ms.service: ALM
 ms.custom: CommunityDocs
@@ -20,7 +20,7 @@ Blog Italiano: <http://blogs.ugidotnet.org/rgm>
 
 ![](./img/MVPLogo.png)
 
-*Agosto, 2013*
+*Gennaio, 2017*
 
 Scenario standard: rilascio di una applicazione non web
 ----------------------------------------------------
