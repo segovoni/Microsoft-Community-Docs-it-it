@@ -1,4 +1,5 @@
-﻿# [Agile IoT - Agile meets IoT](AgileIOT.md)
+﻿# [Utilizzare Release Management con script PowerShell](Release-Management-in-Powershell.md)
+# [Agile IoT - Agile meets IoT](AgileIOT.md)
 # [Creare un Task personalizzato per la nuova build di TFS2015 / Visual Studio Team Services](CreareEstensioniPerBuild.md)
 # [Rilasciare un package ClickOnce su un Blob di Windows Azure con la build vNext](DeployClickOnce.md)
 # [DevOps Jump Start - Adottare concretamente DevOps](DevOps-Adopt.md)
