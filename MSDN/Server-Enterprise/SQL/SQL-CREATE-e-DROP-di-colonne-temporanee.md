@@ -176,49 +176,31 @@ END;
 GO
 ```
 
-Dopo alcuni mesi di lavoro della stored procedure (in produzione), è
-stato raggiunto il limite massimo degli identificativi univoci (ID)
+Dopo alcuni mesi di lavoro della stored procedure (in produzione), è stato raggiunto il limite massimo degli identificativi univoci (ID)
 assegnabili in fase di creazione di una nuova colonna.
 
-**Non** era quindi più possibile **aggiungere colonne alla tabella**
-dbo.ShippingHeader. SQL Server restituiva il messaggio di errore
-indicato in precedenza perché il contatore colid della tabella di
-sistema sys.syscolpars **non poteva essere incrementato** in quanto
+**Non** era quindi più possibile **aggiungere colonne alla tabella** dbo.ShippingHeader. SQL Server restituiva il messaggio di errore
+indicato in precedenza perché il contatore colid della tabella di sistema sys.syscolpars **non poteva essere incrementato** in quanto
 raggiunto il limite massimo di valori rappresentabili.
 
-La colonna colid, nella versione 2005 di SQL Server, è di tipo smallint
-e con questo tipo di dato si possono rappresentare positivamente 2\^15 -
-1 elementi, ossia 32.767 dopo qualche mese, il cliente aveva inserito
-più di 32.767 documenti di trasporto!
+La colonna colid, nella versione 2005 di SQL Server, è di tipo smallint e con questo tipo di dato si possono rappresentare positivamente 2\^15 - 1 elementi, ossia 32.767 dopo qualche mese, il cliente aveva inserito più di 32.767 documenti di trasporto!
 
 Messaggio di Errore 1701 (SQL Server 2012)
 ==========================================
 
-In SQL Server 2012, il tipo di dato della colonna column\_id della vista
-sys.columns è Integer, può quindi rappresentare positivamente 2\^31 - 1
-elementi, molti di più di quelli che potevano essere rappresentati in
-precedenza, ma la nostra stored procedure prima di raggiungere il limite
-massimo restituisce il messaggio di errore illustrato nella figura
-seguente.
+In SQL Server 2012, il tipo di dato della colonna column\_id della vista sys.columns è Integer, può quindi rappresentare positivamente 2\^31 - 1 elementi, molti di più di quelli che potevano essere rappresentati in precedenza, ma la nostra stored procedure prima di raggiungere il limite massimo restituisce il messaggio di errore illustrato nella figura seguente.
 
 ![](./img/SQL-CREATE-e-DROP-di-colonne-temporanee/image3.png)
 
 Figura 2 – Messaggio di Errore 1701 (SQL Server 2012)
 
-Dopo aver modificato la stored procedure che implementa la logica di
-generazione dei documenti di trasporto, per non eseguire l’ADD e il DROP
-di una colonna temporanea ad ogni esecuzione, ci siamo subito posti il
-problema di come poter applicare futuri aggiornamenti (aggiunta di nuove
-colonne) alla tabella dbo.ShippingHeader.
+Dopo aver modificato la stored procedure che implementa la logica digenerazione dei documenti di trasporto, per non eseguire l'ADD e il DROP di una colonna temporanea ad ogni esecuzione, ci siamo subito posti il problema di come poter applicare futuri aggiornamenti (aggiunta di nuove colonne) alla tabella dbo.ShippingHeader.
 
 Soluzione
 =========
 
-La soluzione adottata consiste nel ricreare la tabella
-dbo.ShippingHeader. Ricreando la tabella, il contatore colid (column\_id
-nella vista sys.columns) verrà resettato. L’assegnazione dei prossimi
-identificativi univoci (ID) ripartirà dal valore successivo a quello
-estratto nella colonna MAX\_ColID nel seguente comando T-SQL:
+La soluzione adottata consiste nel ricreare la tabella dbo.ShippingHeader. Ricreando la tabella, il contatore colid (column\_id
+nella vista sys.columns) verrà resettato. L’assegnazione dei prossimi identificativi univoci (ID) ripartirà dal valore successivo a quello estratto nella colonna MAX\_ColID nel seguente comando T-SQL:
 
 ```SQl
 USE [tempdb];
@@ -246,34 +228,27 @@ nell’ordine, le seguenti attività:
 Duplicazione della tabella e copia dei dati 
 ===========================================
 
-Per duplicare (copiando i dati) la tabella dbo.ShippingHeader abbiamo
-utilizzato il Tool di [Importazione/Esportazione guidata di SQL
+Per duplicare (copiando i dati) la tabella dbo.ShippingHeader abbiamoutilizzato il Tool di [Importazione/Esportazione guidata di SQL
 Server](http://msdn.microsoft.com/it-it/library/ms188032(v=sql.105).aspx).
 
-Completata la procedura, il database conterrà una nuova tabella che in
-questo esempio abbiamo chiamato dbo.ShippingHeader2 come illustra la
+Completata la procedura, il database conterrà una nuova tabella che inquesto esempio abbiamo chiamato dbo.ShippingHeader2 come illustra la
 figura seguente.
 
 ![](./img/SQL-CREATE-e-DROP-di-colonne-temporanee/image4.png)
 
-Figura 3 – Tabella dbo.ShippingHeader2 (copia dalle
-    tabella dbo.ShippingHeader)
+Figura 3 – Tabella dbo.ShippingHeader2 (copia dalle tabella dbo.ShippingHeader)
 
 Eliminazione delle integrità referenziali definite su dbo.ShippingHeader
 ========================================================================
 
-Per ottenere, in modo semplice e veloce, i comandi di eliminazione delle
-integrità referenziali definite sulla tabella dbo.ShippingHeader abbiamo
-utilizzato le funzioni di scripting di SQL Server, in particolare
-abbiamo utilizzato la funzione di generazione del codice per le
+Per ottenere, in modo semplice e veloce, i comandi di eliminazione delle integrità referenziali definite sulla tabella dbo.ShippingHeader abbiamo utilizzato le funzioni di scripting di SQL Server, in particolare abbiamo utilizzato la funzione di generazione del codice per le
 istruzioni DROP e CREATE, come illustrato in figura 4.
 
 ![](./img/SQL-CREATE-e-DROP-di-colonne-temporanee/image5.png)
 
 Figura 4 – Funzioni di scripting di SQL Server
 
-Abbiamo quindi eseguito la cancellazione dei vincoli definiti sulla la
-tabella dbo.ShippingHeader, il seguente frammento di codice T-SQL
+Abbiamo quindi eseguito la cancellazione dei vincoli definiti sulla tabella dbo.ShippingHeader, il seguente frammento di codice T-SQL
 riporta gli statement eseguiti:
 
 ```SQL
@@ -324,8 +299,7 @@ GO
 Eliminazione della tabella dbo.ShippingHeader
 =============================================
 
-Dopo aver eliminato i vincoli (integrità referenziali e di dominio), è
-stato possibile eliminare la tabella dbo.ShippingHeader.
+Dopo aver eliminato i vincoli (integrità referenziali e di dominio), è stato possibile eliminare la tabella dbo.ShippingHeader.
 
 ```SQL
 USE [tempdb]
@@ -338,8 +312,7 @@ GO
 Rinomina (in dbo.ShippingHeader) della tabella precedentemente copiata
 ======================================================================
 
-Per rinominare la tabella dbo.ShippingHeader2 in dbo.ShippingHeader,
-abbiamo utilizzato la stored procedure di sistema
+Per rinominare la tabella dbo.ShippingHeader2 in dbo.ShippingHeader,abbiamo utilizzato la stored procedure di sistema
 [sp\_rename](http://msdn.microsoft.com/en-us/library/ms188351.aspx) che
 consente di modificare il nome di un oggetto creato dall’utente, nel
 database corrente. Il seguente comando T-SQL illustra l’utilizzo di
@@ -407,25 +380,17 @@ GO
 Conclusioni
 ===========
 
-L’utilizzo **ciclico** di una **colonna temporanea creata** e
-**distrutta** su una tabella, ad esempio, per ogni esecuzione di una
-stored procedure o in generale per ogni esecuzione di una determinata
-elaborazione **non è una buona pratica di programmazione**.
+L’utilizzo **ciclico** di una **colonna temporanea creata** e **distrutta** su una tabella, ad esempio, per ogni esecuzione di una
+stored procedure o in generale per ogni esecuzione di una determinata elaborazione **non è una buona pratica di programmazione**.
 
-Lo scenario descritto rappresenta una semplificazione di un caso reale,
-non abbiamo trattato la rigenerazione di eventuali indici definiti nella
-tabella dbo.ShippingHeader.
+Lo scenario descritto rappresenta una semplificazione di un caso reale, non abbiamo trattato la rigenerazione di eventuali indici definiti nella tabella dbo.ShippingHeader.
 
-Prima di eseguire la procedura descritta in un ambiente di produzione è
-necessario averla provata in modo completo su un backup del DB in
+Prima di eseguire la procedura descritta in un ambiente di produzione è necessario averla provata in modo completo su un backup del DB in
 ambiente di test.
 
-#### di [Sergio Govoni](http://mvp.microsoft.com/en-us/mvp/Sergio%20Govoni-4029181) - Microsoft MVP
+#### di [Sergio Govoni](http://mvp.microsoft.com/en-us/mvp/Sergio%20Govoni-4029181) - Microsoft Data Platform MVP
 
-Blog: <http://www.ugiss.org/sgovoni/>
+Blog: <http://sqlblog.com/blogs/sergio_govoni/default.aspx>
 
 Twitter: [@segovoni](https://twitter.com/segovoni)
-
-
-
 
