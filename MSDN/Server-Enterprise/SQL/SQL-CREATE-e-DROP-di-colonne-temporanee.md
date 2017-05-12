@@ -14,7 +14,9 @@ ms.custom: CommunityDocs
 
 #### di [Sergio Govoni](http://mvp.microsoft.com/en-us/mvp/Sergio%20Govoni-4029181) - Microsoft Data Platform MVP
 
-Blog: <http://sqlblog.com/blogs/sergio_govoni/default.aspx>
+English Blog: <http://sqlblog.com/blogs/sergio_govoni/default.aspx>
+
+UGISS Author: <https://www.ugiss.org/author/sgovoni/>
 
 Twitter: [@segovoni](https://twitter.com/segovoni)
 
@@ -26,7 +28,7 @@ Twitter: [@segovoni](https://twitter.com/segovoni)
 Introduzione
 ============
 
-La vista di sistema [sys.columns](http://msdn.microsoft.com/en-us/library/ms176106.aspx), come citano i books on-line, restituisce una riga per ogni colonna contenuta negli oggetti di un database che possono contenere colonne come, ad esempio, viste o tabelle. Gli oggetti database in grado di contenere colonne sono elencati di seguito:
+La vista di sistema [sys.columns](http://msdn.microsoft.com/en-us/library/ms176106.aspx), come citano i books on-line, restituisce una riga per ogni colonna contenuta negli oggetti di un database che possono contenere colonne come, ad esempio, viste o tabelle. Gli oggetti database in grado di contenere colonne sono i seguenti:
 
 -   Funzioni assembly con valori di tabella
 -   Funzioni in-line con valori di tabella
@@ -67,7 +69,7 @@ GO
 -- dbo.Product
 CREATE TABLE dbo.Product
 (
-ProductID VARCHAR(25) NOT NULL
+ ProductID VARCHAR(25) NOT NULL
 ,SafetyStockLevel SMALLINT NOT NULL
 ,Size VARCHAR(5) NULL
 ,ModifiedDate DATETIME NOT NULL DEFAULT GETDATE()
@@ -88,26 +90,21 @@ GO
 CREATE TABLE dbo.ShippingHeader
 (
 ShippingID INTEGER IDENTITY(1, 1) NOT NULL
-,ProductID VARCHAR(25) NOT NULL
-FOREIGN KEY (ProductID)
-REFERENCES dbo.Product(ProductID)
+,ProductID VARCHAR(25) NOT NULL FOREIGN KEY (ProductID) REFERENCES dbo.Product(ProductID)
 ,ShipDate DATETIME DEFAULT GETDATE() NOT NULL
 ,ShipNumber VARCHAR(20)
-,CustomerID INT DEFAULT(1) NOT NULL
-FOREIGN KEY (CustomerID)
-REFERENCES dbo.Customer(CustomerID)
+,CustomerID INT DEFAULT(1) NOT NULL FOREIGN KEY (CustomerID) REFERENCES dbo.Customer(CustomerID)
 ,ShipName VARCHAR(20) DEFAULT('Name')
 ,ShipAddress VARCHAR(40) DEFAULT('Address')
 ,ShipCity VARCHAR(20) DEFAULT('City')
 ,ShipPostalCode VARCHAR(20) DEFAULT('Postal code')
 ,ShipCountry VARCHAR(20) DEFAULT('Country')
-,DeliveryDate DATETIME DEFAULT GETDATE()
-PRIMARY KEY(ShippingID)
+,DeliveryDate DATETIME DEFAULT GETDATE() PRIMARY KEY(ShippingID)
 );
 GO
 ```
 
-La tabella dbo.ShippingHeader è utilizzata per memorizzare i documenti di trasporto emessi dall’azienda. Su questa tabella, **per ogni nuovo documento**, viene **creata e distrutta la colonna temporanea** TestField, utilizzata per salvare alcune informazioni durante la
+La tabella dbo.ShippingHeader è utilizzata per memorizzare i documenti di trasporto emessi dall'azienda. Su questa tabella, **per ogni nuovo documento**, viene **creata e distrutta la colonna temporanea TestField**, utilizzata per salvare alcune informazioni durante la
 generazione del DdT.
 
 La stored procedure di generazione DdT eseguiva un frammento di codice T-SQL simile a quello riportato di seguito, dove nei tratti commentati c'era la logica di generazione del documento.
@@ -160,16 +157,15 @@ GO
 Dopo alcuni mesi di lavoro della stored procedure (in produzione), è stato raggiunto il limite massimo degli identificativi univoci (ID)
 assegnabili in fase di creazione di una nuova colonna.
 
-**Non** era quindi più possibile **aggiungere colonne alla tabella** dbo.ShippingHeader. SQL Server restituiva il messaggio di errore
-indicato in precedenza perché il contatore colid della tabella di sistema sys.syscolpars **non poteva essere incrementato** in quanto
-raggiunto il limite massimo di valori rappresentabili.
+**Non** era quindi più possibile **aggiungere colonne** alla tabella dbo.ShippingHeader. SQL Server restituiva il messaggio di errore
+indicato in precedenza perché il contatore **colid** della tabella di sistema sys.syscolpars **non poteva essere incrementato** in quanto raggiunto il limite massimo di valori rappresentabili.
 
-La colonna colid, nella versione 2005 di SQL Server, è di tipo smallint e con questo tipo di dato si possono rappresentare positivamente 2\^15 - 1 elementi, ossia 32.767 dopo qualche mese, il cliente aveva inserito più di 32.767 documenti di trasporto!
+La colonna colid, nella versione 2005 di SQL Server, è di tipo smallint e con questo tipo di dato si possono rappresentare positivamente 2\^15 - 1 elementi, ossia 32.767. Dopo qualche mese, il cliente aveva inserito più di 32.767 documenti di trasporto!
 
 Messaggio di Errore 1701 (SQL Server 2012)
 ==========================================
 
-In SQL Server 2012, il tipo di dato della colonna column\_id della vista sys.columns è Integer, può quindi rappresentare positivamente 2\^31 - 1 elementi, molti di più di quelli che potevano essere rappresentati in precedenza, ma la nostra stored procedure prima di raggiungere il limite massimo restituisce il messaggio di errore illustrato nella figura seguente.
+Da SQL Server 2012, il tipo di dato della colonna column\_id della vista sys.columns è Integer, può quindi rappresentare positivamente 2\^31 - 1 elementi, molti di più di quelli che potevano essere rappresentati in precedenza, ma la nostra stored procedure prima di raggiungere il limite massimo restituisce il messaggio di errore illustrato nella figura seguente.
 
 ![](./img/SQL-CREATE-e-DROP-di-colonne-temporanee/image3.png)
 
@@ -181,29 +177,26 @@ Soluzione
 =========
 
 La soluzione adottata consiste nel ricreare la tabella dbo.ShippingHeader. Ricreando la tabella, il contatore colid (column\_id
-nella vista sys.columns) verrà resettato. L’assegnazione dei prossimi identificativi univoci (ID) ripartirà dal valore successivo a quello estratto nella colonna MAX\_ColID nel seguente comando T-SQL:
+nella vista sys.columns) verrà inizializzato. L'assegnazione dei prossimi identificativi univoci (ID) ripartirà dal valore successivo a quello estratto nella colonna MAX\_ColID nel seguente comando T-SQL:
 
 ```SQl
 USE [tempdb];
 GO
 SELECT
-    MAX(c.column_id) AS MAX_ColID
+  MAX(c.column_id) AS MAX_ColID
 FROM
-    sys.columns AS c
+  sys.columns AS c
 WHERE
-(   c.object_id = object_id('dbo.ShippingHeader'));
+  (c.object_id = object_id('dbo.ShippingHeader'));
 GO
 ```
 
-Per ricreare la tabella dbo.ShippingHeader possiamo eseguire,
-nell’ordine, le seguenti attività:
+Per ricreare la tabella dbo.ShippingHeader possiamo eseguire, nell'ordine, le seguenti attività:
 
 -   Duplicazione della tabella (e copia dei dati)
--   Eliminazione delle integrità referenziali definite su
-    dbo.ShippingHeader
+-   Eliminazione delle integrità referenziali definite su dbo.ShippingHeader
 -   Eliminazione della tabella dbo.ShippingHeader
--   Rinomina (in dbo.ShippingHeader) della tabella precedentemente
-    copiata
+-   Rinomina (in dbo.ShippingHeader) della tabella precedentemente copiata
 -   Applicazione delle integrità referenziali
 
 Duplicazione della tabella e copia dei dati 
@@ -212,8 +205,7 @@ Duplicazione della tabella e copia dei dati
 Per duplicare (copiando i dati) la tabella dbo.ShippingHeader abbiamoutilizzato il Tool di [Importazione/Esportazione guidata di SQL
 Server](http://msdn.microsoft.com/it-it/library/ms188032(v=sql.105).aspx).
 
-Completata la procedura, il database conterrà una nuova tabella che inquesto esempio abbiamo chiamato dbo.ShippingHeader2 come illustra la
-figura seguente.
+Completata la procedura, il database conterrà una nuova tabella che inquesto esempio abbiamo chiamato dbo.ShippingHeader2 come illustra la figura seguente.
 
 ![](./img/SQL-CREATE-e-DROP-di-colonne-temporanee/image4.png)
 
@@ -293,11 +285,7 @@ GO
 Rinomina (in dbo.ShippingHeader) della tabella precedentemente copiata
 ======================================================================
 
-Per rinominare la tabella dbo.ShippingHeader2 in dbo.ShippingHeader,abbiamo utilizzato la stored procedure di sistema
-[sp\_rename](http://msdn.microsoft.com/en-us/library/ms188351.aspx) che
-consente di modificare il nome di un oggetto creato dall’utente, nel
-database corrente. Il seguente comando T-SQL illustra l’utilizzo di
-sp\_rename:
+Per rinominare la tabella dbo.ShippingHeader2 in dbo.ShippingHeader, abbiamo utilizzato la stored procedure di sistema [sp\_rename](http://msdn.microsoft.com/en-us/library/ms188351.aspx) che consente di modificare il nome di un oggetto creato dall'utente, nel database corrente. Il seguente comando T-SQL illustra l’utilizzo di sp\_rename:
 
 ```SQL
 USE [tempdb];
@@ -308,14 +296,11 @@ EXEC sp_rename
 ,@newname = 'ShippingHeader';
 GO
 ```
+
 Applicazione delle integrità referenziali
 =========================================
 
-L’ultimo step consiste nel ripristinare la PRIMARY KEY e i vincoli della
-tabella dbo.ShippingHeader. I comandi di creazione della PRIMARY KEY e
-delle integrità sulla tabella dbo.ShippingHeader rigenerata sono stati
-precedentemente generati (nello step 2), vengono ora utilizzati come
-illustrato di seguito:
+L'ultimo step consiste nel ripristinare la PRIMARY KEY e i vincoli della tabella dbo.ShippingHeader. I comandi di creazione della PRIMARY KEY e delle integrità sulla tabella dbo.ShippingHeader rigenerata sono stati precedentemente generati (nello step 2), vengono ora utilizzati come illustrato di seguito:
 
 ```SQL
 USE [tempdb]
@@ -361,17 +346,17 @@ GO
 Conclusioni
 ===========
 
-L’utilizzo **ciclico** di una **colonna temporanea creata** e **distrutta** su una tabella, ad esempio, per ogni esecuzione di una
-stored procedure o in generale per ogni esecuzione di una determinata elaborazione **non è una buona pratica di programmazione**.
+L'utilizzo **ciclico** di una **colonna temporanea creata** e **distrutta** su una tabella, ad esempio, per ogni esecuzione di una stored procedure o in generale per ogni esecuzione di una determinata elaborazione **non è una buona pratica di programmazione**.
 
 Lo scenario descritto rappresenta una semplificazione di un caso reale, non abbiamo trattato la rigenerazione di eventuali indici definiti nella tabella dbo.ShippingHeader.
 
-Prima di eseguire la procedura descritta in un ambiente di produzione è necessario averla provata in modo completo su un backup del DB in
-ambiente di test.
+Prima di eseguire la procedura descritta in un ambiente di produzione è necessario averla provata in modo completo su un backup del DB in ambiente di test.
 
 #### di [Sergio Govoni](http://mvp.microsoft.com/en-us/mvp/Sergio%20Govoni-4029181) - Microsoft Data Platform MVP
 
 Blog: <http://sqlblog.com/blogs/sergio_govoni/default.aspx>
+
+UGISS Author: <https://www.ugiss.org/author/sgovoni/>
 
 Twitter: [@segovoni](https://twitter.com/segovoni)
 
