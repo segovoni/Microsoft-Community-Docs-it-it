@@ -67,38 +67,39 @@ USE [tempdb];
 GO
 
 -- dbo.Product
-CREATE TABLE dbo.Product(
+CREATE TABLE dbo.Product
+(
  ProductID VARCHAR(25) NOT NULL
-,SafetyStockLevel SMALLINT NOT NULL
-,Size VARCHAR(5) NULL
-,ModifiedDate DATETIME NOT NULL DEFAULT GETDATE()
-,Status BIT NOT NULL DEFAULT(1)
-,CONSTRAINT PK_Product PRIMARY KEY(ProductID)
+ ,SafetyStockLevel SMALLINT NOT NULL
+ ,Size VARCHAR(5) NULL
+ ,ModifiedDate DATETIME NOT NULL DEFAULT GETDATE()
+ ,Status BIT NOT NULL DEFAULT(1)
+ ,CONSTRAINT PK_Product PRIMARY KEY(ProductID)
 );
 GO
 
 -- dbo.Customer
 CREATE TABLE dbo.Customer
 (
-CustomerID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY
-,CustomerName VARCHAR(40) NOT NULL
+ CustomerID INT IDENTITY(1, 1) NOT NULL PRIMARY KEY
+ ,CustomerName VARCHAR(40) NOT NULL
 );
 GO
 
 -- dbo.ShippingHeader
 CREATE TABLE dbo.ShippingHeader
 (
-ShippingID INTEGER IDENTITY(1, 1) NOT NULL
-,ProductID VARCHAR(25) NOT NULL FOREIGN KEY (ProductID) REFERENCES dbo.Product(ProductID)
-,ShipDate DATETIME DEFAULT GETDATE() NOT NULL
-,ShipNumber VARCHAR(20)
-,CustomerID INT DEFAULT(1) NOT NULL FOREIGN KEY (CustomerID) REFERENCES dbo.Customer(CustomerID)
-,ShipName VARCHAR(20) DEFAULT('Name')
-,ShipAddress VARCHAR(40) DEFAULT('Address')
-,ShipCity VARCHAR(20) DEFAULT('City')
-,ShipPostalCode VARCHAR(20) DEFAULT('Postal code')
-,ShipCountry VARCHAR(20) DEFAULT('Country')
-,DeliveryDate DATETIME DEFAULT GETDATE() PRIMARY KEY(ShippingID)
+ ShippingID INTEGER IDENTITY(1, 1) NOT NULL
+ ,ProductID VARCHAR(25) NOT NULL FOREIGN KEY (ProductID) REFERENCES dbo.Product(ProductID)
+ ,ShipDate DATETIME DEFAULT GETDATE() NOT NULL
+ ,ShipNumber VARCHAR(20)
+ ,CustomerID INT DEFAULT(1) NOT NULL FOREIGN KEY (CustomerID) REFERENCES dbo.Customer(CustomerID)
+ ,ShipName VARCHAR(20) DEFAULT('Name')
+ ,ShipAddress VARCHAR(40) DEFAULT('Address')
+ ,ShipCity VARCHAR(20) DEFAULT('City')
+ ,ShipPostalCode VARCHAR(20) DEFAULT('Postal code')
+ ,ShipCountry VARCHAR(20) DEFAULT('Country')
+ ,DeliveryDate DATETIME DEFAULT GETDATE() PRIMARY KEY(ShippingID)
 );
 GO
 ```
@@ -280,9 +281,7 @@ Per rinominare la tabella dbo.ShippingHeader2 in dbo.ShippingHeader, abbiamo uti
 USE [tempdb];
 GO
 
-EXEC sp_rename
-@objname = 'dbo.ShippingHeader2'
-,@newname = 'ShippingHeader';
+EXEC sp_rename @objname = 'dbo.ShippingHeader2', @newname = 'ShippingHeader';
 GO
 ```
 
@@ -322,13 +321,10 @@ GO
 ALTER TABLE [dbo].[ShippingHeader] ADD DEFAULT (getdate()) FOR [DeliveryDate]
 GO
 
-ALTER TABLE [dbo].[ShippingHeader] WITH CHECK ADD FOREIGN KEY([CustomerID]) 
-REFERENCES [dbo].[Customer] ([CustomerID])
+ALTER TABLE [dbo].[ShippingHeader] WITH CHECK ADD FOREIGN KEY([CustomerID]) REFERENCES [dbo].[Customer] ([CustomerID])
 GO
 
-ALTER TABLE [dbo].[ShippingHeader] WITH CHECK ADD FOREIGN KEY([ProductID])
-REFERENCES [dbo].[Product] ([ProductID])
-
+ALTER TABLE [dbo].[ShippingHeader] WITH CHECK ADD FOREIGN KEY([ProductID]) REFERENCES [dbo].[Product] ([ProductID])
 GO
 ```
 
