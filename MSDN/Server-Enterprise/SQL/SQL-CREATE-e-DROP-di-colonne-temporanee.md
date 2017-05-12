@@ -67,8 +67,7 @@ USE [tempdb];
 GO
 
 -- dbo.Product
-CREATE TABLE dbo.Product
-(
+CREATE TABLE dbo.Product(
  ProductID VARCHAR(25) NOT NULL
 ,SafetyStockLevel SMALLINT NOT NULL
 ,Size VARCHAR(5) NULL
@@ -121,11 +120,11 @@ ALTER TABLE dbo.ShippingHeader ADD TestField INTEGER;
 
 -- Memorizzazione di un valore temporaneo
 UPDATE
-    dbo.ShippingHeader
+  dbo.ShippingHeader
 SET
-    TestField = @value
+  TestField = @value
 WHERE
-    (<condizione>)
+  (<condizione>)
 
 -- ...
 -- ...
@@ -133,11 +132,11 @@ WHERE
 
 -- Utilizzo del valore memorizzato
 SELECT
-    TestField
+  TestField
 FROM
-    dbo.ShippingHeader
+  dbo.ShippingHeader
 WHERE
-    (<condizione>)
+  (<condizione>)
 
 -- ...
 -- ...
@@ -228,44 +227,34 @@ riporta gli statement eseguiti:
 USE [tempdb]
 GO
 
-ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT
-[FK__ShippingH__Produ__1A14E395]
+ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT [FK__ShippingH__Produ__1A14E395]
 GO
 
-ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT
-[FK__ShippingH__Custo__1CF15040]
+ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT [FK__ShippingH__Custo__1CF15040]
 GO
 
-ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT
-[DF__ShippingH__Deliv__22AA2996]
+ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT [DF__ShippingH__Deliv__22AA2996]
 GO
 
-ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT
-[DF__ShippingH__ShipC__21B6055D]
+ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT [DF__ShippingH__ShipC__21B6055D]
 GO
 
-ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT
-[DF__ShippingH__ShipP__20C1E124]
+ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT [DF__ShippingH__ShipP__20C1E124]
 GO
 
-ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT
-[DF__ShippingH__ShipC__1FCDBCEB]
+ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT [DF__ShippingH__ShipC__1FCDBCEB]
 GO
 
-ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT
-[DF__ShippingH__ShipA__1ED998B2]
+ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT [DF__ShippingH__ShipA__1ED998B2]
 GO
 
-ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT
-[DF__ShippingH__ShipN__1DE57479]
+ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT [DF__ShippingH__ShipN__1DE57479]
 GO
 
-ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT
-[DF__ShippingH__Custo__1BFD2C07]
+ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT [DF__ShippingH__Custo__1BFD2C07]
 GO
 
-ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT
-[DF__ShippingH__ShipD__1B0907CE]
+ALTER TABLE [dbo].[ShippingHeader] DROP CONSTRAINT [DF__ShippingH__ShipD__1B0907CE]
 GO
 ```
 
