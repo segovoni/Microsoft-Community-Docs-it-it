@@ -2,7 +2,7 @@
 title: SQL - CREATE e DROP di colonne temporanee
 description: SQL - CREATE e DROP di colonne temporanee
 author: MSCommunityPubService
-ms.author: aldod
+ms.author: segovoni
 ms.manager: csiism
 ms.date: 08/01/2016
 ms.topic: article
@@ -12,9 +12,9 @@ ms.custom: CommunityDocs
 
 # SQL: CREATE e DROP di colonne temporanee
 
-#### di [Sergio Govoni](http://mvp.microsoft.com/en-us/mvp/Sergio%20Govoni-4029181) - Microsoft MVP
+#### di [Sergio Govoni](http://mvp.microsoft.com/en-us/mvp/Sergio%20Govoni-4029181) - Microsoft Data Platform MVP
 
-Blog: <http://www.ugiss.org/sgovoni/>
+Blog: <http://sqlblog.com/blogs/sergio_govoni/default.aspx>
 
 Twitter: [@segovoni](https://twitter.com/segovoni)
 
@@ -43,14 +43,14 @@ contenere colonne sono elencati di seguito:
 
 
 In particolare la colonna column\_id della vista sys.columns espone
-l’identificativo univoco (ID) assegnato ad ogni colonna presente
-all’interno di un oggetto, che da questo momento in poi ipotizziamo, per
+l'identificativo univoco (ID) assegnato ad ogni colonna presente
+all'interno di un oggetto, che da questo momento in poi ipotizziamo, per
 semplicità, essere una tabella.
 
 Scenario 
 ========
 
-Un po’ di tempo fa, ho avuto l’occasione di occuparmi del problema che
+Un po' di tempo fa, ho avuto l'occasione di occuparmi del problema che
 sta alla base del Messaggio di Errore 1714 illustrato nella figura
 seguente (su una istanza SQL Server 2005).
 
@@ -58,8 +58,8 @@ seguente (su una istanza SQL Server 2005).
 
 Figura 1 – Messaggio di Errore 1714 (SQL Server 2005)
 
-L’errore è stato riscontrato in una stored procedure che gestisce la
-generazione dei documenti di trasporto. L’ipotetico cliente che ha
+L'errore è stato riscontrato in una stored procedure che gestisce la
+generazione dei documenti di trasporto. L'ipotetico cliente che ha
 segnalato questo errore, emette ogni giorno migliaia di DdT; la
 segnalazione è pervenuta proprio durante la generazione di un nuovo
 documento. Per la memorizzazione delle testate dei documenti di
@@ -188,7 +188,7 @@ raggiunto il limite massimo di valori rappresentabili.
 
 La colonna colid, nella versione 2005 di SQL Server, è di tipo smallint
 e con questo tipo di dato si possono rappresentare positivamente 2\^15 -
-1 elementi, ossia 32.767… dopo qualche mese, il cliente aveva inserito
+1 elementi, ossia 32.767 dopo qualche mese, il cliente aveva inserito
 più di 32.767 documenti di trasporto!
 
 Messaggio di Errore 1701 (SQL Server 2012)
