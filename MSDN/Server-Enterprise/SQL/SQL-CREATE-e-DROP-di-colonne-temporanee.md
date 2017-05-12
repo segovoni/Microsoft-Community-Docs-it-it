@@ -26,12 +26,7 @@ Twitter: [@segovoni](https://twitter.com/segovoni)
 Introduzione
 ============
 
-La vista di sistema
-[sys.columns](http://msdn.microsoft.com/en-us/library/ms176106.aspx),
-come citano i books on-line, restituisce una riga per ogni colonna
-contenuta negli oggetti di un database che possono contenere colonne
-come, ad esempio, viste o tabelle. Gli oggetti database in grado di
-contenere colonne sono elencati di seguito:
+La vista di sistema [sys.columns](http://msdn.microsoft.com/en-us/library/ms176106.aspx), come citano i books on-line, restituisce una riga per ogni colonna contenuta negli oggetti di un database che possono contenere colonne come, ad esempio, viste o tabelle. Gli oggetti database in grado di contenere colonne sono elencati di seguito:
 
 -   Funzioni assembly con valori di tabella
 -   Funzioni in-line con valori di tabella
@@ -42,37 +37,28 @@ contenere colonne sono elencati di seguito:
 -   Viste
 
 
-In particolare la colonna column\_id della vista sys.columns espone
-l'identificativo univoco (ID) assegnato ad ogni colonna presente
-all'interno di un oggetto, che da questo momento in poi ipotizziamo, per
-semplicità, essere una tabella.
+In particolare la colonna column\_id della vista sys.columns espone l'identificativo univoco (ID) assegnato ad ogni colonna presente
+all'interno di un oggetto, che da questo momento in poi ipotizziamo, per semplicità, essere una tabella.
 
 Scenario 
 ========
 
-Un po' di tempo fa, ho avuto l'occasione di occuparmi del problema che
-sta alla base del Messaggio di Errore 1714 illustrato nella figura
+Un po' di tempo fa, ho avuto l'occasione di occuparmi del problema che sta alla base del Messaggio di Errore 1714 illustrato nella figura
 seguente (su una istanza SQL Server 2005).
 
 ![](./img/SQL-CREATE-e-DROP-di-colonne-temporanee/image2.png)
 
 Figura 1 – Messaggio di Errore 1714 (SQL Server 2005)
 
-L'errore è stato riscontrato in una stored procedure che gestisce la
-generazione dei documenti di trasporto. L'ipotetico cliente che ha
-segnalato questo errore, emette ogni giorno migliaia di DdT; la
-segnalazione è pervenuta proprio durante la generazione di un nuovo
-documento. Per la memorizzazione delle testate dei documenti di
-trasporto, si utilizza la tabella dbo.ShippingHeader.
+L'errore è stato riscontrato in una stored procedure che gestisce la generazione dei documenti di trasporto. L'ipotetico cliente che ha
+segnalato questo errore, emette ogni giorno migliaia di DdT; la segnalazione è pervenuta proprio durante la generazione di un nuovo
+documento. Per la memorizzazione delle testate dei documenti di trasporto, si utilizza la tabella dbo.ShippingHeader.
 
 Messaggio di Errore 1714 (SQL Server 2005)
 ==========================================
 
-Il seguente frammento di codice T-SQL implementa la creazione
-(semplificata) della tabella dbo.ShippingHeader nel database di sistema
-tempdb. Per completezza vengono create anche le tabelle dbo.Product
-(anagrafica prodotti) e dbo.Customer (anagrafica clienti).
-
+Il seguente frammento di codice T-SQL implementa la creazione (semplificata) della tabella dbo.ShippingHeader nel database di sistema
+tempdb. Per completezza vengono create anche le tabelle dbo.Product (anagrafica prodotti) e dbo.Customer (anagrafica clienti).
 
 ```SQL
 USE [tempdb];
@@ -121,15 +107,10 @@ PRIMARY KEY(ShippingID)
 GO
 ```
 
-La tabella dbo.ShippingHeader è utilizzata per memorizzare i documenti
-di trasporto emessi dall’azienda. Su questa tabella, **per ogni nuovo
-documento**, viene **creata e distrutta la colonna temporanea**
-TestField, utilizzata per salvare alcune informazioni durante la
+La tabella dbo.ShippingHeader è utilizzata per memorizzare i documenti di trasporto emessi dall’azienda. Su questa tabella, **per ogni nuovo documento**, viene **creata e distrutta la colonna temporanea** TestField, utilizzata per salvare alcune informazioni durante la
 generazione del DdT.
 
-La stored procedure di generazione DdT eseguiva un frammento di codice
-T-SQL simile a quello riportato di seguito, dove nei tratti commentati
-c’era la logica di generazione del documento.
+La stored procedure di generazione DdT eseguiva un frammento di codice T-SQL simile a quello riportato di seguito, dove nei tratti commentati c'era la logica di generazione del documento.
 
 ```SQL
 BEGIN
