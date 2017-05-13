@@ -1,7 +1,7 @@
 ---
 title: SQL - CREATE e DROP di colonne temporanee
 description: SQL - CREATE e DROP di colonne temporanee
-author: MSCommunityPubService
+author: segovoni
 ms.author: aldod
 ms.manager: csiism
 ms.date: 08/01/2016
@@ -12,9 +12,9 @@ ms.custom: CommunityDocs
 
 # SQL - CREATE e DROP di colonne temporanee
 
-#### di [Sergio Govoni](http://mvp.microsoft.com/en-us/mvp/Sergio%20Govoni-4029181) - Microsoft MVP
+#### di [Sergio Govoni](http://mvp.microsoft.com/en-us/mvp/Sergio%20Govoni-4029181) - Microsoft Data Platform MVP
 
-Blog: <http://www.ugiss.org/sgovoni/>
+Blog: <http://sqlblog.com/blogs/sergio_govoni/default.aspx>
 
 Twitter: [@segovoni](https://twitter.com/segovoni)
 
