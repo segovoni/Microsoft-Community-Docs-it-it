@@ -1,8 +1,8 @@
 ---
 title: SQL - CREATE e DROP di colonne temporanee
 description: SQL - CREATE e DROP di colonne temporanee
-author: MSCommunityPubService
-ms.author: segovoni
+author: segovoni
+ms.author: aldod
 ms.manager: csiism
 ms.date: 08/01/2016
 ms.topic: article
