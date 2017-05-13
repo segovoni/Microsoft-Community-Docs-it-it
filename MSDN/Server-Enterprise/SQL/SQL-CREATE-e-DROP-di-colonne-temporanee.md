@@ -28,7 +28,7 @@ Twitter: [@segovoni](https://twitter.com/segovoni)
 Introduzione
 ============
 
-La vista di sistema [sys.columns](http://msdn.microsoft.com/en-us/library/ms176106.aspx), come citano i books on-line, restituisce una riga per ogni colonna contenuta negli oggetti di un database che possono contenere colonne come, ad esempio, viste o tabelle. Gli oggetti database in grado di contenere colonne sono i seguenti:
+La vista di sistema [sys.columns](https://docs.microsoft.com/en-us/sql/relational-databases/system-catalog-views/sys-columns-transact-sql), come citano i books on-line, restituisce una riga per ogni colonna contenuta negli oggetti di un database che possono contenere colonne come, ad esempio, viste o tabelle. Gli oggetti database in grado di contenere colonne sono i seguenti:
 
 -   Funzioni assembly con valori di tabella
 -   Funzioni in-line con valori di tabella
@@ -275,7 +275,7 @@ GO
 Rinomina (in dbo.ShippingHeader) della tabella precedentemente copiata
 ======================================================================
 
-Per rinominare la tabella dbo.ShippingHeader2 in dbo.ShippingHeader, abbiamo utilizzato la stored procedure di sistema [sp\_rename](http://msdn.microsoft.com/en-us/library/ms188351.aspx) che consente di modificare il nome di un oggetto creato dall'utente, nel database corrente. Il seguente comando T-SQL illustra l’utilizzo di sp\_rename:
+Per rinominare la tabella dbo.ShippingHeader2 in dbo.ShippingHeader, abbiamo utilizzato la stored procedure di sistema [sp\_rename](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sp-rename-transact-sql) che consente di modificare il nome di un oggetto creato dall'utente, nel database corrente. Il seguente comando T-SQL illustra l’utilizzo di sp\_rename:
 
 ```SQL
 USE [tempdb];
