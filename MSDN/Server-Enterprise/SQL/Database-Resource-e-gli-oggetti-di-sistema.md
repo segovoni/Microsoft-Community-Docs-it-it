@@ -26,7 +26,7 @@ UGISS Author: <https://www.ugiss.org/author/sgovoni>
 Introduzione
 ============
 
-Durante la sessione di approfondimento "[Le 3 DMV fondamentali per tutti](http://www.sqlconference.it/events/2012/sessions.aspx#a83)”, che ho tenuto alla [SQL Server & Business Intelligence Conference 2012](http://www.sqlconference.it/events/2012/default.aspx), ho presentato le DMV dicendo che sono state implementate a partire da SQL Server 2005, sono disponibili in tutti i database, ma non esistono in nessun database utente! Infatti, l'esistenza reale di questi oggetti è all'interno del database **Resource**, che però non è visibile a occhio nudo neppure utilizzando SQL Server Management Studio.
+Durante la sessione di approfondimento [Le 3 DMV fondamentali per tutti](http://www.sqlconference.it/events/2012/sessions.aspx#a83), che ho tenuto alla [SQL Server & Business Intelligence Conference 2012](http://www.sqlconference.it/events/2012/default.aspx), ho presentato le DMV dicendo che sono state implementate a partire da SQL Server 2005, sono disponibili in tutti i database, ma non esistono in nessun database utente! Infatti, l'esistenza reale di questi oggetti è all'interno del database **Resource**, che però non è visibile a occhio nudo neppure utilizzando SQL Server Management Studio.
 
 Quest'affermazione ha stimolato la curiosità di alcuni partecipanti, che mi hanno chiesto informazioni più approfondite circa questo DB, che si aggiunge ai già noti database di sistema [master](http://msdn.microsoft.com/it-it/library/ms187837.aspx), [model](http://msdn.microsoft.com/it-it/library/ms186388.aspx), [msdb](http://msdn.microsoft.com/it-it/library/ms187112.aspx) e [tempdb](http://msdn.microsoft.com/it-it/library/ms190768.aspx).
 
