@@ -132,10 +132,7 @@ Figura 5 - Avvio del servizio SQL Server in multi user mode
 Importanza del database Resource 
 ================================
 
-Come gli altri database di sistema anche il database Resource rappresenta un DB critico. Il servizio principale di SQL Server dipende
-anche da questo database; qualora non sia presente, il servizio principale non potrà essere avviato. Per dimostrarlo, dopo aver fermato
-i servizi di SQL Server, abbiamo rinominato i file mssqlsystemresource.mdf e mssqlsystemresource.ldf del database Resource
-(operazione da non fare in produzione!). Al successivo tentativo di riavvio del servizio principale, il sistema ha restituito il messaggio di errore illustrato in figura 6.
+Come gli altri database di sistema anche il database Resource rappresenta un DB critico. Il servizio principale di SQL Server dipende anche da questo database; qualora non sia presente, il servizio principale non potrà essere avviato. Per dimostrarlo, dopo aver fermato i servizi di SQL Server, abbiamo rinominato i file mssqlsystemresource.mdf e mssqlsystemresource.ldf del database Resource (*operazione da non fare in produzione!*). Al successivo tentativo di riavvio del servizio principale, il sistema ha restituito il messaggio di errore illustrato in figura 6.
 
 ![](./img/Database-Resource-e-gli-oggetti-di-sistema/image7.jpg)
 
