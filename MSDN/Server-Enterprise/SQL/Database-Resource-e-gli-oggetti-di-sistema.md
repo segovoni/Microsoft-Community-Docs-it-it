@@ -30,17 +30,15 @@ Durante la sessione di approfondimento [Le 3 DMV fondamentali per tutti](http://
 
 Quest'affermazione ha stimolato la curiosità di alcuni partecipanti, che mi hanno chiesto informazioni più approfondite circa questo DB, che si aggiunge ai già noti database di sistema [master](http://msdn.microsoft.com/it-it/library/ms187837.aspx), [model](http://msdn.microsoft.com/it-it/library/ms186388.aspx), [msdb](http://msdn.microsoft.com/it-it/library/ms187112.aspx) e [tempdb](http://msdn.microsoft.com/it-it/library/ms190768.aspx).
 
-In questo articolo parleremo quindi del DB Resource, non solo per la sua caratteristica di contenitore unico e unificato degli oggetti di
-sistema, ma anche per la sua importanza negli scenari di disaster recovery.
+In questo articolo parleremo quindi del DB Resource, non solo per la sua caratteristica di contenitore unico e unificato degli oggetti di sistema, ma anche per la sua importanza negli scenari di disaster recovery.
+
 
 Database Resource 
 =================
 
-Il database Resource è un DB di sistema, accessibile in sola lettura, che contiene tutti gli oggetti di sistema disponibili in SQL Server. Gli oggetti che troviamo nello schema sys sono memorizzati fisicamente nel database Resource e questo garantisce la loro visibilità in ogni DB. Le DMV (DMVs e DMFs) appartengono allo schema sys, sono oggetti di sistema; da qui l'affermazione iniziale.
+Il database Resource è un DB di sistema, accessibile in sola lettura, che contiene tutti gli oggetti di sistema disponibili in SQL Server. Gli oggetti che troviamo nello schema *sys* sono memorizzati fisicamente nel database Resource e questo garantisce la loro visibilità in ogni DB. Le DMV (DMVs e DMFs) appartengono allo schema *sys*, sono oggetti di sistema; da qui l'affermazione iniziale.
 
-La presenza del database Resource semplifica la procedura di aggiornamento a una nuova versione di SQL Server, l'applicazione di un
-service pack o di un cumulative update. Nelle versioni di SQL Server precedenti a SQL Server 2005, l'aggiornamento a una nuova versione o
-l'applicazione di un service pack prevede l'eliminazione e la creazione degli oggetti di sistema su ogni database presente nell'istanza al momento dell'aggiornamento. Da SQL Server 2005 in poi, poiché tutti gli oggetti di sistema sono contenuti nel database Resource, l'aggiornamento è centralizzato e limitato ai file fisici (MDF e LDF) di questo database che sono rispettivamente:
+La presenza del database Resource semplifica la procedura di aggiornamento a una nuova versione di SQL Server, l'applicazione di un Service Pack o di un Cumulative Update. Nelle versioni di SQL Server precedenti a SQL Server 2005, l'aggiornamento o l'applicazione di un service pack prevedeva l'eliminazione e la creazione degli oggetti di sistema su ogni database presente nell'istanza al momento dell'aggiornamento. Da SQL Server 2005 in poi, poiché tutti gli oggetti di sistema sono contenuti nel database Resource, l'aggiornamento è centralizzato e limitato ai file fisici (MDF e LDF) di questo database che sono rispettivamente:
 
 - mssqlsystemresource.mdf (master data file)
 - mssqlsystemresource.ldf (log data file)
@@ -58,8 +56,7 @@ In SQL Server 2008 (R2) e SQL Server 2012, i file del database Resource si trova
     Server\\MSSQL11.&lt;nome\_istanza&gt;\\MSSQL\\Binn\\*
 
 
-In SQL Server 2005 i file del database Resource si trovano e devono risiedere sempre nella stessa directory in cui sono installati i file
-del database master, che by design si trovano qui:
+In SQL Server 2005 i file del database Resource si trovano e devono risiedere sempre nella stessa directory in cui sono installati i file del database master, che by design si trovano qui:
 
 - *&lt;drive&gt;:\\Programmi\\Microsoft SQL
     Server\\MSSQL.1\\MSSQL\\Data\\*
@@ -77,8 +74,7 @@ che ospita i file mssqlsystemresource.mdf e mssqlsystemresource.ldf per l'istanz
 
 Figura 1 - Directory che ospita i file del database Resource
 
-Il seguente frammento di codice in linguaggio T-SQL restituisce informazioni circa la versione del database Resource e la data/ora
-dell'ultimo aggiornamento.
+Il seguente frammento di codice in linguaggio T-SQL restituisce informazioni circa la versione del database Resource e la data/ora dell'ultimo aggiornamento.
 
 ```SQL
 SELECT
@@ -93,11 +89,11 @@ L'output è illustrato in figura 2:
 
 Figura 2 - Versione e data/ora ultimo aggiornamento del database Resource
 
+
 Accesso al database Resource 
 ============================
 
-Ci sono due modi per accedere al database Resource, il primo consiste nel copiare i file mssqlsystemresource.mdf e mssqlsystemresource.ldf in una cartella diversa da quella in cui si trovano, dopo aver arrestato il servizio principale di SQL Server. Una volta copiati i file e riavviato il servizio, sarà possibile effettuare l'attach dei file copiati creando un nuovo DB con nome differente da "mssqlsystemresource". Il DB creato sarà accessibile e le modifiche effettuate su questa copia **non** avranno
-ovviamente effetto sul database Resource di sistema. Il secondo metodo consiste nell'avviare il servizio principale di SQL Server in single user mode ovvero con il flag "-m" nei parametri di avvio (del servizio), come illustrato in figura 3.
+Ci sono due modi per accedere al database Resource, il primo consiste nel copiare i file mssqlsystemresource.mdf e mssqlsystemresource.ldf in una cartella diversa da quella in cui si trovano, dopo aver arrestato il servizio principale di SQL Server. Una volta copiati i file e riavviato il servizio, sarà possibile effettuare l'attach dei file copiati creando un nuovo DB con nome differente da "mssqlsystemresource". Il DB creato sarà accessibile e le modifiche effettuate su questa copia **non** avranno ovviamente effetto sul database Resource di sistema. Il secondo metodo consiste nell'avviare il servizio principale di SQL Server in single user mode ovvero con il flag "-m" nei parametri di avvio (del servizio), come illustrato in figura 3.
 
 ![](./img/Database-Resource-e-gli-oggetti-di-sistema/image4.jpg)
 
@@ -149,9 +145,8 @@ Figura 6 - Visualizzatore eventi applicativi: Errore durante l'avvio del servizi
 Backup del database Resource 
 ============================
 
-Come si può leggere anche sulla guida in linea (Books On-Line), SQL Server non è in grado di eseguire il backup automatico del database
-Resource. Tuttavia, è possibile - **e consigliato** - salvare periodicamente una copia di backup dei file mssqlsystemresource.mdf e
-mssqlsystemresource.ldf trattandoli come file binari, eseguendo la copia manualmente oppure schedulando i comandi offerti dal file system per la copia dei file (xcopy). Anche il ripristino di un backup di questi file non può essere eseguito da SQL Server, l'unico modo per farlo è agire manualmente ripristinando i file del database Resource avendo cura di non sovrascrivere la versione corrente con una copia non aggiornata.
+Come si può leggere anche sulla guida in linea (Books On-Line), SQL Server non è in grado di eseguire il backup automatico del database Resource. Tuttavia, è possibile, **ma soprattutto consigliato**, salvare periodicamente una copia di backup dei file mssqlsystemresource.mdf e mssqlsystemresource.ldf trattandoli come file binari, eseguendo la copia manualmente oppure schedulando i comandi offerti dal file system per la copia dei file (xcopy). Anche il ripristino di un backup di questi file non può essere eseguito da SQL Server, l'unico modo per farlo è agire manualmente ripristinando i file del database Resource avendo cura di non sovrascrivere la versione corrente con una copia non aggiornata.
+
 
 Conclusioni 
 ===========
@@ -159,6 +154,7 @@ Conclusioni
 Dall'edizione 2005 di SQL Server, i processi di disaster recovery devono tenere conto della presenza del database Resource perché il servizio principale di SQL Server dipende anche da questo database di sistema "nascosto".
 
 È consigliabile che il database Resource sia modificato esclusivamente da o su indicazione di uno specialista del Servizio Supporto Tecnico Clienti Microsoft.
+
 
 #### Di [Sergio Govoni](https://mvp.microsoft.com/en-us/PublicProfile/4029181?fullName=Sergio%20Govoni) – Microsoft Data Platform MVP
 
