@@ -116,7 +116,7 @@ GO
 ```
 
 
-![](./img/Database-Resource-e-gli-oggetti-di-sistema/image5.jpg)
+[](./img/Database-Resource-e-gli-oggetti-di-sistema/image5.jpg)
 
 Figura 4 - Connessione al database Resource
 
