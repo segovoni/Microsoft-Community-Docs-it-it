@@ -39,27 +39,25 @@ La vista di sistema [sys.columns](http://msdn.microsoft.com/en-us/library/ms1761
 -   Viste
 
 
-In particolare la colonna column\_id della vista sys.columns espone l'identificativo univoco (ID) assegnato ad ogni colonna presente
-all'interno di un oggetto, che da questo momento in poi ipotizziamo, per semplicità, essere una tabella.
+In particolare la colonna column\_id della vista sys.columns espone l'identificativo univoco (ID) assegnato ad ogni colonna presente all'interno di un oggetto, che da questo momento in poi ipotizziamo, per semplicità, essere una tabella.
+
 
 Scenario 
 ========
 
-Un po' di tempo fa, ho avuto l'occasione di occuparmi del problema che sta alla base del Messaggio di Errore 1714 illustrato nella figura
-seguente (su una istanza SQL Server 2005).
+Un po' di tempo fa, ho avuto l'occasione di occuparmi del problema che sta alla base del Messaggio di Errore 1714 illustrato nella figura seguente (su una istanza SQL Server 2005).
 
 ![](./img/SQL-CREATE-e-DROP-di-colonne-temporanee/image2.png)
 
 Figura 1 – Messaggio di Errore 1714 (SQL Server 2005)
 
-L'errore è stato riscontrato in una stored procedure che gestisce la generazione dei documenti di trasporto. L'ipotetico cliente che hasegnalato questo errore, emette ogni giorno migliaia di DdT; la segnalazione è pervenuta proprio durante la generazione di un nuovo
-documento. Per la memorizzazione delle testate dei documenti di trasporto, si utilizza la tabella dbo.ShippingHeader.
+L'errore è stato riscontrato in una stored procedure che gestisce la generazione dei documenti di trasporto. L'ipotetico cliente che ha segnalato questo errore, emette ogni giorno migliaia di DdT; la segnalazione è pervenuta proprio durante la generazione di un nuovo documento. Per la memorizzazione delle testate dei documenti di trasporto, si utilizza la tabella dbo.ShippingHeader.
+
 
 Messaggio di Errore 1714 (SQL Server 2005)
 ==========================================
 
-Il seguente frammento di codice T-SQL implementa la creazione (semplificata) della tabella dbo.ShippingHeader nel database di sistema
-tempdb. Per completezza vengono create anche le tabelle dbo.Product (anagrafica prodotti) e dbo.Customer (anagrafica clienti).
+Il seguente frammento di codice T-SQL implementa la creazione (semplificata) della tabella dbo.ShippingHeader nel database di sistema tempdb. Per completezza vengono create anche le tabelle dbo.Product (anagrafica prodotti) e dbo.Customer (anagrafica clienti).
 
 ```SQL
 USE [tempdb];
@@ -103,8 +101,7 @@ CREATE TABLE dbo.ShippingHeader
 GO
 ```
 
-La tabella dbo.ShippingHeader è utilizzata per memorizzare i documenti di trasporto emessi dall'azienda. Su questa tabella, **per ogni nuovo documento**, viene **creata e distrutta la colonna temporanea TestField**, utilizzata per salvare alcune informazioni durante la
-generazione del DdT.
+La tabella dbo.ShippingHeader è utilizzata per memorizzare i documenti di trasporto emessi dall'azienda. Su questa tabella, **per ogni nuovo documento**, viene **creata e distrutta la colonna temporanea TestField**, utilizzata per salvare alcune informazioni durante la generazione del DdT.
 
 La stored procedure di generazione DdT eseguiva un frammento di codice T-SQL simile a quello riportato di seguito, dove nei tratti commentati c'era la logica di generazione del documento.
 
@@ -175,8 +172,7 @@ Dopo aver modificato la stored procedure che implementa la logica digenerazione 
 Soluzione
 =========
 
-La soluzione adottata consiste nel ricreare la tabella dbo.ShippingHeader. Ricreando la tabella, il contatore colid (column\_id
-nella vista sys.columns) verrà inizializzato. L'assegnazione dei prossimi identificativi univoci (ID) ripartirà dal valore successivo a quello estratto nella colonna MAX\_ColID nel seguente comando T-SQL:
+La soluzione adottata consiste nel ricreare la tabella dbo.ShippingHeader. Ricreando la tabella, il contatore colid (column\_id nella vista sys.columns) verrà inizializzato. L'assegnazione dei prossimi identificativi univoci (ID) ripartirà dal valore successivo a quello estratto nella colonna MAX\_ColID nel seguente comando T-SQL:
 
 ```SQl
 USE [tempdb];
@@ -214,8 +210,7 @@ Figura 3 – Tabella dbo.ShippingHeader2 (copia dalle tabella dbo.ShippingHeader
 Eliminazione delle integrità referenziali definite su dbo.ShippingHeader
 ========================================================================
 
-Per ottenere, in modo semplice e veloce, i comandi di eliminazione delle integrità referenziali definite sulla tabella dbo.ShippingHeader abbiamo utilizzato le funzioni di scripting di SQL Server, in particolare abbiamo utilizzato la funzione di generazione del codice per le
-istruzioni DROP e CREATE, come illustrato in figura 4.
+Per ottenere, in modo semplice e veloce, i comandi di eliminazione delle integrità referenziali definite sulla tabella dbo.ShippingHeader abbiamo utilizzato le funzioni di scripting di SQL Server, in particolare abbiamo utilizzato la funzione di generazione del codice per le istruzioni DROP e CREATE, come illustrato in figura 4.
 
 ![](./img/SQL-CREATE-e-DROP-di-colonne-temporanee/image5.png)
 
