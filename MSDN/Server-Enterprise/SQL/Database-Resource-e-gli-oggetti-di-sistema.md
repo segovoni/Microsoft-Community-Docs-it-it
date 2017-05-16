@@ -18,6 +18,8 @@ English Blog: <http://sqlblog.com/blogs/sergio_govoni/default.aspx>
 
 UGISS Author: <https://www.ugiss.org/author/sgovoni>
 
+Twitter: [@segovoni](https://twitter.com/segovoni)
+
 ![](./img/MVPLogo.png)
 
 
@@ -158,3 +160,6 @@ Dall'edizione 2005 di SQL Server, i processi di disaster recovery devono tenere 
 English Blog: <http://sqlblog.com/blogs/sergio_govoni/default.aspx>
 
 UGISS Author: <https://www.ugiss.org/author/sgovoni>
+
+Twitter: [@segovoni](https://twitter.com/segovoni)
+
