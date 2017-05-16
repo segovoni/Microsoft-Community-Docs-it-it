@@ -1,8 +1,8 @@
 ---
 title: SQL - Database Resource e gli oggetti di sistema
 description: SQL - Database Resource e gli oggetti di sistema
-author: MSCommunityPubService
-ms.author: segovoni
+author: segovoni
+ms.author: aldod
 ms.manager: csiism
 ms.date: 08/01/2016
 ms.topic: article
@@ -116,7 +116,7 @@ GO
 ```
 
 
-[](./img/Database-Resource-e-gli-oggetti-di-sistema/image5.jpg)
+![](./img/Database-Resource-e-gli-oggetti-di-sistema/image5.jpg)
 
 Figura 4 - Connessione al database Resource
 
