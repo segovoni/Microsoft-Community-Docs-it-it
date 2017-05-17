@@ -28,7 +28,7 @@ Twitter: [@segovoni](https://twitter.com/segovoni)
 Introduzione
 ============
 
-La vista di sistema [sys.columns](http://msdn.microsoft.com/en-us/library/ms176106.aspx), come citano i books on-line, restituisce una riga per ogni colonna contenuta negli oggetti di un database che possono contenere colonne come, ad esempio, viste o tabelle. Gli oggetti database in grado di contenere colonne sono i seguenti:
+La vista di sistema [sys.columns](https://docs.microsoft.com/en-us/sql/relational-databases/system-catalog-views/sys-columns-transact-sql), come citano i books on-line, restituisce una riga per ogni colonna contenuta negli oggetti di un database che possono contenere colonne come, ad esempio, viste o tabelle. Gli oggetti database in grado di contenere colonne sono i seguenti:
 
 -   Funzioni assembly con valori di tabella
 -   Funzioni in-line con valori di tabella
@@ -45,11 +45,13 @@ In particolare la colonna column\_id della vista sys.columns espone l'identifica
 Scenario 
 ========
 
+
 Un po' di tempo fa, ho avuto l'occasione di occuparmi del problema che sta alla base del Messaggio di Errore 1714 illustrato nella figura seguente (su una istanza SQL Server 2005).
 
 ![](./img/SQL-CREATE-e-DROP-di-colonne-temporanee/image2.png)
 
 Figura 1 – Messaggio di Errore 1714 (SQL Server 2005)
+
 
 L'errore è stato riscontrato in una stored procedure che gestisce la generazione dei documenti di trasporto. L'ipotetico cliente che ha segnalato questo errore, emette ogni giorno migliaia di DdT; la segnalazione è pervenuta proprio durante la generazione di un nuovo documento. Per la memorizzazione delle testate dei documenti di trasporto, si utilizza la tabella dbo.ShippingHeader.
 
@@ -58,6 +60,7 @@ Messaggio di Errore 1714 (SQL Server 2005)
 ==========================================
 
 Il seguente frammento di codice T-SQL implementa la creazione (semplificata) della tabella dbo.ShippingHeader nel database di sistema tempdb. Per completezza vengono create anche le tabelle dbo.Product (anagrafica prodotti) e dbo.Customer (anagrafica clienti).
+
 
 ```SQL
 USE [tempdb];
@@ -100,6 +103,7 @@ CREATE TABLE dbo.ShippingHeader
 );
 GO
 ```
+
 
 La tabella dbo.ShippingHeader è utilizzata per memorizzare i documenti di trasporto emessi dall'azienda. Su questa tabella, **per ogni nuovo documento**, viene **creata e distrutta la colonna temporanea TestField**, utilizzata per salvare alcune informazioni durante la generazione del DdT.
 
@@ -150,11 +154,13 @@ END;
 GO
 ```
 
+
 Dopo alcuni mesi di lavoro della stored procedure (in produzione), è stato raggiunto il limite massimo degli identificativi univoci (ID) assegnabili in fase di creazione di una nuova colonna.
 
 **Non** era quindi più possibile **aggiungere colonne** alla tabella dbo.ShippingHeader. SQL Server restituiva il messaggio di errore indicato in precedenza perché il contatore **colid** della tabella di sistema sys.syscolpars **non poteva essere incrementato** in quanto raggiunto il limite massimo di valori rappresentabili.
 
 La colonna colid, nella versione 2005 di SQL Server, è di tipo smallint e con questo tipo di dato si possono rappresentare positivamente 2\^15 - 1 elementi, ossia 32.767. Dopo qualche mese, il cliente aveva inserito più di 32.767 documenti di trasporto!
+
 
 
 Messaggio di Errore 1701 (SQL Server 2012)
@@ -169,10 +175,13 @@ Figura 2 – Messaggio di Errore 1701 (SQL Server 2012)
 Dopo aver modificato la stored procedure che implementa la logica digenerazione dei documenti di trasporto, per non eseguire l'ADD e il DROP di una colonna temporanea ad ogni esecuzione, ci siamo subito posti il problema di come poter applicare futuri aggiornamenti (aggiunta di nuove colonne) alla tabella dbo.ShippingHeader.
 
 
+
 Soluzione
 =========
 
+
 La soluzione adottata consiste nel ricreare la tabella dbo.ShippingHeader. Ricreando la tabella, il contatore colid (column\_id nella vista sys.columns) verrà inizializzato. L'assegnazione dei prossimi identificativi univoci (ID) ripartirà dal valore successivo a quello estratto nella colonna MAX\_ColID nel seguente comando T-SQL:
+
 
 ```SQl
 USE [tempdb];
@@ -198,7 +207,9 @@ Per ricreare la tabella dbo.ShippingHeader possiamo eseguire, nell'ordine, le se
 Duplicazione della tabella e copia dei dati 
 ===========================================
 
+
 Per duplicare (copiando i dati) la tabella dbo.ShippingHeader abbiamoutilizzato il Tool di [Importazione/Esportazione guidata di SQL Server](http://msdn.microsoft.com/it-it/library/ms188032(v=sql.105).aspx).
+
 
 Completata la procedura, il database conterrà una nuova tabella che inquesto esempio abbiamo chiamato dbo.ShippingHeader2 come illustra la figura seguente.
 
@@ -210,13 +221,16 @@ Figura 3 – Tabella dbo.ShippingHeader2 (copia dalle tabella dbo.ShippingHeader
 Eliminazione delle integrità referenziali definite su dbo.ShippingHeader
 ========================================================================
 
+
 Per ottenere, in modo semplice e veloce, i comandi di eliminazione delle integrità referenziali definite sulla tabella dbo.ShippingHeader abbiamo utilizzato le funzioni di scripting di SQL Server, in particolare abbiamo utilizzato la funzione di generazione del codice per le istruzioni DROP e CREATE, come illustrato in figura 4.
+
 
 ![](./img/SQL-CREATE-e-DROP-di-colonne-temporanee/image5.png)
 
 Figura 4 – Funzioni di scripting di SQL Server
 
 Abbiamo quindi eseguito la cancellazione dei vincoli definiti sulla tabella dbo.ShippingHeader, il seguente frammento di codice T-SQL riporta gli statement eseguiti:
+
 
 ```SQL
 USE [tempdb]
@@ -269,7 +283,8 @@ GO
 Rinomina (in dbo.ShippingHeader) della tabella precedentemente copiata
 ======================================================================
 
-Per rinominare la tabella dbo.ShippingHeader2 in dbo.ShippingHeader, abbiamo utilizzato la stored procedure di sistema [sp\_rename](http://msdn.microsoft.com/en-us/library/ms188351.aspx) che consente di modificare il nome di un oggetto creato dall'utente, nel database corrente. Il seguente comando T-SQL illustra l’utilizzo di sp\_rename:
+
+Per rinominare la tabella dbo.ShippingHeader2 in dbo.ShippingHeader, abbiamo utilizzato la stored procedure di sistema [sp\_rename](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sp-rename-transact-sql) che consente di modificare il nome di un oggetto creato dall'utente, nel database corrente. Il seguente comando T-SQL illustra l’utilizzo di sp\_rename:
 
 ```SQL
 USE [tempdb];
