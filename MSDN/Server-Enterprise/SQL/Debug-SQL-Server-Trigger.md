@@ -23,7 +23,7 @@ Twitter: [@segovoni](https://twitter.com/segovoni)
 Introduzione
 ============
 
-I più importanti linguaggi di programmazione hanno strumenti di debug integrati direttamente nell'IDE. Il debugger ha tipicamente un'interfaccia grafica che consente di esaminare i valori che assumono le variabili durante l'esecuzione, il flusso del programma step-by-step e permette di definire punti di interruzione in corrispondenza dei quali fermare l'esecuzione del programma.
+I più importanti linguaggi di programmazione hanno strumenti di debug integrati direttamente nell'IDE. Il debugger ha tipicamente un'interfaccia grafica che consente di esaminare i valori che assumono le variabili durante l'esecuzione, il flusso del programma step-by-step e permette di definire punti di interruzione in corrispondenza dei quali fermare l'esecuzione dell'applicazione.
 
 Ogni sviluppatore ama gli strumenti di debug, specialmente quando deve capire perché un programma genera un errore o quando viene effettuato un calcolo errato.
 
@@ -35,7 +35,7 @@ Come effettuare il debug di un Trigger (T-SQL)
 
 Il debug di un Trigger è possibile attraverso l'ambiente di sviluppo Microsoft Visual Studio.
 
-Consideriamo il Trigger (di esempio) TR\_Product\_StockLevel definito sulla tabella Production.Product del database AdventureWorks, il seguente frammento di codice T-SQL ne implementa la creazione. Lo scopo del Trigger è quello di impedire l'inserimento di nuovi prodotti aventi come "Scorta di Sicurezza" valori minori di dieci.
+Consideriamo il Trigger (di esempio) TR\_Product\_StockLevel definito sulla tabella Production.Product del database AdventureWorks, il seguente frammento di codice T-SQL ne implementa la creazione. Lo scopo del Trigger è quello di impedire l'inserimento di nuovi prodotti aventi come *Scorta di Sicurezza* valori minori di dieci.
 
 ```SQL
 USE [AdventureWorks2014];
@@ -62,7 +62,7 @@ BEGIN
     END CATCH;
 END;
 ```
-Probabilmente, avrete già notato che il Trigger TR\_Product\_StockLevel non è stato pensato per lavorare su più righe, l'autore non ha considerato che la tabella virtuale "Inserted" potrà contenere più righe nello stesso momento, per la stessa attivazione del Trigger. Solo quando la tabella virtuale "Inserted" conterrà una sola riga, il Trigger lavorerà correttamente e impedirà l'inserimento di nuovi prodotti con valori della Scorta di Sicurezza non coerenti.
+Probabilmente, avrete già notato che il Trigger TR\_Product\_StockLevel non è stato pensato per lavorare su più righe, l'autore non ha considerato che la tabella virtuale *Inserted* potrà contenere più righe nello stesso momento, per la stessa attivazione del Trigger. Solo quando la tabella virtuale *Inserted* conterrà una sola riga, il Trigger lavorerà correttamente e impedirà l'inserimento di nuovi prodotti con valori della Scorta di Sicurezza non coerenti.
 
 Il cliente presso cui abbiamo installato il Trigger lamenta però la presenza di Prodotti, appena inseriti, con valori minori di dieci nella colonna SafetyStockLevel. Vorremmo quindi poter effettuare il debug del Trigger nello stesso modo in cui uno sviluppatore è abituato ad eseguire il debug del codice di un'applicazione.
 
