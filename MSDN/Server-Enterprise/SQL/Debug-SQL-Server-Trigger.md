@@ -43,7 +43,7 @@ Consideriamo il Trigger (di esempio) TR\_Product\_StockLevel definito sulla tabe
 USE [AdventureWorks];
 GO
 
-CREATE TRIGGER Production.TR\_Product\_StockLevel ON Production.Product AFTER INSERT AS
+CREATE TRIGGER Production.TR_Product_StockLevel ON Production.Product AFTER INSERT AS
 BEGIN
   /*
     Avoid to insert products with value of safety stock level lower than 10
