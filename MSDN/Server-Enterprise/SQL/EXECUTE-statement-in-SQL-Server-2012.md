@@ -44,7 +44,6 @@ RESULT SETS supporta le seguenti opzioni:
 - NONE
 - (&lt;result\_set\_definition&gt;)
 
-che descriviamo di seguito.
 
 RESULT SETS UNDEFINED 
 =====================
