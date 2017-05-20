@@ -30,9 +30,9 @@ Introduzione
 
 In questo articolo parleremo del nuovo gruppo di opzioni RESULT SETS implementate per la clausola WITH del comando [EXECUTE](http://msdn.microsoft.com/en-us/library/ms188332(v=SQL.110).aspx) in SQL Server 2012.
 
-Quante volte avete avuto la necessità di utilizzare il result-set restituito, ad esempio, da una stored procedure? E quante volte il result-set restituito era esattamente come ve lo aspettavate? Pensando alle risposte a queste domande probabilmente vi verranno in mente le situazioni in cui avete dovuto "sistemare" il result-set restituito in output dal comando EXECUTE, e uno dei workaround più tipici per risolvere il problema è quello di scaricare tale result-set in una tabella temporanea per poterlo adeguare alle vostre esigenze.
+Quante volte avete avuto la necessità di utilizzare il result-set restituito, ad esempio, da una stored procedure? E quante volte il result-set restituito era esattamente come ve lo aspettavate? Pensando alle risposte a queste domande probabilmente vi ricorderete le situazioni in cui avete dovuto "adeguare" il result-set restituito in output dal comando EXECUTE, e uno dei workaround più tipici per risolvere il problema è quello di memorizzare tale result-set in una tabella temporanea per poterlo adeguare alle vostre esigenze.
 
-L’opzione RESULT SETS garantisce metadati specifici per i result-set di una stored procedure o di un batch T-SQL implementando un "contratto" tra il comando EXECUTE (chiamante) e la relativa stored procedure o batch T-SQL (chiamato).
+L'opzione RESULT SETS garantisce metadati specifici per i result-set di una stored procedure o di un batch T-SQL implementando un "contratto" tra il comando EXECUTE (chiamante) e la relativa stored procedure o batch T-SQL (chiamato).
 
 
 Le opzioni supportate da RESULT SETS
@@ -48,7 +48,7 @@ RESULT SETS supporta le seguenti opzioni:
 RESULT SETS UNDEFINED 
 =====================
 
-L'opzione RESULT SETS UNDEFINED rappresenta il default; specificando questa opzione oppure omettendo RESULT SETS, il comando EXECUTE mantiene il comportamento che aveva nelle precedenti edizioni di SQL Server ovvero fino all'edizione 2008 R2. By default, quindi, lo statement EXECUTE non fornisce garanzie sui metadati restituiti dall'esecuzione di una stored procedure o di un batch T-SQL.
+L'opzione **RESULT SETS UNDEFINED** rappresenta il default; specificando questa opzione oppure omettendo RESULT SETS, il comando EXECUTE mantiene il comportamento che aveva nelle precedenti edizioni di SQL Server ovvero fino all'edizione 2008 R2. By default, lo statement EXECUTE **non** fornisce garanzie sui metadati restituiti dall'esecuzione di una stored procedure o di un batch T-SQL.
 
 Nel seguente frammento di codice si osserva che i due statement EXECUTE restituiscono lo stesso output dimostrando che l'opzione RESULT SETS UNDEFINED rappresenta il comportamento di default.
 
@@ -73,7 +73,7 @@ Figura 1 – L'opzione RESULT SETS UNDEFINED rappresenta il default
 RESULT SETS NONE 
 ================
 
-L'opzione RESULT SETS NONE garantisce che non vengano restituiti result-set per il comando EXECUTE; verrà generato un errore qualora la stored procedure o il batch T-SQL invocati con EXECUTE tentino la restituzione di un result-set. Nel seguente frammento di codice viene utilizzata l'opzione RESULT SETS NONE per garantire al chiamante che nessun result-set venga restituito.
+L'opzione **RESULT SETS NONE** garantisce che non vengano restituiti result-set per il comando EXECUTE. Verrà generato un errore qualora la stored procedure o il batch, invocati con EXECUTE, tentino la restituzione di un result-set. Nel seguente frammento di codice viene utilizzata l'opzione RESULT SETS NONE per garantire al chiamante che nessun result-set venga restituito.
 
 ```SQL
 USE [tempdb];
@@ -94,7 +94,7 @@ Figura 2 – L'opzione RESULT SETS NONE garantisce che non vengano restituiti re
 RESULT SETS ({…}) 
 =================
 
-L'opzione RESULT SET (&lt;result\_set\_definition&gt;) permette di definire esattamente i metadati attesi per tutti i result-set restituiti dal comando EXECUTE; garantisce che i metadati restituiti siano in accordo, per numero e tipo, con quelli definiti. Nel seguente frammento di codice, vengono definiti metadati specifici per l'unico result-set restituito dallo statement EXECUTE.
+L'opzione **RESULT SET (&lt;result\_set\_definition&gt;)** permette di definire esattamente i metadati attesi per tutti i result-set restituiti dal comando EXECUTE; garantisce che i metadati restituiti siano in accordo, per numero e tipo, con quelli definiti. Nel seguente frammento di codice, vengono definiti metadati specifici per l'unico result-set restituito dallo statement EXECUTE.
 
 ```SQL
 USE [tempdb];
@@ -185,8 +185,7 @@ AS
 BEGIN
   /*
   Stored procedure di esempio
-  Restituisce i prodotti vendibili alla data passata
-  come parametro
+  Restituisce i prodotti vendibili alla data passata come parametro
   */
 
   IF (ISNULL(@vDate, '') = '')
@@ -249,7 +248,7 @@ L'output ottenuto è illustrato in Figura 6 dove si può osservare come le colon
 
 Figura 6 – Prodotti vendibili al 31/12/2005, metadati specifici per il risultato
 
-Oltre agli articoli vendibili ad una certa data, nel prossimo esempio desideriamo ricevere in output anche il secondo un result-set, che deve contenere, come nel caso del primo, gli articoli vendibili alla data passata in *@vDate*, ma che hanno Prezzo di Listino minore o uguale al valore passato nel parametro *@vPrice*. Nel prossimo esempio, illustriamo come sia possibile definire nome delle colonne e tipi di dato, anche per il secondo result-set (con la stessa logica mutuata per il primo).
+Oltre agli articoli vendibili ad una certa data, nel prossimo esempio desideriamo ricevere in output anche il secondo un result-set, che deve contenere, come nel caso del primo, gli articoli vendibili alla data passata in *@vDate*, ma che hanno Prezzo di Listino minore o uguale al valore passato nel parametro *@vPrice*. Nel prossimo esempio, illustriamo come sia possibile definire nome delle colonne e tipi di dato, anche per il secondo result-set.
 
 ```SQL
 EXECUTE Production.uspGetProductForSell
@@ -296,7 +295,7 @@ GO
 Conclusioni 
 ===========
 
-L'opzione RESULT SETS implementata per il comando EXECUTE in SQL Server 2012, permette di definire metadati specifici per tutti i result-set restituiti; implementa un "contratto" tra il comando EXECUTE (chiamante) e i risultati restituiti da stored procedure o batch T-SQL (chiamato). L'Engine di SQL Server respingerà l'esecuzione dello statement qualora il "contratto" venga violato.
+L'opzione RESULT SETS implementata per il comando EXECUTE in SQL Server 2012, permette di definire **metadati specifici** per tutti i result-set restituiti; implementa un "contratto" tra il comando EXECUTE (chiamante) e i risultati restituiti da stored procedure o batch T-SQL (chiamato). L'Engine di SQL Server respingerà l'esecuzione dello statement qualora il "contratto" venga violato.
 
 #### Di [Sergio Govoni](https://mvp.microsoft.com/en-us/PublicProfile/4029181?fullName=Sergio%20Govoni) – Microsoft Data Platform MVP
 
