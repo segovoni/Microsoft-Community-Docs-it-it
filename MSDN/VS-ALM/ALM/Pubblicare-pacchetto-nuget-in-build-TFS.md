@@ -24,6 +24,8 @@ Blog Italiano: <http://blogs.ugidotnet.org/rgm>
 
 *Marzo, 2014*
 
+**Nota:** Questo articolo contiene informazioni valide per la vecchia build XAML e non è più attuale con l'attuale sistema di build. Se avete ancora build XAML operative, il suggerimento è aggiornarle alla nuova versione, prima che il build controller venga completamente rimosso in una delle future versioni di TFS.
+
 Versionare gli assembly
 -----------------------
 
