@@ -1,7 +1,7 @@
 ---
 title: FileTable in SQL Server 2012
 description: FileTable in SQL Server 2012
-author: MSCommunityPubService
+author: segovoni
 ms.author: aldod
 ms.manager: csiism
 ms.date: 08/01/2016
