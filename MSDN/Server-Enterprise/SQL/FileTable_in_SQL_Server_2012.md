@@ -29,7 +29,7 @@ Introduzione
 
 Alcuni di voi avranno sicuramente apprezzato l'attributo [FILESTREAM](http://technet.microsoft.com/it-it/library/bb933993(v=sql.105).aspx) introdotto nella versione 2008 di SQL Server. FILESTREAM rappresenta il punto di contatto tra il mondo del file system e il mondo del database, concilia i vantaggi delle due tecnologie con una struttura dati gestita da SQL Server, ma appoggiata sul file system.
 
-Abbiamo illustrato l'utilizzo del supporto FILESTREAM nel webcast [SQL Server 2008 R2: FILESTREAM Attribute](https://vimeo.com/87449251) disponibile sul canale UGISS di Vimeo.
+Abbiamo illustrato l'utilizzo del supporto FILESTREAM nel webcast [SQL Server 2008 R2: FILESTREAM Attribute](https://vimeo.com/87449251) disponibile sul [canale UGISS](https://vimeo.com/ugiss) di Vimeo.
 
 Tuttavia, un limite evidente del supporto FILESTREAM è rappresentato dal fatto che le applicazioni tradizionali, che non conoscono SQL Server, non possono accedervi. L'accesso al supporto FILESTREAM, su SQL Server 2008, doveva essere eseguito utilizzando il linguaggio T-SQL oppure tramite speciali API .NET Win32. Molti clienti hanno quindi chiesto il potenziamento di questa tecnologia e l'implementazione del tradizionale accesso ai file, come avviene nelle applicazioni Office o con Esplora Risorse di Windows, mantenendo però i vantaggi del supporto FILESTREAM, ovvero la possibilità di includere, nel backup del DB, i file memorizzati nelle colonne VARBINARY(MAX) con attributo FILESTREAM e di poter eseguire ricerche con il servizio full-text search.
 
