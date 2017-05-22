@@ -39,9 +39,9 @@ La risposta di Microsoft è arrivata con SQL Server 2012, che implementa [FileTa
 FileTable
 =========
 
-FileTable permette ad una applicazione d'integrare la memorizzazione dei propri file all'interno di SQL Server, dove sarà possibile eseguire ricerche full-text e semantiche, anche su dati e metadati non strutturati. In altre parole sarà possibile memorizzare file e documenti in speciali tabelle di SQL Server chiamate FileTables; le applicazioni Windows potranno accedere a tali file come se fossero memorizzati (solo) nel file system senza implementare alcuna modifica.
+FileTable permette ad una applicazione d'integrare la memorizzazione dei propri file all'interno di SQL Server, dove sarà possibile eseguire ricerche full-text e semantiche, anche su dati e metadati non strutturati. In altre parole sarà possibile memorizzare file e documenti in speciali tabelle di SQL Server chiamate *FileTables*; le applicazioni Windows potranno accedere a tali file come se fossero memorizzati (solo) nel file system senza implementare alcuna modifica.
 
-La nuova caratteristica FileTable è basata sulla tecnologia FILESTREAM; una FileTable è una tabella speciale, con uno schema fisso, creata dall'utente e utilizzata per la memorizzazione di dati FILESTREAM (documenti, file o cartelle).
+La nuova caratteristica FileTable è basata sulla tecnologia FILESTREAM; **una FileTable è una tabella speciale, con uno schema fisso, creata dall'utente e utilizzata per la memorizzazione di dati FILESTREAM** (documenti, file o cartelle).
 
 
 Prerequisiti 
@@ -53,7 +53,7 @@ Per utilizzare FileTable è necessario aver attivato il supporto FILESTREAM, dap
 Setup 
 =====
 
-Procediamo con il setup del database di esempio FileTablesDB, il seguente frammento di codice in linguaggio T-SQL implementa la creazione di questo database. Osserviamo la definizione del Filegroup aggiuntivo FileStreamGroup dedicato al supporto FILESTREAM.
+Procediamo con il setup del database di esempio *FileTablesDB*, il seguente frammento di codice in linguaggio T-SQL implementa la creazione di questo database. Osserviamo la definizione del Filegroup aggiuntivo *FileStreamGroup* dedicato al supporto FILESTREAM.
 
 ```SQL
 ------------------------------------------------------------------------
@@ -102,17 +102,17 @@ LOG ON
 go
 ```
 
-Dopo aver creato il database che ospiterà FileTable, modifichiamo l'opzione NON\_TRANSACTED\_ACCESS sul DB appena creato (FileTablesDB). Il valore FULL assegnato a NON\_TRANSACTED\_ACCESS indica a SQL Server che tutti gli accessi a FileTable, derivanti dal file system, non saranno transazionali; non sarà quindi possibile ripristinare i dati di FileTable in un punto preciso (point-in-time restore). La non transazionalità delle modifiche è applicata solo agli accessi che avvengono tramite la condivisione file di Windows, qualsiasi altro accesso tramite T-SQL o API sarà completamente transazionale, anche se attiva l'opzione NON\_TRANSACTED\_ACCESS.
+Dopo aver creato il database che ospiterà FileTable, modifichiamo l'opzione *NON\_TRANSACTED\_ACCESS* sul DB appena creato (FileTablesDB). Il valore *FULL* assegnato a *NON\_TRANSACTED\_ACCESS* indica a SQL Server che tutti gli accessi a FileTable, derivanti dal file system, non saranno transazionali; non sarà quindi possibile ripristinare i dati di FileTable in un punto preciso (point-in-time restore). La non transazionalità delle modifiche è applicata solo agli accessi che avvengono tramite la condivisione file di Windows, qualsiasi altro accesso tramite T-SQL o API sarà completamente transazionale, anche se attiva l'opzione *NON\_TRANSACTED\_ACCESS*.
 
 
-I valori supportati da NON\_TRANSACTED\_ACCESS sono:
+I valori supportati da *NON\_TRANSACTED\_ACCESS* sono:
 
 - FULL
 - READONLY
 - OFF
 
 
-Il seguente frammento di codice T-SQL imposta l'accesso non transazionale (FULL) per FileTable sul database di esempio FileTablesDB.
+Il seguente frammento di codice T-SQL imposta l'accesso non transazionale (FULL) per FileTable sul database di esempio *FileTablesDB*.
 
 ```SQL
 ------------------------------------------------------------------------
@@ -139,7 +139,7 @@ Figura 1 – Scheda Opzioni della finestra Proprietà database di SQL Server Man
 Creazione di una FileTable 
 ==========================
 
-Procediamo ora con la creazione di una FileTable (letteralmente "tabella di file") nel database di esempio FileTablesDB; il seguente frammento di codice T-SQL implementa la creazione della tabella dbo.ProjectsStore.
+Procediamo ora con la creazione di una FileTable (letteralmente "tabella di file") nel database di esempio *FileTablesDB*; il seguente frammento di codice T-SQL implementa la creazione della tabella dbo.ProjectsStore.
 
 ```SQL
 ------------------------------------------------------------------------
@@ -153,7 +153,7 @@ with (
 go
 ```
 
-Una delle particolarità che possiamo osservare nel precedente statement è l'assenza di definizione dello schema; la tabella dbo.ProjectsStore è stata creata con lo schema predefinito per FileTable, che potete consultare sui BOL di SQL Server 2012 a [questo link](http://msdn.microsoft.com/en-us/library/gg492084(v=SQL.110).aspx).
+Una delle particolarità che possiamo osservare nel precedente statement è l'assenza di definizione dello schema; la tabella *dbo.ProjectsStore* è stata creata con lo schema predefinito per FileTable, che potete consultare sui BOL di SQL Server 2012 a [questo link](http://msdn.microsoft.com/en-us/library/gg492084(v=SQL.110).aspx).
 
 Come descritto in precedenza, l'aggiunta o la rimozione di colonne allo schema fisso di un oggetto FileTable non è consentita. Il seguente frammento di codice T-SQL sarà quindi respinto da SQL Server:
 
@@ -169,15 +169,15 @@ In output, il messaggio di errore sarà:
 
     Impossibile aggiungere la colonna 'test' alla tabella 'dbo.ProjectsStore' perché si tratta di un oggetto FileTable. L'aggiunta di colonne allo schema fisso di un oggetto FileTable non è consentita.
 
-Nello schema della tabella dbo.ProjectsStore troviamo colonne che descrivono le proprietà dei file di Windows (attributo di sola lettura, archivio, file temporaneo, file di sistema, ecc.), troviamo il path relativo rispetto alla root directory, memorizzato nella colonna path\_locator di tipo HIERARCHYID; il file effettivo, invece, si trova nella colonna file\_stream di tipo VARBINARY(MAX).
+Nello schema della tabella *dbo.ProjectsStore* troviamo colonne che descrivono le proprietà dei file di Windows (attributo di sola lettura, archivio, file temporaneo, file di sistema, ecc.), troviamo il path relativo rispetto alla root directory, memorizzato nella colonna path\_locator di tipo HIERARCHYID; il file effettivo, invece, si trova nella colonna file\_stream di tipo VARBINARY(MAX).
 
-La figura 2 illustra la struttura della tabella dbo.ProjectsStore, si osservi il ramo dedicato a FileTable, posto allo stesso livello di quello dedicato alle tabelle di sistema.
+La figura 2 illustra la struttura della tabella *dbo.ProjectsStore*, si osservi il ramo dedicato a FileTable, posto allo stesso livello di quello dedicato alle tabelle di sistema.
 
 ![](./img/FileTable_in_SQL_Server_2012/image3.jpg)
 
 Figura 2 – Schema predefinito per le tabelle FileTable
 
-Per esplorare il contenuto della directory associata alla tabella dbo.ProjectsStore è sufficiente eseguire un click destro del mouse sulla FileTable e selezionare la voce "Esplora directory FileTable" dal menù contestuale. La figura 3 descrive graficamente l'operazione da eseguire.
+Per esplorare il contenuto della directory associata alla tabella *dbo.ProjectsStore* è sufficiente eseguire un click destro del mouse sulla FileTable e selezionare la voce "Esplora directory FileTable" dal menù contestuale. La figura 3 descrive graficamente l'operazione da eseguire.
 
 ![](./img/FileTable_in_SQL_Server_2012/image4.jpg)
 
@@ -187,11 +187,11 @@ L'output di questa operazione è illustrato in figura 4.
 
 ![](./img/FileTable_in_SQL_Server_2012/image5.jpg)
 
-Figura 4 – Contenuto della directory associata alla FileTable dbo.ProjectsStore
+Figura 4 – Contenuto della directory associata alla FileTable *dbo.ProjectsStore*
 
 La cartella ora è vuota; osserviamo il suo path, che contiene il nome della condivisione Windows (MSSQLSERVER) specificata durante la configurazione del supporto FILESTREAM, su cui si basa la tecnologia FileTable.
 
-Eseguiamo ora la copia di tutti i file contenuti in C:\\Temp\\Font, specificando come cartella di destinazione la directory associata alla FileTable dbo.ProjectsStore; il seguente comando XCOPY permette di eseguire l'operazione di copia:
+Eseguiamo ora la copia di tutti i file contenuti in C:\\Temp\\Font, specificando come cartella di destinazione la directory associata alla FileTable *dbo.ProjectsStore*; il seguente comando XCOPY permette di eseguire l'operazione di copia:
 
     xcopy c:\temp\font\*.* \\nome_server\mssqlserver\Projects\DocumentTable /E
 
@@ -201,7 +201,7 @@ Figura 5 – Copia file da C:\\temp\\font a FileTable
 
 Nella cartella di destinazione ci aspettiamo di trovare tutti i file copiati, ma nella FileTable, cosa ci aspettiamo di trovare?
 
-Il seguente frammento di codice interroga il contenuto della FileTable dbo.ProjectsStore:
+Il seguente frammento di codice interroga il contenuto della FileTable *dbo.ProjectsStore*:
 
 ```SQL
 select
@@ -218,11 +218,11 @@ L'output è illustrato in figura 6:
 
 ![](./img/FileTable_in_SQL_Server_2012/image7.jpg)
 
-Figura 6 – Contenuto della FileTable dbo.ProjectsStore
+Figura 6 – Contenuto della FileTable *dbo.ProjectsStore*
 
-La copia dei (due) file, dalla cartella C:\\Temp\\Font alla directory collegata alla FileTable ha eseguito anche l'inserimento di un record, per ogni file copiato, nella tabella dbo.ProjectsStore memorizzando, di fatto, tali file nel database FileTablesDB, grazie al supporto FILESTREAM.
+La copia dei (due) file, dalla cartella C:\\Temp\\Font alla directory collegata alla FileTable ha eseguito anche l'inserimento di un record, per ogni file copiato, nella tabella *dbo.ProjectsStore* memorizzando, di fatto, tali file nel database *FileTablesDB*, grazie al supporto FILESTREAM.
 
-Con FileTable sono state rilasciate anche alcune funzioni che permettono di gestire e interrogare i dati attraverso il linguaggio T-SQL, un esempio è rappresentato dalla funzione FileTableRootPath() che fornisce il path di origine del file salvato su FileTable.
+Con FileTable sono state rilasciate anche alcune funzioni che permettono di gestire e interrogare i dati attraverso il linguaggio T-SQL, un esempio è rappresentato dalla funzione *FileTableRootPath()* che fornisce il path di origine del file salvato su FileTable.
 
 Con T-SQL è inoltre possibile:
 
