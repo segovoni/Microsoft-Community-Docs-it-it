@@ -49,7 +49,7 @@ IF (@@ROWCOUNT = 0)
 Ecco un esempio di creazione di un Trigger, per il comando UPDATE, sulla tabella Person.Person del database [AdventureWorks2012](http://msftdbprodsamples.codeplex.com/releases/view/55330):
 
 ```SQL
-CREATE TRIGGER TR\_Person\_Person\_Upd ON Person.Person FOR UPDATE AS
+CREATE TRIGGER TR_Person_Person_Upd ON Person.Person FOR UPDATE AS
 BEGIN
   IF (@@ROWCOUNT = 0)
     RETURN;
