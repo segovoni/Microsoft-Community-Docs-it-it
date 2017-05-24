@@ -32,6 +32,7 @@ Un Trigger, in SQL Server, è ottimizzato quando la sua durata è trascurabile r
 
 Ottimizzare un Trigger esistente, che racchiude centinaia di righe di codice, può rivelarsi molto difficile; quindi l'arma migliore è la prevenzione!
 
+
 Il comando che ogni Trigger dovrebbe avere
 ==========================================
 
@@ -80,9 +81,7 @@ Nel caso le colonne di nostro interesse non siano state aggiornate, avremmo un'a
 La funzione [UPDATE()](http://technet.microsoft.com/it-it/library/ms187326.aspx) restituisce il valore Booleano True nel caso la colonna sia stata modificata o nel caso di INSERT, ma non permette di sapere, in caso di aggiornamento, se i valori della colonna sono cambiati ovvero se il vecchio valore è diverso dal nuovo. Qualora il Trigger debba eseguire un'azione solo se il vecchio valore, di una colonna, risulti essere diverso dal nuovo, si potranno interrogare le tabelle virtuali *INSERTED* e *DELETED*. Il seguente frammento di codice T-SQL implementa un esempio di Trigger, per il comando UPDATE, sulla tabella *Sales.SalesOrderDetail* del database *AdventureWorks* dove si desidera eseguire un'azione solo quando viene aggiornata la colonna *UnitPrice* e **il vecchio valore è diverso dal nuovo** per almeno una riga.
 
 ```SQL
-CREATE TRIGGER Sales.TR_SalesOrderDetail_Upd ON
-Sales.SalesOrderDetail
-AFTER UPDATE AS
+CREATE TRIGGER Sales.TR_SalesOrderDetail_Upd ON Sales.SalesOrderDetail AFTER UPDATE AS
 BEGIN
   IF (@@ROWCOUNT = 0)
     RETURN;
@@ -108,6 +107,58 @@ GO
 ```
 
 Si osservi l'istruzione *SET NOCOUNT ON* eseguita immediatamente dopo aver verificato il valore della variabile *@@ROWCOUNT*; permette di bloccare l'invio di messaggi al client per ogni istruzione all'interno del Trigger. Nel caso di Trigger contenenti diverse istruzioni e che non restituiscono un'elevata quantità di dati, l'impostazione di *SET NOCOUNT* ad *ON* può determinare un incremento delle prestazioni significativo grazie alla notevole riduzione del traffico di rete.
+
+
+Trigger attivati dal comando MERGE (T-SQL)
+==========================================
+
+Il comando MERGE imposta il valore della variabile di sistema *@@ROWCOUNT* con il numero delle righe "Merged" che può essere diverso dal numero di righe da controllare nel Trigger. In definitiva, quindi, si consiglia di contare i record nella tabella *INSERTED* per i trigger su INSERT o UPDATE, e quelli nella tabella *DELETED* per i trigger UPDATE o DELETE in sostituzione di *@@ROWCOUNT* qualora venga utilizzato il comando MERGE.
+
+```SQL
+CREATE TRIGGER Sales.TR_SalesOrderDetail_Upd ON Sales.SalesOrderDetail AFTER UPDATE AS
+BEGIN
+  -- Contare i record nella tabella Inserted per i trigger su INSERT o UPDATE,
+  -- e quelli nella tabella Deleted per i trigger UPDATE o DELETE in sostituzione di @@ROWCOUNT
+  
+  -- Il comando MERGE imposta @@ROWCOUNT con il numero di righe "merged" che può
+  -- essere diverso dal numero di righe da controllare nel trigger
+
+  -- Definizione e impostazione variabili
+  DECLARE
+    @inserted_rows_affected INT
+    ,@deleted_rows_affected INT;
+
+  SET @inserted_rows_affected = (SELECT COUNT(*) FROM inserted);
+  --SET @deleted_rows_affected = (SELECT COUNT(*) FROM deleted);
+
+  -- Se non ci sono righe coinvolte nel comando che ha scatenato il trigger
+  -- non c'è nulla da fare se non restituire il controllo al chiamante!!
+  IF (@inserted_rows_affected = 0)
+    RETURN;
+  --IF (@deleted_rows_affected = 0)
+  --  RETURN;
+
+  SET NOCOUNT ON;
+
+  IF UPDATE(UnitPrice)
+     AND EXISTS (
+                 SELECT
+                   i.SalesOrderID
+                   ,i.SalesOrderDetailID
+                 FROM
+                   inserted AS i
+                 JOIN
+                   deleted AS d ON (d.SalesOrderID=i.SalesOrderID) AND (d.SalesOrderDetailID=i.SalesOrderDetailID)
+                 WHERE
+                   (d.UnitPrice <> i.UnitPrice)
+                )
+  BEGIN
+    -- <azione>
+  END;
+END;
+GO
+```
+
 
 Conclusioni
 ===========
