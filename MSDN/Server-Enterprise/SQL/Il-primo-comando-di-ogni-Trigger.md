@@ -1,7 +1,7 @@
 ---
 title: Il primo comando di ogni Trigger
 description: Il primo comando di ogni Trigger
-author: MSCommunityPubService
+author: segovoni
 ms.author: aldod
 ms.manager: csiism
 ms.date: 08/01/2016
@@ -25,14 +25,14 @@ Twitter: [@segovoni](https://twitter.com/segovoni)
 
 *Agosto, 2013*
 
-Introduzione {#introduzione .ppSection}
+Introduzione
 ============
 
 Un Trigger, di SQL Server, è ottimizzato se la sua durata è breve. I Trigger lavorano sempre in transazione (implicita o esplicita che sia) e i Lock rimarranno al loro posto fino a quando la transazione non verrà confermata (con un COMMIT) o respinta (con un ROLLBACK). Si intuisce facilmente che più lunga sarà la durata di un Trigger, più alta sarà la probabilità che esso blocchi un altro processo.
 
 Ottimizzare un Trigger esistente, che racchiude centinaia di righe di codice, può rivelarsi molto difficile; quindi l'arma migliore è la prevenzione!
 
-Il comando che ogni Trigger dovrebbe avere {#il-comando-che-ogni-trigger-dovrebbe-avere .ppSection}
+Il comando che ogni Trigger dovrebbe avere
 ==========================================
 
 Potreste considerarlo banale, ma lo troverete interessante, la prima cosa da fare affinché la durata di un Trigger sia breve è stabilire se il Trigger debba intervenire oppure no. Se non ci sono righe coinvolte nel comando che lo ha scatenato, significa **generalmente** che il Trigger in questione non dovrà fare nulla.
@@ -109,7 +109,7 @@ GO
 
 Si osservi l'istruzione *SET NOCOUNT ON* eseguita immediatamente dopo aver verificato il valore della variabile *@@ROWCOUNT*; permette di bloccare l'invio di messaggi al client per ogni istruzione all'interno del Trigger. Nel caso di Trigger contenenti diverse istruzioni e che non restituiscono un'elevata quantità di dati, l'impostazione di SET NOCOUNT ad ON può determinare un incremento delle prestazioni significativo grazie alla notevole riduzione del traffico di rete.
 
-Conclusioni {#conclusioni .ppSection}
+Conclusioni
 ===========
 
 I Trigger sembrano facili da scrivere, ma scrivere Trigger efficienti non è affatto semplice e quando la loro complessità aumenta, talvolta possono presentare effetti collaterali in grado di confondere persino l'autore! L'importante è ricordarsi che un Trigger è ottimizzato se la sua durata è breve.
