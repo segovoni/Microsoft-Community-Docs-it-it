@@ -1,7 +1,7 @@
 ---
 title: Una inaspettata variazione di SPID
 description: Una inaspettata variazione di SPID (SQL Server, Session Process ID)
-author: MSCommunityPubService
+author: segovoni
 ms.author: aldod
 ms.manager: csiism
 ms.date: 08/01/2016
@@ -12,13 +12,15 @@ ms.custom: CommunityDocs
 
 # Una inaspettata variazione di SPID (SQL Server, Session Process ID)
 
-#### di [Sergio Govoni](http://mvp.microsoft.com/en-us/mvp/Sergio%20Govoni-4029181) – Microsoft MVP
-![](./img/Inaspettata-variazione-di-SPID/image1.png)
+#### Di [Sergio Govoni](https://mvp.microsoft.com/en-us/PublicProfile/4029181?fullName=Sergio%20Govoni) – Microsoft Data Platform MVP
 
-Blog (Italiano): [http://www.ugiss.org/sgovoni/](http://www.ugiss.org/sgovoni/)
-Blog (Inglese): [http://sqlblog.com/blogs/sergio_govoni](http://sqlblog.com/blogs/sergio_govoni)
+English Blog: <http://sqlblog.com/blogs/sergio_govoni/default.aspx>
+
+UGISS Author: <https://www.ugiss.org/author/sgovoni>
 
 Twitter: [@segovoni](https://twitter.com/segovoni)
+
+![](./img/Inaspettata-variazione-di-SPID/image1.png)
 
 *Aprile 2014*
 
@@ -26,12 +28,8 @@ Twitter: [@segovoni](https://twitter.com/segovoni)
 Introduzione
 ============
 
-Un po’ di tempo fa, ho avuto l’opportunità di analizzare una situazione
-in cui si verificava un inaspettato cambiamento dello SPID relativo ad
-una connessione aperta da un’Applicazione verso un database SQL Server.
-Lo [SPID](http://technet.microsoft.com/en-us/library/ms189535.aspx)
-rappresenta l’identificativo numerico assegnato da SQL Server ad ogni
-nuova sessione.
+Un po' di tempo fa, ho avuto l'opportunità di analizzare una situazione in cui si verificava un inaspettato cambiamento dello SPID relativo ad una connessione aperta da un'applicazione verso un database SQL Server. Lo [SPID](http://technet.microsoft.com/en-us/library/ms189535.aspx) rappresenta l'identificativo numerico assegnato da SQL Server ad ogni nuova sessione.
+
 
 Inaspettata variazione dell’identificativo sessione (SPID)
 ==========================================================
