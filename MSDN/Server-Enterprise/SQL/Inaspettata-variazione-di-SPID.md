@@ -34,35 +34,17 @@ Un po' di tempo fa, ho avuto l'opportunità di analizzare una situazione in cui 
 Inaspettata variazione dell’identificativo sessione (SPID)
 ==========================================================
 
-Tutto è iniziato con la segnalazione di un cliente, che lamentava
-rallentamenti nell’Applicazione, blocchi e talvolta errori di lock
-time-out. I rallentamenti e i blocchi non erano ovviamente sistematici e
-attribuibili ad un eccezionale carico di lavoro; si verificavano però
-principalmente su una determinata funzione Applicativa. Dopo svariati
-tentativi nel cercare di catturare questi tipi di lock, siamo finalmente
-riusciti a riprodurre il problema.
+Tutto è iniziato con la segnalazione di un cliente, che lamentava rallentamenti nell'applicazione, blocchi e talvolta errori di lock time-out. I rallentamenti e i blocchi non erano ovviamente sistematici e attribuibili ad un eccezionale carico di lavoro; si verificavano però principalmente su una determinata funzione Applicativa. Dopo svariati tentativi nel cercare di catturare questi tipi di lock, siamo finalmente riusciti a riprodurre il problema.
 
-Siamo riusciti ad avere due file di traccia SQL Profiler relativi a due
-elaborazioni della stessa funzione Applicativa eseguita dallo stesso
-operatore, sullo stesso client e con gli stessi criteri. La prima
-elaborazione non è stata portata a termine a causa di un errore di lock
-time-out, mentre la seconda elaborazione è stata completata senza
-errori.
+Siamo riusciti ad avere due file di traccia SQL Profiler relativi a due elaborazioni della stessa funzione Applicativa eseguita dallo stesso operatore, sullo stesso client e con gli stessi criteri. La prima elaborazione non è stata portata a termine a causa di un errore di lock time-out, mentre la seconda elaborazione è stata completata senza errori.
 
-Confrontando i due file di traccia SQL Profiler, in uno dei due, si è
-osservata una “inaspettata variazione” dello SPID relativo alla sessione
-del processo che si stava monitorando, proprio nell’elaborazione che non
-è stata portata a termine. Ho scritto “inaspettata variazione” perché
-l’applicazione utilizza una sola connessione per eseguire tutte le query
-catturate da SQL Profiler.
+Confrontando i due file di traccia SQL Profiler, in uno dei due, si è osservata una "inaspettata variazione" dello SPID relativo alla sessione del processo che si stava monitorando, proprio nell'elaborazione che non è stata portata a termine. Ho scritto "inaspettata variazione" perché l'applicazione utilizza una sola connessione per eseguire tutte le query catturate da SQL Profiler.
 
-La figura 1 illustra il file di traccia relativo all’elaborazione
-terminata con l’errore di lock time-out.
+La figura 1 illustra il file di traccia relativo all’elaborazione terminata con l'errore di lock time-out.
 
 ![](./img/Inaspettata-variazione-di-SPID/image2.png)
 
-Figura 1 – File di traccia SQL Profiler con inaspettata variazione
-    di SPID
+Figura 1 – File di traccia SQL Profiler con inaspettata variazione di SPID
 
 Osserviamo le righe aventi ClientProcessID uguale a 192, in
 corrispondenza della prima riga selezionata c’è stata la variazione di
