@@ -77,39 +77,21 @@ GO
 
 Figura 1 – Inserimento dati di prova con utilizzo della clausola OUTPUT
 
-Ipotizziamo ora che questo comando di INSERT sia stato utilizzato
-all’interno di un’applicazione, distribuita a un cliente. Dopo qualche
-tempo, l’assistenza clienti riceve una segnalazione di errore
-proveniente proprio dal cliente presso il quale è stato fatto il deploy
-dell’applicazione nel cui codice sorgente è contenuto lo statement
-precedente (illustrato in figura 1).
+Ipotizziamo ora che questo comando di INSERT sia stato utilizzato all'interno di un'applicazione, distribuita a un cliente. Dopo qualche tempo, l'assistenza clienti riceve una segnalazione di errore proveniente proprio dal cliente presso il quale è stato fatto il deploy dell'applicazione nel cui codice sorgente è contenuto lo statement precedente (illustrato in figura 1).
 
-Il messaggio di errore segnalato all’assistenza è quello illustrato in
-figura 2, che abbiamo riprodotto su SQL Server Management Studio (SSMS):
+Il messaggio di errore segnalato all'assistenza è quello illustrato in figura 2, che abbiamo riprodotto su SQL Server Management Studio (SSMS):
 
 ![](./img/SQL-OUTPUT-clause-e-triggers/image3.png)
 
 Figura 2 – SQL Server Error Message 334
 
-Che cosa è successo all’applicazione? Che è in produzione già da molto
-tempo senza alcun problema? Non sono state eseguite modifiche al codice
-sorgente! Queste sono le prime domande che uno sviluppatore
-(tipicamente) si pone in questi casi.
+Che cosa è successo all'applicazione? Che è in produzione già da molto tempo senza alcun problema? Non sono state eseguite modifiche al codice sorgente! Queste sono le prime domande che uno sviluppatore (tipicamente) si pone in questi casi.
 
-Uno dei comandi di INSERT, inviati dall’applicazione a SQL Server, ora
-fallisce perché è stato creato un oggetto Trigger, attivo sulla tabella
-dbo.TableA, per l'evento INSERT.
+Uno dei comandi di INSERT, inviati dall'applicazione a SQL Server, ora fallisce perché è stato creato un oggetto Trigger, attivo sulla tabella *dbo.TableA*, per l'evento INSERT.
 
-La clausola OUTPUT, con la sintassi illustrata in figura 2, non può
-restituire informazioni relative alle righe inserite proprio per la
-presenza del Trigger. Il messaggio di errore suggerisce di utilizzare la
-clausola INTO per memorizzare le informazioni riguardanti le righe
-inserite in una variabile di tipo tabella oppure in una tabella
-temporanea.
+La clausola OUTPUT, con la sintassi illustrata in figura 2, non può restituire informazioni relative alle righe inserite proprio per la presenza del Trigger. Il messaggio di errore suggerisce di utilizzare la clausola INTO per memorizzare le informazioni riguardanti le righe inserite in una variabile di tipo tabella oppure in una tabella temporanea.
 
-Il seguente frammento di codice T-SQL contiene i comandi di creazione
-del Trigger TR\_LogTableA e della tabella di Log dbo.LogTableA su cui il
-Trigger tenta di memorizzare (inserire) altre informazioni.
+Il seguente frammento di codice T-SQL contiene i comandi di creazione del Trigger *TR\_LogTableA* e della tabella di Log *dbo.LogTableA* su cui il Trigger tenta di memorizzare (inserire) altre informazioni.
 
 ```SQL
 USE [tempdb];
@@ -118,9 +100,9 @@ GO
 -- Creazione tabella dbo.LogTableA
 CREATE TABLE dbo.LogTableA
 (
-    LogID INTEGER NOT NULL
-    ,LogColA VARCHAR(64)
-    ,Operation VARCHAR(1) NOT NULL DEFAULT 'I'
+  LogID INTEGER NOT NULL
+  ,LogColA VARCHAR(64)
+  ,Operation VARCHAR(1) NOT NULL DEFAULT 'I'
 );
 GO
 
@@ -128,61 +110,42 @@ GO
 CREATE TRIGGER TR_LogTableA on dbo.TableA
 FOR INSERT
 AS BEGIN
-
-    /*
+  /*
     Log degli INSERT eseguiti sulla tabella dbo.TableA
-    */
+  */
 
-    INSERT INTO dbo.LogTableA
-    (
-        LogID
-        ,LogColA
-        ,Operation
-    )
-    SELECT
-        ID
-        ,ColA
-        ,'I'
-    FROM
-        INSERTED
+  INSERT INTO dbo.LogTableA
+  (
+    LogID
+    ,LogColA
+    ,Operation
+  )
+  SELECT
+    ID
+    ,ColA
+    ,'I'
+  FROM
+    INSERTED
 END;
 GO
 ```
-Dopo aver adeguato il codice dell’applicazione attraverso l’utilizzo
-dell’opzione INTO per la clausola OUTPUT, abbiamo cercato di comprendere
-i motivi dell’errore, che sono da ricercarsi nel numero di result-set
-restituiti per lo statement.
 
-Il codice ODBC, per eseguire la restituzione dei result-set, utilizza
-cicli di chiamate alle seguenti API: SQLFetch, SQLNumResultCols,
-SQLRowCount, SQLMoreResults.
+Dopo aver adeguato il codice dell'applicazione attraverso l'utilizzo dell'opzione INTO per la clausola OUTPUT, abbiamo cercato di comprendere i motivi dell'errore, che sono da ricercarsi nel numero di result-set restituiti per lo statement.
 
-Con il Trigger attivo, il primo result-set restituito riguardava il
-numero di righe inserite dal Trigger e non il numero di righe inserite
-dal comando che ha scatenato il Trigger! Il secondo result-set
-riguardava il numero di righe interessate dal nostro comando di INSERT
-(quello eseguito dall’applicazione) e l’ultimo result-set riguardava le
-informazioni relative alle righe inserite dallo statement che ha
-scatenato il Trigger, sostanzialmente quello volevamo in primo luogo!
+Il codice ODBC, per eseguire la restituzione dei result-set, utilizza cicli di chiamate alle seguenti API: *SQLFetch*, *SQLNumResultCols*, *SQLRowCount* e *SQLMoreResults*.
+
+Con il Trigger attivo, il primo result-set restituito riguardava il numero di righe inserite dal Trigger e non il numero di righe inserite dal comando che ha scatenato il Trigger! Il secondo result-set riguardava il numero di righe interessate dal nostro comando di INSERT (quello eseguito dall'applicazione) e l'ultimo result-set riguardava le informazioni relative alle righe inserite dallo statement che ha scatenato il Trigger, sostanzialmente quello che volevamo in primo luogo!
+
 
 Conclusioni
------------
+===========
 
-Ricordiamoci che l’implementazione di un Trigger avrà effetto sugli
-statement INSERT, UPDATE, DELETE e MERGE qualora in questi ultimi venga
-utilizzata la clausola OUTPUT. Per evitare potenziali errori si può
-usare l’opzione INTO (della clausola OUTPUT) specificando la
-destinazione dell’output. L’applicazione dovrà essere progettata in modo
-da poter leggere tutti i result-set restituiti. Una best practices da
-ricordare quando si realizza un Trigger è quella di aggiungere lo
-statement SET NOCOUNT ON per evitare venga restituito il result-set che
-descrive il numero di righe interessare dalle operazioni eseguite nel
-Trigger, tipicamente il testo “Affected number of rows”.
+Ricordiamoci che l'implementazione di un Trigger avrà effetto sugli statement INSERT, UPDATE, DELETE e MERGE qualora in questi ultimi venga utilizzata la clausola OUTPUT. Per evitare potenziali errori si può usare l'opzione INTO (della clausola OUTPUT) specificando la destinazione dell'output. L'applicazione dovrà essere progettata in modo da poter leggere tutti i result-set restituiti. Una best practices da ricordare quando si realizza un Trigger è quella di aggiungere lo statement SET NOCOUNT ON per evitare venga restituito il result-set che descrive il numero di righe interessare dalle operazioni eseguite nel Trigger, tipicamente il testo "Affected number of rows".
 
-#### di Sergio Govoni – Microsoft MVP ([Blog](http://community.ugiss.org/blogs/sgovoni) / [MVP Profile](http://mvp.microsoft.com/profiles/Sergio.Govoni))
+#### Di [Sergio Govoni](https://mvp.microsoft.com/en-us/PublicProfile/4029181?fullName=Sergio%20Govoni) – Microsoft Data Platform MVP
 
+English Blog: <http://sqlblog.com/blogs/sergio_govoni/default.aspx>
 
+UGISS Author: <https://www.ugiss.org/author/sgovoni>
 
-
-
-
+Twitter: [@segovoni](https://twitter.com/segovoni)
