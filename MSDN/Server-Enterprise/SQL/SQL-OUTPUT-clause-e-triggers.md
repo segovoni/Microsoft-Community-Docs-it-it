@@ -39,7 +39,7 @@ Un esempio di utilizzo della clausola OUTPUT
 
 Di seguito, riportiamo un esempio (opportunamente semplificato) di utilizzo della clausola OUTPUT. Ipotizziamo di avere a disposizione la tabella *dbo.TableA* e di voler ottenere in output, per ogni statement di tipo INSERT, i valori assegnati alle OUTPUT clause and Triggers *ColA* e *ID* (in particolare quelli assegnati alla colonna ID), per ogni riga inserita.
 
-Il seguente frammento di codice in linguaggio T-SQL esegue il setup della tabella dbo.TableA sul database di sistema tempdb.
+Il seguente frammento di codice in linguaggio T-SQL esegue il setup della tabella *dbo.TableA* sul database di sistema *tempdb*.
 
 ```SQL
 USE [tempdb];
