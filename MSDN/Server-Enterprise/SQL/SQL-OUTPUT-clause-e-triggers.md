@@ -1,7 +1,7 @@
 ---
 title: SQL - OUTPUT clause and Triggers
 description: SQL - OUTPUT clause and Triggers
-author: MSCommunityPubService
+author: segovoni
 ms.author: aldod
 ms.manager: csiism
 ms.date: 08/01/2016
@@ -12,49 +12,34 @@ ms.custom: CommunityDocs
 
 # SQL: OUTPUT clause and Triggers
 
-#### di Sergio Govoni – Microsoft MVP ([Blog](http://community.ugiss.org/blogs/sgovoni) / [MVP Profile](http://mvp.microsoft.com/profiles/Sergio.Govoni))
+#### Di [Sergio Govoni](https://mvp.microsoft.com/en-us/PublicProfile/4029181?fullName=Sergio%20Govoni) – Microsoft Data Platform MVP
+
+English Blog: <http://sqlblog.com/blogs/sergio_govoni/default.aspx>
+
+UGISS Author: <https://www.ugiss.org/author/sgovoni>
+
+Twitter: [@segovoni](https://twitter.com/segovoni)
 
 ![](./img/SQL-OUTPUT-clause-e-triggers/image1.png)
-
 
 *Agosto, 2012*
 
 Introduzione
-------------
+============
 
-Recentemente, ho avuto l’occasione di apprezzare la clausola OUTPUT per
-determinare il valore degli identificativi univoci restituiti da
-un’operazione di INSERT, per una colonna di tipo Integer (ID) con
-proprietà
-[IDENTITY](http://msdn.microsoft.com/en-us/library/aa933196(v=sql.80).aspx).
-L’esigenza era quella di determinare il valore assegnato alla colonna ID
-di una tabella per le nuove righe inserite.
+Recentemente, ho avuto l'occasione di apprezzare la clausola OUTPUT per determinare il valore degli identificativi univoci restituiti da un'operazione di INSERT, per una colonna di tipo Integer (ID) con proprietà [IDENTITY](http://msdn.microsoft.com/en-us/library/aa933196(v=sql.80).aspx). L'esigenza era quella di determinare il valore assegnato alla colonna ID di una tabella per le nuove righe inserite.
 
-Come indicano i books on-line, la [clausola
-OUTPUT](http://msdn.microsoft.com/en-us/library/ms177564.aspx),
-implementata nell’edizione 2005 di SQL Server:
+Come indicano i books on-line, la [clausola OUTPUT](http://msdn.microsoft.com/en-us/library/ms177564.aspx), implementata nell'edizione 2005 di SQL Server:
 
-> “Restituisce le informazioni da (o le espressioni basate su) ogni
-    riga interessata da un’istruzione INSERT, UPDATE, DELETE o MERGE.
-    Questi risultati possono essere restituiti all’applicazione di
-    elaborazione per l’utilizzo nei messaggi di errore, l’archiviazione
-    e altri scopi simili dell’applicazione. I risultati possono anche
-    essere inseriti in una tabella o in una variabile di tabella.
-    Inoltre, è possibile acquisire i risultati di una clausola OUTPUT in
-    un’istruzione nidificata INSERT, UPDATE, DELETE o MERGE e inserire
-    tali risultati in una vista o tabella di destinazione.”
+> "Restituisce le informazioni da (o le espressioni basate su) ogni riga interessata da un'istruzione INSERT, UPDATE, DELETE o MERGE. Questi risultati possono essere restituiti all’applicazione di elaborazione per l'utilizzo nei messaggi di errore, l'archiviazione e altri scopi simili dell'applicazione. I risultati possono anche essere inseriti in una tabella o in una variabile di tabella. Inoltre, è possibile acquisire i risultati di una clausola OUTPUT in un'istruzione nidificata INSERT, UPDATE, DELETE o MERGE e inserire tali risultati in una vista o tabella di destinazione."
+
 
 Un esempio di utilizzo della clausola OUTPUT
---------------------------------------------
+============================================
 
-Di seguito, riportiamo un esempio (opportunamente semplificato) di
-utilizzo della clausola OUTPUT. Ipotizziamo di avere a disposizione la
-tabella dbo.TableA e di voler ottenere in output, per ogni statement di
-tipo INSERT, i valori assegnati alle OUTPUT clause and Triggers ColA e ID (in particolare
-quelli assegnati alla colonna ID), per ogni riga inserita.
+Di seguito, riportiamo un esempio (opportunamente semplificato) di utilizzo della clausola OUTPUT. Ipotizziamo di avere a disposizione la tabella *dbo.TableA* e di voler ottenere in output, per ogni statement di tipo INSERT, i valori assegnati alle OUTPUT clause and Triggers *ColA* e *ID* (in particolare quelli assegnati alla colonna ID), per ogni riga inserita.
 
-Il seguente frammento di codice in linguaggio T-SQL esegue il setup
-della tabella dbo.TableA sul database di sistema tempdb.
+Il seguente frammento di codice in linguaggio T-SQL esegue il setup della tabella dbo.TableA sul database di sistema tempdb.
 
 ```SQL
 USE [tempdb];
@@ -63,32 +48,28 @@ GO
 -- Creazione tabella dbo.TableA
 CREATE TABLE dbo.TableA
 (
-    ID INTEGER IDENTITY(1, 1) NOT NULL PRIMARY KEY
-    ,ColA VARCHAR(64)
+  ID INTEGER IDENTITY(1, 1) NOT NULL PRIMARY KEY
+  ,ColA VARCHAR(64)
 );
 GO
 ```
 
-Eseguiamo ora un’operazione di INSERT, sulla tabella dbo.TableA,
-aggiungendo la clausola OUTPUT in modo che siano restituite le
-informazioni richieste, relative alle righe inserite; la figura 1
-illustra l’output (atteso) del seguente comando di INSERT:
+Eseguiamo ora un'operazione di INSERT, sulla tabella *dbo.TableA*, aggiungendo la clausola OUTPUT in modo che siano restituite le informazioni richieste, relative alle righe inserite; la figura 1 illustra l'output (atteso) del seguente comando di INSERT:
 
 ```SQL
 USE [tempdb];
 GO
 
 -- Inserimento dati di prova con restituzione delle informazioni inserite
-
 INSERT INTO dbo.TableA
-    (
-        ColA
-    )
+(
+  ColA
+)
 OUTPUT
-    inserted.ID
-    ,inserted.ColA
+  inserted.ID
+  ,inserted.ColA
 VALUES
-    ('Row 1'), ('Row 2');
+  ('Row 1'), ('Row 2');
 GO
 ```
 
