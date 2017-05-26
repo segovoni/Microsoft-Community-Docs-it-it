@@ -90,15 +90,10 @@ Questo comportamento rappresenta un tentativo di ottimizzazione,
 applicato da OLE DB in alcune situazioni, che però non sempre produce
 l’effetto desiderato!
 
-di [Sergio
-Govoni](http://mvp.microsoft.com/en-us/mvp/Sergio%20Govoni-4029181) –
-Microsoft MVP
+#### Di [Sergio Govoni](https://mvp.microsoft.com/en-us/PublicProfile/4029181?fullName=Sergio%20Govoni) – Microsoft Data Platform MVP
 
-Blog (Italiano): [http://www.ugiss.org/sgovoni
-/](http://www.ugiss.org/sgovoni%20/) Blog (Inglese): <http://sqlblog.com/blogs/sergio_govoni>
+English Blog: <http://sqlblog.com/blogs/sergio_govoni/default.aspx>
+
+UGISS Author: <https://www.ugiss.org/author/sgovoni>
 
 Twitter: [@segovoni](https://twitter.com/segovoni)
-
-
-
-
