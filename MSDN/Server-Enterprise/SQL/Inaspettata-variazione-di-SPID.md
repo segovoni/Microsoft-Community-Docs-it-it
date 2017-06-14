@@ -73,3 +73,4 @@ English Blog: <http://sqlblog.com/blogs/sergio_govoni/default.aspx>
 UGISS Author: <https://www.ugiss.org/author/sgovoni>
 
 Twitter: [@segovoni](https://twitter.com/segovoni)
+
