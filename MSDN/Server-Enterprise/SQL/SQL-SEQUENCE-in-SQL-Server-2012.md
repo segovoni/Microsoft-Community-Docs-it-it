@@ -118,6 +118,7 @@ Un problema tipico delle colonne IDENTITY è quello che si riferisce al reset de
 
 ```SQL
 ALTER SEQUENCE dbo.MySequence RESTART WITH 20;
+GO
 ```
 
 I prossimi valori restituiti, da *dbo.MySequence*, partiranno dal valore 20:
