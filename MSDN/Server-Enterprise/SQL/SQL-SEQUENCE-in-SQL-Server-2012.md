@@ -34,7 +34,7 @@ Questo articolo fornisce una overview dell'oggetto SEQUENCE che, implementato co
 Utilizzi Tipici 
 ===============
 
-Un oggetto SEQUENCE può essere utilizzato in sostituzione di una colonna IDENTITY, ad esempio, quando:
+Un oggetto SEQUENCE può essere utilizzato in sostituzione di una colonna IDENTITY quando:
 
 - L'applicazione richiede un numero (valore) prima che un comando di INSERT sia eseguito
 - L'applicazione richiede che sia condivisa una singola sequenza di valori numerici tra più tabelle o tra più colonne all’interno della stessa tabella
@@ -93,7 +93,7 @@ L'oggetto *dbo.MySequence*, appena creato sul database di esempio SQL2012\_SEQUE
 
 ![](./img/SQL-SEQUENCE-in-SQL-Server-2012/image2.jpg)
 
-Figura 1 – Oggetto dbo.MySequence in SSMS (Object Explorer)
+Figura 1 – Oggetto *dbo.MySequence* in SSMS (Object Explorer)
 
 ![](./img/SQL-SEQUENCE-in-SQL-Server-2012/image3.jpg)
 
@@ -110,9 +110,9 @@ L'output è illustrato in figura 3:
 
 ![](./img/SQL-SEQUENCE-in-SQL-Server-2012/image4.jpg)
 
-Figura 3 – Utilizzo della funzione NEXT VALUE FOR sulla sequenza dbo.MySequence
+Figura 3 – Utilizzo della funzione NEXT VALUE FOR sulla sequenza *dbo.MySequence*
 
-Osserviamo che per creare ed utilizzare l'oggetto dbo.MySequence non è stato necessario disporre di una tabella, non ci siamo neppure preoccupati di salvare su disco le informazioni relative alla sequenza (al momento, il database di esempio SQL2012\_SEQUENCE non contiene user-table).
+Osserviamo che per creare ed utilizzare l'oggetto *dbo.MySequence* non è stato necessario disporre di una tabella, non ci siamo neppure preoccupati di salvare su disco le informazioni relative alla sequenza (al momento, il database di esempio SQL2012\_SEQUENCE non contiene user-table).
 
 Un problema tipico delle colonne IDENTITY è quello che si riferisce al reset dei valori della sequenza. Per resettare i valori di una sequenza numerica di un oggetto SEQUENCE si potrà utilizzare l'opzione RESTART WITH come riportata il seguente comando T-SQL:
 
@@ -120,7 +120,7 @@ Un problema tipico delle colonne IDENTITY è quello che si riferisce al reset de
 ALTER SEQUENCE dbo.MySequence RESTART WITH 20;
 ```
 
-I prossimi valori restituiti, da dbo.MySequence, partiranno dal valore 20:
+I prossimi valori restituiti, da *dbo.MySequence*, partiranno dal valore 20:
 
 ```SQL
 SELECT next_mysequence_value = NEXT VALUE FOR dbo.MySequence;
@@ -151,9 +151,9 @@ La figura 5 illustra l'output del precedente frammento di codice T-SQL.
 
 ![](./img/SQL-SEQUENCE-in-SQL-Server-2012/image6.jpg)
 
-Figura 5 - Valori della sequenza dbo.MySequence in un contesto transazionale
+Figura 5 - Valori della sequenza *dbo.MySequence* in un contesto transazionale
 
-Vediamo ora uno degli utilizzi più tipici per un oggetto SEQUENCE, nel prossimo esempio verrà creata la tabella dbo.Orders in cui abbiamo evitato di utilizzare la proprietà IDENTITY per la colonna OrderID che rappresenta la Primary Key della tabella. La generazione dei valori univoci, da assegnare alla colonna OrderID della tabella dbo.Orders, è gestita attraverso la sequenza dbo.SO\_OrderID.
+Vediamo ora uno degli utilizzi più tipici per un oggetto SEQUENCE, nel prossimo esempio verrà creata la tabella *dbo.Orders* in cui abbiamo evitato di utilizzare la proprietà IDENTITY per la colonna *OrderID* che rappresenta la Primary Key della tabella. La generazione dei valori univoci, da assegnare alla colonna *OrderID* della tabella *dbo.Orders*, è gestita attraverso la sequenza dbo.SO\_OrderID.
 
 E' importante osservare l'utilizzo della funzione NEXT VALUE FOR nello statement INSERT INTO usato per popolare la tabella.
 
@@ -210,7 +210,7 @@ VALUES
 GO
 ```
 
-Visualizziamo ora il contenuto della tabella dbo.Orders, ci aspettiamo due record, e per ognuno ci aspettiamo che la colonna OrderID sia stata valorizzata correttamente.
+Visualizziamo ora il contenuto della tabella *dbo.Orders*, ci aspettiamo due record, e per ognuno ci aspettiamo che la colonna *OrderID* sia stata valorizzata correttamente.
 
 ```SQL
 -- Query the table
@@ -221,7 +221,7 @@ L'output ottenuto è illustrato in figura 6.
 
 ![](./img/SQL-SEQUENCE-in-SQL-Server-2012/image7.jpg)
 
-Figura 6 – Contenuto della tabella dbo.Orders
+Figura 6 – Contenuto della tabella *dbo.Orders*
 
 Conclusioni 
 ===========
