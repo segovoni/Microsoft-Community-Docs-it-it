@@ -20,7 +20,7 @@ UGISS Author: <https://www.ugiss.org/author/sgovoni>
 
 Twitter: [@segovoni](https://twitter.com/segovoni)
 
-![](./img/Il-primo-comando-di-ogni-Trigger/image1.png)
+![](./img/MVPLogo.png)
 
 
 *Aprile, 2018*
@@ -31,7 +31,6 @@ Introduzione
 Le performance di una soluzione database sono spesso oggetto di diatriba tra chi fornisce la soluzione e chi la personalizza. Scrivere codice T-SQL ottimizzato, in grado di scalare all'aumentare dei dati e degli utenti, non è affatto semplice e quando la complessità aumenta, le attività di manutenzione del codice diventano difficili da attuale anche per l'autore stesso.
 
 In questo articolo, condivido la metodologia di tuning e alcuni script che utilizzo per ottenere informazioni sulle **performance delle query che utilizzano le viste** presenti nel database oggetto dell'analisi. La presenza di viste nidificate contenenti query non ottimizzate può essere oggetto di analisi specifica, gli script contenuti in questo articolo hanno l'obiettivo di fornire alcuni indicatori sull'utilizzo e sulle performance delle viste di un DB.
-
 
 Alcuni indicatori sulle performance delle viste in SQL Server
 ==========================================
@@ -178,7 +177,6 @@ GO
 
 L'ultima query fornisce informazioni sulle viste non utilizzate, fate molta attenzione ai dati che estrae, è basata sulla DMV [sys.dm_exec_cached_plans](https://docs.microsoft.com/it-it/sql/relational-databases/system-dynamic-management-views/sys-dm-exec-cached-plans-transact-sql) che è soggetta al fluttuare dei piani di esecuzione all'interno della plan cache. Se una vista non è in cache nel momento in cui eseguite la query, non è detto che tale vista sia da eliminare.. se ritenete che la cache sia abbastanza rappresentativa del vostro carico di lavoro, tenetene semplicemente conto. Se nei successivi controlli, la vista sarà sempre presente, potrete valutare di effettuare altre indagini.
 
-
 ```SQL
 SELECT
   SCHEMA_NAME(vw.schema_id) AS schemaname
@@ -204,10 +202,8 @@ WHERE
 GO
 ```
 
-
 Conclusioni
 ===========
-
 
 
 #### Di [Sergio Govoni](https://mvp.microsoft.com/en-us/PublicProfile/4029181?fullName=Sergio%20Govoni) – Microsoft Data Platform MVP
