@@ -1,4 +1,4 @@
-﻿---
+---
 title: Statistiche di utilizzo e performance delle viste in un database SQL Server
 description: Statistiche di utilizzo e performance delle viste in un database SQL Server
 author: segovoni
