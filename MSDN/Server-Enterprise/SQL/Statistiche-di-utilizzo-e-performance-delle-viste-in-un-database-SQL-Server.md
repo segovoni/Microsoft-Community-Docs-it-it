@@ -20,7 +20,7 @@ UGISS Author: <https://www.ugiss.org/author/sgovoni>
 
 Twitter: [@segovoni](https://twitter.com/segovoni)
 
-![](./img/MVPLogo.png)
+![](./img/Statistiche-di-utilizzo-e-performance-delle-viste-in-un-database-SQL-Server/MVP-logo-blue-only.png)
 
 
 *Aprile, 2018*
@@ -37,7 +37,7 @@ Alcuni indicatori sulle performance delle viste in SQL Server
 
 Utilizzando la tecnica top-down, che per il tuning delle performance è schematizzata nella figura 1, il primo dato interessante è stato ottenuto interrogando la DMV [sys.dm_exec_query_optimizer_info](https://docs.microsoft.com/it-it/sql/relational-databases/system-dynamic-management-views/sys-dm-exec-query-optimizer-info-transact-sql) che espone le statistiche sulle ottimizzazioni eseguite dal Query Optimizer dall'avvio dell'istanza SQL Server; i valori sono quindi cumulativi.
 
-![](./img/Statistiche-di-utilizzo-e-performance-delle-viste-in-un-database-SQL-Server/Performance-tuning-il-metodo-top-down.png)
+![Figura 1](./img/Statistiche-di-utilizzo-e-performance-delle-viste-in-un-database-SQL-Server/Performance-tuning-il-metodo-top-down.png)
 
 La CTE riportata di seguito, basata sulla DMV [sys.dm_exec_query_optimizer_info](https://docs.microsoft.com/it-it/sql/relational-databases/system-dynamic-management-views/sys-dm-exec-query-optimizer-info-transact-sql), fornisce informazioni sul carico di lavoro. Il dato interessante che si ottiene è il numero (in percentuale) di query che referenziano una vista. Ho avuto l'opportunità di esaminare casi dove circa l'85% delle query eseguite referenziava una vista. Il dato puro, di per sé, non necessariamente è sintomo di un problema di performance, ma se associato alle lamentele degli utenti circa la lentezza del sistema, ci suggerisce quantomeno un approfondimento.
 
