@@ -204,19 +204,22 @@ WHERE
 GO
 ```
 
-## Risorse correlate
+Risorse correlate
+=================
 
-Alcune risorse correlate
+Alcune risorse correlate:
 
-1. [DMVs for Performance Tuning (Video - SQL Saturday Pordenone 2017)](https://www.youtube.com/watch?v=9FQaFwpt3-k)
+1. [DMVs for Performance Tuning (Video - SQL Saturday Pordenone)](https://www.youtube.com/watch?v=9FQaFwpt3-k)
 
-2. [DMVs for Performance Tuning (Slide e Demo - SQL Saturday Pordenone 2017)](http://www.sqlsaturday.com/589/Sessions/Details.aspx?sid=57409)
+2. [DMVs for Performance Tuning (Slide e Demo - SQL Saturday Pordenone)](http://www.sqlsaturday.com/589/Sessions/Details.aspx?sid=57409)
 
-2. [SQL Server Tuning in pillole](https://vimeo.com/200980883)
+3. [SQL Server Tuning in pillole (Video - SQL Saturday Parma)](https://vimeo.com/200980883)
 
-2. [Performance Tuning With SQL Server Dynamic Management Views](https://www.red-gate.com/library/performance-tuning-with-sql-server-dynamic-management-views)
+4. [SQL Server Tuning in pillole (Slide e Demo - SQL Saturday Parma)](http://www.sqlsaturday.com/566/Sessions/Details.aspx?sid=53988)
 
-3. [The Most Prominent Wait Types of your SQL Server 2016](https://channel9.msdn.com/Blogs/MVP-Data-Platform/The-Most-Prominent-Wait-Types-of-your-SQL-Server-2016)
+5. [Performance Tuning With SQL Server Dynamic Management Views](https://www.red-gate.com/library/performance-tuning-with-sql-server-dynamic-management-views)
+
+6. [The Most Prominent Wait Types of your SQL Server 2016](https://channel9.msdn.com/Blogs/MVP-Data-Platform/The-Most-Prominent-Wait-Types-of-your-SQL-Server-2016)
 
 
 
