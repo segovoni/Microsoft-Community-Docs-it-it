@@ -33,11 +33,9 @@ Le performance di una soluzione database sono spesso oggetto di diatriba tra chi
 In questo articolo, condivido la metodologia di tuning e alcuni script che utilizzo per ottenere informazioni sulle **performance delle query che utilizzano le viste** presenti nel database oggetto dell'analisi. La presenza di viste nidificate contenenti query non ottimizzate può diventare oggetto di analisi specifica, gli script contenuti in questo articolo hanno l'obiettivo di fornire alcuni indicatori sull'utilizzo e sulle performance delle viste di un DB.
 
 Alcuni indicatori sulle performance delle viste in SQL Server
-==========================================
+=============================================================
 
-Utilizzando la tecnica top-down, che per il tuning delle performance è schematizzata nella figura 1, il primo dato interessante è stato ottenuto interrogando la DMV [sys.dm_exec_query_optimizer_info](https://docs.microsoft.com/it-it/sql/relational-databases/system-dynamic-management-views/sys-dm-exec-query-optimizer-info-transact-sql) che espone le statistiche sulle ottimizzazioni eseguite dal Query Optimizer dall'avvio dell'istanza SQL Server; i valori sono quindi cumulativi.
-
-![Figura 1](./img/Statistiche-di-utilizzo-e-performance-delle-viste-in-un-database-SQL-Server/Performance-tuning-il-metodo-top-down.png)
+Il primo dato interessante è stato ottenuto interrogando la DMV [sys.dm_exec_query_optimizer_info](https://docs.microsoft.com/it-it/sql/relational-databases/system-dynamic-management-views/sys-dm-exec-query-optimizer-info-transact-sql) che espone le statistiche sulle ottimizzazioni eseguite dal Query Optimizer dall'avvio dell'istanza SQL Server; i valori sono quindi cumulativi.
 
 La CTE riportata di seguito, basata sulla DMV [sys.dm_exec_query_optimizer_info](https://docs.microsoft.com/it-it/sql/relational-databases/system-dynamic-management-views/sys-dm-exec-query-optimizer-info-transact-sql), fornisce informazioni sul carico di lavoro. Il dato interessante che si ottiene è il numero (in percentuale) di query che referenziano una vista. Ho avuto l'opportunità di esaminare casi dove circa l'85% delle query eseguite referenziava una vista. Il dato puro, di per sé, non necessariamente è sintomo di un problema di performance, ma se associato alle lamentele degli utenti circa la lentezza del sistema, ci suggerisce quantomeno un approfondimento.
 
