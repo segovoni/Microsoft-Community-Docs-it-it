@@ -28,16 +28,16 @@ Twitter: [@segovoni](https://twitter.com/segovoni)
 Introduzione
 ============
 
-Le performance di una soluzione database sono spesso oggetto di diatriba tra chi fornisce la soluzione e chi la personalizza. Scrivere codice T-SQL ottimizzato, in grado di scalare all'aumentare dei dati e degli utenti, non è affatto semplice e quando la complessità aumenta, le attività di manutenzione del codice diventano difficili da attuale anche per l'autore stesso.
+Le performance di una soluzione database sono spesso oggetto di diatriba tra chi fornisce la soluzione e chi la personalizza. Scrivere codice T-SQL ottimizzato, in grado di scalare all'aumentare dei dati e degli utenti, non è affatto semplice e quando la complessità aumenta, le attività di manutenzione del codice diventano difficili da attuare anche per l'autore stesso.
 
-In questo articolo, condivido la metodologia di tuning e alcuni script che utilizzo per ottenere informazioni sulle **performance delle query che utilizzano le viste** presenti nel database oggetto dell'analisi. La presenza di viste nidificate contenenti query non ottimizzate può essere oggetto di analisi specifica, gli script contenuti in questo articolo hanno l'obiettivo di fornire alcuni indicatori sull'utilizzo e sulle performance delle viste di un DB.
+In questo articolo, condivido la metodologia di tuning e alcuni script che utilizzo per ottenere informazioni sulle **performance delle query che utilizzano le viste** presenti nel database oggetto dell'analisi. La presenza di viste nidificate contenenti query non ottimizzate può diventare oggetto di analisi specifica, gli script contenuti in questo articolo hanno l'obiettivo di fornire alcuni indicatori sull'utilizzo e sulle performance delle viste di un DB.
 
 Alcuni indicatori sulle performance delle viste in SQL Server
 ==========================================
 
-Utilizzando la tecnica top-down, il primo dato interessante è stato ottenuto interrogando la DMV [sys.dm_exec_query_optimizer_info](https://docs.microsoft.com/it-it/sql/relational-databases/system-dynamic-management-views/sys-dm-exec-query-optimizer-info-transact-sql) che espone le statistiche sulle ottimizzazioni eseguite dal Query Optimizer dall'avvio dell'istanza SQL Server; i valori sono quindi cumulativi.
+Utilizzando la tecnica top-down, che per il tuning delle performance è schematizzata nella figura 1, il primo dato interessante è stato ottenuto interrogando la DMV [sys.dm_exec_query_optimizer_info](https://docs.microsoft.com/it-it/sql/relational-databases/system-dynamic-management-views/sys-dm-exec-query-optimizer-info-transact-sql) che espone le statistiche sulle ottimizzazioni eseguite dal Query Optimizer dall'avvio dell'istanza SQL Server; i valori sono quindi cumulativi.
 
-La CTE riportata di seguito, basata sulla DMV sys.dm_exec_query_optimizer_info, fornisce informazioni sul carico di lavoro, il dato interessante che si ottiene è stato il numero (in percentuale) di query che referenziano una vista. Ho avuto l'opportunità di esaminare casi dove circa l'80% delle query eseguite referenziava una vista. Il dato puro, di per sé, non necessariamente è sintomo di un problema di performance, ma se associato alle lamentele degli utenti circa la lentezza del sistema, ci suggerisce quantomeno un approfondimento.
+La CTE riportata di seguito, basata sulla DMV [sys.dm_exec_query_optimizer_info](https://docs.microsoft.com/it-it/sql/relational-databases/system-dynamic-management-views/sys-dm-exec-query-optimizer-info-transact-sql), fornisce informazioni sul carico di lavoro. Il dato interessante che si ottiene è il numero (in percentuale) di query che referenziano una vista. Ho avuto l'opportunità di esaminare casi dove circa l'85% delle query eseguite referenziava una vista. Il dato puro, di per sé, non necessariamente è sintomo di un problema di performance, ma se associato alle lamentele degli utenti circa la lentezza del sistema, ci suggerisce quantomeno un approfondimento.
 
 ```SQL
 WITH CTE_QO AS
@@ -175,7 +175,7 @@ CROSS APPLY
 GO
 ```
 
-L'ultima query fornisce informazioni sulle viste non utilizzate, fate molta attenzione ai dati che estrae, è basata sulla DMV [sys.dm_exec_cached_plans](https://docs.microsoft.com/it-it/sql/relational-databases/system-dynamic-management-views/sys-dm-exec-cached-plans-transact-sql) che è soggetta al fluttuare dei piani di esecuzione all'interno della plan cache. Se una vista non è in cache nel momento in cui eseguite la query, non è detto che tale vista sia da eliminare.. se ritenete che la cache sia abbastanza rappresentativa del vostro carico di lavoro, tenetene semplicemente conto. Se nei successivi controlli, la vista sarà sempre presente, potrete valutare di effettuare altre indagini.
+L'ultima query fornisce informazioni sulle viste non utilizzate, fate molta attenzione ai dati che estrae, è basata sulla DMV [sys.dm_exec_cached_plans](https://docs.microsoft.com/it-it/sql/relational-databases/system-dynamic-management-views/sys-dm-exec-cached-plans-transact-sql) che è soggetta al fluttuare dei piani di esecuzione all'interno della plan cache. Se una vista non è in cache nel momento in cui eseguite la query, non è detto che tale vista sia da eliminare. Se ritenete che la cache sia abbastanza rappresentativa del vostro carico di lavoro, tenetene semplicemente conto. Se nei successivi controlli, la vista sarà sempre presente, potrete valutare di effettuare altre indagini.
 
 ```SQL
 SELECT
