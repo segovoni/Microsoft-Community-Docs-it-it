@@ -204,8 +204,20 @@ WHERE
 GO
 ```
 
-Conclusioni
-===========
+## Risorse correlate
+
+Alcune risorse correlate
+
+1. [DMVs for Performance Tuning (Video - SQL Saturday Pordenone 2017)](https://www.youtube.com/watch?v=9FQaFwpt3-k)
+
+2. [DMVs for Performance Tuning (Slide e Demo - SQL Saturday Pordenone 2017)](http://www.sqlsaturday.com/589/Sessions/Details.aspx?sid=57409)
+
+2. [SQL Server Tuning in pillole](https://vimeo.com/200980883)
+
+2. [Performance Tuning With SQL Server Dynamic Management Views](https://www.red-gate.com/library/performance-tuning-with-sql-server-dynamic-management-views)
+
+3. [The Most Prominent Wait Types of your SQL Server 2016](https://channel9.msdn.com/Blogs/MVP-Data-Platform/The-Most-Prominent-Wait-Types-of-your-SQL-Server-2016)
+
 
 
 #### Di [Sergio Govoni](https://mvp.microsoft.com/en-us/PublicProfile/4029181?fullName=Sergio%20Govoni) – Microsoft Data Platform MVP
